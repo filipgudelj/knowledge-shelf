@@ -7,7 +7,9 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "nuxt": "^3.17.5",
@@ -19,6 +21,8 @@
     "@nuxt/icon": "^1.13.0",
     "@nuxt/image": "^1.10.0",
     "@nuxt/test-utils": "^3.19.1",
+    "prettier": "^3.5.3",
+    "sass": "^1.89.1",
     "typescript": "^5.8.3",
     "vue-tsc": "^2.2.10"
   }
