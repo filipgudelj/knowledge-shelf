@@ -7,9 +7,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "@nuxtjs/supabase": "^1.5.1",
@@ -18,7 +16,6 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^1.4.1",
     "@nuxt/icon": "^1.13.0",
     "@nuxt/image": "^1.10.0",
     "@nuxt/test-utils": "^3.19.1",
