@@ -1,5 +1,4 @@
 <script>
-// import '~/assets/scss/main.scss'
 const _amdija = 'hello'
 </script>
 
@@ -16,9 +15,3 @@ const _amdija = 'hello'
     <NuxtPage />
   </NuxtLayout>
 </template>
-
-<style>
-/* .test {
-  background: red;
-} */
-</style>

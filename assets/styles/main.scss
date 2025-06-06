@@ -1,5 +1,5 @@
-@use './reset';
-
-.test {
-  background: blue;
-}
+@use './reset.scss';
+@use './base.scss';
+@use './colors.scss';
+@use './typography.scss';
+@use './spacings.scss';
