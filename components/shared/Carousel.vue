@@ -1,5 +1,4 @@
-<script lang="ts" setup>
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <div class="carousel-container">
@@ -17,8 +16,8 @@
   </div>
 </template>
 
-<style scoped>
-.carousel-container{
+<style lang="scss" scoped>
+.carousel-container {
   background-color: gray;
 }
 
