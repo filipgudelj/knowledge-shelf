@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/supabase'],
+  modules: ['@nuxtjs/supabase', '@nuxt/icon', '@nuxt/fonts'],
   components: [
     {
       path: '~/components',
@@ -18,6 +18,7 @@ export default defineNuxtConfig({
             @use "~/assets/styles/_base.scss" as *;
             @use "~/assets/styles/_colors.scss" as *;
             @use "~/assets/styles/_spacings.scss" as *;
+            @use "~/assets/styles/_breakpoints.scss" as *;
             @use "~/assets/styles/_typography.scss" as *;
           `,
         },

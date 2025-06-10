@@ -1,9 +1,13 @@
-<script lang="ts" setup></script>
-
 <template>
-  <div>
-    <h1>This is Home Page</h1>
-    <NuxtLink to="/auth/login">Go to Login page</NuxtLink>
-    <Carousel />
-  </div>
+  <Section>
+    <Carousel title="Title 1" />
+  </Section>
+
+  <Section>
+    <Carousel title="Title 2" />
+  </Section>
+
+  <Section>
+    <Carousel title="Title 3" />
+  </Section>
 </template>

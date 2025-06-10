@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h2>This is Sidebar</h2>
-    <h2>This is Sidebar</h2>
-    <h2>This is Sidebar</h2>
+    <h2>Sidebar</h2>
+    <h2>Sidebar</h2>
+    <h2>Sidebar</h2>
   </div>
 </template>
 
