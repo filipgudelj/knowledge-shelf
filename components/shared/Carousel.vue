@@ -86,14 +86,14 @@ const translateX = computed(() => {
           :disabled="isPreviousButtonDisabled"
           aria-label="Previous"
         >
-          <Icon name="mdi:chevron-left" size="1.5rem" />
+          <Icon name="mdi:chevron-left" size="24px" />
         </button>
         <button
           @click="nextSlide"
           :disabled="isNextButtonDisabled"
           aria-label="Next"
         >
-          <Icon name="mdi:chevron-right" size="1.5rem" />
+          <Icon name="mdi:chevron-right" size="24px" />
         </button>
       </div>
     </div>
@@ -190,7 +190,7 @@ const translateX = computed(() => {
   .slide-title {
     max-width: 90%;
     color: $color-black;
-    font-size: $font-size-5;
+    font-size: $font-size-lg;
     text-align: center;
   }
 
@@ -200,7 +200,7 @@ const translateX = computed(() => {
 
   .slide-price {
     color: $color-black;
-    font-size: $font-size-5;
+    font-size: $font-size-lg;
   }
 }
 </style>
