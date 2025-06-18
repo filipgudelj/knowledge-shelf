@@ -50,7 +50,7 @@ const clearSearch = () => {
   height: 48px;
   padding-inline: 48px;
   border: 1px solid $color-gray-200;
-  border-radius: $spacing-3;
+  border-radius: $radius-5;
   background-color: $color-gray-200;
   line-height: 48px;
   font-size: $font-size-lg;

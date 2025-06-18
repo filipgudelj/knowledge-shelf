@@ -18,6 +18,10 @@
         <Icon name="mdi:home-variant-outline" size="32px" />
         <span class="sidebar__nav-label">Home</span>
       </button>
+      <button class="sidebar__nav-item" aria-label="Go to Home">
+        <Icon name="mdi:explore" size="32px" />
+        <span class="sidebar__nav-label">Explore</span>
+      </button>
       <button class="sidebar__nav-item" aria-label="Go to Favourites">
         <Icon name="mdi:favorite-border" size="32px" />
         <span class="sidebar__nav-label">Favourites</span>
@@ -80,7 +84,7 @@
   gap: $spacing-2;
   width: 100%;
   padding-block: $spacing-2;
-  border-radius: $spacing-3;
+  border-radius: $radius-5;
   font-size: $font-size-xl;
   transition: all 0.3s ease;
   @media (min-width: $screen-md) {

@@ -15,11 +15,12 @@ export default defineNuxtConfig({
         scss: {
           additionalData: `
             @use "~/assets/styles/_reset.scss" as *;
-            @use "~/assets/styles/_colors.scss" as *;
-            @use "~/assets/styles/_spacings.scss" as *;
-            @use "~/assets/styles/_breakpoints.scss" as *;
-            @use "~/assets/styles/_typography.scss" as *;
             @use "~/assets/styles/_mixins.scss" as *;
+            @use "~/assets/styles/_breakpoints.scss" as *;
+            @use "~/assets/styles/_spacings.scss" as *;
+            @use "~/assets/styles/_borders.scss" as *;
+            @use "~/assets/styles/_colors.scss" as *;
+            @use "~/assets/styles/_typography.scss" as *;
           `,
         },
       },
