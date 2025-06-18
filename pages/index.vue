@@ -1,3 +1,15 @@
+<script lang="ts" setup>
+useHead({
+  title: 'Knowledge Shelf',
+  meta: [
+    {
+      name: 'description',
+      content: 'Explore a curated selection of books.',
+    },
+  ],
+})
+</script>
+
 <template>
   <Section>
     <Carousel title="Title 1" />
