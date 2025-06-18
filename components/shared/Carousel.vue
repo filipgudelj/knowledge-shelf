@@ -49,7 +49,7 @@ const slides = [
     image: '/images/test-book-img.jpg',
   },
 ]
-const visibleSlides = 5
+const visibleSlides = 3
 const totalSlides = slides.length
 const currentSlideIndex = ref(0)
 
@@ -77,10 +77,10 @@ const translateX = computed(() => {
 </script>
 
 <template>
-  <div class="carousel-container">
-    <div class="carousel-heading">
+  <div class="carousel">
+    <div class="carousel__heading">
       <h4>{{ props.title }}</h4>
-      <div class="carousel-btns">
+      <div class="carousel__buttons">
         <button
           @click="previousSlide"
           :disabled="isPreviousButtonDisabled"
@@ -97,26 +97,26 @@ const translateX = computed(() => {
         </button>
       </div>
     </div>
-    <div class="carousel-view">
+    <div class="carousel__view">
       <div
-        class="carousel-track"
         :style="{
           transform: translateX,
           width: `calc(100% * (${totalSlides} / ${visibleSlides}))`,
         }"
+        class="carousel__track"
       >
         <div
-          class="carousel-slide"
+          v-for="(slide, index) in slides"
+          :key="index"
           :style="{
             width: `calc(100% / ${totalSlides})`,
           }"
-          v-for="(slide, index) in slides"
-          :key="index"
+          class="slide"
         >
-          <img :src="slide.image" :alt="slide.title" class="slide-image" />
-          <p class="slide-title">{{ slide.title }}</p>
-          <p class="slide-author">{{ slide.author }}</p>
-          <p class="slide-price">{{ formatNumberToEuro(slide.price) }}</p>
+          <img :src="slide.image" :alt="slide.title" class="slide__image" />
+          <p class="slide__title">{{ slide.title }}</p>
+          <p class="slide__author">{{ slide.author }}</p>
+          <p class="slide__price">{{ formatNumberToEuro(slide.price) }}</p>
         </div>
       </div>
     </div>
@@ -124,26 +124,23 @@ const translateX = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-.carousel-container {
+.carousel {
+  width: 100%;
   padding-block: $spacing-6;
   background-color: $color-white;
 }
 
-.carousel-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.carousel__heading {
+  @include flex(row, space-between, center);
   padding-block: $spacing-5;
 }
 
-.carousel-btns {
+.carousel__buttons {
   display: flex;
   gap: $spacing-1;
 
   button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex();
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -165,42 +162,41 @@ const translateX = computed(() => {
   }
 }
 
-.carousel-view {
+.carousel__view {
   overflow: hidden;
   width: 100%;
 }
 
-.carousel-track {
-  display: flex;
+.carousel__track {
+  @include flex(row, flex-start, flex-start);
   gap: $spacing-5;
   transition: transform 0.3s ease-in-out;
 }
 
-.carousel-slide {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.slide {
+  @include flex(column, flex-start, center);
   gap: $spacing-1;
+}
 
-  img {
-    width: 100%;
-    margin-bottom: $spacing-3;
-  }
+.slide__image {
+  width: 100%;
+  height: 275px;
+  margin-bottom: $spacing-3;
+}
 
-  .slide-title {
-    max-width: 90%;
-    color: $color-black;
-    font-size: $font-size-lg;
-    text-align: center;
-  }
+.slide__title {
+  max-width: 90%;
+  color: $color-black;
+  font-size: $font-size-lg;
+  text-align: center;
+}
 
-  .slide-author {
-    color: $color-gray-700;
-  }
+.slide__author {
+  color: $color-gray-700;
+}
 
-  .slide-price {
-    color: $color-black;
-    font-size: $font-size-lg;
-  }
+.slide__price {
+  color: $color-black;
+  font-size: $font-size-lg;
 }
 </style>

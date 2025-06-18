@@ -1,3 +1,6 @@
+$font-family-base: 'Roboto', sans-serif;
+$font-family-logo: 'Franklin Gothic Medium', sans-serif;
+
 $font-size-xxs: 0.625rem; // 10px
 $font-size-xs: 0.75rem; // 12px
 $font-size-sm: 0.875rem; // 14px
@@ -9,6 +12,10 @@ $font-size-3xl: 1.75rem; // 28px
 $font-size-4xl: 2rem; // 32px
 $font-size-5xl: 2.5rem; // 40px
 $font-size-6xl: 3rem; // 48px
+
+body {
+  font-family: $font-family-base;
+}
 
 h1 {
   font-size: $font-size-5xl;

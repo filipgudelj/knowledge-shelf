@@ -10,10 +10,8 @@
 <style lang="scss" scoped>
 .topbar {
   grid-column: 2/3;
-  border-bottom: 1px solid $color-gray-300;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include flex(row, space-between, center);
   padding: $spacing-5;
+  border-bottom: 1px solid $color-gray-300;
 }
 </style>

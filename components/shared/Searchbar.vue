@@ -12,36 +12,41 @@ const clearSearch = () => {
 </script>
 
 <template>
-  <div class="search-container">
+  <div class="search">
     <input
       type="text"
       name="search"
       v-model="searchQuery"
       @keydown.enter="doSearch"
       placeholder="Search books..."
-      class="search-input"
+      class="search__input"
     />
-    <button @click="doSearch" class="search-btn">
+    <button @click="doSearch" class="search__button" aria-label="Search">
       <Icon name="mdi:search" size="24px" />
     </button>
-    <button v-if="searchQuery" @click="clearSearch" class="remove-btn">
+    <button
+      v-if="searchQuery"
+      @click="clearSearch"
+      class="search__button--clear"
+      aria-label="Clear search"
+    >
       <Icon name="mdi:remove" size="24px" />
     </button>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.search-container {
+.search {
   position: relative;
 }
 
-.search-container:hover .search-input:focus {
-  border: 1px solid $color-blue-800;
+.search:hover .search__input:focus {
+  border: 1px solid $color-blue-500;
   background-color: $color-gray-300;
 }
 
-.search-input {
-  width: 375px;
+.search__input {
+  width: 225px;
   height: 48px;
   padding-inline: 48px;
   border: 1px solid $color-gray-200;
@@ -51,6 +56,14 @@ const clearSearch = () => {
   font-size: $font-size-lg;
   transition: all 0.3s ease;
 
+  @media (min-width: $screen-sm) {
+    width: 300px;
+  }
+
+  @media (min-width: $screen-md) {
+    width: 350px;
+  }
+
   &:hover {
     border: 1px solid $color-gray-300;
     background-color: $color-gray-300;
@@ -58,7 +71,11 @@ const clearSearch = () => {
 
   &:focus {
     outline: none;
-    border: 1px solid $color-blue-800;
+    border: 1px solid $color-blue-500;
+  }
+
+  &::placeholder {
+    color: $color-gray-600;
   }
 }
 
@@ -71,13 +88,13 @@ const clearSearch = () => {
   color: $color-gray-800;
 }
 
-.search-btn {
+.search__button {
   @extend %icon-btn;
   left: 0;
   margin: 0 $spacing-3 0 $spacing-5;
 }
 
-.remove-btn {
+.search__button--clear {
   @extend %icon-btn;
   right: 0;
   margin: 0 $spacing-5 0 $spacing-3;

@@ -1,9 +1,7 @@
 <template>
   <div class="layout">
     <Sidebar />
-
     <Topbar />
-
     <main class="content">
       <slot />
     </main>
@@ -13,18 +11,21 @@
 <style lang="scss" scoped>
 .layout {
   display: grid;
-  grid-template-columns: 250px 1fr;
   grid-template-rows: 80px 1fr;
+  grid-template-columns: 80px 1fr;
   min-height: 100vh;
+
+  @media (min-width: $screen-md) {
+    grid-template-columns: 250px 1fr;
+  }
 }
 
 .content {
   grid-column: 2/3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flex(column, flex-start, center);
   width: 100%;
-  max-width: 1280px;
+  min-width: 0;
+  max-width: 1920px;
   margin-inline: auto;
   padding-inline: $spacing-5;
 }

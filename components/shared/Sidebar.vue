@@ -1,7 +1,27 @@
+<script lang="ts" setup></script>
+
 <template>
   <div class="sidebar">
-    <div>
-      <Icon name="mdi:book-open-page-variant" size="48px" />
+    <div class="sidebar__header">
+      <button class="sidebar__logo" aria-label="Knowledge Shelf Home">
+        <Icon
+          name="mdi:book-open-page-variant"
+          size="40px"
+          class="sidebar__logo-icon"
+        />
+        <span class="sidebar__logo-text">KNOWLEDGE SHELF</span>
+      </button>
+    </div>
+
+    <div class="sidebar__nav">
+      <button class="sidebar__nav-item" aria-label="Go to Home">
+        <Icon name="mdi:home-variant-outline" size="32px" />
+        <span class="sidebar__nav-label">Home</span>
+      </button>
+      <button class="sidebar__nav-item" aria-label="Go to Favourites">
+        <Icon name="mdi:favorite-border" size="32px" />
+        <span class="sidebar__nav-label">Favourites</span>
+      </button>
     </div>
   </div>
 </template>
@@ -10,6 +30,74 @@
 .sidebar {
   grid-column: 1/2;
   grid-row: 1/3;
+  display: grid;
+  grid-template-rows: 80px 1fr;
+  padding-inline: $spacing-4;
   border-right: 1px solid $color-gray-300;
+}
+
+.sidebar__header {
+  @include flex();
+  color: $color-blue-500;
+  @media (min-width: $screen-md) {
+    color: $color-black;
+  }
+}
+
+.sidebar__logo {
+  @include flex();
+  width: 100%;
+
+  @media (min-width: $screen-md) {
+    @include flex(row, flex-start, center);
+  }
+}
+
+.sidebar__logo-icon {
+  display: block;
+  @media (min-width: $screen-md) {
+    display: none;
+  }
+}
+
+.sidebar__logo-text {
+  display: none;
+  font-family: $font-family-logo;
+  @media (min-width: $screen-md) {
+    display: block;
+    font-size: $font-size-xl;
+    font-weight: 700;
+  }
+}
+
+.sidebar__nav {
+  @include flex(column, flex-start, center);
+  gap: $spacing-2;
+}
+
+.sidebar__nav-item {
+  @include flex(row, center, center);
+  gap: $spacing-2;
+  width: 100%;
+  padding-block: $spacing-2;
+  border-radius: $spacing-3;
+  font-size: $font-size-xl;
+  transition: all 0.3s ease;
+  @media (min-width: $screen-md) {
+    @include flex(row, flex-start, center);
+  }
+
+  &:hover {
+    background-color: $color-gray-200;
+  }
+}
+
+.sidebar__nav-label {
+  display: none;
+  @media (min-width: $screen-md) {
+    display: block;
+    font-weight: 700;
+    line-height: 20px;
+  }
 }
 </style>
