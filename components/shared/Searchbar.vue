@@ -18,7 +18,7 @@ const clearSearch = () => {
       name="search"
       v-model="searchQuery"
       @keydown.enter="doSearch"
-      placeholder="Search books..."
+      :placeholder="$t('search.placeholder')"
       class="search__input"
     />
     <button @click="doSearch" class="search__button" aria-label="Search">

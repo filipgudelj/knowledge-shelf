@@ -1,5 +1,3 @@
-<script lang="ts" setup></script>
-
 <template>
   <button class="dropdown">F</button>
 </template>

@@ -1,0 +1,18 @@
+{
+  "sidebar": {
+    "home": "Početna",
+    "explore": "Istraži",
+    "favourites": "Omiljeno",
+    "cart": "Košarica",
+    "login": "Prijava",
+    "register": "Registracija"
+  },
+  "search": {
+    "placeholder": "Pretraži knjige..."
+  },
+  "carousel": {
+    "title1": "Naslov Jedan",
+    "title2": "Naslov Dva",
+    "title3": "Naslov Tri"
+  }
+}

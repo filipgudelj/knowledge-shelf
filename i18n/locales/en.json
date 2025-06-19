@@ -1,0 +1,18 @@
+{
+  "sidebar": {
+    "home": "Home",
+    "explore": "Explore",
+    "favourites": "Favourites",
+    "cart": "Cart",
+    "login": "Login",
+    "register": "Register"
+  },
+  "search": {
+    "placeholder": "Search books..."
+  },
+  "carousel": {
+    "title1": "Title One",
+    "title2": "Title Two",
+    "title3": "Title Three"
+  }
+}

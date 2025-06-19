@@ -13,14 +13,14 @@ useHead({
 
 <template>
   <Section>
-    <Carousel title="Title 1" />
+    <Carousel :title="$t('carousel.title1')" />
   </Section>
 
   <Section>
-    <Carousel title="Title 2" />
+    <Carousel :title="$t('carousel.title2')" />
   </Section>
 
   <Section>
-    <Carousel title="Title 3" />
+    <Carousel :title="$t('carousel.title3')" />
   </Section>
 </template>

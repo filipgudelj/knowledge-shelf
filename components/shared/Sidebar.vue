@@ -1,5 +1,3 @@
-<script lang="ts" setup></script>
-
 <template>
   <div class="sidebar">
     <div class="sidebar__header">
@@ -16,30 +14,34 @@
     <div class="sidebar__nav">
       <button class="sidebar__nav-item" aria-label="Go to Home">
         <Icon name="mdi:home-variant-outline" size="32px" />
-        <span class="sidebar__nav-label">Home</span>
+        <span class="sidebar__nav-label">{{ $t('sidebar.home') }}</span>
       </button>
-      <button class="sidebar__nav-item" aria-label="Go to Home">
+      <button class="sidebar__nav-item" aria-label="Go to Explore">
         <Icon name="mdi:explore" size="32px" />
-        <span class="sidebar__nav-label">Explore</span>
+        <span class="sidebar__nav-label">{{ $t('sidebar.explore') }}</span>
       </button>
       <button class="sidebar__nav-item" aria-label="Go to Favourites">
         <Icon name="mdi:favorite-border" size="32px" />
-        <span class="sidebar__nav-label">Favourites</span>
+        <span class="sidebar__nav-label">{{ $t('sidebar.favourites') }}</span>
       </button>
       <button class="sidebar__nav-item" aria-label="Go to Cart">
         <Icon name="mdi:cart-outline" size="32px" />
-        <span class="sidebar__nav-label">Cart</span>
+        <span class="sidebar__nav-label">{{ $t('sidebar.cart') }}</span>
       </button>
+
+      <div class="sidebar__nav-divider"></div>
+
+      <LangSwitcher />
 
       <div class="sidebar__nav-divider"></div>
 
       <button class="sidebar__nav-item" aria-label="Go to Login">
         <Icon name="mdi:login-variant" size="32px" />
-        <span class="sidebar__nav-label">Login</span>
+        <span class="sidebar__nav-label">{{ $t('sidebar.login') }}</span>
       </button>
-      <button class="sidebar__nav-item" aria-label="Go to Favourites">
+      <button class="sidebar__nav-item" aria-label="Go to Register">
         <Icon name="mdi:register-outline" size="32px" />
-        <span class="sidebar__nav-label">Register</span>
+        <span class="sidebar__nav-label">{{ $t('sidebar.register') }}</span>
       </button>
     </div>
   </div>
