@@ -26,6 +26,17 @@
         <Icon name="mdi:favorite-border" size="32px" />
         <span class="sidebar__nav-label">Favourites</span>
       </button>
+
+      <div class="sidebar__nav-divider"></div>
+
+      <button class="sidebar__nav-item" aria-label="Go to Login">
+        <Icon name="mdi:login-variant" size="32px" />
+        <span class="sidebar__nav-label">Login</span>
+      </button>
+      <button class="sidebar__nav-item" aria-label="Go to Favourites">
+        <Icon name="mdi:register-outline" size="32px" />
+        <span class="sidebar__nav-label">Register</span>
+      </button>
     </div>
   </div>
 </template>
@@ -36,12 +47,12 @@
   grid-row: 1/3;
   display: grid;
   grid-template-rows: 80px 1fr;
-  padding-inline: $spacing-4;
   border-right: 1px solid $color-gray-300;
 }
 
 .sidebar__header {
   @include flex();
+  padding-inline: $spacing-4;
   color: $color-blue-500;
   @media (min-width: $screen-md) {
     color: $color-black;
@@ -77,6 +88,7 @@
 .sidebar__nav {
   @include flex(column, flex-start, center);
   gap: $spacing-2;
+  padding-inline: $spacing-4;
 }
 
 .sidebar__nav-item {
@@ -103,5 +115,12 @@
     font-weight: 700;
     line-height: 20px;
   }
+}
+
+.sidebar__nav-divider {
+  width: calc(100% + $spacing-4 * 2);
+  height: 1px;
+  margin-block: $spacing-4;
+  background-color: $color-gray-300;
 }
 </style>
