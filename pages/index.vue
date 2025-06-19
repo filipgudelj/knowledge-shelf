@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+// PAGE META
 useHead({
   title: 'Knowledge Shelf',
   meta: [

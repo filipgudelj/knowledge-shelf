@@ -2,7 +2,7 @@
 // STATE
 const searchQuery = ref('')
 
-// SEARCH FUNCTIONS
+// SEARCH
 const doSearch = () => {
   console.log(`Search ${searchQuery.value}`)
 }

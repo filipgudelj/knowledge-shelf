@@ -82,6 +82,11 @@ const maxSlideIndex = computed(() => slides.length - visibleSlides.value)
 const translateX = computed(() => {
   return `translateX(-${(100 / slides.length) * currentSlideIndex.value}%)`
 })
+
+// WATCHERS
+watch(width, () => {
+  currentSlideIndex.value = 0
+})
 </script>
 
 <template>
@@ -191,6 +196,7 @@ const translateX = computed(() => {
 .slide__image {
   width: 100%;
   margin-bottom: $spacing-3;
+  border-radius: $radius-3;
 }
 
 .slide__title {
