@@ -26,6 +26,10 @@
         <Icon name="mdi:favorite-border" size="32px" />
         <span class="sidebar__nav-label">Favourites</span>
       </button>
+      <button class="sidebar__nav-item" aria-label="Go to Cart">
+        <Icon name="mdi:cart-outline" size="32px" />
+        <span class="sidebar__nav-label">Cart</span>
+      </button>
 
       <div class="sidebar__nav-divider"></div>
 
