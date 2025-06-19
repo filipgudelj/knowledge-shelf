@@ -1,11 +1,11 @@
 <script lang="ts" setup></script>
 
 <template>
-  <button class="user-dropdown">F</button>
+  <button class="dropdown">F</button>
 </template>
 
 <style lang="scss" scoped>
-.user-dropdown {
+.dropdown {
   width: 32px;
   height: 32px;
   border-radius: 50%;

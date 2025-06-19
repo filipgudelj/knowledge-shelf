@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useWindowSize } from '@vueuse/core'
 import { formatNumberToEuro } from '~/helpers/formatters'
 
 // PROPS
@@ -49,11 +50,11 @@ const slides = [
     image: '/images/test-book-img.jpg',
   },
 ]
-const visibleSlides = 3
 const totalSlides = slides.length
 const currentSlideIndex = ref(0)
+const { width } = useWindowSize()
 
-// NAVIGATION FUNCTIONS
+// CAROUSEL NAVIGATION
 const nextSlide = () => {
   if (currentSlideIndex.value < maxSlideIndex.value) {
     currentSlideIndex.value++
@@ -66,61 +67,70 @@ const previousSlide = () => {
 }
 
 // COMPUTED
+const visibleSlides = computed(() => {
+  if (width.value < 475) return 1
+  if (width.value < 900) return 2
+  if (width.value < 1200) return 3
+  if (width.value < 1500) return 4
+  return 5
+})
 const isPreviousButtonDisabled = computed(() => currentSlideIndex.value === 0)
 const isNextButtonDisabled = computed(
   () => currentSlideIndex.value === maxSlideIndex.value,
 )
-const maxSlideIndex = computed(() => slides.length - visibleSlides)
+const maxSlideIndex = computed(() => slides.length - visibleSlides.value)
 const translateX = computed(() => {
   return `translateX(-${(100 / slides.length) * currentSlideIndex.value}%)`
 })
 </script>
 
 <template>
-  <div class="carousel">
-    <div class="carousel__heading">
-      <h4>{{ props.title }}</h4>
-      <div class="carousel__buttons">
-        <button
-          @click="previousSlide"
-          :disabled="isPreviousButtonDisabled"
-          aria-label="Previous"
-        >
-          <Icon name="mdi:chevron-left" size="24px" />
-        </button>
-        <button
-          @click="nextSlide"
-          :disabled="isNextButtonDisabled"
-          aria-label="Next"
-        >
-          <Icon name="mdi:chevron-right" size="24px" />
-        </button>
+  <ClientOnly>
+    <div class="carousel">
+      <div class="carousel__heading">
+        <h4>{{ props.title }}</h4>
+        <div class="carousel__buttons">
+          <button
+            @click="previousSlide"
+            :disabled="isPreviousButtonDisabled"
+            aria-label="Previous"
+          >
+            <Icon name="mdi:chevron-left" size="24px" />
+          </button>
+          <button
+            @click="nextSlide"
+            :disabled="isNextButtonDisabled"
+            aria-label="Next"
+          >
+            <Icon name="mdi:chevron-right" size="24px" />
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="carousel__view">
-      <div
-        :style="{
-          transform: translateX,
-          width: `calc(100% * (${totalSlides} / ${visibleSlides}))`,
-        }"
-        class="carousel__track"
-      >
+      <div class="carousel__view">
         <div
-          v-for="(slide, index) in slides"
-          :key="index"
           :style="{
-            width: `calc(100% / ${totalSlides})`,
+            transform: translateX,
+            width: `calc(100% * (${totalSlides} / ${visibleSlides}))`,
           }"
-          class="slide"
+          class="carousel__track"
         >
-          <img :src="slide.image" :alt="slide.title" class="slide__image" />
-          <p class="slide__title">{{ slide.title }}</p>
-          <p class="slide__author">{{ slide.author }}</p>
-          <p class="slide__price">{{ formatNumberToEuro(slide.price) }}</p>
+          <div
+            v-for="(slide, index) in slides"
+            :key="index"
+            :style="{
+              width: `calc(100% / ${totalSlides})`,
+            }"
+            class="slide"
+          >
+            <img :src="slide.image" :alt="slide.title" class="slide__image" />
+            <p class="slide__title">{{ slide.title }}</p>
+            <p class="slide__author">{{ slide.author }}</p>
+            <p class="slide__price">{{ formatNumberToEuro(slide.price) }}</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </ClientOnly>
 </template>
 
 <style lang="scss" scoped>
@@ -180,7 +190,6 @@ const translateX = computed(() => {
 
 .slide__image {
   width: 100%;
-  height: 275px;
   margin-bottom: $spacing-3;
 }
 
