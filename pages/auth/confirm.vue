@@ -1,6 +1,8 @@
 <script setup lang="ts">
+// STATE
 const user = useSupabaseUser()
 
+// WATCHERS
 watch(
   user,
   async () => {
@@ -15,7 +17,16 @@ watch(
 </script>
 
 <template>
-  <div>Email Verification</div>
-  <div>Your email was confirmed</div>
-  <div>Waiting for login...</div>
+  <div class="confirm">
+    <p>Your email was confirmed</p>
+    <p>Waiting for login...</p>
+  </div>
 </template>
+
+<style lang="scss" scoped>
+.confirm {
+  @include flex(column, center, center);
+  gap: $spacing-5;
+  margin-top: $spacing-7;
+}
+</style>

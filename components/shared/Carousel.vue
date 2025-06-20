@@ -210,7 +210,7 @@ watch(width, () => {
 .slide__image {
   width: 100%;
   margin-bottom: $spacing-3;
-  border-radius: $radius-3;
+  border-radius: $radius-4;
 }
 
 .slide__title {

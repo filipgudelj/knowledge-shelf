@@ -1,5 +1,7 @@
 <script lang="ts" setup>
+// STATE
 const localePath = useLocalePath()
+const user = useSupabaseUser()
 </script>
 
 <template>
@@ -57,9 +59,10 @@ const localePath = useLocalePath()
 
       <LangSwitcher />
 
-      <div class="sidebar__nav-divider"></div>
+      <div v-if="!user" class="sidebar__nav-divider"></div>
 
       <NuxtLink
+        v-if="!user"
         :to="localePath('/auth/login')"
         class="sidebar__nav-item"
         aria-label="Go to Login"
@@ -68,6 +71,7 @@ const localePath = useLocalePath()
         <span class="sidebar__nav-label">{{ $t('sidebar.login') }}</span>
       </NuxtLink>
       <NuxtLink
+        v-if="!user"
         :to="localePath('/auth/register')"
         class="sidebar__nav-item"
         aria-label="Go to Register"

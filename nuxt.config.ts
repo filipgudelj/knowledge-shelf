@@ -1,6 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/supabase', '@nuxt/icon', '@nuxt/fonts', '@nuxtjs/i18n'],
+  modules: [
+    '@pinia/nuxt',
+    '@nuxtjs/supabase',
+    '@nuxt/icon',
+    '@nuxt/fonts',
+    '@nuxtjs/i18n',
+  ],
   components: [
     {
       path: '~/components',
