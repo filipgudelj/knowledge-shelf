@@ -18,8 +18,8 @@ watch(
 
 <template>
   <div class="confirm">
-    <p>Your email was confirmed</p>
-    <p>Waiting for login...</p>
+    <p>Thank you! Your email is now verified.</p>
+    <p>You're being redirected to your dashboard...</p>
   </div>
 </template>
 
