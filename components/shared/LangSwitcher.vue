@@ -11,19 +11,21 @@ const nextLocaleCode = computed(() => (locale.value === 'en' ? 'hr' : 'en'))
 </script>
 
 <template>
-  <NuxtLink
-    :to="switchLocalePath(nextLocaleCode)"
-    :key="locale.code"
-    class="lang-switcher__link"
-    :aria-label="`Switch language to ${nextLocaleCode.toUpperCase()}`"
-  >
-    <img
-      :src="currentLocaleData.flag"
-      :alt="`Flag of ${currentLocaleData.name}`"
-      class="lang-switcher__flag"
-    />
-    <span class="lang-switcher__label">{{ currentLocaleData.name }}</span>
-  </NuxtLink>
+  <ClientOnly>
+    <NuxtLink
+      :to="switchLocalePath(nextLocaleCode)"
+      :key="locale.code"
+      class="lang-switcher__link"
+      :aria-label="`Switch language to ${nextLocaleCode.toUpperCase()}`"
+    >
+      <img
+        :src="currentLocaleData.flag"
+        :alt="`Flag of ${currentLocaleData.name}`"
+        class="lang-switcher__flag"
+      />
+      <span class="lang-switcher__label">{{ currentLocaleData.name }}</span>
+    </NuxtLink>
+  </ClientOnly>
 </template>
 
 <style lang="scss" scoped>
