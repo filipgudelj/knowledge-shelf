@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const supabase = useSupabaseClient()
+const user = useSupabaseUser()
 const email = ref('')
 const password = ref('')
 
@@ -12,6 +13,8 @@ const registerUser = async () => {
     },
   })
 }
+
+console.log(user.value)
 </script>
 
 <template>
