@@ -2,7 +2,7 @@
   <div class="topbar">
     <Searchbar />
     <div class="topbar__right">
-      <LightDarkSwitcher />
+      <ThemeSwitcher />
       <UserDropdown />
     </div>
   </div>
