@@ -8,6 +8,11 @@ const showMenu = ref(false)
 const toggleMenu = () => {
   showMenu.value = !showMenu.value
 }
+
+const handleLogout = () => {
+  toggleMenu()
+  authStore.logout()
+}
 </script>
 
 <template>
@@ -19,7 +24,7 @@ const toggleMenu = () => {
     <div v-if="showMenu" class="dropdown__menu">
       <button class="dropdown__item">Settings</button>
       <button
-        @click="authStore.logout"
+        @click="handleLogout"
         class="dropdown__item dropdown__item--logout"
       >
         Logout
