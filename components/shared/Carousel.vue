@@ -93,7 +93,7 @@ watch(width, () => {
   <ClientOnly>
     <div class="carousel">
       <div class="carousel__heading">
-        <h4>{{ props.title }}</h4>
+        <div class="carousel__title">{{ props.title }}</div>
         <div class="carousel__buttons">
           <button
             @click="previousSlide"
@@ -142,12 +142,15 @@ watch(width, () => {
 .carousel {
   width: 100%;
   padding-block: $spacing-6;
-  background-color: $color-white;
 }
 
 .carousel__heading {
   @include flex(row, space-between, center);
   padding-block: $spacing-5;
+}
+
+.carousel__title {
+  font-size: $font-size-2xl;
 }
 
 .carousel__buttons {
@@ -159,19 +162,30 @@ watch(width, () => {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    color: $color-gray-800;
     transition: all 0.3s ease;
 
     &:hover {
       background-color: $color-gray-200;
+
+      html.dark & {
+        background-color: $color-gray-800;
+      }
     }
 
     &:disabled {
       color: $color-gray-300;
 
+      html.dark & {
+        color: $color-gray-800;
+      }
+
       &:hover {
+        background-color: $color-gray-100;
         cursor: not-allowed;
-        background-color: $color-white;
+
+        html.dark & {
+          background-color: $color-gray-900;
+        }
       }
     }
   }
@@ -201,17 +215,19 @@ watch(width, () => {
 
 .slide__title {
   max-width: 90%;
-  color: $color-black;
   font-size: $font-size-lg;
   text-align: center;
 }
 
 .slide__author {
-  color: $color-gray-700;
+  color: $color-gray-600;
+
+  html.dark & {
+    color: $color-gray-500;
+  }
 }
 
 .slide__price {
-  color: $color-black;
   font-size: $font-size-lg;
 }
 </style>

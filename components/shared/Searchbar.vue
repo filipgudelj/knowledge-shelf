@@ -43,6 +43,10 @@ const clearSearch = () => {
 .search:hover .search__input:focus {
   border: 1px solid $color-blue-500;
   background-color: $color-gray-300;
+
+  html.dark & {
+    background-color: $color-gray-700;
+  }
 }
 
 .search__input {
@@ -56,6 +60,12 @@ const clearSearch = () => {
   font-size: $font-size-lg;
   transition: all 0.3s ease;
 
+  html.dark & {
+    border: 1px solid $color-gray-800;
+    background-color: $color-gray-800;
+    color: $color-gray-200;
+  }
+
   @media (min-width: $screen-sm) {
     width: 300px;
   }
@@ -67,15 +77,28 @@ const clearSearch = () => {
   &:hover {
     border: 1px solid $color-gray-300;
     background-color: $color-gray-300;
+
+    html.dark & {
+      border: 1px solid $color-gray-700;
+      background-color: $color-gray-700;
+    }
   }
 
   &:focus {
     outline: none;
     border: 1px solid $color-blue-500;
+
+    html.dark & {
+      border: 1px solid $color-blue-500;
+    }
   }
 
   &::placeholder {
     color: $color-gray-600;
+
+    html.dark & {
+      color: $color-gray-500;
+    }
   }
 }
 
@@ -86,6 +109,10 @@ const clearSearch = () => {
   width: 24px;
   height: 24px;
   color: $color-gray-800;
+
+  html.dark & {
+    color: $color-gray-500;
+  }
 }
 
 .search__button {

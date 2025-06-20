@@ -8,8 +8,10 @@
   height: 32px;
   border-radius: 50%;
   background-color: $color-gray-200;
-  color: $color-gray-800;
   font-size: $font-size-sm;
-  font-weight: 700;
+
+  html.dark & {
+    background-color: $color-gray-800;
+  }
 }
 </style>

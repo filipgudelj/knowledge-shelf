@@ -54,14 +54,23 @@
   display: grid;
   grid-template-rows: 80px 1fr;
   border-right: 1px solid $color-gray-300;
+
+  html.dark & {
+    border-right: 1px solid $color-gray-700;
+  }
 }
 
 .sidebar__header {
   @include flex();
   padding-inline: $spacing-4;
   color: $color-blue-500;
+
   @media (min-width: $screen-md) {
-    color: $color-black;
+    color: $color-gray-900;
+
+    html.dark & {
+      color: $color-gray-200;
+    }
   }
 }
 
@@ -76,6 +85,7 @@
 
 .sidebar__logo-icon {
   display: block;
+
   @media (min-width: $screen-md) {
     display: none;
   }
@@ -84,10 +94,10 @@
 .sidebar__logo-text {
   display: none;
   font-family: $font-family-logo;
+
   @media (min-width: $screen-md) {
     display: block;
     font-size: $font-size-xl;
-    font-weight: 700;
   }
 }
 
@@ -102,23 +112,29 @@
   gap: $spacing-2;
   width: 100%;
   padding-block: $spacing-2;
+  padding-inline: $spacing-2;
   border-radius: $radius-5;
   font-size: $font-size-xl;
   transition: all 0.3s ease;
+
   @media (min-width: $screen-md) {
     @include flex(row, flex-start, center);
   }
 
   &:hover {
     background-color: $color-gray-200;
+
+    html.dark & {
+      background-color: $color-gray-800;
+    }
   }
 }
 
 .sidebar__nav-label {
   display: none;
+
   @media (min-width: $screen-md) {
     display: block;
-    font-weight: 700;
     line-height: 20px;
   }
 }
@@ -128,5 +144,9 @@
   height: 1px;
   margin-block: $spacing-4;
   background-color: $color-gray-300;
+
+  html.dark & {
+    background-color: $color-gray-700;
+  }
 }
 </style>

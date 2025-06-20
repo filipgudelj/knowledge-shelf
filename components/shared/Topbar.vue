@@ -1,7 +1,10 @@
 <template>
   <div class="topbar">
     <Searchbar />
-    <UserDropdown />
+    <div class="topbar__right">
+      <LightDarkSwitcher />
+      <UserDropdown />
+    </div>
   </div>
 </template>
 
@@ -11,5 +14,14 @@
   @include flex(row, space-between, center);
   padding: $spacing-5;
   border-bottom: 1px solid $color-gray-300;
+
+  html.dark & {
+    border-bottom: 1px solid $color-gray-700;
+  }
+}
+
+.topbar__right {
+  @include flex();
+  gap: $spacing-3;
 }
 </style>

@@ -32,15 +32,21 @@ const nextLocaleCode = computed(() => (locale.value === 'en' ? 'hr' : 'en'))
   gap: $spacing-2;
   width: 100%;
   padding-block: $spacing-2;
+  padding-inline: $spacing-2;
   border-radius: $radius-5;
   font-size: $font-size-xl;
   transition: all 0.3s ease;
+
   @media (min-width: $screen-md) {
     @include flex(row, flex-start, center);
   }
 
   &:hover {
-    background-color: $color-gray-300;
+    background-color: $color-gray-200;
+
+    html.dark & {
+      background-color: $color-gray-800;
+    }
   }
 }
 
@@ -52,9 +58,9 @@ const nextLocaleCode = computed(() => (locale.value === 'en' ? 'hr' : 'en'))
 
 .lang-switcher__label {
   display: none;
+
   @media (min-width: $screen-md) {
     display: block;
-    font-weight: 700;
     line-height: 20px;
   }
 }
