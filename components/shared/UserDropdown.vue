@@ -9,6 +9,7 @@ const toggleMenu = () => {
   showMenu.value = !showMenu.value
 }
 
+// HANDLERS
 const handleLogout = () => {
   toggleMenu()
   authStore.logout()

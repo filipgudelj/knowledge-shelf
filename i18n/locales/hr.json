@@ -7,12 +7,34 @@
     "login": "Prijava",
     "register": "Registracija"
   },
+
   "search": {
     "placeholder": "Pretraži knjige..."
   },
+
   "carousel": {
     "title1": "Naslov Jedan",
     "title2": "Naslov Dva",
     "title3": "Naslov Tri"
+  },
+
+  "login": {
+    "title": "Prijava",
+    "subtitle": "Bok, dobrodošli nazad!",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Unesite svoj email",
+    "passwordLabel": "Lozinka",
+    "passwordPlaceholder": "Unesite svoju lozinku",
+    "submit": "Prijavi se"
+  },
+
+  "register": {
+    "title": "Registracija",
+    "subtitle": "Kreirajte svoj račun!",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Unesite svoj email",
+    "passwordLabel": "Lozinka",
+    "passwordPlaceholder": "Unesite svoju lozinku",
+    "submit": "Registriraj se"
   }
 }

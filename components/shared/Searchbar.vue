@@ -56,6 +56,7 @@ const clearSearch = () => {
   border: 1px solid $color-gray-200;
   border-radius: $radius-5;
   background-color: $color-gray-200;
+  color: $color-gray-900;
   line-height: 48px;
   font-size: $font-size-lg;
   transition: all 0.3s ease;
@@ -64,14 +65,6 @@ const clearSearch = () => {
     border: 1px solid $color-gray-800;
     background-color: $color-gray-800;
     color: $color-gray-200;
-  }
-
-  @media (min-width: $screen-sm) {
-    width: 300px;
-  }
-
-  @media (min-width: $screen-md) {
-    width: 350px;
   }
 
   &:hover {
@@ -99,6 +92,14 @@ const clearSearch = () => {
     html.dark & {
       color: $color-gray-500;
     }
+  }
+
+  @media (min-width: $screen-sm) {
+    width: 300px;
+  }
+
+  @media (min-width: $screen-md) {
+    width: 350px;
   }
 }
 

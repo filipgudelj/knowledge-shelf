@@ -7,12 +7,34 @@
     "login": "Login",
     "register": "Register"
   },
+
   "search": {
     "placeholder": "Search books..."
   },
+
   "carousel": {
     "title1": "Title One",
     "title2": "Title Two",
     "title3": "Title Three"
+  },
+
+  "login": {
+    "title": "Login",
+    "subtitle": "Hi, welcome back!",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "submit": "Login"
+  },
+
+  "register": {
+    "title": "Register",
+    "subtitle": "Create your account!",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "submit": "Register"
   }
 }

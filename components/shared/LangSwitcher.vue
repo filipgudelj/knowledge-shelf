@@ -39,16 +39,16 @@ const nextLocaleCode = computed(() => (locale.value === 'en' ? 'hr' : 'en'))
   font-size: $font-size-xl;
   transition: all 0.3s ease;
 
-  @media (min-width: $screen-md) {
-    @include flex(row, flex-start, center);
-  }
-
   &:hover {
     background-color: $color-gray-200;
 
     html.dark & {
       background-color: $color-gray-800;
     }
+  }
+
+  @media (min-width: $screen-md) {
+    @include flex(row, flex-start, center);
   }
 }
 
