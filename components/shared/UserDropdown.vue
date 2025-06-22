@@ -55,6 +55,7 @@ const handleLogout = () => {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  line-height: 32px;
 }
 
 .dropdown__menu {
