@@ -7,6 +7,7 @@ const password = ref('')
 // HANDLERS
 const handleLogin = () => {
   authStore.login(email.value, password.value)
+  navigateTo('/')
 }
 </script>
 

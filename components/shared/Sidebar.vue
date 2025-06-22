@@ -1,14 +1,13 @@
 <script lang="ts" setup>
 // STATE
-const localePath = useLocalePath()
 const user = useSupabaseUser()
 </script>
 
 <template>
   <div class="sidebar">
     <div class="sidebar__header">
-      <NuxtLink
-        :to="localePath('/')"
+      <NuxtLinkLocale
+        :to="'/'"
         class="sidebar__logo"
         aria-label="Knowledge Shelf Home"
       >
@@ -18,42 +17,42 @@ const user = useSupabaseUser()
           class="sidebar__logo-icon"
         />
         <span class="sidebar__logo-text">KNOWLEDGE SHELF</span>
-      </NuxtLink>
+      </NuxtLinkLocale>
     </div>
 
     <div class="sidebar__nav">
-      <NuxtLink
-        :to="localePath('/')"
+      <NuxtLinkLocale
+        :to="'/'"
         class="sidebar__nav-item"
         aria-label="Go to Home"
       >
         <Icon name="mdi:home-variant-outline" size="32px" />
         <span class="sidebar__nav-label">{{ $t('sidebar.home') }}</span>
-      </NuxtLink>
-      <NuxtLink
-        :to="localePath('/')"
+      </NuxtLinkLocale>
+      <NuxtLinkLocale
+        :to="'/'"
         class="sidebar__nav-item"
         aria-label="Go to Explore"
       >
         <Icon name="mdi:explore" size="32px" />
         <span class="sidebar__nav-label">{{ $t('sidebar.explore') }}</span>
-      </NuxtLink>
-      <NuxtLink
-        :to="localePath('/')"
+      </NuxtLinkLocale>
+      <NuxtLinkLocale
+        :to="'/'"
         class="sidebar__nav-item"
         aria-label="Go to Favourites"
       >
         <Icon name="mdi:favorite-border" size="32px" />
         <span class="sidebar__nav-label">{{ $t('sidebar.favourites') }}</span>
-      </NuxtLink>
-      <NuxtLink
-        :to="localePath('/')"
+      </NuxtLinkLocale>
+      <NuxtLinkLocale
+        :to="'/'"
         class="sidebar__nav-item"
         aria-label="Go to Cart"
       >
         <Icon name="mdi:cart-outline" size="32px" />
         <span class="sidebar__nav-label">{{ $t('sidebar.cart') }}</span>
-      </NuxtLink>
+      </NuxtLinkLocale>
 
       <div class="sidebar__nav-divider"></div>
 
@@ -61,24 +60,24 @@ const user = useSupabaseUser()
 
       <div v-if="!user" class="sidebar__nav-divider"></div>
 
-      <NuxtLink
+      <NuxtLinkLocale
         v-if="!user"
-        :to="localePath('/auth/login')"
+        :to="'/auth/login'"
         class="sidebar__nav-item"
         aria-label="Go to Login"
       >
         <Icon name="mdi:login-variant" size="32px" />
         <span class="sidebar__nav-label">{{ $t('sidebar.login') }}</span>
-      </NuxtLink>
-      <NuxtLink
+      </NuxtLinkLocale>
+      <NuxtLinkLocale
         v-if="!user"
-        :to="localePath('/auth/register')"
+        :to="'/auth/register'"
         class="sidebar__nav-item"
         aria-label="Go to Register"
       >
         <Icon name="mdi:register-outline" size="32px" />
         <span class="sidebar__nav-label">{{ $t('sidebar.register') }}</span>
-      </NuxtLink>
+      </NuxtLinkLocale>
     </div>
   </div>
 </template>
