@@ -19,6 +19,7 @@ const clearSearch = () => {
       v-model="searchQuery"
       @keydown.enter="doSearch"
       :placeholder="$t('search.placeholder')"
+      autocomplete="off"
       class="search__input"
     />
     <button @click="doSearch" class="search__button" aria-label="Search">

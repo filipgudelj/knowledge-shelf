@@ -31,6 +31,7 @@ function onInput(event: Event) {
       :placeholder="props.placeholder"
       :value="props.modelValue"
       @input="onInput"
+      autocomplete="off"
       class="input"
     />
     <div v-if="slots.icon" class="input__icon">
