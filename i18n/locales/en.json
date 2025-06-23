@@ -35,6 +35,23 @@
     "emailPlaceholder": "Enter your email",
     "passwordLabel": "Password",
     "passwordPlaceholder": "Enter your password",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Re-enter your password",
     "submit": "Register"
+  },
+
+  "validation": {
+    "email": {
+      "required": "Email is required",
+      "invalid": "Email must be a valid email address"
+    },
+    "password": {
+      "required": "Password is required",
+      "min": "Password must be at least 6 characters"
+    },
+    "confirmPassword": {
+      "required": "Confirm password is required",
+      "match": "Passwords must match"
+    }
   }
 }

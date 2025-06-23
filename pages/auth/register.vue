@@ -1,17 +1,54 @@
 <script lang="ts" setup>
+import { useForm, useField } from 'vee-validate'
+import * as yup from 'yup'
+
 // STATE
 const authStore = useAuthStore()
-const email = ref('')
-const password = ref('')
+const { t } = useI18n()
 
-// HANDLERS
-const handleRegister = () => {
-  authStore.register(email.value, password.value)
-}
+// VALIDATION
+const schema = yup.object({
+  email: yup
+    .string()
+    .required(t('validation.email.required'))
+    .matches(
+      /^[^@]+?\.[^@]+?@[\w.-]+\.[a-zA-Z]{2,}$/,
+      t('validation.email.invalid'),
+    ),
+  password: yup
+    .string()
+    .required(t('validation.password.required'))
+    .min(6, t('validation.password.min')),
+  confirmPassword: yup
+    .string()
+    .required(t('validation.confirmPassword.required'))
+    .oneOf([yup.ref('password')], t('validation.confirmPassword.match')),
+})
+
+const submitted = ref(false)
+const { handleSubmit } = useForm({
+  validationSchema: schema,
+  validateOnMount: false,
+})
+const { value: email, errorMessage: emailError } = useField<string>('email')
+const { value: password, errorMessage: passwordError } =
+  useField<string>('password')
+const { value: confirmPassword, errorMessage: confirmPasswordError } =
+  useField<string>('confirmPassword')
+
+// SUBMIT
+const onSubmit = handleSubmit(
+  () => {
+    authStore.register(email.value, password.value)
+  },
+  () => {
+    submitted.value = true
+  },
+)
 </script>
 
 <template>
-  <form @submit.prevent="handleRegister()" class="register">
+  <form @submit.prevent="onSubmit()" class="register">
     <div class="register__head">
       <h1>{{ $t('register.title') }}</h1>
       <p>{{ $t('register.subtitle') }}</p>
@@ -27,7 +64,12 @@ const handleRegister = () => {
       <template #icon>
         <Icon name="mdi:email-outline" />
       </template>
+
+      <template #error>
+        <div v-if="submitted && emailError">{{ emailError }}</div>
+      </template>
     </FormInput>
+
     <FormInput
       :label="$t('register.passwordLabel')"
       v-model="password"
@@ -38,15 +80,40 @@ const handleRegister = () => {
       <template #icon>
         <Icon name="mdi:password-outline" />
       </template>
+
+      <template #error>
+        <div v-if="submitted && passwordError">{{ passwordError }}</div>
+      </template>
     </FormInput>
-    <SubmitButton>{{ $t('register.submit') }}</SubmitButton>
+
+    <FormInput
+      :label="$t('register.confirmPasswordLabel')"
+      v-model="confirmPassword"
+      id="confirmPassword"
+      type="password"
+      :placeholder="$t('register.confirmPasswordPlaceholder')"
+    >
+      <template #icon>
+        <Icon name="mdi:lock-check-outline" />
+      </template>
+
+      <template #error>
+        <div v-if="submitted && confirmPasswordError">
+          {{ confirmPasswordError }}
+        </div>
+      </template>
+    </FormInput>
+
+    <SubmitButton class="register__submit">{{
+      $t('register.submit')
+    }}</SubmitButton>
   </form>
 </template>
 
 <style lang="scss" scoped>
 .register {
   @include flex(column, center, flex-start);
-  gap: $spacing-5;
+  gap: $spacing-1;
   margin-top: $spacing-10;
   width: 250px;
 
@@ -70,5 +137,10 @@ const handleRegister = () => {
 .register__head {
   @include flex(column, center, flex-start);
   gap: $spacing-3;
+  margin-bottom: $spacing-6;
+}
+
+.register__submit {
+  margin-top: $spacing-3;
 }
 </style>

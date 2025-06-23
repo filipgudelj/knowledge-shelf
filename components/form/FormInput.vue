@@ -37,6 +37,7 @@ function onInput(event: Event) {
     <div v-if="slots.icon" class="input__icon">
       <slot name="icon" />
     </div>
+    <div class="input__error"><slot name="error" /></div>
   </div>
 </template>
 
@@ -89,7 +90,7 @@ function onInput(event: Event) {
 
 .input__icon {
   position: absolute;
-  top: 50%;
+  top: 35%;
   @include flex();
   width: 32px;
   height: 24px;
@@ -98,5 +99,12 @@ function onInput(event: Event) {
 
 .input__wrapper:has(.input__icon) .input {
   padding-left: $spacing-9;
+}
+
+.input__error {
+  height: 20px;
+  margin-top: $spacing-1;
+  color: $color-red;
+  font-size: $font-size-sm;
 }
 </style>

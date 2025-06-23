@@ -35,6 +35,23 @@
     "emailPlaceholder": "Unesite svoj email",
     "passwordLabel": "Lozinka",
     "passwordPlaceholder": "Unesite svoju lozinku",
+    "confirmPasswordLabel": "Potvrdi lozinku",
+    "confirmPasswordPlaceholder": "Ponovno unesi lozinku",
     "submit": "Registriraj se"
+  },
+
+  "validation": {
+    "email": {
+      "required": "Email je obavezan",
+      "invalid": "Email mora biti valjana adresa"
+    },
+    "password": {
+      "required": "Lozinka je obavezna",
+      "min": "Lozinka mora imati najmanje 6 znakova"
+    },
+    "confirmPassword": {
+      "required": "Potvrda lozinke je obavezna",
+      "match": "Lozinke se moraju podudarati"
+    }
   }
 }
