@@ -104,7 +104,7 @@ function onInput(event: Event) {
 .input__error {
   height: 20px;
   margin-top: $spacing-1;
-  color: $color-red;
+  color: $color-red-500;
   font-size: $font-size-sm;
 }
 </style>

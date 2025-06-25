@@ -1,22 +1,31 @@
-<script lang="ts" setup>
-//META
-definePageMeta({
-  middleware: ['confirm'],
-})
+<script setup lang="ts">
+const user = useSupabaseUser()
+const { showToast } = useToast()
+const { t } = useI18n()
+
+// WATCHERS
+watch(
+  user,
+  () => {
+    if (user.value) {
+      showToast('success', t('toast.emailConfirmed'))
+      return navigateTo('/')
+    }
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
   <div class="confirm">
-    <Icon name="mdi:success-circle" size="64px" class="confirm__icon" />
-    <p class="confirm__text">{{ $t('verification.emailVerified') }}</p>
-    <p class="confirm__subtext">{{ $t('verification.emailThanks') }}</p>
+    <p class="confirm__text">
+      {{ $t('confirm.waitingForLogin') }}<span class="confirm__dots--animate" />
+    </p>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .confirm {
-  @include flex(column, center, center);
-  gap: $spacing-3;
   margin-top: $spacing-10;
 }
 
@@ -24,7 +33,31 @@ definePageMeta({
   font-size: $font-size-xl;
 }
 
-.confirm__icon {
-  color: $color-green;
+.confirm__dots--animate {
+  display: inline-block;
+  width: 1.5rem;
+
+  &::before {
+    content: '';
+    animation: dots 1s steps(3, end) infinite;
+  }
+}
+
+@keyframes dots {
+  0% {
+    content: '';
+  }
+
+  33% {
+    content: '.';
+  }
+
+  66% {
+    content: '..';
+  }
+
+  100% {
+    content: '...';
+  }
 }
 </style>

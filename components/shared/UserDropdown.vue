@@ -124,6 +124,6 @@ const handleLogout = () => {
 }
 
 .dropdown__item--logout {
-  color: $color-red;
+  color: $color-red-500;
 }
 </style>

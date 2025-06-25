@@ -58,5 +58,16 @@
   "verification": {
     "emailVerified": "Email potvrđen!",
     "emailThanks": "Hvala što ste potvrdili svoj email."
+  },
+
+  "confirm": {
+    "waitingForLogin": "Čekanje na prijavu"
+  },
+
+  "toast": {
+    "emailConfirmed": "Email je potvrđen!",
+    "success": "Uspjeh",
+    "error": "Greška",
+    "info": "Informacija"
   }
 }
