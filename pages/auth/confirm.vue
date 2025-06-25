@@ -1,17 +1,8 @@
 <script lang="ts" setup>
-const user = useSupabaseUser()
-
-// WATCHERS
-// watch(
-//   user,
-//   async () => {
-//     if (user.value) {
-//       await new Promise((resolve) => setTimeout(resolve, 2000))
-//       return navigateTo('/')
-//     }
-//   },
-//   { immediate: true },
-// )
+//META
+definePageMeta({
+  middleware: ['confirm'],
+})
 </script>
 
 <template>
@@ -25,8 +16,8 @@ const user = useSupabaseUser()
 <style lang="scss" scoped>
 .confirm {
   @include flex(column, center, center);
-  height: 100%;
   gap: $spacing-3;
+  margin-top: $spacing-10;
 }
 
 .confirm__text {
