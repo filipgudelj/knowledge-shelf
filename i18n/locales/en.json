@@ -55,11 +55,6 @@
     }
   },
 
-  "verification": {
-    "emailVerified": "Email verified!",
-    "emailThanks": "Thanks for confirming your email."
-  },
-
   "confirm": {
     "waitingForLogin": "Waiting for login"
   },

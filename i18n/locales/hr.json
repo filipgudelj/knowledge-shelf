@@ -55,11 +55,6 @@
     }
   },
 
-  "verification": {
-    "emailVerified": "Email potvrđen!",
-    "emailThanks": "Hvala što ste potvrdili svoj email."
-  },
-
   "confirm": {
     "waitingForLogin": "Čekanje na prijavu"
   },
