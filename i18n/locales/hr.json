@@ -53,5 +53,10 @@
       "required": "Potvrda lozinke je obavezna",
       "match": "Lozinke se moraju podudarati"
     }
+  },
+
+  "verification": {
+    "emailVerified": "Email potvrđen!",
+    "emailThanks": "Hvala što ste potvrdili svoj email."
   }
 }

@@ -53,5 +53,10 @@
       "required": "Confirm password is required",
       "match": "Passwords must match"
     }
+  },
+
+  "verification": {
+    "emailVerified": "Email verified!",
+    "emailThanks": "Thanks for confirming your email."
   }
 }

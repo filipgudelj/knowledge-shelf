@@ -58,26 +58,28 @@ const user = useSupabaseUser()
 
       <LangSwitcher />
 
-      <div v-if="!user" class="sidebar__nav-divider"></div>
+      <ClientOnly>
+        <div v-if="!user" class="sidebar__nav-divider"></div>
 
-      <NuxtLinkLocale
-        v-if="!user"
-        :to="'/auth/login'"
-        class="sidebar__nav-item"
-        aria-label="Go to Login"
-      >
-        <Icon name="mdi:login-variant" size="32px" />
-        <span class="sidebar__nav-label">{{ $t('sidebar.login') }}</span>
-      </NuxtLinkLocale>
-      <NuxtLinkLocale
-        v-if="!user"
-        :to="'/auth/register'"
-        class="sidebar__nav-item"
-        aria-label="Go to Register"
-      >
-        <Icon name="mdi:register-outline" size="32px" />
-        <span class="sidebar__nav-label">{{ $t('sidebar.register') }}</span>
-      </NuxtLinkLocale>
+        <NuxtLinkLocale
+          v-if="!user"
+          :to="'/auth/login'"
+          class="sidebar__nav-item"
+          aria-label="Go to Login"
+        >
+          <Icon name="mdi:login-variant" size="32px" />
+          <span class="sidebar__nav-label">{{ $t('sidebar.login') }}</span>
+        </NuxtLinkLocale>
+        <NuxtLinkLocale
+          v-if="!user"
+          :to="'/auth/register'"
+          class="sidebar__nav-item"
+          aria-label="Go to Register"
+        >
+          <Icon name="mdi:register-outline" size="32px" />
+          <span class="sidebar__nav-label">{{ $t('sidebar.register') }}</span>
+        </NuxtLinkLocale>
+      </ClientOnly>
     </div>
   </div>
 </template>
