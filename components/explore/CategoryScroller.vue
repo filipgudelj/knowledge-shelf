@@ -1,44 +1,27 @@
 <script lang="ts" setup>
-const categories = [
-  { label: 'All', value: 'all', slug: 'all' },
-  { label: 'Art and Design', value: 'art and design', slug: 'art-and-design' },
-  { label: 'Biography', value: 'biography', slug: 'biography' },
-  {
-    label: 'Business, Economics and Law',
-    value: 'business, economics and law',
-    slug: 'business-economics-and-law',
-  },
-  { label: 'Computing', value: 'computing', slug: 'computing' },
-  {
-    label: 'Crime and Thrillers',
-    value: 'crime and thrillers',
-    slug: 'crime-and-thrillers',
-  },
-  { label: 'Education', value: 'education', slug: 'education' },
-  { label: 'Fiction', value: 'fiction', slug: 'fiction' },
-  { label: 'Graphic Novels', value: 'graphic novels', slug: 'graphic-novels' },
-  {
-    label: 'Health and Wellbeing',
-    value: 'health and wellbeing',
-    slug: 'health-and-wellbeing',
-  },
-  { label: 'History', value: 'history', slug: 'history' },
-  {
-    label: 'Science and Nature',
-    value: 'science and nature',
-    slug: 'science-and-nature',
-  },
-  { label: 'Travel', value: 'travel', slug: 'travel' },
-]
+// TYPES
+type Category = { label: string; value: string; slug: string }
+
+// PROPS
+const props = defineProps<{ categories: Category[] }>()
+
+// STATE
+const route = useRoute()
+
+// COMPUTEDS
+const activeCategory = computed(() => {
+  return (route.params.category as string) || 'all'
+})
 </script>
 
 <template>
   <div class="scrollmenu">
     <NuxtLinkLocale
-      v-for="category in categories"
+      v-for="category in props.categories"
       :key="category.value"
       :to="`/explore/${category.slug}`"
       class="scrollmenu-item"
+      :class="{ 'scrollmenu-item--active': category.slug === activeCategory }"
       :aria-label="`Go to ${category.label}`"
       >{{ category.label }}
     </NuxtLinkLocale>
@@ -95,5 +78,9 @@ const categories = [
   &:hover {
     color: $color-blue-500;
   }
+}
+
+.scrollmenu-item--active {
+  color: $color-blue-500;
 }
 </style>
