@@ -30,7 +30,7 @@ const user = useSupabaseUser()
         <span class="sidebar__nav-label">{{ $t('sidebar.home') }}</span>
       </NuxtLinkLocale>
       <NuxtLinkLocale
-        :to="'/'"
+        :to="'/explore/all'"
         class="sidebar__nav-item"
         aria-label="Go to Explore"
       >
