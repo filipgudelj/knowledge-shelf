@@ -48,89 +48,88 @@ const onSubmit = handleSubmit(
 </script>
 
 <template>
-  <form @submit.prevent="onSubmit()" class="register">
-    <div class="register__head">
-      <h1>{{ $t('register.title') }}</h1>
-      <p>{{ $t('register.subtitle') }}</p>
-    </div>
+  <div class="register">
+    <form @submit.prevent="onSubmit()" class="register__form">
+      <div class="register__head">
+        <h1>{{ $t('register.title') }}</h1>
+        <p>{{ $t('register.subtitle') }}</p>
+      </div>
 
-    <FormInput
-      :label="$t('register.emailLabel')"
-      v-model="email"
-      id="email"
-      type="text"
-      :placeholder="$t('register.emailPlaceholder')"
-    >
-      <template #icon>
-        <Icon name="mdi:email-outline" />
-      </template>
+      <FormInput
+        :label="$t('register.emailLabel')"
+        v-model="email"
+        id="email"
+        type="text"
+        :placeholder="$t('register.emailPlaceholder')"
+      >
+        <template #icon>
+          <Icon name="mdi:email-outline" />
+        </template>
 
-      <template #error>
-        <div v-if="submitted && emailError">{{ emailError }}</div>
-      </template>
-    </FormInput>
+        <template #error>
+          <div v-if="submitted && emailError">{{ emailError }}</div>
+        </template>
+      </FormInput>
 
-    <FormInput
-      :label="$t('register.passwordLabel')"
-      v-model="password"
-      id="password"
-      type="password"
-      :placeholder="$t('register.passwordPlaceholder')"
-    >
-      <template #icon>
-        <Icon name="mdi:password-outline" />
-      </template>
+      <FormInput
+        :label="$t('register.passwordLabel')"
+        v-model="password"
+        id="password"
+        type="password"
+        :placeholder="$t('register.passwordPlaceholder')"
+      >
+        <template #icon>
+          <Icon name="mdi:password-outline" />
+        </template>
 
-      <template #error>
-        <div v-if="submitted && passwordError">{{ passwordError }}</div>
-      </template>
-    </FormInput>
+        <template #error>
+          <div v-if="submitted && passwordError">{{ passwordError }}</div>
+        </template>
+      </FormInput>
 
-    <FormInput
-      :label="$t('register.confirmPasswordLabel')"
-      v-model="confirmPassword"
-      id="confirmPassword"
-      type="password"
-      :placeholder="$t('register.confirmPasswordPlaceholder')"
-    >
-      <template #icon>
-        <Icon name="mdi:lock-check-outline" />
-      </template>
+      <FormInput
+        :label="$t('register.confirmPasswordLabel')"
+        v-model="confirmPassword"
+        id="confirmPassword"
+        type="password"
+        :placeholder="$t('register.confirmPasswordPlaceholder')"
+      >
+        <template #icon>
+          <Icon name="mdi:lock-check-outline" />
+        </template>
 
-      <template #error>
-        <div v-if="submitted && confirmPasswordError">
-          {{ confirmPasswordError }}
-        </div>
-      </template>
-    </FormInput>
+        <template #error>
+          <div v-if="submitted && confirmPasswordError">
+            {{ confirmPasswordError }}
+          </div>
+        </template>
+      </FormInput>
 
-    <SubmitButton class="register__submit">{{
-      $t('register.submit')
-    }}</SubmitButton>
-  </form>
+      <SubmitButton class="register__submit">{{
+        $t('register.submit')
+      }}</SubmitButton>
+    </form>
+
+    <div class="login__image" />
+  </div>
 </template>
 
 <style lang="scss" scoped>
 .register {
+  @include flex(row);
+  gap: $spacing-5;
+  width: 100%;
+  height: 435px;
+  margin-top: $spacing-6;
+}
+
+.register__form {
   @include flex(column, center, flex-start);
   gap: $spacing-1;
-  margin-top: $spacing-10;
-  width: 250px;
-
-  @media (min-width: $screen-sm) {
-    width: 325px;
-  }
-
-  @media (min-width: $screen-md) {
-    width: 400px;
-  }
+  width: 100%;
 
   @media (min-width: $screen-lg) {
-    width: 550px;
-  }
-
-  @media (min-width: $screen-xl) {
-    width: 650px;
+    width: 50%;
   }
 }
 
@@ -142,5 +141,20 @@ const onSubmit = handleSubmit(
 
 .register__submit {
   margin-top: $spacing-3;
+}
+
+.login__image {
+  display: none;
+  width: 50%;
+  height: 100%;
+  border-radius: $radius-4;
+  background-image: url('/svgs/boy-writing.svg');
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  @media (min-width: $screen-lg) {
+    display: block;
+  }
 }
 </style>

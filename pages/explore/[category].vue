@@ -35,30 +35,59 @@ const categories = ref<Category[]>([
 ])
 const route = useRoute()
 const booksStore = useBooksStore()
-const slug = route.params.category as string
-const category = categories.value.find((c) => c.slug === slug)
-if (!category) {
+
+// COMPUTEDS
+const slug = computed(() => route.params.category as string)
+const category = computed(() =>
+  categories.value.find((c) => c.slug === slug.value),
+)
+if (!category.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: `Category not found: ${slug}`,
+    statusMessage: `Category not found: ${slug.value}`,
   })
 }
-const pageTitle = category.label + ' books'
+const categoryName = computed(() => category.value!.value)
+const pageTitle = computed(() => `${category.value!.label} books`)
 
-// API
-const books = await booksStore.getBooks()
+// WATCHERS
+watch(
+  () => categoryName.value,
+  async (newCat, oldCat) => {
+    if (newCat === oldCat) return
+
+    booksStore.resetBooks()
+    await booksStore.loadMoreBooks(newCat)
+  },
+  { immediate: true },
+)
+
+// INFINITE SCROLL
+const onScroll = async () => {
+  if (!booksStore.hasMoreBooks) return
+
+  const scrollPos = window.innerHeight + window.scrollY
+  const threshold = document.documentElement.offsetHeight - 200
+
+  if (scrollPos >= threshold) {
+    await booksStore.loadMoreBooks(categoryName.value)
+  }
+}
+
+// LCH
+onMounted(() => {
+  window.addEventListener('scroll', onScroll)
+})
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', onScroll)
+})
 </script>
 
 <template>
   <div class="explore">
     <CategoryScroller :categories="categories" />
-
     <h1 class="explore__title">{{ pageTitle }}</h1>
-    <!-- <div class="explore__controls">
-      <FilterBooks />
-      <SortBooks />
-    </div> -->
-    <BooksList :books="books" />
+    <BooksList :books="booksStore.books" />
   </div>
 </template>
 

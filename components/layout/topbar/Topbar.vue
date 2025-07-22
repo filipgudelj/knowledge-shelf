@@ -12,7 +12,7 @@
 .topbar {
   grid-column: 2/3;
   @include flex(row, space-between, center);
-  padding: $spacing-5;
+  padding: $spacing-6;
   border-bottom: 1px solid $color-gray-300;
 
   html.dark & {

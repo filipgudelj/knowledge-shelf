@@ -32,8 +32,8 @@
   @include flex(column, flex-start, center);
   width: 100%;
   min-width: 0;
-  max-width: 1920px;
+  max-width: calc(1920px - 250px);
   margin-inline: auto;
-  padding-inline: $spacing-5;
+  padding-inline: $spacing-6;
 }
 </style>

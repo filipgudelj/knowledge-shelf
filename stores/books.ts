@@ -3,15 +3,47 @@ import type { Book } from '@/types'
 
 export const useBooksStore = defineStore('books', () => {
   const supabase = useSupabaseClient()
+  const books = ref<Book[]>([])
+  const page = ref(0)
+  const pageSize = 24
+  const hasMoreBooks = ref(true)
+  const isLoading = ref(false)
 
-  const getBooks = async (): Promise<Book[]> => {
-    const { data: books, error } = await supabase
+  const loadMoreBooks = async (category: string) => {
+    if (isLoading.value || !hasMoreBooks.value) return
+
+    isLoading.value = true
+
+    const start = page.value * pageSize
+    const end = start + pageSize - 1
+
+    let query = supabase
       .from('books')
       .select('*')
-      .range(0, 13)
+      .order('id', { ascending: true })
+      .range(start, end)
 
-    return books ?? []
+    if (category !== 'all') {
+      query = query.eq('category', category)
+    }
+
+    const { data } = await query
+
+    if (!data || data.length < pageSize) {
+      hasMoreBooks.value = false
+    }
+
+    books.value.push(...(data ?? []))
+    page.value++
+
+    isLoading.value = false
   }
 
-  return { getBooks }
+  const resetBooks = () => {
+    books.value = []
+    page.value = 0
+    hasMoreBooks.value = true
+  }
+
+  return { books, hasMoreBooks, loadMoreBooks, resetBooks }
 })

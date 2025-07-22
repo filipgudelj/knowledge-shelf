@@ -146,7 +146,7 @@ watch(width, () => {
 
 .carousel__heading {
   @include flex(row, space-between, center);
-  padding-block: $spacing-5;
+  padding-block: $spacing-6;
 }
 
 .carousel__title {
