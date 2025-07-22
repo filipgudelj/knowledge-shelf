@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-// TYPES
-type Category = { label: string; value: string; slug: string }
+import type { Category } from '@/types'
 
 // PROPS
 const props = defineProps<{ categories: Category[] }>()
@@ -20,8 +19,8 @@ const activeCategory = computed(() => {
       v-for="category in props.categories"
       :key="category.value"
       :to="`/explore/${category.slug}`"
-      class="scrollmenu-item"
-      :class="{ 'scrollmenu-item--active': category.slug === activeCategory }"
+      class="scrollmenu__item"
+      :class="{ 'scrollmenu__item--active': category.slug === activeCategory }"
       :aria-label="`Go to ${category.label}`"
       >{{ category.label }}
     </NuxtLinkLocale>
@@ -65,7 +64,7 @@ const activeCategory = computed(() => {
   }
 }
 
-.scrollmenu-item {
+.scrollmenu__item {
   display: inline-block;
   margin: $spacing-3 $spacing-6 $spacing-3 0;
   padding-block: $spacing-2;
@@ -80,7 +79,7 @@ const activeCategory = computed(() => {
   }
 }
 
-.scrollmenu-item--active {
+.scrollmenu__item--active {
   color: $color-blue-500;
 }
 </style>

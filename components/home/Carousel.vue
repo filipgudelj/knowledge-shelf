@@ -141,7 +141,7 @@ watch(width, () => {
 <style lang="scss" scoped>
 .carousel {
   width: 100%;
-  padding-block: $spacing-6;
+  padding-bottom: $spacing-6;
 }
 
 .carousel__heading {

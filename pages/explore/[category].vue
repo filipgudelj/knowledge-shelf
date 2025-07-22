@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-// TYPES
-type Category = { label: string; value: string; slug: string }
+import type { Category } from '~/types/category'
 
 // STATE
 const categories = ref<Category[]>([
@@ -35,23 +34,31 @@ const categories = ref<Category[]>([
   { label: 'Travel', value: 'travel', slug: 'travel' },
 ])
 const route = useRoute()
+const booksStore = useBooksStore()
 const slug = route.params.category as string
 const category = categories.value.find((c) => c.slug === slug)
 if (!category) {
-  throw createError({ statusCode: 404, statusMessage: 'Category not found' })
+  throw createError({
+    statusCode: 404,
+    statusMessage: `Category not found: ${slug}`,
+  })
 }
 const pageTitle = category.label + ' books'
+
+// API
+const books = await booksStore.getBooks()
 </script>
 
 <template>
   <div class="explore">
     <CategoryScroller :categories="categories" />
-    <h1 class="explore-title">{{ pageTitle }}</h1>
-    <div class="explore-controls">
+
+    <h1 class="explore__title">{{ pageTitle }}</h1>
+    <!-- <div class="explore__controls">
       <FilterBooks />
       <SortBooks />
-    </div>
-    <BooksList />
+    </div> -->
+    <BooksList :books="books" />
   </div>
 </template>
 
@@ -60,7 +67,7 @@ const pageTitle = category.label + ' books'
   width: 100%;
 }
 
-.explore-title {
+.explore__title {
   margin: $spacing-6 0;
 }
 </style>

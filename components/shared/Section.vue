@@ -7,6 +7,5 @@
 <style lang="scss" scoped>
 .section {
   @include flex(row, center, flex-start);
-  width: 80%;
 }
 </style>
