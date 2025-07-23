@@ -29,7 +29,7 @@ export function useToast() {
     toast.isClosing = true
     setTimeout(() => {
       toasts.value = toasts.value.filter((t) => t.id !== id)
-    }, 300)
+    }, 200)
   }
 
   return {

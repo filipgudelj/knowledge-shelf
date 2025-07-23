@@ -2,6 +2,17 @@
 const user = useSupabaseUser()
 const { showToast } = useToast()
 const { t } = useI18n()
+const route = useRoute()
+
+onMounted(async () => {
+  const { error, error_description } = route.query as Record<string, string>
+
+  if (error) {
+    await nextTick()
+    showToast('error', error_description || t('toast.genericAuthError'))
+    navigateTo('/')
+  }
+})
 
 // WATCHERS
 watch(
