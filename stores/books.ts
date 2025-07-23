@@ -43,7 +43,8 @@ export const useBooksStore = defineStore('books', () => {
     books.value = []
     page.value = 0
     hasMoreBooks.value = true
+    isLoading.value = false
   }
 
-  return { books, hasMoreBooks, loadMoreBooks, resetBooks }
+  return { books, hasMoreBooks, isLoading, loadMoreBooks, resetBooks }
 })

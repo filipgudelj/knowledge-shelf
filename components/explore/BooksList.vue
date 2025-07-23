@@ -1,13 +1,44 @@
 <script lang="ts" setup>
+import VueSkeletonLoader from 'vue3-skeleton-loader'
+import 'vue3-skeleton-loader/dist/style.css'
 import type { Book } from '@/types'
 
 // PROPS
-const props = defineProps<{ books: Book[] }>()
+const props = defineProps<{
+  books: Book[]
+  isInitialLoading: boolean
+}>()
+
+const showSkeleton = ref(true)
+let skeletonTimer: ReturnType<typeof setTimeout> | null = null
+
+onMounted(() => {
+  skeletonTimer = setTimeout(() => {
+    showSkeleton.value = false
+  }, 500)
+})
+
+onBeforeUnmount(() => {
+  if (skeletonTimer) {
+    clearTimeout(skeletonTimer)
+    skeletonTimer = null
+  }
+})
 </script>
 
 <template>
   <div class="books">
-    <div v-for="book in props.books" :key="book.id" class="books__item">
+    <VueSkeletonLoader
+      v-if="props.isInitialLoading || showSkeleton"
+      v-for="n in 24"
+      :key="'skel-' + n"
+      type="image@1"
+      :width="'100%'"
+      :height="'400px'"
+    >
+    </VueSkeletonLoader>
+
+    <div v-else v-for="book in props.books" :key="book.id">
       <BookCard :book="book" />
     </div>
   </div>

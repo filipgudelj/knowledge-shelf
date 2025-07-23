@@ -49,15 +49,18 @@ if (!category.value) {
 }
 const categoryName = computed(() => category.value!.value)
 const pageTitle = computed(() => `${category.value!.label} books`)
+const isInitialLoading = computed(
+  () => booksStore.isLoading && booksStore.books.length === 0,
+)
 
 // WATCHERS
 watch(
   () => categoryName.value,
-  async (newCat, oldCat) => {
-    if (newCat === oldCat) return
+  async (newCategoryName, oladCategoryName) => {
+    if (newCategoryName === oladCategoryName) return
 
     booksStore.resetBooks()
-    await booksStore.loadMoreBooks(newCat)
+    await booksStore.loadMoreBooks(newCategoryName)
   },
   { immediate: true },
 )
@@ -87,7 +90,7 @@ onBeforeUnmount(() => {
   <div class="explore">
     <CategoryScroller :categories="categories" />
     <h1 class="explore__title">{{ pageTitle }}</h1>
-    <BooksList :books="booksStore.books" />
+    <BooksList :books="booksStore.books" :isInitialLoading="isInitialLoading" />
   </div>
 </template>
 
