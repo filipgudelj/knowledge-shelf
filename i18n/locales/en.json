@@ -59,6 +59,22 @@
     "waitingForLogin": "Waiting for login"
   },
 
+  "categories": {
+    "all": "All",
+    "art-and-design": "Art and Design",
+    "biography": "Biography",
+    "business-economics-and-law": "Business and Law",
+    "computing": "Computing",
+    "crime-and-thrillers": "Crime and Thrillers",
+    "education": "Education",
+    "fiction": "Fiction",
+    "graphic-novels": "Graphic Novels",
+    "health-and-wellbeing": "Health and Wellness",
+    "history": "History",
+    "science-and-nature": "Science and Nature",
+    "travel": "Travel"
+  },
+
   "toast": {
     "emailConfirmed": "Email confirmed!",
     "success": "Success",

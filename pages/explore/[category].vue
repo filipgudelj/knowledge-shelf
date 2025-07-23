@@ -2,37 +2,29 @@
 import type { Category } from '~/types/category'
 
 // STATE
-const categories = ref<Category[]>([
-  { label: 'All', value: 'all', slug: 'all' },
-  { label: 'Art and Design', value: 'art and design', slug: 'art-and-design' },
-  { label: 'Biography', value: 'biography', slug: 'biography' },
-  {
-    label: 'Business and Law',
-    value: 'business, economics and law',
-    slug: 'business-economics-and-law',
-  },
-  { label: 'Computing', value: 'computing', slug: 'computing' },
-  {
-    label: 'Crime and Thrillers',
-    value: 'crime and thrillers',
-    slug: 'crime-and-thrillers',
-  },
-  { label: 'Education', value: 'education', slug: 'education' },
-  { label: 'Fiction', value: 'fiction', slug: 'fiction' },
-  { label: 'Graphic Novels', value: 'graphic novels', slug: 'graphic-novels' },
-  {
-    label: 'Health and Wellness',
-    value: 'health and wellbeing',
-    slug: 'health-and-wellbeing',
-  },
-  { label: 'History', value: 'history', slug: 'history' },
-  {
-    label: 'Sci and Nature',
-    value: 'science and nature',
-    slug: 'science-and-nature',
-  },
-  { label: 'Travel', value: 'travel', slug: 'travel' },
+const { t } = useI18n()
+const baseCategories = ref<Omit<Category, 'label'>[]>([
+  { value: 'all', slug: 'all' },
+  { value: 'art and design', slug: 'art-and-design' },
+  { value: 'biography', slug: 'biography' },
+  { value: 'business, economics and law', slug: 'business-economics-and-law' },
+  { value: 'computing', slug: 'computing' },
+  { value: 'crime and thrillers', slug: 'crime-and-thrillers' },
+  { value: 'education', slug: 'education' },
+  { value: 'fiction', slug: 'fiction' },
+  { value: 'graphic novels', slug: 'graphic-novels' },
+  { value: 'health and wellbeing', slug: 'health-and-wellbeing' },
+  { value: 'history', slug: 'history' },
+  { value: 'science and nature', slug: 'science-and-nature' },
+  { value: 'travel', slug: 'travel' },
 ])
+
+const categories = computed<Category[]>(() =>
+  baseCategories.value.map((c) => ({
+    ...c,
+    label: t(`categories.${c.slug}`),
+  })),
+)
 const route = useRoute()
 const booksStore = useBooksStore()
 
@@ -48,7 +40,7 @@ if (!category.value) {
   })
 }
 const categoryName = computed(() => category.value!.value)
-const pageTitle = computed(() => `${category.value!.label} books`)
+const pageTitle = computed(() => `${category.value!.label}`)
 const isInitialLoading = computed(
   () => booksStore.isLoading && booksStore.books.length === 0,
 )
