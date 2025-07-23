@@ -70,6 +70,10 @@ const activeCategory = computed(() => {
   padding-block: $spacing-2;
   transition: all 0.3s ease;
 
+  @media (min-width: $screen-lg) {
+    font-size: $font-size-lg;
+  }
+
   &:last-child {
     margin-right: 0;
   }

@@ -51,15 +51,15 @@ const clearSearch = () => {
 }
 
 .search__input {
-  width: 225px;
-  height: 48px;
-  padding-inline: $spacing-11;
+  width: 185px;
+  height: 40px;
+  padding-inline: $spacing-10;
   border: 1px solid $color-gray-200;
   border-radius: $radius-5;
   background-color: $color-gray-200;
   color: $color-gray-900;
   line-height: 48px;
-  font-size: $font-size-lg;
+  font-size: $font-size-sm;
   transition: all 0.3s ease;
 
   html.dark & {
@@ -95,8 +95,15 @@ const clearSearch = () => {
     }
   }
 
+  @media (min-width: $screen-xs) {
+    width: 215px;
+  }
+
   @media (min-width: $screen-sm) {
     width: 300px;
+    height: 48px;
+    padding-inline: $spacing-11;
+    font-size: $font-size-md;
   }
 
   @media (min-width: $screen-md) {
@@ -120,12 +127,20 @@ const clearSearch = () => {
 .search__button {
   @extend %icon-btn;
   left: 0;
-  margin: 0 $spacing-3 0 $spacing-5;
+  margin: 0 $spacing-3 0 $spacing-3;
+
+  @media (min-width: $screen-sm) {
+    margin: 0 $spacing-3 0 $spacing-5;
+  }
 }
 
 .search__button--clear {
   @extend %icon-btn;
   right: 0;
-  margin: 0 $spacing-5 0 $spacing-3;
+  margin: 0 $spacing-3 0 $spacing-3;
+
+  @media (min-width: $screen-sm) {
+    margin: 0 $spacing-5 0 $spacing-3;
+  }
 }
 </style>
