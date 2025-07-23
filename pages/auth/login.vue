@@ -1,10 +1,13 @@
 <script lang="ts" setup>
 import { useForm, useField } from 'vee-validate'
 import * as yup from 'yup'
+import { useThrottleFn } from '@vueuse/core'
 
 // STATE
 const authStore = useAuthStore()
-const { t } = useI18n()
+const { showToast } = useToast()
+const { t, defaultLocale, locale } = useI18n()
+const router = useRouter()
 
 // VALIDATION
 const schema = yup.object({
@@ -13,7 +16,7 @@ const schema = yup.object({
 })
 
 const submitted = ref(false)
-const { handleSubmit } = useForm({
+const { handleSubmit, resetForm } = useForm({
   validationSchema: schema,
   validateOnMount: false,
 })
@@ -23,18 +26,30 @@ const { value: password, errorMessage: passwordError } =
 
 // SUBMIT
 const onSubmit = handleSubmit(
-  () => {
-    authStore.login(email.value, password.value)
+  async () => {
+    const { error } = await authStore.login(email.value, password.value)
+    if (error?.code === 'invalid_credentials') {
+      showToast('error', t('toast.invalidLoginCredentials'))
+    } else if (!error) {
+      resetForm()
+      const path = locale.value === defaultLocale ? '/' : `/${locale.value}/`
+      router.push({ path })
+    }
   },
   () => {
     submitted.value = true
   },
 )
+
+const onSubmitThrottled = useThrottleFn((e: Event) => {
+  e.preventDefault()
+  onSubmit()
+}, 1000)
 </script>
 
 <template>
   <div class="login">
-    <form @submit.prevent="onSubmit()" class="login__form">
+    <form @submit.prevent="onSubmitThrottled" class="login__form">
       <div class="login__head">
         <h1>{{ $t('login.title') }}</h1>
         <p>{{ $t('login.subtitle') }}</p>

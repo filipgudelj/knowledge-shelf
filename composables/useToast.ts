@@ -14,7 +14,7 @@ export function useToast() {
 
     setTimeout(() => {
       closeToast()
-    }, 3000)
+    }, 2500)
   }
 
   const closeToast = () => {

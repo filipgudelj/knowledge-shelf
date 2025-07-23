@@ -76,7 +76,11 @@
   },
 
   "toast": {
-    "emailConfirmed": "Email je potvrđen!",
+    "requestTooSoon": "Pričekajte prije ponovnog pokušaja",
+    "alreadyRegistered": "Email već registriran",
+    "confirmationSent": "Potvrdni email poslan",
+    "invalidLoginCredentials": "Pogrešni podaci za prijavu",
+    "emailConfirmed": "Email je potvrđen",
     "success": "Uspjeh",
     "error": "Greška",
     "info": "Informacija"

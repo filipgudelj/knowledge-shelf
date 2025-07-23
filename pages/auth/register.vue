@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { useForm, useField } from 'vee-validate'
 import * as yup from 'yup'
+import { useThrottleFn } from '@vueuse/core'
 
 // STATE
 const authStore = useAuthStore()
+const { showToast } = useToast()
 const { t } = useI18n()
 
 // VALIDATION
@@ -26,7 +28,7 @@ const schema = yup.object({
 })
 
 const submitted = ref(false)
-const { handleSubmit } = useForm({
+const { handleSubmit, resetForm } = useForm({
   validationSchema: schema,
   validateOnMount: false,
 })
@@ -38,18 +40,35 @@ const { value: confirmPassword, errorMessage: confirmPasswordError } =
 
 // SUBMIT
 const onSubmit = handleSubmit(
-  () => {
-    authStore.register(email.value, password.value)
+  async () => {
+    const { data, error } = await authStore.register(
+      email.value,
+      password.value,
+    )
+    if (error?.code === 'over_email_send_rate_limit') {
+      showToast('error', t('toast.requestTooSoon'))
+    } else if (!error && data.user?.identities?.length === 0) {
+      showToast('info', t('toast.alreadyRegistered'))
+      resetForm()
+    } else if (!error && data.user?.identities?.length !== 0) {
+      showToast('success', t('toast.confirmationSent'))
+      resetForm()
+    }
   },
   () => {
     submitted.value = true
   },
 )
+
+const onSubmitThrottled = useThrottleFn((e: Event) => {
+  e.preventDefault()
+  onSubmit()
+}, 1000)
 </script>
 
 <template>
   <div class="register">
-    <form @submit.prevent="onSubmit()" class="register__form">
+    <form @submit.prevent="onSubmitThrottled" class="register__form">
       <div class="register__head">
         <h1>{{ $t('register.title') }}</h1>
         <p>{{ $t('register.subtitle') }}</p>

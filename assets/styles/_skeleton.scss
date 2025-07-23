@@ -1,0 +1,11 @@
+@use 'colors';
+
+:root {
+  --skel-base: #{colors.$color-gray-200};
+  --skel-highlight: #{colors.$color-gray-300};
+}
+
+html.dark {
+  --skel-base: #{colors.$color-gray-800};
+  --skel-highlight: #{colors.$color-gray-700};
+}

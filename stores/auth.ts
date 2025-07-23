@@ -4,20 +4,24 @@ export const useAuthStore = defineStore('auth', () => {
   const supabase = useSupabaseClient()
 
   const register = async (email: string, password: string) => {
-    await supabase.auth.signUp({
+    const response = await supabase.auth.signUp({
       email: email,
       password: password,
       options: {
         emailRedirectTo: 'http://localhost:3000/auth/confirm',
       },
     })
+
+    return response
   }
 
   const login = async (email: string, password: string) => {
-    await supabase.auth.signInWithPassword({
+    const response = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     })
+
+    return response
   }
 
   const logout = async () => {

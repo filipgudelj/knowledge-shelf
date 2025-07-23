@@ -9,9 +9,11 @@ const props = defineProps<{
   isInitialLoading: boolean
 }>()
 
+// STATE
 const showSkeleton = ref(true)
 let skeletonTimer: ReturnType<typeof setTimeout> | null = null
 
+// LCH
 onMounted(() => {
   skeletonTimer = setTimeout(() => {
     showSkeleton.value = false
@@ -35,6 +37,8 @@ onBeforeUnmount(() => {
       type="image@1"
       :width="'100%'"
       :height="'400px'"
+      base-color="var(--skel-base)"
+      highlight-color="var(--skel-highlight)"
     >
     </VueSkeletonLoader>
 
