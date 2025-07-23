@@ -7,6 +7,16 @@ import { useThrottleFn } from '@vueuse/core'
 const authStore = useAuthStore()
 const { showToast } = useToast()
 const { t } = useI18n()
+const passwordInput = ref<{ focus: () => void } | null>(null)
+const confirmPasswordInput = ref<{ focus: () => void } | null>(null)
+
+// HANDLERS
+const focusPassword = () => {
+  passwordInput.value?.focus()
+}
+const focusConfirmPassword = () => {
+  confirmPasswordInput.value?.focus()
+}
 
 // VALIDATION
 const schema = yup.object({
@@ -80,6 +90,7 @@ const onSubmitThrottled = useThrottleFn((e: Event) => {
         id="email"
         type="text"
         :placeholder="$t('register.emailPlaceholder')"
+        @keydown.enter.prevent="focusPassword"
       >
         <template #icon>
           <Icon name="mdi:email-outline" />
@@ -91,11 +102,13 @@ const onSubmitThrottled = useThrottleFn((e: Event) => {
       </FormInput>
 
       <FormInput
+        ref="passwordInput"
         :label="$t('register.passwordLabel')"
         v-model="password"
         id="password"
         type="password"
         :placeholder="$t('register.passwordPlaceholder')"
+        @keydown.enter.prevent="focusConfirmPassword"
       >
         <template #icon>
           <Icon name="mdi:password-outline" />
@@ -107,6 +120,7 @@ const onSubmitThrottled = useThrottleFn((e: Event) => {
       </FormInput>
 
       <FormInput
+        ref="confirmPasswordInput"
         :label="$t('register.confirmPasswordLabel')"
         v-model="confirmPassword"
         id="confirmPassword"

@@ -9,7 +9,13 @@ const props = defineProps<{
 }>()
 
 // STATE
+const inputRef = ref<HTMLInputElement | null>(null)
 const slots = useSlots()
+
+// EXPOSE
+defineExpose({
+  focus: () => inputRef.value?.focus(),
+})
 
 // EMITS
 const emit = defineEmits(['update:modelValue'])
@@ -26,6 +32,7 @@ function onInput(event: Event) {
       {{ props.label }}</label
     >
     <input
+      ref="inputRef"
       :id="props.id"
       :type="props.type"
       :placeholder="props.placeholder"

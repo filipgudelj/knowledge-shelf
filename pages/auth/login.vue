@@ -8,6 +8,12 @@ const authStore = useAuthStore()
 const { showToast } = useToast()
 const { t, defaultLocale, locale } = useI18n()
 const router = useRouter()
+const passwordInput = ref<{ focus: () => void } | null>(null)
+
+// HANDLERS
+const focusPassword = () => {
+  passwordInput.value?.focus()
+}
 
 // VALIDATION
 const schema = yup.object({
@@ -61,6 +67,7 @@ const onSubmitThrottled = useThrottleFn((e: Event) => {
         id="email"
         type="text"
         :placeholder="$t('login.emailPlaceholder')"
+        @keydown.enter.prevent="focusPassword"
       >
         <template #icon>
           <Icon name="mdi:email-outline" />
@@ -72,6 +79,7 @@ const onSubmitThrottled = useThrottleFn((e: Event) => {
       </FormInput>
 
       <FormInput
+        ref="passwordInput"
         :label="$t('login.passwordLabel')"
         v-model="password"
         id="password"
