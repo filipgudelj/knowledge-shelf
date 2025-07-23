@@ -1,35 +1,40 @@
-// TYPES
-type ToastType = 'success' | 'error' | 'info'
+import { ref } from 'vue'
+import type { Toast, ToastType } from '@/types'
 
 // STATE
-const toastType = ref<ToastType>('info')
-const toastMessage = ref('')
-const isToastClosing = ref(false)
+const toasts = ref<Toast[]>([])
+let toastId = 0
 
 export function useToast() {
   const showToast = (type: ToastType = 'info', msg: string) => {
-    toastType.value = type
-    toastMessage.value = msg
-    isToastClosing.value = false
+    const id = toastId++
+
+    toasts.value.push({
+      id,
+      type,
+      message: msg,
+      isClosing: false,
+    })
 
     setTimeout(() => {
-      closeToast()
+      closeToast(id)
     }, 2500)
   }
 
-  const closeToast = () => {
-    if (isToastClosing.value) return
-    isToastClosing.value = true
+  const closeToast = (id: number) => {
+    const toast = toasts.value.find((t) => t.id === id)
+
+    if (!toast || toast.isClosing) return
+
+    toast.isClosing = true
     setTimeout(() => {
-      toastMessage.value = ''
+      toasts.value = toasts.value.filter((t) => t.id !== id)
     }, 300)
   }
 
   return {
-    toastType,
-    toastMessage,
+    toasts,
     showToast,
-    isToastClosing,
     closeToast,
   }
 }

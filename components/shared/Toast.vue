@@ -1,15 +1,12 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
 // STATE
-const { toastType, toastMessage, isToastClosing, closeToast } = useToast()
+const { toasts, closeToast } = useToast()
 const { t } = useI18n()
-
-// COMPUTEDS
-const typeLabel = computed(() => {
-  return t(`toast.${toastType.value}`)
-})
-
-const iconName = computed(() => {
-  switch (toastType.value) {
+const getTypeLabel = (type: string) => t(`toast.${type}`)
+const getIconName = (type: string) => {
+  switch (type) {
     case 'success':
       return 'mdi:success-circle-outline'
     case 'error':
@@ -18,44 +15,48 @@ const iconName = computed(() => {
     default:
       return 'mdi:information-outline'
   }
-})
+}
 </script>
 
 <template>
-  <div
-    v-if="toastMessage"
-    :class="[
-      'toast',
-      `toast--${toastType}`,
-      { 'toast--closing': isToastClosing },
-    ]"
-  >
-    <div class="toast__icon">
-      <Icon :name="iconName" size="24px" />
-    </div>
-    <div class="toast__content">
-      <p class="toast__type">{{ typeLabel }}</p>
-      <p class="toast__message">{{ toastMessage }}</p>
-    </div>
-    <button @click="closeToast" class="toast__close">
-      <Icon name="mdi:remove" size="24px" />
-    </button>
+  <div class="toast-container">
+    <TransitionGroup name="toast" tag="div">
+      <div
+        v-for="toast in toasts"
+        :key="toast.id"
+        :class="['toast', `toast--${toast.type}`]"
+      >
+        <div class="toast__icon">
+          <Icon :name="getIconName(toast.type)" size="24px" />
+        </div>
+        <div class="toast__content">
+          <p class="toast__type">{{ getTypeLabel(toast.type) }}</p>
+          <p class="toast__message">{{ toast.message }}</p>
+        </div>
+        <button @click="closeToast(toast.id)" class="toast__close">
+          <Icon name="mdi:remove" size="24px" />
+        </button>
+      </div>
+    </TransitionGroup>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.toast {
+.toast-container {
   position: fixed;
   top: 96px;
   right: 16px;
   z-index: 1000;
-  @include flex(row, space-between, center);
+}
+
+.toast {
+  @include flex(row, flex-start, center);
   gap: $spacing-5;
-  min-width: 250px;
+  margin-bottom: $spacing-3;
   padding: $spacing-4;
   border-radius: $radius-5;
+  background-color: $color-blue-200;
   color: $color-gray-900;
-  animation: slide-in 0.3s ease forwards;
 }
 
 .toast--success {
@@ -70,10 +71,6 @@ const iconName = computed(() => {
   background-color: $color-blue-200;
 }
 
-.toast--closing {
-  animation: slide-out 0.3s ease forwards;
-}
-
 .toast__icon {
   width: 24px;
   height: 24px;
@@ -83,14 +80,27 @@ const iconName = computed(() => {
   @include flex(column, flex-start, flex-start);
   gap: $spacing-2;
   width: 100%;
+  min-width: 200px;
+
+  @media (min-width: $screen-md) {
+    min-width: 225px;
+  }
 }
 
 .toast__type {
-  font-size: $font-size-lg;
+  font-size: $font-size-md;
+
+  @media (min-width: $screen-md) {
+    font-size: $font-size-lg;
+  }
 }
 
 .toast__message {
-  font-size: $font-size-sm;
+  font-size: $font-size-xs;
+
+  @media (min-width: $screen-md) {
+    font-size: $font-size-sm;
+  }
 }
 
 .toast__close {
@@ -98,25 +108,20 @@ const iconName = computed(() => {
   height: 24px;
 }
 
-@keyframes slide-in {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.toast-enter-active,
+.toast-leave-active,
+.toast-move {
+  transition: all 0.3s ease;
 }
 
-@keyframes slide-out {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
+.toast-enter-from,
+.toast-leave-to {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.toast-leave-active {
+  position: absolute;
+  right: 0;
 }
 </style>
