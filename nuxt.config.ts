@@ -48,7 +48,8 @@ export default defineNuxtConfig({
             @use "~/assets/styles/_borders.scss" as *;
             @use "~/assets/styles/_colors.scss" as *;
             @use "~/assets/styles/_typography.scss" as *;
-             @use "~/assets/styles/_skeleton.scss" as *;
+            @use "~/assets/styles/_base.scss" as *;
+            @use "~/assets/styles/_skeleton.scss" as *;
           `,
         },
       },
