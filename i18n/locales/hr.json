@@ -9,6 +9,7 @@
   },
 
   "search": {
+    "resultsFor": "Rezultati za",
     "placeholder": "Pretraži knjige..."
   },
 
@@ -69,6 +70,10 @@
     "history": "Povijest",
     "science-and-nature": "Znanost i priroda",
     "travel": "Putovanja"
+  },
+
+  "books": {
+    "noResults": "Trenutno nema nijednog artikla za prikaz."
   },
 
   "toast": {

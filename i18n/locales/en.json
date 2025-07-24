@@ -9,6 +9,7 @@
   },
 
   "search": {
+    "resultsFor": "Results for",
     "placeholder": "Search books..."
   },
 
@@ -69,6 +70,10 @@
     "history": "History",
     "science-and-nature": "Science and Nature",
     "travel": "Travel"
+  },
+
+  "books": {
+    "noResults": "There are currently no items available to display"
   },
 
   "toast": {

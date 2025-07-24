@@ -9,7 +9,7 @@ export const useBooksStore = defineStore('books', () => {
   const hasMoreBooks = ref(true)
   const isLoading = ref(false)
 
-  const loadMoreBooks = async (category: string) => {
+  const loadMoreBooks = async (category?: string, searchQuery?: string) => {
     if (isLoading.value || !hasMoreBooks.value) return
 
     isLoading.value = true
@@ -17,17 +17,21 @@ export const useBooksStore = defineStore('books', () => {
     const start = page.value * pageSize
     const end = start + pageSize - 1
 
-    let query = supabase
+    let queryBuilder = supabase
       .from('books')
       .select('*')
       .order('id', { ascending: true })
       .range(start, end)
 
-    if (category !== 'all') {
-      query = query.eq('category', category)
+    if (category !== 'all' && category) {
+      queryBuilder = queryBuilder.eq('category', category)
     }
 
-    const { data } = await query
+    if (searchQuery) {
+      queryBuilder = queryBuilder.ilike('title', `%${searchQuery}%`)
+    }
+
+    const { data } = await queryBuilder
 
     if (!data || data.length < pageSize) {
       hasMoreBooks.value = false
@@ -39,6 +43,14 @@ export const useBooksStore = defineStore('books', () => {
     isLoading.value = false
   }
 
+  const searchBooks = async (searchQuery?: string) => {
+    if (!searchQuery) {
+      resetBooks()
+    }
+
+    await loadMoreBooks(undefined, searchQuery)
+  }
+
   const resetBooks = () => {
     books.value = []
     page.value = 0
@@ -46,5 +58,12 @@ export const useBooksStore = defineStore('books', () => {
     isLoading.value = false
   }
 
-  return { books, hasMoreBooks, isLoading, loadMoreBooks, resetBooks }
+  return {
+    books,
+    hasMoreBooks,
+    isLoading,
+    loadMoreBooks,
+    searchBooks,
+    resetBooks,
+  }
 })

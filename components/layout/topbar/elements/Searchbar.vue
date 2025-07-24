@@ -1,10 +1,23 @@
 <script lang="ts" setup>
 // STATE
-const searchQuery = ref('')
+const localePath = useLocalePath()
+const router = useRouter()
+const route = useRoute()
+const searchQuery = ref(String(route.params.searchQuery || ''))
+
+// WATCHERS
+watch(
+  () => route.params.searchQuery,
+  (query) => {
+    searchQuery.value = String(query || '')
+  },
+)
 
 // SEARCH
 const doSearch = () => {
-  console.log(`Search ${searchQuery.value}`)
+  const searchQueryTrimmed = searchQuery.value.trim()
+  if (!searchQueryTrimmed) return
+  router.push(localePath(`/search/${searchQueryTrimmed}`))
 }
 const clearSearch = () => {
   searchQuery.value = ''

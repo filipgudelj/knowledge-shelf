@@ -10,8 +10,16 @@ const props = defineProps<{
 }>()
 
 // STATE
+const { t } = useI18n()
 const showSkeleton = ref(true)
 let skeletonTimer: ReturnType<typeof setTimeout> | null = null
+
+// COMPUTEDS
+const showNoResults = computed(() => {
+  return (
+    !props.isInitialLoading && !showSkeleton.value && props.books.length === 0
+  )
+})
 
 // LCH
 onMounted(() => {
@@ -42,6 +50,10 @@ onBeforeUnmount(() => {
     >
     </VueSkeletonLoader>
 
+    <p v-else-if="showNoResults" class="no-results">
+      {{ t('books.noResults') }}
+    </p>
+
     <div v-else v-for="book in props.books" :key="book.id">
       <BookCard :book="book" />
     </div>
@@ -53,5 +65,11 @@ onBeforeUnmount(() => {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 2rem;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  width: 100%;
+  font-size: $font-size-lg;
 }
 </style>
