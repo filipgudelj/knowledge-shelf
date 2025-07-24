@@ -1,74 +1,41 @@
-<script setup lang="ts">
+<script lang="ts" setup>
+// PAGE META
+definePageMeta({
+  middleware: ['confirm'],
+})
+
+// STATE
 const user = useSupabaseUser()
 const { showToast } = useToast()
 const { t } = useI18n()
 const route = useRoute()
-
-onMounted(async () => {
-  const { error, error_description } = route.query as Record<string, string>
-
-  if (error) {
-    await nextTick()
-    showToast('error', error_description || t('toast.genericAuthError'))
-    navigateTo('/')
-  }
-})
+const router = useRouter()
+const localePath = useLocalePath()
+const { error_description } = route.query as Record<string, string>
 
 // WATCHERS
 watch(
   user,
-  () => {
+  async () => {
     if (user.value) {
+      await nextTick()
       showToast('success', t('toast.emailConfirmed'))
-      return navigateTo('/')
+      router.push(localePath('/'))
     }
   },
   { immediate: true },
 )
+
+// LCH
+onMounted(async () => {
+  if (error_description === 'Email link is invalid or has expired') {
+    await nextTick()
+    showToast('error', t('toast.linkExpired'))
+    router.push(localePath('/'))
+  }
+})
 </script>
 
 <template>
-  <div class="confirm">
-    <p class="confirm__text">
-      {{ $t('confirm.waitingForLogin') }}<span class="confirm__dots--animate" />
-    </p>
-  </div>
+  <Loader />
 </template>
-
-<style lang="scss" scoped>
-.confirm {
-  margin-top: $spacing-10;
-}
-
-.confirm__text {
-  font-size: $font-size-xl;
-}
-
-.confirm__dots--animate {
-  display: inline-block;
-  width: 1.5rem;
-
-  &::before {
-    content: '';
-    animation: dots 1s steps(3, end) infinite;
-  }
-}
-
-@keyframes dots {
-  0% {
-    content: '';
-  }
-
-  33% {
-    content: '.';
-  }
-
-  66% {
-    content: '..';
-  }
-
-  100% {
-    content: '...';
-  }
-}
-</style>

@@ -55,10 +55,6 @@
     }
   },
 
-  "confirm": {
-    "waitingForLogin": "Waiting for login"
-  },
-
   "categories": {
     "all": "All",
     "art-and-design": "Art and Design",
@@ -80,6 +76,7 @@
     "alreadyRegistered": "Email already registered",
     "confirmationSent": "Confirmation email sent",
     "invalidLoginCredentials": "Invalid login credentials",
+    "linkExpired": "Email link is invalid or has expired",
     "emailConfirmed": "Email confirmed",
     "success": "Success",
     "error": "Error",

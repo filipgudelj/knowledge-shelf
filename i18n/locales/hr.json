@@ -55,10 +55,6 @@
     }
   },
 
-  "confirm": {
-    "waitingForLogin": "Čekanje na prijavu"
-  },
-
   "categories": {
     "all": "Sve",
     "art-and-design": "Umjetnost i dizajn",
@@ -80,6 +76,7 @@
     "alreadyRegistered": "Email već registriran",
     "confirmationSent": "Potvrdni email poslan",
     "invalidLoginCredentials": "Pogrešni podaci za prijavu",
+    "linkExpired": "Link je nevažeći ili je istekao",
     "emailConfirmed": "Email je potvrđen",
     "success": "Uspjeh",
     "error": "Greška",

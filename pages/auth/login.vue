@@ -6,7 +6,8 @@ import { useThrottleFn } from '@vueuse/core'
 // STATE
 const authStore = useAuthStore()
 const { showToast } = useToast()
-const { t, defaultLocale, locale } = useI18n()
+const { t } = useI18n()
+const localePath = useLocalePath()
 const router = useRouter()
 const passwordInput = ref<{ focus: () => void } | null>(null)
 
@@ -38,8 +39,7 @@ const onSubmit = handleSubmit(
       showToast('error', t('toast.invalidLoginCredentials'))
     } else if (!error) {
       resetForm()
-      const path = locale.value === defaultLocale ? '/' : `/${locale.value}/`
-      router.push({ path })
+      router.push(localePath('/'))
     }
   },
   () => {
