@@ -107,7 +107,7 @@ const clearSearch = () => {
   }
 
   @media (min-width: $screen-md) {
-    width: 350px;
+    width: 340px;
   }
 }
 
