@@ -79,6 +79,11 @@ function onInput(event: Event) {
     &:hover {
       border: 1px solid $color-gray-500;
     }
+
+    &:focus {
+      outline: none;
+      border: 1px solid $color-blue-500;
+    }
   }
 
   &:hover {
