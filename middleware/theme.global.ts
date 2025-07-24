@@ -8,6 +8,8 @@ export default defineNuxtRouteMiddleware((to, from) => {
     themeCookie.value = newIsDarkValue ? 'dark' : 'light'
   })
 
+  if (import.meta.client) return
+
   useHead({
     htmlAttrs: {
       class: themeCookie.value === 'dark' ? 'dark' : '',
