@@ -4,6 +4,16 @@ definePageMeta({
   middleware: ['confirm'],
 })
 
+// STATE
+const user = useSupabaseUser()
+const { showToast } = useToast()
+const { t, locale } = useI18n()
+const route = useRoute()
+const router = useRouter()
+const localePath = useLocalePath()
+const { error_description } = route.query as Record<string, string>
+
+// HEAD
 useHead({
   title: 'Confirm | Knowledge Shelf',
   meta: [
@@ -12,16 +22,10 @@ useHead({
       content: 'Please confirm your email address to activate your account.',
     },
   ],
+  htmlAttrs: {
+    lang: locale.value,
+  },
 })
-
-// STATE
-const user = useSupabaseUser()
-const { showToast } = useToast()
-const { t } = useI18n()
-const route = useRoute()
-const router = useRouter()
-const localePath = useLocalePath()
-const { error_description } = route.query as Record<string, string>
 
 // WATCHERS
 watch(

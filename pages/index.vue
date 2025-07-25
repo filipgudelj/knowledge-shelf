@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-// PAGE META
+// STATE
+const { locale } = useI18n()
+
+// HEAD
 useHead({
   title: 'Knowledge Shelf',
   meta: [
@@ -8,6 +11,9 @@ useHead({
       content: 'Browse and buy books online from a wide range of categories.',
     },
   ],
+  htmlAttrs: {
+    lang: locale.value,
+  },
 })
 </script>
 

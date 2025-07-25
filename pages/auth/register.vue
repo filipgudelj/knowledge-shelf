@@ -3,7 +3,14 @@ import { useForm, useField } from 'vee-validate'
 import * as yup from 'yup'
 import { useThrottleFn } from '@vueuse/core'
 
-// PAGE META
+// STATE
+const authStore = useAuthStore()
+const { showToast } = useToast()
+const { t, locale } = useI18n()
+const passwordInput = ref<{ focus: () => void } | null>(null)
+const confirmPasswordInput = ref<{ focus: () => void } | null>(null)
+
+// HEAD
 useHead({
   title: 'Register | Knowledge Shelf',
   meta: [
@@ -12,14 +19,10 @@ useHead({
       content: 'Create your account.',
     },
   ],
+  htmlAttrs: {
+    lang: locale.value,
+  },
 })
-
-// STATE
-const authStore = useAuthStore()
-const { showToast } = useToast()
-const { t } = useI18n()
-const passwordInput = ref<{ focus: () => void } | null>(null)
-const confirmPasswordInput = ref<{ focus: () => void } | null>(null)
 
 // HANDLERS
 const focusPassword = () => {

@@ -2,6 +2,7 @@
 // STATE
 const route = useRoute()
 const booksStore = useBooksStore()
+const { locale } = useI18n()
 
 // COMPUTEDS
 const { t } = useI18n()
@@ -10,7 +11,7 @@ const isInitialLoading = computed(
   () => booksStore.isLoading && booksStore.books.length === 0,
 )
 
-// PAGE META
+// HEAD
 useHead({
   title: `Search: "${currentQuery.value}" | Knowledge Shelf`,
   meta: [
@@ -19,6 +20,9 @@ useHead({
       content: `Find books related to "${currentQuery.value}".`,
     },
   ],
+  htmlAttrs: {
+    lang: locale.value,
+  },
 })
 
 // WATCHERS

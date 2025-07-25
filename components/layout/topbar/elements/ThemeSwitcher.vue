@@ -8,7 +8,11 @@ const toggleDark = useToggle(isDark)
 
 <template>
   <ClientOnly>
-    <button @click="toggleDark()" class="theme-switcher">
+    <button
+      @click="toggleDark()"
+      class="theme-switcher"
+      aria-label="Theme Switcher"
+    >
       <div
         class="theme-switcher__thumb"
         :class="{ 'theme-switcher__thumb--dark': isDark }"

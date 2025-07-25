@@ -2,7 +2,6 @@
 import type { Category } from '~/types/category'
 
 // STATE
-const { t } = useI18n()
 const baseCategories = ref<(Omit<Category, 'label'> & { headTitle: string })[]>(
   [
     { value: 'all', slug: 'all', headTitle: 'All' },
@@ -44,6 +43,7 @@ const baseCategories = ref<(Omit<Category, 'label'> & { headTitle: string })[]>(
     { value: 'travel', slug: 'travel', headTitle: 'Travel' },
   ],
 )
+const { t, locale } = useI18n()
 const route = useRoute()
 const booksStore = useBooksStore()
 
@@ -77,7 +77,7 @@ const isInitialLoading = computed(
   () => booksStore.isLoading && booksStore.books.length === 0,
 )
 
-// PAGE META
+// HEAD
 useHead({
   title: `${category.value!.headTitle === 'All' ? 'All books' : category.value!.headTitle} | Knowledge Shelf`,
   meta: [
@@ -86,6 +86,9 @@ useHead({
       content: `Explore our collection of ${category.value!.headTitle} books.`,
     },
   ],
+  htmlAttrs: {
+    lang: locale.value,
+  },
 })
 
 // WATCHERS
