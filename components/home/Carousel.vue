@@ -68,7 +68,7 @@ const previousSlide = () => {
 
 // COMPUTED
 const visibleSlides = computed(() => {
-  if (width.value < 570) return 1
+  if (width.value < 567) return 1
   if (width.value < 900) return 2
   if (width.value < 1150) return 3
   if (width.value < 1450) return 4
