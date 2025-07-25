@@ -3,6 +3,17 @@ import { useForm, useField } from 'vee-validate'
 import * as yup from 'yup'
 import { useThrottleFn } from '@vueuse/core'
 
+// PAGE META
+useHead({
+  title: 'Login | Knowledge Shelf',
+  meta: [
+    {
+      name: 'description',
+      content: 'Log in to continue using your account features.',
+    },
+  ],
+})
+
 // STATE
 const authStore = useAuthStore()
 const { showToast } = useToast()

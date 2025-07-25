@@ -10,6 +10,17 @@ const isInitialLoading = computed(
   () => booksStore.isLoading && booksStore.books.length === 0,
 )
 
+// PAGE META
+useHead({
+  title: `Search: "${currentQuery.value}" | Knowledge Shelf`,
+  meta: [
+    {
+      name: 'description',
+      content: `Find books related to "${currentQuery.value}".`,
+    },
+  ],
+})
+
 // WATCHERS
 watch(
   () => currentQuery.value,

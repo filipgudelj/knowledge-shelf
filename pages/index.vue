@@ -5,7 +5,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Explore a curated selection of books.',
+      content: 'Browse and buy books online from a wide range of categories.',
     },
   ],
 })

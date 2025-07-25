@@ -4,6 +4,16 @@ definePageMeta({
   middleware: ['confirm'],
 })
 
+useHead({
+  title: 'Confirm | Knowledge Shelf',
+  meta: [
+    {
+      name: 'description',
+      content: 'Please confirm your email address to activate your account.',
+    },
+  ],
+})
+
 // STATE
 const user = useSupabaseUser()
 const { showToast } = useToast()

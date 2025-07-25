@@ -56,20 +56,23 @@
     }
   },
 
-  "categories": {
-    "all": "Sve",
-    "art-and-design": "Umjetnost i dizajn",
-    "biography": "Biografija",
-    "business-economics-and-law": "Poslovanje i pravo",
-    "computing": "Računarstvo",
-    "crime-and-thrillers": "Kriminalistika i trileri",
-    "education": "Obrazovanje",
-    "fiction": "Fikcija",
-    "graphic-novels": "Stripovi",
-    "health-and-wellbeing": "Zdravlje i dobrobit",
-    "history": "Povijest",
-    "science-and-nature": "Znanost i priroda",
-    "travel": "Putovanja"
+  "explore": {
+    "categories": {
+      "all": "Sve",
+      "art-and-design": "Umjetnost i dizajn",
+      "biography": "Biografija",
+      "business-economics-and-law": "Poslovanje i pravo",
+      "computing": "Računarstvo",
+      "crime-and-thrillers": "Kriminalistika i trileri",
+      "education": "Obrazovanje",
+      "fiction": "Fikcija",
+      "graphic-novels": "Stripovi",
+      "health-and-wellbeing": "Zdravlje i dobrobit",
+      "history": "Povijest",
+      "science-and-nature": "Znanost i priroda",
+      "travel": "Putovanja"
+    },
+    "allBooks": "Sve knjige"
   },
 
   "books": {
