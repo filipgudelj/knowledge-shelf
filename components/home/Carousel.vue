@@ -68,11 +68,12 @@ const previousSlide = () => {
 
 // COMPUTED
 const visibleSlides = computed(() => {
-  if (width.value < 475) return 1
+  if (width.value < 570) return 1
   if (width.value < 900) return 2
-  if (width.value < 1200) return 3
-  if (width.value < 1500) return 4
-  return 5
+  if (width.value < 1150) return 3
+  if (width.value < 1450) return 4
+  if (width.value < 1700) return 5
+  return 6
 })
 const isPreviousButtonDisabled = computed(() => currentSlideIndex.value === 0)
 const isNextButtonDisabled = computed(

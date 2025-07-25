@@ -40,7 +40,7 @@ onBeforeUnmount(() => {
   <div class="books">
     <VueSkeletonLoader
       v-if="props.isInitialLoading || showSkeleton"
-      v-for="n in 24"
+      v-for="n in 14"
       :key="'skel-' + n"
       type="image@1"
       :width="'100%'"
@@ -64,7 +64,7 @@ onBeforeUnmount(() => {
 .books {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 2rem;
+  gap: $spacing-9;
 }
 
 .no-results {
