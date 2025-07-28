@@ -11,20 +11,6 @@ const isInitialLoading = computed(
   () => booksStore.isLoading && booksStore.books.length === 0,
 )
 
-// HEAD
-useHead({
-  title: `Search: "${currentQuery.value}" | Knowledge Shelf`,
-  meta: [
-    {
-      name: 'description',
-      content: `Find books related to "${currentQuery.value}".`,
-    },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
-
 // WATCHERS
 watch(
   () => currentQuery.value,
@@ -53,6 +39,20 @@ onMounted(() => {
 })
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', onScroll)
+})
+
+// HEAD
+useHead({
+  title: `Search: "${currentQuery.value}" | Knowledge Shelf`,
+  meta: [
+    {
+      name: 'description',
+      content: `Find books related to "${currentQuery.value}".`,
+    },
+  ],
+  htmlAttrs: {
+    lang: locale.value,
+  },
 })
 </script>
 

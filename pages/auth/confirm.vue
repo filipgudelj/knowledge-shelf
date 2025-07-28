@@ -13,20 +13,6 @@ const router = useRouter()
 const localePath = useLocalePath()
 const { error_description } = route.query as Record<string, string>
 
-// HEAD
-useHead({
-  title: 'Confirm | Knowledge Shelf',
-  meta: [
-    {
-      name: 'description',
-      content: 'Please confirm your email address to activate your account.',
-    },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
-
 // WATCHERS
 watch(
   user,
@@ -47,6 +33,20 @@ onMounted(async () => {
     showToast('error', t('toast.linkExpired'))
     router.push(localePath('/'))
   }
+})
+
+// HEAD
+useHead({
+  title: 'Confirm | Knowledge Shelf',
+  meta: [
+    {
+      name: 'description',
+      content: 'Please confirm your email address to activate your account.',
+    },
+  ],
+  htmlAttrs: {
+    lang: locale.value,
+  },
 })
 </script>
 

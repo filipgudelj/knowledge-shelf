@@ -10,20 +10,6 @@ const { t, locale } = useI18n()
 const passwordInput = ref<{ focus: () => void } | null>(null)
 const confirmPasswordInput = ref<{ focus: () => void } | null>(null)
 
-// HEAD
-useHead({
-  title: 'Register | Knowledge Shelf',
-  meta: [
-    {
-      name: 'description',
-      content: 'Create your account.',
-    },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
-
 // HANDLERS
 const focusPassword = () => {
   passwordInput.value?.focus()
@@ -88,6 +74,20 @@ const onSubmitThrottled = useThrottleFn((e: Event) => {
   e.preventDefault()
   onSubmit()
 }, 1000)
+
+// HEAD
+useHead({
+  title: 'Register | Knowledge Shelf',
+  meta: [
+    {
+      name: 'description',
+      content: 'Create your account.',
+    },
+  ],
+  htmlAttrs: {
+    lang: locale.value,
+  },
+})
 </script>
 
 <template>

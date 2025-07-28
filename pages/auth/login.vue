@@ -11,20 +11,6 @@ const localePath = useLocalePath()
 const router = useRouter()
 const passwordInput = ref<{ focus: () => void } | null>(null)
 
-// HEAD
-useHead({
-  title: 'Login | Knowledge Shelf',
-  meta: [
-    {
-      name: 'description',
-      content: 'Log in to continue using your account features.',
-    },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
-
 // HANDLERS
 const focusPassword = () => {
   passwordInput.value?.focus()
@@ -65,6 +51,20 @@ const onSubmitThrottled = useThrottleFn((e: Event) => {
   e.preventDefault()
   onSubmit()
 }, 1000)
+
+// HEAD
+useHead({
+  title: 'Login | Knowledge Shelf',
+  meta: [
+    {
+      name: 'description',
+      content: 'Log in to continue using your account features.',
+    },
+  ],
+  htmlAttrs: {
+    lang: locale.value,
+  },
+})
 </script>
 
 <template>
