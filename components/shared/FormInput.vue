@@ -18,11 +18,11 @@ defineExpose({
 })
 
 // EMITS
-const emit = defineEmits(['update:modelValue'])
+const emits = defineEmits(['update:modelValue'])
 
 function onInput(event: Event) {
   const target = event.target as HTMLInputElement
-  emit('update:modelValue', target.value)
+  emits('update:modelValue', target.value)
 }
 </script>
 

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 // EMITS
-const emit = defineEmits(['click'])
+const emits = defineEmits(['click'])
 </script>
 
 <template>
-  <button type="submit" @click="emit('click')" class="button">
+  <button type="submit" @click="emits('click')" class="button">
     <slot />
   </button>
 </template>

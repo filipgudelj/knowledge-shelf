@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Book } from '@/types'
+import type { Book, BookFilters, BookSort } from '@/types'
 
 export const useBooksStore = defineStore('books', () => {
   const supabase = useSupabaseClient()
@@ -9,7 +9,12 @@ export const useBooksStore = defineStore('books', () => {
   const hasMoreBooks = ref(true)
   const isLoading = ref(false)
 
-  const loadMoreBooks = async (category?: string, searchQuery?: string) => {
+  const loadMoreBooks = async (
+    category?: string,
+    searchQuery?: string,
+    filters?: BookFilters,
+    sort?: BookSort,
+  ) => {
     if (isLoading.value || !hasMoreBooks.value) return
 
     isLoading.value = true
@@ -20,7 +25,9 @@ export const useBooksStore = defineStore('books', () => {
     let queryBuilder = supabase
       .from('books')
       .select('*')
-      .order('id', { ascending: true })
+      .order(sort?.sortBy ?? 'created_at', {
+        ascending: sort?.ascending ?? true,
+      })
       .range(start, end)
 
     if (category !== 'all' && category) {
@@ -29,6 +36,15 @@ export const useBooksStore = defineStore('books', () => {
 
     if (searchQuery) {
       queryBuilder = queryBuilder.ilike('title', `%${searchQuery}%`)
+    }
+
+    if (filters?.priceRange) {
+      queryBuilder = queryBuilder.gte('price', filters.priceRange.min)
+      queryBuilder = queryBuilder.lte('price', filters.priceRange.max)
+    }
+
+    if (filters?.binding?.length) {
+      queryBuilder = queryBuilder.in('binding', filters.binding)
     }
 
     const { data } = await queryBuilder

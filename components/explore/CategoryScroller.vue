@@ -17,8 +17,8 @@ const activeCategory = computed(() => {
   <div class="scrollmenu">
     <NuxtLinkLocale
       v-for="category in props.categories"
-      :key="category.value"
-      :to="`/explore/${category.slug}`"
+      :key="category.name"
+      :to="{ path: `/explore/${category.slug}`, query: route.query }"
       class="scrollmenu__item"
       :class="{ 'scrollmenu__item--active': category.slug === activeCategory }"
       :aria-label="`Go to ${category.label}`"
