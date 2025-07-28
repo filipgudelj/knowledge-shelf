@@ -79,6 +79,18 @@
     "noResults": "There are currently no items available to display"
   },
 
+  "sort": {
+    "label": "Sort by:",
+    "sortBy": {
+      "dateDesc": "Date (new → old)",
+      "dateAsc": "Date (old → new)",
+      "priceAsc": "Price (low → high)",
+      "priceDesc": "Price (high → low)",
+      "titleAsc": "Title (A → Z)",
+      "titleDesc": "Title (Z → A)"
+    }
+  },
+
   "toast": {
     "requestTooSoon": "Please wait before trying again",
     "alreadyRegistered": "Email already registered",

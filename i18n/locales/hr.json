@@ -79,6 +79,18 @@
     "noResults": "Trenutno nema nijednog artikla za prikaz."
   },
 
+  "sort": {
+    "label": "Sortiraj po:",
+    "sortBy": {
+      "dateDesc": "Datum (novi → stari)",
+      "dateAsc": "Datum (stari → novi)",
+      "priceAsc": "Cijena (niska → visoka)",
+      "priceDesc": "Cijena (visoka → niska)",
+      "titleAsc": "Naslov (A → Ž)",
+      "titleDesc": "Naslov (Ž → A)"
+    }
+  },
+
   "toast": {
     "requestTooSoon": "Pričekajte prije ponovnog pokušaja",
     "alreadyRegistered": "Email već registriran",

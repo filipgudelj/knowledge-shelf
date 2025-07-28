@@ -15,14 +15,15 @@ const emits = defineEmits<{
 
 // STATE
 const sortList = [
-  { label: 'Date (new → old)', sortBy: 'created_at', order: 'desc' },
-  { label: 'Date (old → new)', sortBy: 'created_at', order: 'asc' },
-  { label: 'Price (low → high)', sortBy: 'price', order: 'asc' },
-  { label: 'Price (high → low)', sortBy: 'price', order: 'desc' },
-  { label: 'Title (A → Z)', sortBy: 'title', order: 'asc' },
-  { label: 'Title (Z → A)', sortBy: 'title', order: 'desc' },
+  { label: 'dateDesc', sortBy: 'created_at', order: 'desc' },
+  { label: 'dateAsc', sortBy: 'created_at', order: 'asc' },
+  { label: 'priceAsc', sortBy: 'price', order: 'asc' },
+  { label: 'priceDesc', sortBy: 'price', order: 'desc' },
+  { label: 'titleAsc', sortBy: 'title', order: 'asc' },
+  { label: 'titleDesc', sortBy: 'title', order: 'desc' },
 ]
 const selected = ref(`${props.sortBy}-${props.order}`)
+const { t } = useI18n()
 
 // WATCHERS
 watch(
@@ -40,14 +41,14 @@ watch(selected, (newSelectedValue) => {
 </script>
 
 <template>
-  <label for="sort">Sort by:</label>
+  <label for="sort">{{ $t('sort.label') }}</label>
   <select id="sort" v-model="selected">
     <option
       v-for="item in sortList"
       :key="`${item.sortBy}-${item.order}`"
       :value="`${item.sortBy}-${item.order}`"
     >
-      {{ item.label }}
+      {{ t(`sort.sortBy.${item.label}`) }}
     </option>
   </select>
 </template>
