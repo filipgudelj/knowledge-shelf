@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Category, CategoryName, BookSort } from '~/types'
+import type { Category, CategoryName, BookSort, BookFilters } from '~/types'
 
 // STATE
 const baseCategories = ref<Omit<Category, 'label'>[]>([
@@ -45,6 +45,13 @@ const { t, locale } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const booksStore = useBooksStore()
+const allowedQueryKeys = [
+  'sortBy',
+  'order',
+  'language',
+  'binding',
+  'inStockOnly',
+]
 
 // COMPUTEDS
 const categories = computed<Category[]>(() =>
@@ -82,7 +89,6 @@ const isInitialLoading = computed(
 )
 
 // SORT
-const allowedQueryKeys = ['sortBy', 'order']
 const validSortByOptions = ['created_at', 'price', 'title']
 const validSortOrders = ['asc', 'desc']
 
@@ -121,25 +127,56 @@ const sort = computed<BookSort>(() => ({
   ascending: sortOrder.value === 'asc',
 }))
 
+// FILTER
+const filters = ref<BookFilters>({
+  language: (route.query.language as 'english' | 'croatian') ?? '',
+  binding: (route.query.binding as 'softcover' | 'hardcover') ?? '',
+  inStockOnly: route.query.inStockOnly === 'true',
+})
+
 // WATCHERS
-watch([sortBy, sortOrder], ([sortBy, order]) => {
+watch([sortBy, sortOrder], ([newSortBy, newOrder]) => {
   router.replace({
     query: {
       ...route.query,
-      sortBy: sortBy,
-      order: order,
+      sortBy: newSortBy,
+      order: newOrder,
     },
   })
 })
 
+watch(filters, (newFilters) => {
+  const query = { ...route.query }
+
+  if (newFilters.language) {
+    query.language = newFilters.language
+  } else {
+    delete query.language
+  }
+
+  if (newFilters.binding) {
+    query.binding = newFilters.binding
+  } else {
+    delete query.binding
+  }
+
+  if (newFilters.inStockOnly) {
+    query.inStockOnly = 'true'
+  } else {
+    delete query.inStockOnly
+  }
+
+  router.replace({ query })
+})
+
 watch(
-  [categoryName, sort] as const,
-  async ([newCategoryName, newSort]) => {
+  [categoryName, sort, filters] as const,
+  async ([newCategoryName, newSort, newFilters]) => {
     booksStore.resetBooks()
     await booksStore.loadMoreBooks(
       newCategoryName,
       undefined,
-      undefined,
+      newFilters,
       newSort,
     )
   },
@@ -157,7 +194,7 @@ const onScroll = async () => {
     await booksStore.loadMoreBooks(
       categoryName.value,
       undefined,
-      undefined,
+      filters.value,
       sort.value,
     )
   }
@@ -190,7 +227,7 @@ useHead({
   <div class="explore">
     <CategoryScroller :categories="categories" />
     <SortBooks v-model:sortBy="sortBy" v-model:order="sortOrder" />
-    <FilterBooks />
+    <FilterBooks v-model:filters="filters" />
     <h1 class="explore__title">{{ pageTitle }}</h1>
     <BooksList :books="booksStore.books" :isInitialLoading="isInitialLoading" />
   </div>

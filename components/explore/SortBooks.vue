@@ -28,8 +28,8 @@ const { t } = useI18n()
 // WATCHERS
 watch(
   () => [props.sortBy, props.order],
-  ([sortBy, order]) => {
-    selected.value = `${sortBy}-${order}`
+  ([newSortBy, newOrder]) => {
+    selected.value = `${newSortBy}-${newOrder}`
   },
 )
 

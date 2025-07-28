@@ -2,7 +2,7 @@ import type { CategoryName } from './category'
 
 type Language = 'english' | 'croatian'
 
-type BindingType = 'paperback' | 'hardcover'
+type BindingType = 'softcover' | 'hardcover'
 
 export interface Book {
   id: number
@@ -32,7 +32,7 @@ export type BookSort =
   | { sortBy: 'title'; ascending: boolean }
 
 export type BookFilters = {
-  priceRange?: { min: number; max: number }
-  language?: Array<'english' | 'croatian'>
-  binding?: Array<'paperback' | 'hardcover'>
+  language?: 'english' | 'croatian' | ''
+  binding?: 'softcover' | 'hardcover' | ''
+  inStockOnly?: boolean
 }

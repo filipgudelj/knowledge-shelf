@@ -38,13 +38,16 @@ export const useBooksStore = defineStore('books', () => {
       queryBuilder = queryBuilder.ilike('title', `%${searchQuery}%`)
     }
 
-    if (filters?.priceRange) {
-      queryBuilder = queryBuilder.gte('price', filters.priceRange.min)
-      queryBuilder = queryBuilder.lte('price', filters.priceRange.max)
+    if (filters?.binding?.length) {
+      queryBuilder = queryBuilder.eq('binding_type', filters.binding)
     }
 
-    if (filters?.binding?.length) {
-      queryBuilder = queryBuilder.in('binding', filters.binding)
+    if (filters?.language?.length) {
+      queryBuilder = queryBuilder.eq('language', filters.language)
+    }
+
+    if (filters?.inStockOnly) {
+      queryBuilder = queryBuilder.gt('stock', 0)
     }
 
     const { data } = await queryBuilder
