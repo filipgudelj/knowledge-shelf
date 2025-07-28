@@ -91,6 +91,19 @@
     }
   },
 
+  "filter": {
+    "language": "Jezik",
+    "binding": "Uvez",
+    "inStockOnly": "Samo dostupne knjige",
+    "apply": "Primijeni filtere",
+    "reset": "Poništi filtere",
+    "chooseOption": "-- Odaberite opciju --",
+    "english": "Engleski",
+    "croatian": "Hrvatski",
+    "softcover": "Meki uvez",
+    "hardcover": "Tvrdi uvez"
+  },
+
   "toast": {
     "requestTooSoon": "Pričekajte prije ponovnog pokušaja",
     "alreadyRegistered": "Email već registriran",

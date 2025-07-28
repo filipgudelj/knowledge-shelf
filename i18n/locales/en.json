@@ -91,6 +91,19 @@
     }
   },
 
+  "filter": {
+    "language": "Language",
+    "binding": "Binding",
+    "inStockOnly": "In Stock Only",
+    "apply": "Apply Filters",
+    "reset": "Reset Filters",
+    "chooseOption": "-- Choose an option --",
+    "english": "English",
+    "croatian": "Croatian",
+    "softcover": "Softcover",
+    "hardcover": "Hardcover"
+  },
+
   "toast": {
     "requestTooSoon": "Please wait before trying again",
     "alreadyRegistered": "Email already registered",

@@ -13,6 +13,7 @@ const emits = defineEmits<{
 
 // STATE
 const localFilters = reactive<BookFilters>({ ...props.filters })
+const { t } = useI18n()
 
 // WATCHERS
 watch(
@@ -51,33 +52,35 @@ const resetFilters = () => {
 <template>
   <div class="filters">
     <div class="filter-group">
-      <label>Language</label>
-      <select v-model="localFilters.language" placeholder="choose">
-        <option disabled value="">-- Choose an option --</option>
-        <option value="english">English</option>
-        <option value="croatian">Croatian</option>
+      <label>{{ t('filter.language') }}</label>
+      <select v-model="localFilters.language">
+        <option disabled value="">{{ t('filter.chooseOption') }}</option>
+        <option value="english">{{ t('filter.english') }}</option>
+        <option value="croatian">{{ t('filter.croatian') }}</option>
       </select>
     </div>
 
     <div class="filter-group">
-      <label>Binding</label>
+      <label>{{ t('filter.binding') }}</label>
       <select v-model="localFilters.binding">
-        <option disabled value="">-- Choose an option --</option>
-        <option value="softcover">Softcover</option>
-        <option value="hardcover">Hardcover</option>
+        <option disabled value="">{{ t('filter.chooseOption') }}</option>
+        <option value="softcover">{{ t('filter.softcover') }}</option>
+        <option value="hardcover">{{ t('filter.hardcover') }}</option>
       </select>
     </div>
 
     <div class="filter-group">
       <label>
         <input type="checkbox" v-model="localFilters.inStockOnly" />
-        In Stock Only
+        {{ t('filter.inStockOnly') }}
       </label>
     </div>
 
     <div class="filter-actions">
-      <button @click="applyFilters">Apply Filters</button>
-      <button @click="resetFilters" type="button">Reset Filters</button>
+      <button @click="applyFilters">{{ t('filter.apply') }}</button>
+      <button @click="resetFilters" type="button">
+        {{ t('filter.reset') }}
+      </button>
     </div>
   </div>
 </template>
