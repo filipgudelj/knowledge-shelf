@@ -112,6 +112,10 @@ const handleLogout = () => {
       transform: translateX(2px);
     }
   }
+
+  &--logout {
+    color: $color-red-500;
+  }
 }
 
 .dropdown__icon {
@@ -121,9 +125,5 @@ const handleLogout = () => {
   html.dark & {
     color: $color-gray-200;
   }
-}
-
-.dropdown__item--logout {
-  color: $color-red-500;
 }
 </style>

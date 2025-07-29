@@ -57,18 +57,18 @@ const getIconName = (type: string) => {
   border-radius: $radius-5;
   background-color: $color-blue-200;
   color: $color-gray-900;
-}
 
-.toast--success {
-  background-color: $color-green-300;
-}
+  &--success {
+    background-color: $color-green-300;
+  }
 
-.toast--error {
-  background-color: $color-red-300;
-}
+  &--error {
+    background-color: $color-red-300;
+  }
 
-.toast--info {
-  background-color: $color-blue-200;
+  &--info {
+    background-color: $color-blue-200;
+  }
 }
 
 .toast__icon {

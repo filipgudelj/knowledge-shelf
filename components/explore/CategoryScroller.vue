@@ -96,9 +96,9 @@ const localizedName = (category: Category) => category.name[locale.value]
   &:hover {
     color: $color-blue-500;
   }
-}
 
-.scrollmenu__item--active {
-  color: $color-blue-500;
+  &--active {
+    color: $color-blue-500;
+  }
 }
 </style>

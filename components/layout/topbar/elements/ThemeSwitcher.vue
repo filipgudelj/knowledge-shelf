@@ -63,10 +63,10 @@ const toggleDark = useToggle(isDark)
   html.dark & {
     background-color: $color-gray-900;
   }
-}
 
-.theme-switcher__thumb--dark {
-  transform: translateX(22px);
+  &--dark {
+    transform: translateX(22px);
+  }
 }
 
 .theme-switch__icon {

@@ -145,15 +145,15 @@ const clearSearch = () => {
   @media (min-width: $screen-sm) {
     margin: 0 $spacing-3 0 $spacing-5;
   }
-}
 
-.search__button--clear {
-  @extend %icon-btn;
-  right: 0;
-  margin: 0 $spacing-3 0 $spacing-3;
+  &--clear {
+    @extend %icon-btn;
+    right: 0;
+    margin: 0 $spacing-3 0 $spacing-3;
 
-  @media (min-width: $screen-sm) {
-    margin: 0 $spacing-5 0 $spacing-3;
+    @media (min-width: $screen-sm) {
+      margin: 0 $spacing-5 0 $spacing-3;
+    }
   }
 }
 </style>
