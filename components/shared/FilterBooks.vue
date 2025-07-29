@@ -52,17 +52,17 @@ const resetFilters = () => {
 <template>
   <div class="filters">
     <div class="filter-group">
-      <label>{{ t('filter.language') }}</label>
-      <select v-model="localFilters.language">
+      <label for="language-select">{{ t('filter.language') }}</label>
+      <select id="language-select" v-model="localFilters.language">
         <option disabled value="">{{ t('filter.chooseOption') }}</option>
-        <option value="english">{{ t('filter.english') }}</option>
-        <option value="croatian">{{ t('filter.croatian') }}</option>
+        <option value="en">{{ t('filter.english') }}</option>
+        <option value="hr">{{ t('filter.croatian') }}</option>
       </select>
     </div>
 
     <div class="filter-group">
-      <label>{{ t('filter.binding') }}</label>
-      <select v-model="localFilters.binding">
+      <label for="binding-select">{{ t('filter.binding') }}</label>
+      <select id="binding-select" v-model="localFilters.binding">
         <option disabled value="">{{ t('filter.chooseOption') }}</option>
         <option value="softcover">{{ t('filter.softcover') }}</option>
         <option value="hardcover">{{ t('filter.hardcover') }}</option>
@@ -70,8 +70,12 @@ const resetFilters = () => {
     </div>
 
     <div class="filter-group">
-      <label>
-        <input type="checkbox" v-model="localFilters.inStockOnly" />
+      <label for="in-stock-checkbox">
+        <input
+          id="in-stock-checkbox"
+          type="checkbox"
+          v-model="localFilters.inStockOnly"
+        />
         {{ t('filter.inStockOnly') }}
       </label>
     </div>

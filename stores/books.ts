@@ -1,16 +1,32 @@
 import { defineStore } from 'pinia'
-import type { Book, BookFilters, BookSort } from '@/types'
+import type { Book, BookFilters, BookSort, Category } from '@/types'
 
 export const useBooksStore = defineStore('books', () => {
   const supabase = useSupabaseClient()
+
   const books = ref<Book[]>([])
+  const categories = ref<Category[]>([])
+
   const page = ref(0)
   const pageSize = 24
   const hasMoreBooks = ref(true)
   const isLoading = ref(false)
 
+  const getCategories = async () => {
+    const { data } = await supabase
+      .from('categories')
+      .select('*')
+      .order('name->>en', { ascending: true })
+
+    categories.value = data || []
+  }
+
+  const getCategoryBySlug = (slug: string) => {
+    return categories.value.find((c) => c.slug === slug)
+  }
+
   const loadMoreBooks = async (
-    category?: string,
+    categoryId?: number,
     searchQuery?: string,
     filters?: BookFilters,
     sort?: BookSort,
@@ -24,14 +40,14 @@ export const useBooksStore = defineStore('books', () => {
 
     let queryBuilder = supabase
       .from('books')
-      .select('*')
+      .select('*, author:authors(*), category:categories(*)')
       .order(sort?.sortBy ?? 'created_at', {
         ascending: sort?.ascending ?? true,
       })
       .range(start, end)
 
-    if (category !== 'all' && category) {
-      queryBuilder = queryBuilder.eq('category', category)
+    if (categoryId) {
+      queryBuilder = queryBuilder.eq('category_id', categoryId)
     }
 
     if (searchQuery) {
@@ -79,8 +95,11 @@ export const useBooksStore = defineStore('books', () => {
 
   return {
     books,
+    categories,
     hasMoreBooks,
     isLoading,
+    getCategories,
+    getCategoryBySlug,
     loadMoreBooks,
     searchBooks,
     resetBooks,

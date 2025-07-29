@@ -1,29 +1,30 @@
-import type { CategoryName } from './category'
-
-type Language = 'english' | 'croatian'
-
-type BindingType = 'softcover' | 'hardcover'
+import type { Author } from './author'
+import type { Category } from './category'
 
 export interface Book {
   id: number
+  created_at: string // ISO 8601 timestamp
   title: string
-  author: string
-  isbn: string
-  description: string
+  author: Author
   price: number
-  category: CategoryName
   stock: number
   cover_url: string
   year_published: number
   format_width_mm: number
   format_height_mm: number
-  language: Language
+  language: 'en' | 'hr'
   pages_count: number
   publisher: string
-  binding_type: BindingType
+  binding_type: 'hardcover' | 'softcover'
   weight_kg: number
   sales_count: number
-  created_at: string
+  category: Category
+  description: {
+    en: string
+    hr: string
+  }
+  original_title: string | null
+  translator: string | null
 }
 
 export type BookSort =
@@ -32,7 +33,7 @@ export type BookSort =
   | { sortBy: 'title'; ascending: boolean }
 
 export type BookFilters = {
-  language?: 'english' | 'croatian' | ''
-  binding?: 'softcover' | 'hardcover' | ''
+  language?: 'en' | 'hr' | ''
+  binding?: 'hardcover' | 'softcover' | ''
   inStockOnly?: boolean
 }

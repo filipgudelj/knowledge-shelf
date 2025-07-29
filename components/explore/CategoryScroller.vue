@@ -6,23 +6,38 @@ const props = defineProps<{ categories: Category[] }>()
 
 // STATE
 const route = useRoute()
+const { t, locale } = useI18n()
 
 // COMPUTEDS
 const activeCategory = computed(() => {
   return (route.params.category as string) || 'all'
 })
+
+const localizedName = (category: Category) => category.name[locale.value]
 </script>
 
 <template>
   <div class="scrollmenu">
     <NuxtLinkLocale
+      :to="{ path: '/explore/all', query: route.query }"
+      :class="[
+        'scrollmenu__item',
+        { 'scrollmenu__item--active': activeCategory === 'all' },
+      ]"
+      :aria-label="`Go to ${t('explore.categories.all')}`"
+    >
+      {{ $t('explore.categories.all') }}
+    </NuxtLinkLocale>
+
+    <NuxtLinkLocale
       v-for="category in props.categories"
-      :key="category.name"
+      :key="category.id"
       :to="{ path: `/explore/${category.slug}`, query: route.query }"
       class="scrollmenu__item"
       :class="{ 'scrollmenu__item--active': category.slug === activeCategory }"
-      :aria-label="`Go to ${category.label}`"
-      >{{ category.label }}
+      :aria-label="`Go to ${localizedName(category)}`"
+    >
+      {{ localizedName(category) }}
     </NuxtLinkLocale>
   </div>
 </template>

@@ -19,7 +19,7 @@ const imageLoaded = ref(false)
       :class="{ loaded: imageLoaded }"
     />
     <p class="book__title">{{ props.book.title }}</p>
-    <p class="book__author">{{ props.book.author }}</p>
+    <p class="book__author">{{ props.book.author.name }}</p>
     <p class="book__price">{{ formatNumberToEuro(props.book.price) }}</p>
   </div>
 </template>

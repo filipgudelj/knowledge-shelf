@@ -1,46 +1,7 @@
 <script lang="ts" setup>
-import type { Category, CategoryName, BookSort, BookFilters } from '~/types'
+import type { BookSort, BookFilters } from '~/types'
 
 // STATE
-const baseCategories = ref<Omit<Category, 'label'>[]>([
-  { name: 'all', slug: 'all', headTitle: 'All' },
-  {
-    name: 'art and design',
-    slug: 'art-and-design',
-    headTitle: 'Art and Design',
-  },
-  { name: 'biography', slug: 'biography', headTitle: 'Biography' },
-  {
-    name: 'business, economics and law',
-    slug: 'business-economics-and-law',
-    headTitle: 'Business, Economics and Law',
-  },
-  { name: 'computing', slug: 'computing', headTitle: 'Computing' },
-  {
-    name: 'crime and thrillers',
-    slug: 'crime-and-thrillers',
-    headTitle: 'Crime and Thrillers',
-  },
-  { name: 'education', slug: 'education', headTitle: 'Education' },
-  { name: 'fiction', slug: 'fiction', headTitle: 'Fiction' },
-  {
-    name: 'graphic novels',
-    slug: 'graphic-novels',
-    headTitle: 'Graphic Novels',
-  },
-  {
-    name: 'health and wellbeing',
-    slug: 'health-and-wellbeing',
-    headTitle: 'Health and Wellbeing',
-  },
-  { name: 'history', slug: 'history', headTitle: 'History' },
-  {
-    name: 'science and nature',
-    slug: 'science-and-nature',
-    headTitle: 'Science and Nature',
-  },
-  { name: 'travel', slug: 'travel', headTitle: 'Travel' },
-])
 const { t, locale } = useI18n()
 const route = useRoute()
 const router = useRouter()
@@ -53,35 +14,28 @@ const allowedQueryKeys = [
   'inStockOnly',
 ]
 
-// COMPUTEDS
-const categories = computed<Category[]>(() =>
-  baseCategories.value.map((c) => ({
-    ...c,
-    label: t(`explore.categories.${c.slug}`),
-  })),
-)
+// CATEGORY
+if (booksStore.categories.length === 0) {
+  await booksStore.getCategories()
+}
 
 const slug = computed(() => route.params.category as string)
 
 const category = computed(() =>
-  categories.value.find((c) => c.slug === slug.value),
+  slug.value === 'all' ? null : booksStore.getCategoryBySlug(slug.value),
 )
-if (!category.value) {
+
+if (slug.value !== 'all' && !category.value) {
   throw createError({
     statusCode: 404,
     statusMessage: `Category not found: ${slug.value}`,
   })
 }
 
-const categoryName = computed<CategoryName>(() => category.value!.name)
-
 const pageTitle = computed(() => {
-  const label = category.value!.label.toLocaleLowerCase()
-  const allLabel = t('explore.categories.all').toLowerCase()
-  if (label === allLabel) {
-    return t('explore.allBooks')
-  }
-  return category.value!.label
+  if (slug.value === 'all') return t('explore.headings.allBooks')
+  const cat = category.value!
+  return cat.name[locale.value]
 })
 
 const isInitialLoading = computed(
@@ -129,7 +83,7 @@ const sort = computed<BookSort>(() => ({
 
 // FILTER
 const filters = ref<BookFilters>({
-  language: (route.query.language as 'english' | 'croatian') ?? '',
+  language: (route.query.language as 'en' | 'hr') ?? '',
   binding: (route.query.binding as 'softcover' | 'hardcover') ?? '',
   inStockOnly: route.query.inStockOnly === 'true',
 })
@@ -170,17 +124,20 @@ watch(filters, (newFilters) => {
 })
 
 watch(
-  [categoryName, sort, filters] as const,
-  async ([newCategoryName, newSort, newFilters]) => {
+  [category, sort, filters] as const,
+  async ([newCategory, newSort, newFilters]) => {
+    if (slug.value !== 'all' && !newCategory) return
+
     booksStore.resetBooks()
+
     await booksStore.loadMoreBooks(
-      newCategoryName,
+      newCategory?.id,
       undefined,
       newFilters,
       newSort,
     )
   },
-  { immediate: true },
+  { immediate: true, flush: 'post' },
 )
 
 // INFINITE SCROLL
@@ -192,7 +149,7 @@ const onScroll = async () => {
 
   if (scrollPos >= threshold) {
     await booksStore.loadMoreBooks(
-      categoryName.value,
+      category.value?.id,
       undefined,
       filters.value,
       sort.value,
@@ -210,11 +167,11 @@ onBeforeUnmount(() => {
 
 // HEAD
 useHead({
-  title: `${category.value!.headTitle === 'All' ? 'All books' : category.value!.headTitle} | Knowledge Shelf`,
+  title: `${pageTitle.value} | Knowledge Shelf`,
   meta: [
     {
       name: 'description',
-      content: `Explore our collection of ${category.value!.headTitle} books.`,
+      content: `Explore our collection of ${pageTitle.value} books.`,
     },
   ],
   htmlAttrs: {
@@ -225,7 +182,7 @@ useHead({
 
 <template>
   <div class="explore">
-    <CategoryScroller :categories="categories" />
+    <CategoryScroller :categories="booksStore.categories" />
     <SortBooks v-model:sortBy="sortBy" v-model:order="sortOrder" />
     <FilterBooks v-model:filters="filters" />
     <h1 class="explore__title">{{ pageTitle }}</h1>
