@@ -52,20 +52,20 @@ function onInput(event: Event) {
 .input__wrapper {
   position: relative;
   @include flex(column, flex-start, flex-start);
-  gap: $spacing-1;
   width: 100%;
 }
 
 .input__label {
-  font-size: $font-size-sm;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .input {
   width: 100%;
+  padding: $spacing-4;
   border: 1px solid $color-gray-300;
   border-radius: $spacing-2;
-  padding-inline: $spacing-4;
-  padding-block: $spacing-4;
   background-color: $color-gray-100;
   color: $color-gray-900;
   font-size: $font-size-md;

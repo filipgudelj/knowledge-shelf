@@ -183,8 +183,8 @@ useHead({
 <template>
   <div class="explore">
     <CategoryScroller :categories="booksStore.categories" />
-    <SortBooks v-model:sortBy="sortBy" v-model:order="sortOrder" />
     <FilterBooks v-model:filters="filters" />
+    <SortBooks v-model:sortBy="sortBy" v-model:order="sortOrder" />
     <h1 class="explore__title">{{ pageTitle }}</h1>
     <BooksList :books="booksStore.books" :isInitialLoading="isInitialLoading" />
   </div>

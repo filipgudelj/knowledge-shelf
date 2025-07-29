@@ -51,61 +51,63 @@ const resetFilters = () => {
 
 <template>
   <div class="filters">
-    <div class="filter-group">
-      <label for="language-select">{{ t('filter.language') }}</label>
-      <select id="language-select" v-model="localFilters.language">
-        <option disabled value="">{{ t('filter.chooseOption') }}</option>
-        <option value="en">{{ t('filter.english') }}</option>
-        <option value="hr">{{ t('filter.croatian') }}</option>
-      </select>
-    </div>
+    <FormSelect
+      id="language-select"
+      :label="t('filter.language')"
+      :placeholder="t('filter.chooseOption')"
+      v-model="localFilters.language"
+      :options="[
+        { value: 'en', label: t('filter.english') },
+        { value: 'hr', label: t('filter.croatian') },
+      ]"
+    />
 
-    <div class="filter-group">
-      <label for="binding-select">{{ t('filter.binding') }}</label>
-      <select id="binding-select" v-model="localFilters.binding">
-        <option disabled value="">{{ t('filter.chooseOption') }}</option>
-        <option value="softcover">{{ t('filter.softcover') }}</option>
-        <option value="hardcover">{{ t('filter.hardcover') }}</option>
-      </select>
-    </div>
+    <FormSelect
+      id="binding-select"
+      :label="t('filter.binding')"
+      :placeholder="t('filter.chooseOption')"
+      v-model="localFilters.binding"
+      :options="[
+        { value: 'softcover', label: t('filter.softcover') },
+        { value: 'hardcover', label: t('filter.hardcover') },
+      ]"
+    />
 
-    <div class="filter-group">
-      <label for="in-stock-checkbox">
-        <input
-          id="in-stock-checkbox"
-          type="checkbox"
-          v-model="localFilters.inStockOnly"
-        />
-        {{ t('filter.inStockOnly') }}
-      </label>
-    </div>
+    <FormCheckbox
+      id="in-stock-checkbox"
+      :label="t('filter.inStockOnly')"
+      v-model="localFilters.inStockOnly"
+    />
 
-    <div class="filter-actions">
-      <button @click="applyFilters">{{ t('filter.apply') }}</button>
-      <button @click="resetFilters" type="button">
+    <div class="filters__actions">
+      <SubmitButton type="primary" size="md" @click="applyFilters">
+        {{ t('filter.apply') }}
+      </SubmitButton>
+      <SubmitButton type="secondary" size="md" @click="resetFilters">
         {{ t('filter.reset') }}
-      </button>
+      </SubmitButton>
     </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .filters {
-  padding: 1rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  @include flex(column, flex-start, stretch);
+  gap: $spacing-5;
+  width: 100%;
+  margin-top: $spacing-6;
+  padding: $spacing-4 $spacing-6;
+  border: 1px solid $color-gray-200;
+
+  html.dark & {
+    border: 1px solid $color-gray-700;
+  }
 }
 
-.filter-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.filter-actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+.filters__actions {
+  @include flex(row, flex-end, flex-start);
+  gap: $spacing-4;
+  width: 300px;
+  margin-left: auto;
 }
 </style>

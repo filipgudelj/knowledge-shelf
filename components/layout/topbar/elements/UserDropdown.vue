@@ -67,7 +67,7 @@ const handleLogout = () => {
   padding-inline: $spacing-4;
   padding-block: $spacing-4;
   border-radius: $radius-4;
-  box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.2);
   background-color: $color-gray-100;
 
   html.dark & {

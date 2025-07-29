@@ -109,7 +109,7 @@ useHead({
         </template>
       </FormInput>
 
-      <SubmitButton class="login__submit">{{
+      <SubmitButton type="primary" size="lg" class="login__submit">{{
         $t('login.submit')
       }}</SubmitButton>
     </form>
