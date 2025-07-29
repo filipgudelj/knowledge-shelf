@@ -4,6 +4,9 @@ import { formatNumberToEuro } from '~/helpers/formatters'
 
 // PROPS
 const props = defineProps<{ book: Book }>()
+
+// STATE
+const imageLoaded = ref(false)
 </script>
 
 <template>
@@ -11,7 +14,9 @@ const props = defineProps<{ book: Book }>()
     <img
       :src="props.book.cover_url"
       :alt="props.book.title"
+      @load="imageLoaded = true"
       class="book__image"
+      :class="{ loaded: imageLoaded }"
     />
     <p class="book__title">{{ props.book.title }}</p>
     <p class="book__author">{{ props.book.author }}</p>
@@ -44,7 +49,16 @@ const props = defineProps<{ book: Book }>()
   width: 100%;
   margin-bottom: $spacing-3;
   border-radius: $radius-4;
-  transition: transform 0.4s ease;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s ease;
+}
+
+.book__image.loaded {
+  opacity: 1;
 }
 
 .book__title {
