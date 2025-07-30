@@ -69,6 +69,34 @@
     "noResults": "Trenutno nema nijednog artikla za prikaz."
   },
 
+  "book": {
+    "meta": {
+      "original_title": "IZVORNI NASLOV",
+      "translator": "PREVODITELJ",
+      "year_published": "GODINA IZDANJA",
+      "language": "JEZIK IZDANJA",
+      "publisher": "NAKLADNIK/IZDAVAČ",
+      "format": "FORMAT",
+      "pages_count": "BROJ STRANICA",
+      "binding_type": "UVEZ",
+      "weight": "TEŽINA"
+    },
+    "values": {
+      "language": {
+        "en": "Engleski",
+        "hr": "Hrvatski"
+      },
+      "binding_type": {
+        "softcover": "Meki uvez",
+        "hardcover": "Tvrdi uvez"
+      }
+    },
+    "tabs": {
+      "description": "Opis knjige",
+      "authorBio": "O autoru"
+    }
+  },
+
   "sort": {
     "label": "Sortiraj po:",
     "sortBy": {

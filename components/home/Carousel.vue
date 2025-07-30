@@ -145,7 +145,8 @@ onBeforeUnmount(() => {
             :style="{ width: `calc(100% / ${totalSlides} - 1rem)` }"
           />
 
-          <div
+          <NuxtLinkLocale
+            :to="`/books/${book.id}`"
             v-else
             v-for="(book, index) in props.books"
             :key="book.id"
@@ -161,7 +162,7 @@ onBeforeUnmount(() => {
             <p class="slide__title">{{ book.title }}</p>
             <p class="slide__author">{{ book.author.name }}</p>
             <p class="slide__price">{{ formatNumberToEuro(book.price) }}</p>
-          </div>
+          </NuxtLinkLocale>
         </div>
       </div>
     </div>

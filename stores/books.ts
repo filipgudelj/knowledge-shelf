@@ -56,6 +56,16 @@ export const useBooksStore = defineStore('books', () => {
     return data ?? []
   }
 
+  const getBookDetails = async (id: number): Promise<Book | null> => {
+    const { data } = await supabase
+      .from('books')
+      .select('*, author:authors(*), category:categories(*)')
+      .eq('id', id)
+      .single()
+
+    return data
+  }
+
   const loadMoreBooks = async (
     categoryId?: number,
     searchQuery?: string,
@@ -129,11 +139,12 @@ export const useBooksStore = defineStore('books', () => {
     categories,
     hasMoreBooks,
     isLoading,
+    getCategories,
+    getCategoryBySlug,
     getMostSoldBooks,
     getNewestBooks,
     getStaffPicksBooks,
-    getCategories,
-    getCategoryBySlug,
+    getBookDetails,
     loadMoreBooks,
     searchBooks,
     resetBooks,

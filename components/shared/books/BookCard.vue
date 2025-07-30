@@ -10,7 +10,7 @@ const imageLoaded = ref(false)
 </script>
 
 <template>
-  <div class="book">
+  <NuxtLinkLocale :to="`/books/${props.book.id}`" class="book">
     <img
       :src="props.book.cover_url"
       :alt="props.book.title"
@@ -21,7 +21,7 @@ const imageLoaded = ref(false)
     <p class="book__title">{{ props.book.title }}</p>
     <p class="book__author">{{ props.book.author.name }}</p>
     <p class="book__price">{{ formatNumberToEuro(props.book.price) }}</p>
-  </div>
+  </NuxtLinkLocale>
 </template>
 
 <style lang="scss" scoped>

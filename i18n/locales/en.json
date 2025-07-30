@@ -69,6 +69,34 @@
     "noResults": "There are currently no items available to display"
   },
 
+  "book": {
+    "meta": {
+      "original_title": "ORIGINAL TITLE",
+      "translator": "TRANSLATOR",
+      "year_published": "YEAR OF PUBLICATION",
+      "language": "LANGUAGE OF EDITION",
+      "publisher": "PUBLISHER",
+      "format": "FORMAT",
+      "pages_count": "NUMBER OF PAGES",
+      "binding_type": "BINDING",
+      "weight": "WEIGHT"
+    },
+    "values": {
+      "language": {
+        "en": "English",
+        "hr": "Croatian"
+      },
+      "binding_type": {
+        "softcover": "Softcover",
+        "hardcover": "Hardcover"
+      }
+    },
+    "tabs": {
+      "description": "Book description",
+      "authorBio": "About the author"
+    }
+  },
+
   "sort": {
     "label": "Sort by:",
     "sortBy": {
