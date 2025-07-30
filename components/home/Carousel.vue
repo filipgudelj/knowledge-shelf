@@ -24,6 +24,10 @@ const { width } = useWindowSize()
 const currentSlideIndex = ref(0)
 const showSkeleton = ref(true)
 let skeletonTimer: ReturnType<typeof setTimeout> | null = null
+const imageLoaded = ref<boolean[]>([])
+const onImageLoad = (index: number) => {
+  imageLoaded.value[index] = true
+}
 
 // COMPUTEDS
 const totalSlides = computed<number>(() => props.books.length)
@@ -48,6 +52,14 @@ const translateX = computed(() => {
 watch(width, () => {
   currentSlideIndex.value = 0
 })
+
+watch(
+  () => props.books,
+  (newBooks) => {
+    imageLoaded.value = newBooks.map(() => false)
+  },
+  { immediate: true },
+)
 
 // HANDLERS
 const nextSlide = () => {
@@ -130,17 +142,22 @@ onBeforeUnmount(() => {
             :height="'400px'"
             base-color="var(--skel-base)"
             highlight-color="var(--skel-highlight)"
-            :style="{ width: `calc(100% / ${totalSlides})` }"
+            :style="{ width: `calc(100% / ${totalSlides} - 1rem)` }"
           />
 
           <div
             v-else
-            v-for="book in props.books"
+            v-for="(book, index) in props.books"
             :key="book.id"
             :style="{ width: `calc(100% / ${totalSlides})` }"
             class="slide"
           >
-            <img :src="book.cover_url" :alt="book.title" class="slide__image" />
+            <img
+              :src="book.cover_url"
+              :alt="book.title"
+              @load="onImageLoad(index)"
+              :class="['slide__image', { loaded: imageLoaded[index] }]"
+            />
             <p class="slide__title">{{ book.title }}</p>
             <p class="slide__author">{{ book.author.name }}</p>
             <p class="slide__price">{{ formatNumberToEuro(book.price) }}</p>
@@ -218,12 +235,35 @@ onBeforeUnmount(() => {
 .slide {
   @include flex(column, flex-start, center);
   gap: $spacing-1;
+  perspective: 700px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover .slide__image {
+    transform: rotateX(-10deg) rotateY(25deg) scale(0.8);
+  }
+
+  &:hover .slide__title {
+    color: $color-blue-500;
+  }
 }
 
 .slide__image {
   width: 100%;
   margin-bottom: $spacing-3;
   border-radius: $radius-4;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s ease;
+}
+
+.slide__image.loaded {
+  opacity: 1;
 }
 
 .slide__title {

@@ -8,12 +8,18 @@ const mostSoldBooks = ref<Book[]>([])
 const newestBooks = ref<Book[]>([])
 const staffPickedBooks = ref<Book[]>([])
 
-// LCH
-onMounted(async () => {
-  mostSoldBooks.value = await booksStore.getMostSoldBooks()
-  newestBooks.value = await booksStore.getNewestBooks()
-  staffPickedBooks.value = await booksStore.getStaffPicksBooks()
-})
+// API
+await (async () => {
+  const [mostSold, newest, staffPicked] = await Promise.all([
+    booksStore.getMostSoldBooks(),
+    booksStore.getNewestBooks(),
+    booksStore.getStaffPicksBooks(),
+  ])
+
+  mostSoldBooks.value = mostSold
+  newestBooks.value = newest
+  staffPickedBooks.value = staffPicked
+})()
 
 // HEAD
 useHead({

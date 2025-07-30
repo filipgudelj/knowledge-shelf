@@ -37,7 +37,7 @@ const imageLoaded = ref(false)
   }
 
   &:hover .book__image {
-    transform: rotateX(-10deg) rotateY(25deg) scale(0.95);
+    transform: rotateX(-10deg) rotateY(25deg) scale(0.8);
   }
 
   &:hover .book__title {
