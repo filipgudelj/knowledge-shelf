@@ -21,6 +21,26 @@ const showNoResults = computed(() => {
   )
 })
 
+// WATCHERS
+watch(
+  () => props.isInitialLoading,
+  (isLoadingAgain) => {
+    if (isLoadingAgain) {
+      showSkeleton.value = true
+
+      if (skeletonTimer) {
+        clearTimeout(skeletonTimer)
+      }
+
+      skeletonTimer = setTimeout(() => {
+        showSkeleton.value = false
+        skeletonTimer = null
+      }, 500)
+    }
+  },
+  { immediate: true },
+)
+
 // LCH
 onMounted(() => {
   skeletonTimer = setTimeout(() => {
