@@ -14,9 +14,9 @@
   },
 
   "carousel": {
-    "title1": "Naslov Jedan",
-    "title2": "Naslov Dva",
-    "title3": "Naslov Tri"
+    "mostSold": "Najprodavanije",
+    "newest": "Novi naslovi",
+    "staffPicks": "Preporučujemo"
   },
 
   "login": {

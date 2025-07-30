@@ -14,9 +14,9 @@
   },
 
   "carousel": {
-    "title1": "Title One",
-    "title2": "Title Two",
-    "title3": "Title Three"
+    "mostSold": "Best Sellers",
+    "newest": "New Arrivals",
+    "staffPicks": "Staff Picks"
   },
 
   "login": {

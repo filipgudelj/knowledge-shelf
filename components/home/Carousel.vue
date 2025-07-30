@@ -1,72 +1,21 @@
 <script lang="ts" setup>
+import type { Book } from '~/types'
 import { useWindowSize } from '@vueuse/core'
 import { formatNumberToEuro } from '~/helpers/formatters'
 
 // PROPS
-const props = withDefaults(defineProps<{ title?: string }>(), { title: '' })
+const props = withDefaults(defineProps<{ title?: string; books: Book[] }>(), {
+  title: '',
+  books: () => [],
+})
 
 // STATE
-const slides = [
-  {
-    title: 'Title',
-    author: 'Author',
-    price: 10,
-    image: '/images/book.jpg',
-  },
-  {
-    title: 'Title',
-    author: 'Author',
-    price: 10,
-    image: '/images/book.jpg',
-  },
-  {
-    title: 'Title',
-    author: 'Author',
-    price: 10,
-    image: '/images/book.jpg',
-  },
-  {
-    title: 'Title',
-    author: 'Author',
-    price: 10,
-    image: '/images/book.jpg',
-  },
-  {
-    title: 'Title',
-    author: 'Author',
-    price: 10,
-    image: '/images/book.jpg',
-  },
-  {
-    title: 'Title',
-    author: 'Author',
-    price: 10,
-    image: '/images/book.jpg',
-  },
-  {
-    title: 'Title',
-    author: 'Author',
-    price: 10,
-    image: '/images/book.jpg',
-  },
-]
-const totalSlides = slides.length
 const currentSlideIndex = ref(0)
 const { width } = useWindowSize()
 
-// CAROUSEL NAVIGATION
-const nextSlide = () => {
-  if (currentSlideIndex.value < maxSlideIndex.value) {
-    currentSlideIndex.value++
-  }
-}
-const previousSlide = () => {
-  if (currentSlideIndex.value > 0) {
-    currentSlideIndex.value--
-  }
-}
+// COMPUTEDS
+const totalSlides = computed(() => props.books.length)
 
-// COMPUTED
 const visibleSlides = computed(() => {
   if (width.value < 567) return 1
   if (width.value < 900) return 2
@@ -79,15 +28,27 @@ const isPreviousButtonDisabled = computed(() => currentSlideIndex.value === 0)
 const isNextButtonDisabled = computed(
   () => currentSlideIndex.value === maxSlideIndex.value,
 )
-const maxSlideIndex = computed(() => slides.length - visibleSlides.value)
+const maxSlideIndex = computed(() => totalSlides.value - visibleSlides.value)
 const translateX = computed(() => {
-  return `translateX(-${(100 / slides.length) * currentSlideIndex.value}%)`
+  return `translateX(-${(100 / totalSlides.value) * currentSlideIndex.value}%)`
 })
 
 // WATCHERS
 watch(width, () => {
   currentSlideIndex.value = 0
 })
+
+// HANDLERS
+const nextSlide = () => {
+  if (currentSlideIndex.value < maxSlideIndex.value) {
+    currentSlideIndex.value++
+  }
+}
+const previousSlide = () => {
+  if (currentSlideIndex.value > 0) {
+    currentSlideIndex.value--
+  }
+}
 </script>
 
 <template>
@@ -121,17 +82,17 @@ watch(width, () => {
           class="carousel__track"
         >
           <div
-            v-for="(slide, index) in slides"
-            :key="index"
+            v-for="book in books"
+            :key="book.id"
             :style="{
               width: `calc(100% / ${totalSlides})`,
             }"
             class="slide"
           >
-            <img :src="slide.image" :alt="slide.title" class="slide__image" />
-            <p class="slide__title">{{ slide.title }}</p>
-            <p class="slide__author">{{ slide.author }}</p>
-            <p class="slide__price">{{ formatNumberToEuro(slide.price) }}</p>
+            <img :src="book.cover_url" :alt="book.title" class="slide__image" />
+            <p class="slide__title">{{ book.title }}</p>
+            <p class="slide__author">{{ book.author.name }}</p>
+            <p class="slide__price">{{ formatNumberToEuro(book.price) }}</p>
           </div>
         </div>
       </div>

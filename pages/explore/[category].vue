@@ -199,7 +199,7 @@ useHead({
 .explore__header {
   @include flex(row, space-between, flex-end);
   flex-wrap: wrap;
-  gap: $spacing-4;
+  gap: $spacing-2;
   margin: $spacing-4 0;
 }
 

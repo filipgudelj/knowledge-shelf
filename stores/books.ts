@@ -25,6 +25,37 @@ export const useBooksStore = defineStore('books', () => {
     return categories.value.find((c) => c.slug === slug)
   }
 
+  const getNewestBooks = async (): Promise<Book[]> => {
+    const { data } = await supabase
+      .from('books')
+      .select('*, author:authors(*), category:categories(*)')
+      .order('created_at', { ascending: false })
+      .limit(12)
+
+    return data ?? []
+  }
+
+  const getMostSoldBooks = async (): Promise<Book[]> => {
+    const { data } = await supabase
+      .from('books')
+      .select('*, author:authors(*), category:categories(*)')
+      .order('sales_count', { ascending: false })
+      .limit(12)
+
+    return data ?? []
+  }
+
+  const getStaffPicksBooks = async (): Promise<Book[]> => {
+    const { data } = await supabase
+      .from('books')
+      .select('*, author:authors(*), category:categories(*)')
+      .eq('is_staff_pick', true)
+      .order('created_at', { ascending: false })
+      .limit(12)
+
+    return data ?? []
+  }
+
   const loadMoreBooks = async (
     categoryId?: number,
     searchQuery?: string,
@@ -98,6 +129,9 @@ export const useBooksStore = defineStore('books', () => {
     categories,
     hasMoreBooks,
     isLoading,
+    getMostSoldBooks,
+    getNewestBooks,
+    getStaffPicksBooks,
     getCategories,
     getCategoryBySlug,
     loadMoreBooks,

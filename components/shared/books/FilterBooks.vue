@@ -95,18 +95,24 @@ const resetFilters = () => {
         v-model="localFilters.inStockOnly"
       />
 
-      <div class="filters__actions" :style="{ width: `${actionsWidth}` }">
-        <SubmitButton type="primary" :size="buttonsSize" @click="applyFilters">
-          {{ t('filter.apply') }}
-        </SubmitButton>
-        <SubmitButton
-          type="secondary"
-          :size="buttonsSize"
-          @click="resetFilters"
-        >
-          {{ t('filter.reset') }}
-        </SubmitButton>
-      </div>
+      <ClientOnly>
+        <div class="filters__actions" :style="{ width: `${actionsWidth}` }">
+          <SubmitButton
+            type="primary"
+            :size="buttonsSize"
+            @click="applyFilters"
+          >
+            {{ t('filter.apply') }}
+          </SubmitButton>
+          <SubmitButton
+            type="secondary"
+            :size="buttonsSize"
+            @click="resetFilters"
+          >
+            {{ t('filter.reset') }}
+          </SubmitButton>
+        </div>
+      </ClientOnly>
     </div>
   </div>
 </template>
