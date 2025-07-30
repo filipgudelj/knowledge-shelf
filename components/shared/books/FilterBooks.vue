@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useWindowSize } from '@vueuse/core'
 import type { BookFilters } from '~/types'
 
 // PROPS
@@ -14,6 +15,18 @@ const emits = defineEmits<{
 // STATE
 const localFilters = reactive<BookFilters>({ ...props.filters })
 const { t } = useI18n()
+const { width } = useWindowSize()
+
+// COMPUTEDS
+const buttonsSize = computed(() => {
+  if (width.value < 610) return 'sm'
+  return 'md'
+})
+
+const actionsWidth = computed(() => {
+  if (width.value < 610) return '240px'
+  return '350px'
+})
 
 // WATCHERS
 watch(
@@ -51,41 +64,49 @@ const resetFilters = () => {
 
 <template>
   <div class="filters">
-    <FormSelect
-      id="language-select"
-      :label="t('filter.language')"
-      :placeholder="t('filter.chooseOption')"
-      v-model="localFilters.language"
-      :options="[
-        { value: 'en', label: t('filter.english') },
-        { value: 'hr', label: t('filter.croatian') },
-      ]"
-    />
+    <div class="filters__select">
+      <FormSelect
+        id="language-select"
+        :label="t('filter.language')"
+        :placeholder="t('filter.chooseOption')"
+        v-model="localFilters.language"
+        :options="[
+          { value: 'en', label: t('filter.english') },
+          { value: 'hr', label: t('filter.croatian') },
+        ]"
+      />
 
-    <FormSelect
-      id="binding-select"
-      :label="t('filter.binding')"
-      :placeholder="t('filter.chooseOption')"
-      v-model="localFilters.binding"
-      :options="[
-        { value: 'softcover', label: t('filter.softcover') },
-        { value: 'hardcover', label: t('filter.hardcover') },
-      ]"
-    />
+      <FormSelect
+        id="binding-select"
+        :label="t('filter.binding')"
+        :placeholder="t('filter.chooseOption')"
+        v-model="localFilters.binding"
+        :options="[
+          { value: 'softcover', label: t('filter.softcover') },
+          { value: 'hardcover', label: t('filter.hardcover') },
+        ]"
+      />
+    </div>
 
-    <FormCheckbox
-      id="in-stock-checkbox"
-      :label="t('filter.inStockOnly')"
-      v-model="localFilters.inStockOnly"
-    />
+    <div class="filters__bottom">
+      <FormCheckbox
+        id="in-stock-checkbox"
+        :label="t('filter.inStockOnly')"
+        v-model="localFilters.inStockOnly"
+      />
 
-    <div class="filters__actions">
-      <SubmitButton type="primary" size="md" @click="applyFilters">
-        {{ t('filter.apply') }}
-      </SubmitButton>
-      <SubmitButton type="secondary" size="md" @click="resetFilters">
-        {{ t('filter.reset') }}
-      </SubmitButton>
+      <div class="filters__actions" :style="{ width: `${actionsWidth}` }">
+        <SubmitButton type="primary" :size="buttonsSize" @click="applyFilters">
+          {{ t('filter.apply') }}
+        </SubmitButton>
+        <SubmitButton
+          type="secondary"
+          :size="buttonsSize"
+          @click="resetFilters"
+        >
+          {{ t('filter.reset') }}
+        </SubmitButton>
+      </div>
     </div>
   </div>
 </template>
@@ -95,19 +116,39 @@ const resetFilters = () => {
   @include flex(column, flex-start, stretch);
   gap: $spacing-5;
   width: 100%;
-  margin-top: $spacing-6;
+  margin-block: $spacing-6;
   padding: $spacing-4 $spacing-6;
-  border: 1px solid $color-gray-200;
+  border: 1px solid $color-gray-300;
+  background-color: $color-gray-100;
 
   html.dark & {
     border: 1px solid $color-gray-700;
+    background-color: $color-gray-900;
+  }
+}
+
+.filters__select {
+  @include flex(row, flex-start, stretch);
+  gap: $spacing-4;
+
+  @media (max-width: $screen-lg) {
+    flex-direction: column;
+  }
+}
+
+.filters__bottom {
+  @include flex(column, space-between, flex-start);
+  gap: $spacing-4;
+
+  @media (min-width: $screen-lg) {
+    @include flex(row, space-between, flex-start);
   }
 }
 
 .filters__actions {
   @include flex(row, flex-end, flex-start);
-  gap: $spacing-4;
-  width: 300px;
+  gap: $spacing-3;
   margin-left: auto;
+  white-space: nowrap;
 }
 </style>

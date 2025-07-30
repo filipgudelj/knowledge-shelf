@@ -1,4 +1,3 @@
-import { ref } from 'vue'
 import type { Toast, ToastType } from '@/types'
 
 // STATE

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
-
 // PROPS
 const props = defineProps<{
   sortBy: string
@@ -41,14 +39,22 @@ watch(selected, (newSelectedValue) => {
 </script>
 
 <template>
-  <label for="sort">{{ $t('sort.label') }}</label>
-  <select id="sort" v-model="selected">
-    <option
-      v-for="item in sortList"
-      :key="`${item.sortBy}-${item.order}`"
-      :value="`${item.sortBy}-${item.order}`"
-    >
-      {{ t(`sort.sortBy.${item.label}`) }}
-    </option>
-  </select>
+  <FormSelect
+    id="sort"
+    :label="t('sort.label')"
+    v-model="selected"
+    :options="
+      sortList.map((item) => ({
+        value: `${item.sortBy}-${item.order}`,
+        label: t(`sort.sortBy.${item.label}`),
+      }))
+    "
+    class="sort__select"
+  />
 </template>
+
+<style lang="scss" scoped>
+.sort__select {
+  width: 230px;
+}
+</style>

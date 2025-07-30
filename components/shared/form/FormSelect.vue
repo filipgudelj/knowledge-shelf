@@ -5,7 +5,7 @@ import { onClickOutside } from '@vueuse/core'
 const props = defineProps<{
   id: string
   label: string
-  placeholder: string
+  placeholder?: string
   modelValue: string | undefined
   options: { value: string; label: string }[]
 }>()

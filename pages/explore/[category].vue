@@ -129,7 +129,6 @@ watch(
     if (slug.value !== 'all' && !newCategory) return
 
     booksStore.resetBooks()
-
     await booksStore.loadMoreBooks(
       newCategory?.id,
       undefined,
@@ -183,9 +182,11 @@ useHead({
 <template>
   <div class="explore">
     <CategoryScroller :categories="booksStore.categories" />
+    <div class="explore__header">
+      <h1 class="explore__title">{{ pageTitle }}</h1>
+      <SortBooks v-model:sortBy="sortBy" v-model:order="sortOrder" />
+    </div>
     <FilterBooks v-model:filters="filters" />
-    <SortBooks v-model:sortBy="sortBy" v-model:order="sortOrder" />
-    <h1 class="explore__title">{{ pageTitle }}</h1>
     <BooksList :books="booksStore.books" :isInitialLoading="isInitialLoading" />
   </div>
 </template>
@@ -195,7 +196,14 @@ useHead({
   width: 100%;
 }
 
+.explore__header {
+  @include flex(row, space-between, flex-end);
+  flex-wrap: wrap;
+  gap: $spacing-4;
+  margin: $spacing-4 0;
+}
+
 .explore__title {
-  margin: $spacing-6 0;
+  margin-right: $spacing-9;
 }
 </style>

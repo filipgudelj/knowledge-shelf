@@ -32,7 +32,7 @@ const emits = defineEmits(['click'])
   transition: all 0.3s ease;
 
   &--sm {
-    padding: $spacing-2 $spacing-3;
+    padding: $spacing-3 $spacing-3;
     font-size: $font-size-sm;
   }
 
