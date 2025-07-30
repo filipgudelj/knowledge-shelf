@@ -32,14 +32,26 @@ useHead({
 
 <template>
   <Section>
-    <Carousel :title="t('carousel.mostSold')" :books="mostSoldBooks" />
+    <Carousel
+      :title="t('carousel.mostSold')"
+      :books="mostSoldBooks"
+      :isLoading="mostSoldBooks.length === 0"
+    />
   </Section>
 
   <Section>
-    <Carousel :title="t('carousel.staffPicks')" :books="staffPickedBooks" />
+    <Carousel
+      :title="t('carousel.staffPicks')"
+      :books="staffPickedBooks"
+      :isLoading="staffPickedBooks.length === 0"
+    />
   </Section>
 
   <Section>
-    <Carousel :title="t('carousel.newest')" :books="newestBooks" />
+    <Carousel
+      :title="t('carousel.newest')"
+      :books="newestBooks"
+      :isLoading="newestBooks.length === 0"
+    />
   </Section>
 </template>

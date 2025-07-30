@@ -61,7 +61,7 @@ onBeforeUnmount(() => {
     <VueSkeletonLoader
       v-if="props.isInitialLoading || showSkeleton"
       v-for="n in 14"
-      :key="'skel-' + n"
+      :key="'skeleton-' + n"
       type="image@1"
       :width="'100%'"
       :height="'400px'"

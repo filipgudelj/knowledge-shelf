@@ -1,22 +1,33 @@
 <script lang="ts" setup>
-import type { Book } from '~/types'
 import { useWindowSize } from '@vueuse/core'
+import type { Book } from '@/types'
 import { formatNumberToEuro } from '~/helpers/formatters'
+import VueSkeletonLoader from 'vue3-skeleton-loader'
+import 'vue3-skeleton-loader/dist/style.css'
 
 // PROPS
-const props = withDefaults(defineProps<{ title?: string; books: Book[] }>(), {
-  title: '',
-  books: () => [],
-})
+const props = withDefaults(
+  defineProps<{
+    title?: string
+    books: Book[]
+    isLoading?: boolean
+  }>(),
+  {
+    title: '',
+    books: () => [],
+    isLoading: false,
+  },
+)
 
 // STATE
-const currentSlideIndex = ref(0)
 const { width } = useWindowSize()
+const currentSlideIndex = ref(0)
+const showSkeleton = ref(true)
+let skeletonTimer: ReturnType<typeof setTimeout> | null = null
 
 // COMPUTEDS
-const totalSlides = computed(() => props.books.length)
-
-const visibleSlides = computed(() => {
+const totalSlides = computed<number>(() => props.books.length)
+const visibleSlides = computed<number>(() => {
   if (width.value < 567) return 1
   if (width.value < 900) return 2
   if (width.value < 1150) return 3
@@ -49,6 +60,36 @@ const previousSlide = () => {
     currentSlideIndex.value--
   }
 }
+
+// SKELETON LOADER
+watch(
+  () => props.isLoading,
+  (isLoading) => {
+    if (isLoading) {
+      showSkeleton.value = true
+      if (skeletonTimer) clearTimeout(skeletonTimer)
+
+      skeletonTimer = setTimeout(() => {
+        showSkeleton.value = false
+        skeletonTimer = null
+      }, 500)
+    }
+  },
+  { immediate: true },
+)
+
+onMounted(() => {
+  skeletonTimer = setTimeout(() => {
+    showSkeleton.value = false
+  }, 500)
+})
+
+onBeforeUnmount(() => {
+  if (skeletonTimer) {
+    clearTimeout(skeletonTimer)
+    skeletonTimer = null
+  }
+})
 </script>
 
 <template>
@@ -81,12 +122,22 @@ const previousSlide = () => {
           }"
           class="carousel__track"
         >
+          <VueSkeletonLoader
+            v-if="props.isLoading || showSkeleton"
+            v-for="n in visibleSlides"
+            :key="'skeleton-' + n"
+            type="image@1"
+            :height="'400px'"
+            base-color="var(--skel-base)"
+            highlight-color="var(--skel-highlight)"
+            :style="{ width: `calc(100% / ${totalSlides})` }"
+          />
+
           <div
-            v-for="book in books"
+            v-else
+            v-for="book in props.books"
             :key="book.id"
-            :style="{
-              width: `calc(100% / ${totalSlides})`,
-            }"
+            :style="{ width: `calc(100% / ${totalSlides})` }"
             class="slide"
           >
             <img :src="book.cover_url" :alt="book.title" class="slide__image" />
