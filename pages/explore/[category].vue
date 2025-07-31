@@ -28,7 +28,7 @@ const category = computed(() =>
 if (slug.value !== 'all' && !category.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: `Category not found: ${slug.value}`,
+    statusMessage: `${t('errors.categoryNotFound')}: ${slug.value}`,
   })
 }
 
@@ -55,15 +55,15 @@ const unknownQueryKeys = Object.keys(route.query).filter(
   (key) => !allowedQueryKeys.includes(key),
 )
 if (unknownQueryKeys.length > 0) {
-  errors.push(`Unknown query parameter(s): ${unknownQueryKeys.join(', ')}`)
+  errors.push(`${t('errors.unknownQueryKeys')}: ${unknownQueryKeys.join(', ')}`)
 }
 
 if (querySortByOption && !validSortByOptions.includes(querySortByOption)) {
-  errors.push(`Invalid sortBy: "${querySortByOption}"`)
+  errors.push(`${t('errors.invalidSortBy')}: "${querySortByOption}"`)
 }
 
 if (querySortOrder && !validSortOrders.includes(querySortOrder)) {
-  errors.push(`Invalid order: "${querySortOrder}"`)
+  errors.push(`${t('errors.invalidSortOrder')}: "${querySortOrder}"`)
 }
 
 if (errors.length > 0) {

@@ -6,11 +6,11 @@ export const useBooksStore = defineStore('books', () => {
 
   const books = ref<Book[]>([])
   const categories = ref<Category[]>([])
-
   const page = ref(0)
   const pageSize = 24
   const hasMoreBooks = ref(true)
   const isLoading = ref(false)
+  const { t } = useI18n()
 
   const getCategories = async () => {
     const { data } = await supabase
@@ -67,7 +67,7 @@ export const useBooksStore = defineStore('books', () => {
       if (error.code === 'PGRST116') {
         throw createError({
           statusCode: 404,
-          statusMessage: `Book not found (ID: ${id})`,
+          statusMessage: `${t('errors.bookNotFound')} (ID: ${id})`,
         })
       }
     }

@@ -138,5 +138,13 @@
     "success": "Success",
     "error": "Error",
     "info": "Info"
+  },
+
+  "errors": {
+    "unknownQueryKeys": "Unknown query parameter(s)",
+    "invalidSortBy": "Invalid sortBy",
+    "invalidSortOrder": "Invalid order",
+    "categoryNotFound": "Category not found",
+    "bookNotFound": "Book not found"
   }
 }

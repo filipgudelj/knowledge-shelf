@@ -138,5 +138,13 @@
     "success": "Uspjeh",
     "error": "Greška",
     "info": "Informacija"
+  },
+
+  "errors": {
+    "unknownQueryKeys": "Nepoznati parametar(i) upita",
+    "invalidSortBy": "Nevažeći sortBy parametar",
+    "invalidSortOrder": "Nevažeći redoslijed sortiranja",
+    "categoryNotFound": "Kategorija nije pronađena",
+    "bookNotFound": "Knjiga nije pronađena"
   }
 }
