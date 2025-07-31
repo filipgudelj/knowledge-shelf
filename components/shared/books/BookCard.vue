@@ -68,6 +68,7 @@ const imageLoaded = ref(false)
   border-radius: $radius-4;
   aspect-ratio: 2 / 3;
   object-fit: cover;
+  transition: all 0.3s ease;
 }
 
 .book__title {

@@ -279,10 +279,7 @@ onBeforeUnmount(() => {
   border-radius: $radius-4;
   aspect-ratio: 2 / 3;
   object-fit: cover;
-}
-
-.slide__image.loaded {
-  opacity: 1;
+  transition: all 0.3s ease;
 }
 
 .slide__title {
