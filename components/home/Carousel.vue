@@ -117,6 +117,7 @@ onBeforeUnmount(() => {
           >
             <Icon name="mdi:chevron-left" size="24px" />
           </button>
+
           <button
             @click="nextSlide"
             :disabled="isNextButtonDisabled"
@@ -126,6 +127,7 @@ onBeforeUnmount(() => {
           </button>
         </div>
       </div>
+
       <div class="carousel__view">
         <div
           :style="{

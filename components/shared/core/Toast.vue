@@ -29,10 +29,12 @@ const getIconName = (type: string) => {
         <div class="toast__icon">
           <Icon :name="getIconName(toast.type)" size="24px" />
         </div>
+
         <div class="toast__content">
           <p class="toast__type">{{ getTypeLabel(toast.type) }}</p>
           <p class="toast__message">{{ toast.message }}</p>
         </div>
+
         <button @click="closeToast(toast.id)" class="toast__close">
           <Icon name="mdi:remove" size="24px" />
         </button>

@@ -29,6 +29,7 @@ const user = useSupabaseUser()
         <Icon name="mdi:home-variant-outline" size="32px" />
         <span class="sidebar__nav-label">{{ $t('sidebar.home') }}</span>
       </NuxtLinkLocale>
+
       <NuxtLinkLocale
         :to="'/explore/all'"
         class="sidebar__nav-item"
@@ -37,6 +38,7 @@ const user = useSupabaseUser()
         <Icon name="mdi:explore" size="32px" />
         <span class="sidebar__nav-label">{{ $t('sidebar.explore') }}</span>
       </NuxtLinkLocale>
+
       <NuxtLinkLocale
         :to="'/'"
         class="sidebar__nav-item"
@@ -45,6 +47,7 @@ const user = useSupabaseUser()
         <Icon name="mdi:favorite-border" size="32px" />
         <span class="sidebar__nav-label">{{ $t('sidebar.favourites') }}</span>
       </NuxtLinkLocale>
+
       <NuxtLinkLocale
         :to="'/'"
         class="sidebar__nav-item"
@@ -70,6 +73,7 @@ const user = useSupabaseUser()
           <Icon name="mdi:login-variant" size="32px" />
           <span class="sidebar__nav-label">{{ $t('sidebar.login') }}</span>
         </NuxtLinkLocale>
+
         <NuxtLinkLocale
           v-if="!user"
           :to="'/auth/register'"

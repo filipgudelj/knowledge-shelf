@@ -19,6 +19,7 @@ const doSearch = () => {
   if (!searchQueryTrimmed) return
   router.push(localePath(`/search/${searchQueryTrimmed}`))
 }
+
 const clearSearch = () => {
   searchQuery.value = ''
 }
@@ -35,9 +36,11 @@ const clearSearch = () => {
       autocomplete="off"
       class="search__input"
     />
+
     <button @click="doSearch" class="search__button" aria-label="Search">
       <Icon name="mdi:search" size="24px" />
     </button>
+
     <button
       v-if="searchQuery"
       @click="clearSearch"

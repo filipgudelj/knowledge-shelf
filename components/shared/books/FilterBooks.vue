@@ -104,6 +104,7 @@ const resetFilters = () => {
           >
             {{ t('filter.apply') }}
           </SubmitButton>
+
           <SubmitButton
             type="secondary"
             :size="buttonsSize"

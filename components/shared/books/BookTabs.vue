@@ -23,6 +23,7 @@ const activeTab = ref<'description' | 'authorBio'>('description')
       >
         {{ t('book.tabs.description') }}
       </button>
+
       <button
         :class="[
           'book-tabs__tab',

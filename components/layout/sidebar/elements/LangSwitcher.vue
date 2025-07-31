@@ -7,6 +7,7 @@ const switchLocalePath = useSwitchLocalePath()
 const currentLocaleData = computed(() => {
   return locales.value.find((i) => i.code === locale.value)
 })
+
 const nextLocaleCode = computed(() => (locale.value === 'en' ? 'hr' : 'en'))
 </script>
 

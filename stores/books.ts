@@ -128,12 +128,14 @@ export const useBooksStore = defineStore('books', () => {
     isLoading.value = false
   }
 
-  const searchBooks = async (searchQuery?: string) => {
-    if (!searchQuery) {
-      resetBooks()
-    }
+  const searchBooks = async (query: string): Promise<Book[]> => {
+    const { data } = await supabase
+      .from('books')
+      .select('*, author:authors(*), category:categories(*)')
+      .ilike('title', `%${query}%`)
+      .limit(5)
 
-    await loadMoreBooks(undefined, searchQuery)
+    return data ?? []
   }
 
   const resetBooks = () => {

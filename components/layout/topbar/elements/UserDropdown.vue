@@ -27,6 +27,7 @@ const handleLogout = () => {
         <div class="dropdown__label">Settings</div>
         <Icon name="mdi:chevron-right" size="20px" class="dropdown__icon" />
       </button>
+
       <button
         @click="handleLogout"
         class="dropdown__item dropdown__item--logout"
