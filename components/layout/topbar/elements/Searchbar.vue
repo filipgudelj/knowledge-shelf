@@ -147,11 +147,6 @@ onClickOutside(searchResultsDropdownRef, () => {
 
 .search:hover .search__input:focus {
   border: 1px solid $color-blue-500;
-  background-color: $color-gray-300;
-
-  html.dark & {
-    background-color: $color-gray-700;
-  }
 }
 
 .search__input {
@@ -173,12 +168,10 @@ onClickOutside(searchResultsDropdownRef, () => {
   }
 
   &:hover {
-    border: 1px solid $color-gray-300;
-    background-color: $color-gray-300;
+    border: 1px solid $color-gray-400;
 
     html.dark & {
-      border: 1px solid $color-gray-700;
-      background-color: $color-gray-700;
+      border: 1px solid $color-gray-600;
     }
   }
 
@@ -261,12 +254,12 @@ onClickOutside(searchResultsDropdownRef, () => {
   max-height: 300px;
   margin-top: $spacing-2;
   border-radius: $radius-5;
-  box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.2);
-  background-color: $color-gray-200;
+  box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.4);
+  background-color: $color-gray-100;
   overflow-y: auto;
 
   html.dark & {
-    background-color: $color-gray-800;
+    background-color: $color-gray-900;
   }
 
   &::-webkit-scrollbar {
@@ -279,19 +272,19 @@ onClickOutside(searchResultsDropdownRef, () => {
 
   &::-webkit-scrollbar-thumb {
     border-radius: $radius-3;
-    background-color: $color-gray-400;
+    background-color: $color-gray-300;
 
     &:hover {
       cursor: pointer;
-      background-color: $color-gray-500;
+      background-color: $color-gray-400;
 
       html.dark & {
-        background-color: $color-gray-500;
+        background-color: $color-gray-600;
       }
     }
 
     html.dark & {
-      background-color: $color-gray-600;
+      background-color: $color-gray-700;
     }
   }
 
@@ -308,15 +301,11 @@ onClickOutside(searchResultsDropdownRef, () => {
   cursor: pointer;
   transition: all 0.3s ease;
 
-  html.dark & {
-    border-bottom: 1px solid $color-gray-600;
-  }
-
   &:hover {
-    background-color: $color-gray-300;
+    background-color: $color-gray-200;
 
     html.dark & {
-      background-color: $color-gray-700;
+      background-color: $color-gray-800;
     }
   }
 
@@ -338,11 +327,11 @@ onClickOutside(searchResultsDropdownRef, () => {
 }
 
 .search__result-author {
-  color: $color-gray-700;
+  color: $color-gray-600;
   font-size: $font-size-xs;
 
   html.dark & {
-    color: $color-gray-500;
+    color: $color-gray-400;
   }
 }
 
@@ -364,13 +353,13 @@ onClickOutside(searchResultsDropdownRef, () => {
 }
 
 .search__loading-item {
-  height: 80px;
+  height: 85px;
   border-radius: $radius-4;
   background: linear-gradient(
     90deg,
-    $color-gray-400 25%,
-    $color-gray-300 50%,
-    $color-gray-400 75%
+    $color-gray-300 25%,
+    $color-gray-200 50%,
+    $color-gray-300 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1s infinite;
@@ -378,9 +367,9 @@ onClickOutside(searchResultsDropdownRef, () => {
   html.dark & {
     background: linear-gradient(
       90deg,
-      $color-gray-700 25%,
-      $color-gray-600 50%,
-      $color-gray-700 75%
+      $color-gray-800 25%,
+      $color-gray-700 50%,
+      $color-gray-800 75%
     );
     background-size: 200% 100%;
     animation: shimmer 1s infinite;
