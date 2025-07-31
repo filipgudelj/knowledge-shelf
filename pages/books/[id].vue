@@ -191,21 +191,29 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
     <VueSkeletonLoader
       type="text@5"
       height="30px"
+      base-color="var(--skel-base)"
+      highlight-color="var(--skel-highlight)"
       class="book__skeleton-summary"
     />
     <VueSkeletonLoader
       type="image@1"
       height="500px"
+      base-color="var(--skel-base)"
+      highlight-color="var(--skel-highlight)"
       class="book__skeleton-media"
     />
     <VueSkeletonLoader
       type="text@7"
       height="20px"
+      base-color="var(--skel-base)"
+      highlight-color="var(--skel-highlight)"
       class="book__skeleton-meta"
     />
     <VueSkeletonLoader
       type="text@1"
       height="200px"
+      base-color="var(--skel-base)"
+      highlight-color="var(--skel-highlight)"
       class="book__skeleton-insight"
     />
   </div>
