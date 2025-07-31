@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { Book } from '~/types'
-import { useDebounceFn, onClickOutside } from '@vueuse/core'
 import { formatNumberToEuro } from '~/helpers/formatters'
+import { onClickOutside } from '@vueuse/core'
 
 // STATE
 const localePath = useLocalePath()
@@ -11,12 +11,21 @@ const booksStore = useBooksStore()
 const searchQuery = ref(String(route.params.searchQuery || ''))
 const searchResults = ref<Book[]>([])
 const searchResultsDropdownRef = ref(null)
+let abortController: AbortController | null = null
 
 // API
-const getSearchResults = useDebounceFn(async (searchQuery: string) => {
-  const books = await booksStore.searchBooks(searchQuery)
-  searchResults.value = books ?? []
-}, 150)
+const getSearchResults = async (query: string) => {
+  abortController?.abort()
+  abortController = new AbortController()
+
+  await new Promise((resolve) => setTimeout(resolve, 300))
+  if (abortController.signal.aborted) return
+
+  const books = await booksStore.searchBooks(query)
+  if (!abortController.signal.aborted) {
+    searchResults.value = books ?? []
+  }
+}
 
 // WATCHERS
 watch(
@@ -26,14 +35,12 @@ watch(
   },
 )
 
-watch(searchQuery, async (newSearchQuery) => {
+watch(searchQuery, (newSearchQuery) => {
   const trimmedNewSearchQuery = newSearchQuery.trim()
-
   if (!trimmedNewSearchQuery) {
     searchResults.value = []
     return
   }
-
   getSearchResults(trimmedNewSearchQuery)
 })
 
@@ -41,18 +48,23 @@ watch(searchQuery, async (newSearchQuery) => {
 const doSearch = () => {
   const trimmedSearchQuery = searchQuery.value.trim()
   if (!trimmedSearchQuery) return
+
+  abortController?.abort()
   searchResults.value = []
   router.push(localePath(`/search/${trimmedSearchQuery}`))
 }
 
 const goToBook = (id: number) => {
+  abortController?.abort()
   searchResults.value = []
   searchQuery.value = ''
   router.push(localePath(`/books/${id}`))
 }
 
 const clearSearch = () => {
+  abortController?.abort()
   searchQuery.value = ''
+  searchResults.value = []
 }
 
 onClickOutside(searchResultsDropdownRef, () => {
