@@ -17,6 +17,7 @@ const toggleFavourite = () => {
   <button
     @click="toggleFavourite"
     :class="['favourite', `favourite--${props.variant || 'circle'}`]"
+    :aria-label="isFavourite ? 'Remove from favourites' : 'Add to favourites'"
   >
     <icon
       :name="isFavourite ? 'mdi:cards-heart' : 'mdi:cards-heart-outline'"

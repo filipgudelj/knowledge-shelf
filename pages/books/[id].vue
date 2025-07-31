@@ -6,7 +6,7 @@ import { formatNumberToEuro } from '~/helpers/formatters'
 
 // STATE
 const route = useRoute()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const booksStore = useBooksStore()
 const bookId = Number(route.params.id)
 const book = ref<Book | null>(null)
@@ -16,12 +16,27 @@ if (!isNaN(bookId)) {
   book.value = await booksStore.getBookDetails(bookId)
 }
 
+// LCH
 onMounted(() => {
   setTimeout(() => {
     showSkeleton.value = false
   }, 500)
 })
 
+// HEAD
+useHead({
+  title: `${book.value?.title} | Knowledge Shelf`,
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Explore detailed information about a selected book from our collection.',
+    },
+  ],
+  htmlAttrs: {
+    lang: locale.value,
+  },
+})
 const quantity = ref(book.value?.stock === 0 ? 0 : 1)
 </script>
 

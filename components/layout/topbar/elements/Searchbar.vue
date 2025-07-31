@@ -1,9 +1,22 @@
 <script lang="ts" setup>
+import type { Book } from '~/types'
+import { useDebounceFn, onClickOutside } from '@vueuse/core'
+import { formatNumberToEuro } from '~/helpers/formatters'
+
 // STATE
 const localePath = useLocalePath()
 const router = useRouter()
 const route = useRoute()
+const booksStore = useBooksStore()
 const searchQuery = ref(String(route.params.searchQuery || ''))
+const searchResults = ref<Book[]>([])
+const searchResultsDropdownRef = ref(null)
+
+// API
+const getSearchResults = useDebounceFn(async (searchQuery: string) => {
+  const books = await booksStore.searchBooks(searchQuery)
+  searchResults.value = books ?? []
+}, 300)
 
 // WATCHERS
 watch(
@@ -13,16 +26,38 @@ watch(
   },
 )
 
-// SEARCH
+watch(searchQuery, async (newSearchQuery) => {
+  const trimmedNewSearchQuery = newSearchQuery.trim()
+
+  if (!trimmedNewSearchQuery) {
+    searchResults.value = []
+    return
+  }
+
+  getSearchResults(trimmedNewSearchQuery)
+})
+
+// HANDLERS
 const doSearch = () => {
-  const searchQueryTrimmed = searchQuery.value.trim()
-  if (!searchQueryTrimmed) return
-  router.push(localePath(`/search/${searchQueryTrimmed}`))
+  const trimmedSearchQuery = searchQuery.value.trim()
+  if (!trimmedSearchQuery) return
+  searchResults.value = []
+  router.push(localePath(`/search/${trimmedSearchQuery}`))
+}
+
+const goToBook = (id: number) => {
+  searchResults.value = []
+  searchQuery.value = ''
+  router.push(localePath(`/books/${id}`))
 }
 
 const clearSearch = () => {
   searchQuery.value = ''
 }
+
+onClickOutside(searchResultsDropdownRef, () => {
+  searchResults.value = []
+})
 </script>
 
 <template>
@@ -49,6 +84,32 @@ const clearSearch = () => {
     >
       <Icon name="mdi:remove" size="24px" />
     </button>
+
+    <div
+      v-if="searchResults.length"
+      ref="searchResultsDropdownRef"
+      class="search__results"
+    >
+      <div
+        v-for="book in searchResults"
+        :key="book.id"
+        @click="goToBook(book.id)"
+        class="search__result"
+      >
+        <img
+          class="search__result-image"
+          :src="book.cover_url"
+          :alt="book.title"
+        />
+        <div class="search__result-details">
+          <p class="search__result-author">{{ book.author.name }}</p>
+          <p class="search__result-title">{{ book.title }}</p>
+          <p class="search__result-price">
+            {{ formatNumberToEuro(book.price) }}
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -125,6 +186,10 @@ const clearSearch = () => {
   @media (min-width: $screen-md) {
     width: 340px;
   }
+
+  @media (min-width: $screen-lg) {
+    width: 420px;
+  }
 }
 
 %icon-btn {
@@ -158,5 +223,101 @@ const clearSearch = () => {
       margin: 0 $spacing-5 0 $spacing-3;
     }
   }
+}
+
+.search__results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  max-height: 300px;
+  margin-top: $spacing-2;
+  border-radius: $radius-5;
+  box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.2);
+  background-color: $color-gray-200;
+  overflow-y: auto;
+
+  html.dark & {
+    background-color: $color-gray-800;
+  }
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: $radius-3;
+    background-color: $color-gray-400;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-gray-500;
+
+      html.dark & {
+        background-color: $color-gray-500;
+      }
+    }
+
+    html.dark & {
+      background-color: $color-gray-600;
+    }
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+}
+
+.search__result {
+  @include flex(row, flex-start, center);
+  gap: $spacing-5;
+  padding: $spacing-3 $spacing-4;
+  border-bottom: 1px solid $color-gray-400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  html.dark & {
+    border-bottom: 1px solid $color-gray-600;
+  }
+
+  &:hover {
+    background-color: $color-gray-300;
+
+    html.dark & {
+      background-color: $color-gray-700;
+    }
+  }
+}
+
+.search__result-image {
+  display: none;
+  width: 70px;
+  height: 110px;
+
+  @media (min-width: $screen-sm) {
+    display: block;
+  }
+}
+
+.search__result-author {
+  color: $color-gray-700;
+  font-size: $font-size-sm;
+
+  html.dark & {
+    color: $color-gray-500;
+  }
+}
+
+.search__result-title {
+  font-size: $font-size-lg;
+}
+
+.search__result-price {
+  margin-top: $spacing-2;
 }
 </style>
