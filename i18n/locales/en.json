@@ -99,7 +99,8 @@
     "tabs": {
       "description": "Book description",
       "authorBio": "About the author"
-    }
+    },
+    "notFound": "Sorry, we couldn't find the book you're looking for."
   },
 
   "sort": {

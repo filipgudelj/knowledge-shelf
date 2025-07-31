@@ -99,7 +99,8 @@
     "tabs": {
       "description": "Opis knjige",
       "authorBio": "O autoru"
-    }
+    },
+    "notFound": "Nažalost, knjiga koju tražite nije pronađena."
   },
 
   "sort": {

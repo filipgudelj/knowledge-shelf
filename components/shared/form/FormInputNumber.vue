@@ -9,8 +9,6 @@ const props = defineProps<{
   step?: number
 }>()
 
-console.log(props.modelValue ?? props.min ?? 1)
-
 // STATE
 const inputRef = ref<HTMLInputElement | null>(null)
 const localValue = ref<number>(props.modelValue ?? props.min ?? 1)

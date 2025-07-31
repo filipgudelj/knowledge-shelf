@@ -2,16 +2,18 @@
 import type { Book } from '~/types'
 import { formatNumberToEuro } from '~/helpers/formatters'
 
+// STATE
 const route = useRoute()
 const { t } = useI18n()
 const booksStore = useBooksStore()
 const bookId = Number(route.params.id)
 const book = ref<Book | null>(null)
-const quantity = ref(1)
 
 if (!isNaN(bookId)) {
   book.value = await booksStore.getBookDetails(bookId)
 }
+
+const quantity = ref(book.value?.stock === 0 ? 0 : 1)
 </script>
 
 <template>
@@ -152,7 +154,9 @@ if (!isNaN(bookId)) {
     </div>
   </div>
 
-  <div v-else>Nothing found...</div>
+  <div v-else class="no-results">
+    {{ t('book.notFound') }}
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -261,7 +265,17 @@ if (!isNaN(bookId)) {
 }
 
 .book-insight {
-  min-height: 400px;
+  min-height: 500px;
   margin-top: $spacing-8;
+
+  @media (min-width: $screen-sm) {
+    min-height: 350px;
+  }
+}
+
+.no-results {
+  margin-top: $spacing-6;
+  width: 100%;
+  font-size: $font-size-lg;
 }
 </style>

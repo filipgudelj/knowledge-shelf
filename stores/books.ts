@@ -57,11 +57,20 @@ export const useBooksStore = defineStore('books', () => {
   }
 
   const getBookDetails = async (id: number): Promise<Book | null> => {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('books')
       .select('*, author:authors(*), category:categories(*)')
       .eq('id', id)
       .single()
+
+    if (error) {
+      if (error.code === 'PGRST116') {
+        throw createError({
+          statusCode: 404,
+          statusMessage: `Book not found (ID: ${id})`,
+        })
+      }
+    }
 
     return data
   }
