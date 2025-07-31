@@ -11,20 +11,24 @@ const booksStore = useBooksStore()
 const searchQuery = ref(String(route.params.searchQuery || ''))
 const searchResults = ref<Book[]>([])
 const searchResultsDropdownRef = ref(null)
+const isSearching = ref(false)
 let abortController: AbortController | null = null
 
 // API
 const getSearchResults = async (query: string) => {
   abortController?.abort()
   abortController = new AbortController()
+  const signal = abortController.signal
 
+  isSearching.value = true
   await new Promise((resolve) => setTimeout(resolve, 300))
-  if (abortController.signal.aborted) return
+  if (signal.aborted) return
 
   const books = await booksStore.searchBooks(query)
-  if (!abortController.signal.aborted) {
-    searchResults.value = books ?? []
-  }
+  if (signal.aborted) return
+
+  searchResults.value = books ?? []
+  isSearching.value = false
 }
 
 // WATCHERS
@@ -50,14 +54,20 @@ const doSearch = () => {
   if (!trimmedSearchQuery) return
 
   abortController?.abort()
+  abortController = null
+  isSearching.value = false
   searchResults.value = []
+
   router.push(localePath(`/search/${trimmedSearchQuery}`))
 }
 
 const goToBook = (id: number) => {
   abortController?.abort()
+  abortController = null
+  isSearching.value = false
   searchResults.value = []
   searchQuery.value = ''
+
   router.push(localePath(`/books/${id}`))
 }
 
@@ -98,11 +108,16 @@ onClickOutside(searchResultsDropdownRef, () => {
     </button>
 
     <div
-      v-if="searchResults.length"
+      v-if="searchQuery.trim() && (searchResults.length || isSearching)"
       ref="searchResultsDropdownRef"
       class="search__results"
     >
+      <div v-if="isSearching" class="search__loading">
+        <div class="search__loading-item" v-for="n in 3" :key="n" />
+      </div>
+
       <div
+        v-else
         v-for="book in searchResults"
         :key="book.id"
         @click="goToBook(book.id)"
@@ -338,5 +353,46 @@ onClickOutside(searchResultsDropdownRef, () => {
 
 .search__result-price {
   margin-top: $spacing-1;
+}
+
+.search__loading {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: $spacing-3;
+  padding: $spacing-3;
+}
+
+.search__loading-item {
+  height: 80px;
+  border-radius: $radius-4;
+  background: linear-gradient(
+    90deg,
+    $color-gray-400 25%,
+    $color-gray-300 50%,
+    $color-gray-400 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1s infinite;
+
+  html.dark & {
+    background: linear-gradient(
+      90deg,
+      $color-gray-700 25%,
+      $color-gray-600 50%,
+      $color-gray-700 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 </style>
