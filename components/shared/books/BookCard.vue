@@ -11,7 +11,11 @@ const imageLoaded = ref(false)
 
 <template>
   <div class="book" :class="{ visible: imageLoaded }">
-    <NuxtLinkLocale :to="`/books/${book.id}`" class="book__link">
+    <NuxtLinkLocale
+      :to="`/books/${book.id}`"
+      class="book__link"
+      :aria-label="`View details for book ${props.book.title}`"
+    >
       <img
         :src="props.book.cover_url"
         :alt="props.book.title"
@@ -24,6 +28,7 @@ const imageLoaded = ref(false)
     <NuxtLinkLocale
       :to="`/authors/${props.book.author?.id ?? props.book.author_id}`"
       class="book__author"
+      :aria-label="`View author ${props.book.author?.name ?? props.book.author_name}`"
     >
       {{ props.book.author?.name ?? props.book.author_name }}
     </NuxtLinkLocale>

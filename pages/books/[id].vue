@@ -47,8 +47,9 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
         <NuxtLinkLocale
           :to="`/authors/${book.author.id}`"
           class="book-summary__author"
-          >{{ book.author.name }}</NuxtLinkLocale
-        >
+          :aria-label="`View details about author ${book.author.name}`"
+          >{{ book.author.name }}
+        </NuxtLinkLocale>
         <h1>{{ book.title }}</h1>
         <div class="book-summary__price">
           {{ formatNumberToEuro(book.price) }}

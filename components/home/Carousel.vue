@@ -161,6 +161,7 @@ onBeforeUnmount(() => {
                 :alt="book.title"
                 @load="onImageLoad(index)"
                 :class="['slide__image']"
+                :aria-label="`View details for book ${book.title}`"
               />
               <p class="slide__title">{{ book.title }}</p>
             </NuxtLinkLocale>
@@ -168,6 +169,7 @@ onBeforeUnmount(() => {
             <NuxtLinkLocale
               :to="`/authors/${book.author?.id}`"
               class="slide__author"
+              :aria-label="`View author ${book.author.name}`"
             >
               {{ book.author.name }}
             </NuxtLinkLocale>
