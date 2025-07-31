@@ -10,20 +10,25 @@ const imageLoaded = ref(false)
 </script>
 
 <template>
-  <NuxtLinkLocale :to="`/books/${props.book.id}`" class="book">
-    <img
-      :src="props.book.cover_url"
-      :alt="props.book.title"
-      @load="imageLoaded = true"
-      class="book__image"
-      :class="{ loaded: imageLoaded }"
-    />
-    <p class="book__title">{{ props.book.title }}</p>
-    <p class="book__author">
+  <div class="book" :class="{ visible: imageLoaded }">
+    <NuxtLinkLocale :to="`/books/${book.id}`" class="book__link">
+      <img
+        :src="props.book.cover_url"
+        :alt="props.book.title"
+        @load="imageLoaded = true"
+        class="book__image"
+      />
+      <p class="book__title">{{ props.book.title }}</p>
+    </NuxtLinkLocale>
+
+    <NuxtLinkLocale
+      :to="`/authors/${props.book.author?.id ?? props.book.author_id}`"
+      class="book__author"
+    >
       {{ props.book.author?.name ?? props.book.author_name }}
-    </p>
+    </NuxtLinkLocale>
     <p class="book__price">{{ formatNumberToEuro(props.book.price) }}</p>
-  </NuxtLinkLocale>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -33,6 +38,16 @@ const imageLoaded = ref(false)
   gap: $spacing-1;
   padding-block: $spacing-3;
   perspective: 1300px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.book__link {
+  @include flex(column, center, center);
 
   &:hover {
     cursor: pointer;
@@ -53,14 +68,6 @@ const imageLoaded = ref(false)
   border-radius: $radius-4;
   aspect-ratio: 2 / 3;
   object-fit: cover;
-  opacity: 0;
-  transition:
-    opacity 0.3s ease,
-    transform 0.4s ease;
-}
-
-.book__image.loaded {
-  opacity: 1;
 }
 
 .book__title {
@@ -72,14 +79,26 @@ const imageLoaded = ref(false)
 }
 
 .book__author {
+  max-width: 90%;
   color: $color-gray-600;
+  text-align: center;
 
   html.dark & {
     color: $color-gray-500;
+
+    &:hover {
+      color: $color-blue-500;
+    }
+  }
+
+  &:hover {
+    color: $color-blue-500;
   }
 }
 
 .book__price {
+  max-width: 90%;
   font-size: $font-size-lg;
+  text-align: center;
 }
 </style>

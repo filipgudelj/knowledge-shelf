@@ -44,7 +44,11 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
   <template v-if="book && !showSkeleton">
     <div class="book">
       <div class="book-summary">
-        <div class="book-summary__author">{{ book.author.name }}</div>
+        <NuxtLinkLocale
+          :to="`/authors/${book.author.id}`"
+          class="book-summary__author"
+          >{{ book.author.name }}</NuxtLinkLocale
+        >
         <h1>{{ book.title }}</h1>
         <div class="book-summary__price">
           {{ formatNumberToEuro(book.price) }}
@@ -258,6 +262,14 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
 
   html.dark & {
     color: $color-gray-300;
+
+    &:hover {
+      color: $color-blue-500;
+    }
+  }
+
+  &:hover {
+    color: $color-blue-500;
   }
 }
 

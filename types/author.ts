@@ -6,4 +6,5 @@ export interface Author {
     en: string
     hr: string
   }
+  avatar_url?: string
 }

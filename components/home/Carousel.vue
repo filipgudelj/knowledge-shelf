@@ -147,24 +147,31 @@ onBeforeUnmount(() => {
             :style="{ width: `calc(100% / ${totalSlides} - 1rem)` }"
           />
 
-          <NuxtLinkLocale
-            :to="`/books/${book.id}`"
+          <div
             v-else
             v-for="(book, index) in props.books"
             :key="book.id"
             :style="{ width: `calc(100% / ${totalSlides})` }"
             class="slide"
           >
-            <img
-              :src="book.cover_url"
-              :alt="book.title"
-              @load="onImageLoad(index)"
-              :class="['slide__image', { loaded: imageLoaded[index] }]"
-            />
-            <p class="slide__title">{{ book.title }}</p>
-            <p class="slide__author">{{ book.author.name }}</p>
+            <NuxtLinkLocale :to="`/books/${book.id}`" class="slide__link">
+              <img
+                :src="book.cover_url"
+                :alt="book.title"
+                @load="onImageLoad(index)"
+                :class="['slide__image', { loaded: imageLoaded[index] }]"
+              />
+              <p class="slide__title">{{ book.title }}</p>
+            </NuxtLinkLocale>
+
+            <NuxtLinkLocale
+              :to="`/authors/${book.author?.id}`"
+              class="slide__author"
+            >
+              {{ book.author.name }}
+            </NuxtLinkLocale>
             <p class="slide__price">{{ formatNumberToEuro(book.price) }}</p>
-          </NuxtLinkLocale>
+          </div>
         </div>
       </div>
     </div>
@@ -240,6 +247,10 @@ onBeforeUnmount(() => {
   @include flex(column, flex-start, center);
   gap: $spacing-1;
   perspective: 700px;
+}
+
+.slide__link {
+  @include flex(column, center, center);
 
   &:hover {
     cursor: pointer;
@@ -278,10 +289,20 @@ onBeforeUnmount(() => {
 }
 
 .slide__author {
+  max-width: 90%;
   color: $color-gray-600;
+  text-align: center;
 
   html.dark & {
     color: $color-gray-500;
+
+    &:hover {
+      color: $color-blue-500;
+    }
+  }
+
+  &:hover {
+    color: $color-blue-500;
   }
 }
 

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Book, BookFilters, BookSort, Category } from '@/types'
+import type { Book, BookFilters, BookSort, Category, Author } from '@/types'
 
 export const useBooksStore = defineStore('books', () => {
   const supabase = useSupabaseClient()
@@ -75,11 +75,22 @@ export const useBooksStore = defineStore('books', () => {
     return data
   }
 
+  const getAuthorById = async (id: number): Promise<Author | null> => {
+    const { data } = await supabase
+      .from('authors')
+      .select('*')
+      .eq('id', id)
+      .single()
+
+    return data
+  }
+
   const loadMoreBooks = async (
     categoryId?: number,
     searchQuery?: string,
     filters?: BookFilters,
     sort?: BookSort,
+    authorId?: number,
   ) => {
     if (isLoading.value || !hasMoreBooks.value) return
 
@@ -124,6 +135,10 @@ export const useBooksStore = defineStore('books', () => {
       queryBuilder = queryBuilder.gt('stock', 0)
     }
 
+    if (authorId) {
+      queryBuilder = queryBuilder.eq('author_id', authorId)
+    }
+
     const { data } = await queryBuilder
 
     if (!data || data.length < pageSize) {
@@ -164,6 +179,7 @@ export const useBooksStore = defineStore('books', () => {
     getNewestBooks,
     getStaffPicksBooks,
     getBookDetails,
+    getAuthorById,
     loadMoreBooks,
     searchBooks,
     resetBooks,

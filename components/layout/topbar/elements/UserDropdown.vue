@@ -17,25 +17,27 @@ const handleLogout = () => {
 </script>
 
 <template>
-  <div v-if="user" class="dropdown">
-    <button @click="toggleMenu" class="dropdown__button">
-      {{ user?.email?.charAt(0).toUpperCase() }}
-    </button>
-
-    <div v-if="showMenu" class="dropdown__menu">
-      <button class="dropdown__item">
-        <div class="dropdown__label">Settings</div>
-        <Icon name="mdi:chevron-right" size="20px" class="dropdown__icon" />
+  <ClientOnly>
+    <div v-if="user" class="dropdown">
+      <button @click="toggleMenu" class="dropdown__button">
+        {{ user?.email?.charAt(0).toUpperCase() }}
       </button>
 
-      <button
-        @click="handleLogout"
-        class="dropdown__item dropdown__item--logout"
-      >
-        Logout
-      </button>
+      <div v-if="showMenu" class="dropdown__menu">
+        <button class="dropdown__item">
+          <div class="dropdown__label">Settings</div>
+          <Icon name="mdi:chevron-right" size="20px" class="dropdown__icon" />
+        </button>
+
+        <button
+          @click="handleLogout"
+          class="dropdown__item dropdown__item--logout"
+        >
+          Logout
+        </button>
+      </div>
     </div>
-  </div>
+  </ClientOnly>
 </template>
 
 <style lang="scss" scoped>

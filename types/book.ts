@@ -6,6 +6,7 @@ export interface Book {
   created_at: string // ISO 8601 timestamp
   title: string
   author: Author
+  author_id?: number
   price: number
   stock: number
   cover_url: string
