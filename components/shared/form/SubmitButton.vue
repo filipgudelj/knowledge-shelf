@@ -3,6 +3,7 @@
 const props = defineProps<{
   type: 'primary' | 'secondary'
   size?: 'sm' | 'md' | 'lg'
+  disabled?: boolean
 }>()
 
 // EMITS
@@ -13,6 +14,7 @@ const emits = defineEmits(['click'])
   <button
     type="submit"
     @click="emits('click')"
+    :disabled="props.disabled"
     :class="[
       'button',
       `button--${props.type}`,
@@ -25,10 +27,10 @@ const emits = defineEmits(['click'])
 
 <style scoped lang="scss">
 .button {
+  @include flex(row, center, center);
   width: 100%;
   padding: $spacing-4;
   border-radius: $radius-3;
-  font-size: $font-size-lg;
   transition: all 0.3s ease;
 
   &--sm {
@@ -51,6 +53,26 @@ const emits = defineEmits(['click'])
     background-color: $color-blue-500;
     color: $color-gray-100;
 
+    &:disabled {
+      background-color: $color-gray-300;
+      color: $color-gray-100;
+      cursor: not-allowed;
+
+      html.dark & {
+        border: 1px solid $color-gray-800;
+        color: $color-gray-400;
+        background-color: $color-gray-700;
+
+        &:hover {
+          background-color: $color-gray-700;
+        }
+      }
+
+      &:hover {
+        background-color: $color-gray-300;
+      }
+    }
+
     html.dark & {
       &:hover {
         background-color: $color-blue-700;
@@ -66,6 +88,26 @@ const emits = defineEmits(['click'])
     border: 1px solid $color-gray-300;
     background-color: $color-gray-200;
     color: $color-gray-900;
+
+    &:disabled {
+      background-color: $color-gray-300;
+      color: $color-gray-100;
+      cursor: not-allowed;
+
+      html.dark & {
+        border: 1px solid $color-gray-800;
+        color: $color-gray-400;
+        background-color: $color-gray-700;
+
+        &:hover {
+          background-color: $color-gray-700;
+        }
+      }
+
+      &:hover {
+        background-color: $color-gray-300;
+      }
+    }
 
     html.dark & {
       &:hover {

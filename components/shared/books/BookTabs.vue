@@ -49,10 +49,6 @@ const activeTab = ref<'description' | 'authorBio'>('description')
 </template>
 
 <style lang="scss" scoped>
-.book-tabs {
-  margin-top: $spacing-8;
-}
-
 .book-tabs__nav {
   display: flex;
   gap: $spacing-6;

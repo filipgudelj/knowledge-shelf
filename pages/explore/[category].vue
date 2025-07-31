@@ -186,7 +186,7 @@ useHead({
       <h1 class="explore__title">{{ pageTitle }}</h1>
       <SortBooks v-model:sortBy="sortBy" v-model:order="sortOrder" />
     </div>
-    <FilterBooks v-model:filters="filters" />
+    <FilterBooks v-model:filters="filters" class="explore__filters" />
     <BooksList :books="booksStore.books" :isInitialLoading="isInitialLoading" />
   </div>
 </template>
@@ -205,5 +205,9 @@ useHead({
 
 .explore__title {
   margin-right: $spacing-9;
+}
+
+.explore__filters {
+  margin-block: $spacing-6;
 }
 </style>

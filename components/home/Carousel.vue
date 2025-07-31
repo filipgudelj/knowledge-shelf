@@ -243,7 +243,7 @@ onBeforeUnmount(() => {
   }
 
   &:hover .slide__image {
-    transform: rotateX(-10deg) rotateY(25deg) scale(0.8);
+    transform: scale(0.9);
   }
 
   &:hover .slide__title {

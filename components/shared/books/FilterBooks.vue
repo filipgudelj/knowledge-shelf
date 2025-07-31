@@ -122,7 +122,6 @@ const resetFilters = () => {
   @include flex(column, flex-start, stretch);
   gap: $spacing-5;
   width: 100%;
-  margin-block: $spacing-6;
   padding: $spacing-4 $spacing-6;
   border: 1px solid $color-gray-300;
   background-color: $color-gray-100;

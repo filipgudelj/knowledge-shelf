@@ -7,6 +7,7 @@ const { t } = useI18n()
 const booksStore = useBooksStore()
 const bookId = Number(route.params.id)
 const book = ref<Book | null>(null)
+const quantity = ref(1)
 
 if (!isNaN(bookId)) {
   book.value = await booksStore.getBookDetails(bookId)
@@ -20,6 +21,29 @@ if (!isNaN(bookId)) {
       <h1>{{ book.title }}</h1>
       <div class="book-summary__price">
         {{ formatNumberToEuro(book.price) }}
+      </div>
+
+      <div class="book__actions">
+        <FormInputNumber
+          id="quantity"
+          v-model="quantity"
+          label="Quantity"
+          :min="book.stock === 0 ? 0 : 1"
+          :max="book.stock"
+          :step="1"
+          class="book__quantity"
+        />
+
+        <SubmitButton
+          type="primary"
+          size="lg"
+          :disabled="book.stock === 0"
+          class="book__submit"
+        >
+          {{ book.stock > 0 ? 'Add to basket' : 'Unavailable' }}
+        </SubmitButton>
+
+        <AddToFavourites variant="rectangle" class="book__favourite" />
       </div>
     </div>
 
@@ -135,7 +159,7 @@ if (!isNaN(bookId)) {
   margin-top: $spacing-6;
 
   @media (min-width: 900px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr;
     gap: $spacing-8;
 
     .book-summary {
@@ -174,9 +198,35 @@ if (!isNaN(bookId)) {
   font-size: $font-size-2xl;
 }
 
+.book__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 550px) 80px;
+  grid-template-rows: auto auto;
+  gap: $spacing-4;
+  margin-top: $spacing-5;
+}
+
+.book__quantity {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  width: 100%;
+}
+
+.book__submit {
+  grid-column: 1;
+  grid-row: 2;
+  width: 100%;
+}
+
+.book__favourite {
+  grid-column: 2;
+  grid-row: 2;
+  width: auto;
+}
+
 .book-media img {
   display: block;
-  margin: $spacing-6 auto;
+  margin: $spacing-8 auto;
   max-width: 100%;
   @media (min-width: 900px) {
     margin: 0 auto;
@@ -206,5 +256,6 @@ if (!isNaN(bookId)) {
 
 .book-insight {
   min-height: 400px;
+  margin-top: $spacing-8;
 }
 </style>

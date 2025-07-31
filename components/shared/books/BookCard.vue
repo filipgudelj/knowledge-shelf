@@ -30,14 +30,14 @@ const imageLoaded = ref(false)
   width: 100%;
   gap: $spacing-1;
   padding-block: $spacing-3;
-  perspective: 700px;
+  perspective: 1300px;
 
   &:hover {
     cursor: pointer;
   }
 
   &:hover .book__image {
-    transform: rotateX(-10deg) rotateY(25deg) scale(0.8);
+    transform: scale(0.9);
   }
 
   &:hover .book__title {
