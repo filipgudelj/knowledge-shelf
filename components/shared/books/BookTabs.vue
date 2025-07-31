@@ -71,7 +71,7 @@ const activeTab = ref<'description' | 'authorBio'>('description')
 }
 
 .book-tabs__content {
-  min-height: 550px;
+  min-height: 530px;
   margin-top: $spacing-4;
   color: $color-gray-700;
   line-height: 1.7;
@@ -82,6 +82,18 @@ const activeTab = ref<'description' | 'authorBio'>('description')
 
   @media (min-width: $screen-sm) {
     min-height: 400px;
+  }
+
+  @media (min-width: $screen-md) {
+    min-height: 340px;
+  }
+
+  @media (min-width: $screen-lg) {
+    min-height: 225px;
+  }
+
+  @media (min-width: $screen-xl) {
+    min-height: 175px;
   }
 }
 
