@@ -134,11 +134,11 @@ const user = useSupabaseUser()
 
 .sidebar__logo-text {
   display: none;
-  font-family: $font-family-logo;
 
   @media (min-width: $screen-md) {
     display: block;
     font-size: $font-size-xl;
+    font-weight: 700;
   }
 }
 
@@ -177,6 +177,7 @@ const user = useSupabaseUser()
   @media (min-width: $screen-md) {
     display: block;
     line-height: 20px;
+    font-weight: 700;
   }
 }
 

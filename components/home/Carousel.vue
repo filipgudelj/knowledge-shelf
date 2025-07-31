@@ -184,6 +184,7 @@ onBeforeUnmount(() => {
 
 .carousel__title {
   font-size: $font-size-2xl;
+  font-weight: 700;
 }
 
 .carousel__buttons {
@@ -272,6 +273,7 @@ onBeforeUnmount(() => {
 .slide__title {
   max-width: 90%;
   font-size: $font-size-lg;
+  font-weight: 700;
   text-align: center;
 }
 

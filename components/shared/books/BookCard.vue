@@ -64,6 +64,7 @@ const imageLoaded = ref(false)
 .book__title {
   max-width: 90%;
   font-size: $font-size-lg;
+  font-weight: 700;
   text-align: center;
   transition: color 0.4s ease;
 }

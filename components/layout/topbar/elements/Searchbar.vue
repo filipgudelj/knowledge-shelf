@@ -16,7 +16,7 @@ const searchResultsDropdownRef = ref(null)
 const getSearchResults = useDebounceFn(async (searchQuery: string) => {
   const books = await booksStore.searchBooks(searchQuery)
   searchResults.value = books ?? []
-}, 300)
+}, 150)
 
 // WATCHERS
 watch(

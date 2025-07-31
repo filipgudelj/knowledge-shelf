@@ -264,6 +264,7 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
 .book-summary__price {
   margin-top: $spacing-5;
   font-size: $font-size-2xl;
+  font-weight: 700;
 }
 
 .book__actions {
@@ -322,6 +323,10 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
 .book-meta__content {
   @include flex(column, flex-start, flex-start);
   gap: $spacing-2;
+}
+
+.book-meta__label {
+  font-weight: 700;
 }
 
 .book-insight {

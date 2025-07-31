@@ -83,6 +83,7 @@ const localizedName = (category: Category) => category.name[locale.value]
   display: inline-block;
   margin: $spacing-6 $spacing-6 $spacing-2 0;
   padding-block: $spacing-2;
+  font-weight: 700;
   transition: all 0.3s ease;
 
   @media (min-width: $screen-lg) {

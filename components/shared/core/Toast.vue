@@ -91,6 +91,7 @@ const getIconName = (type: string) => {
 
 .toast__type {
   font-size: $font-size-md;
+  font-weight: 700;
 
   @media (min-width: $screen-md) {
     font-size: $font-size-lg;

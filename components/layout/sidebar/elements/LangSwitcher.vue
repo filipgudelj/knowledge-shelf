@@ -38,6 +38,7 @@ const nextLocaleCode = computed(() => (locale.value === 'en' ? 'hr' : 'en'))
   padding-inline: $spacing-2;
   border-radius: $radius-5;
   font-size: $font-size-xl;
+  font-weight: 700;
   transition: all 0.3s ease;
 
   &:hover {
