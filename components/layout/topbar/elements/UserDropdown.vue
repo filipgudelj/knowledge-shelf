@@ -63,7 +63,7 @@ const handleLogout = () => {
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
-  z-index: 10;
+  z-index: 100;
   width: 150px;
   padding-inline: $spacing-4;
   padding-block: $spacing-4;

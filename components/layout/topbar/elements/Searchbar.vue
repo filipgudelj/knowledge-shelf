@@ -230,7 +230,7 @@ onClickOutside(searchResultsDropdownRef, () => {
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 10;
+  z-index: 100;
   max-height: 300px;
   margin-top: $spacing-2;
   border-radius: $radius-5;

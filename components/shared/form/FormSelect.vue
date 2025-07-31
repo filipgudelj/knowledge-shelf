@@ -136,7 +136,7 @@ const onSelect = (value: string) => {
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
-  z-index: 10;
+  z-index: 100;
   width: 100%;
   border: 1px solid $color-gray-300;
   border-radius: $radius-3;
