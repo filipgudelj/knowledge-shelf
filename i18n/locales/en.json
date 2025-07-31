@@ -70,15 +70,20 @@
   },
 
   "book": {
+    "quantity": "Quantity",
+    "actions": {
+      "addToBasket": "Add to basket",
+      "unavailable": "Unavailable"
+    },
     "meta": {
-      "original_title": "ORIGINAL TITLE",
+      "originalTitle": "ORIGINAL TITLE",
       "translator": "TRANSLATOR",
-      "year_published": "YEAR OF PUBLICATION",
+      "yearPublished": "YEAR OF PUBLICATION",
       "language": "LANGUAGE OF EDITION",
       "publisher": "PUBLISHER",
       "format": "FORMAT",
-      "pages_count": "NUMBER OF PAGES",
-      "binding_type": "BINDING",
+      "pagesCount": "NUMBER OF PAGES",
+      "bindingType": "BINDING",
       "weight": "WEIGHT"
     },
     "values": {
@@ -86,7 +91,7 @@
         "en": "English",
         "hr": "Croatian"
       },
-      "binding_type": {
+      "bindingType": {
         "softcover": "Softcover",
         "hardcover": "Hardcover"
       }

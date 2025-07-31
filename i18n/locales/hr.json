@@ -70,15 +70,20 @@
   },
 
   "book": {
+    "quantity": "Količina",
+    "actions": {
+      "addToBasket": "Dodaj u košaricu",
+      "unavailable": "Nedostupno"
+    },
     "meta": {
-      "original_title": "IZVORNI NASLOV",
+      "originalTitle": "IZVORNI NASLOV",
       "translator": "PREVODITELJ",
-      "year_published": "GODINA IZDANJA",
+      "yearPublished": "GODINA IZDANJA",
       "language": "JEZIK IZDANJA",
-      "publisher": "NAKLADNIK/IZDAVAČ",
+      "publisher": "NAKLADNIK / PROIZVOĐAČ",
       "format": "FORMAT",
-      "pages_count": "BROJ STRANICA",
-      "binding_type": "UVEZ",
+      "pagesCount": "BROJ STRANICA",
+      "bindingType": "UVEZ",
       "weight": "TEŽINA"
     },
     "values": {
@@ -86,7 +91,7 @@
         "en": "Engleski",
         "hr": "Hrvatski"
       },
-      "binding_type": {
+      "bindingType": {
         "softcover": "Meki uvez",
         "hardcover": "Tvrdi uvez"
       }

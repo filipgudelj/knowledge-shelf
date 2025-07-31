@@ -27,7 +27,7 @@ if (!isNaN(bookId)) {
         <FormInputNumber
           id="quantity"
           v-model="quantity"
-          label="Quantity"
+          :label="t('book.quantity')"
           :min="book.stock === 0 ? 0 : 1"
           :max="book.stock"
           :step="1"
@@ -40,7 +40,11 @@ if (!isNaN(bookId)) {
           :disabled="book.stock === 0"
           class="book__submit"
         >
-          {{ book.stock > 0 ? 'Add to basket' : 'Unavailable' }}
+          {{
+            book.stock > 0
+              ? t('book.actions.addToBasket')
+              : t('book.actions.unavailable')
+          }}
         </SubmitButton>
 
         <AddToFavourites variant="rectangle" class="book__favourite" />
@@ -55,7 +59,7 @@ if (!isNaN(bookId)) {
       <div class="book-meta__item" v-if="book.original_title">
         <Icon name="mdi:flag-variant" size="24px" class="book-meta__icon" />
         <div class="book-meta__content">
-          <p class="book-meta__label">{{ t('book.meta.original_title') }}</p>
+          <p class="book-meta__label">{{ t('book.meta.originalTitle') }}</p>
           <p class="book-meta__value">{{ book.original_title }}</p>
         </div>
       </div>
@@ -75,7 +79,7 @@ if (!isNaN(bookId)) {
           class="book-meta__icon"
         />
         <div class="book-meta__content">
-          <p class="book-meta__label">{{ t('book.meta.year_published') }}</p>
+          <p class="book-meta__label">{{ t('book.meta.yearPublished') }}</p>
           <p class="book-meta__value">{{ book.year_published }}</p>
         </div>
       </div>
@@ -115,7 +119,7 @@ if (!isNaN(bookId)) {
           class="book-meta__icon"
         />
         <div class="book-meta__content">
-          <p class="book-meta__label">{{ t('book.meta.pages_count') }}</p>
+          <p class="book-meta__label">{{ t('book.meta.pagesCount') }}</p>
           <p class="book-meta__value">{{ book.pages_count }}</p>
         </div>
       </div>
@@ -127,9 +131,9 @@ if (!isNaN(bookId)) {
           class="book-meta__icon"
         />
         <div class="book-meta__content">
-          <p class="book-meta__label">{{ t('book.meta.binding_type') }}</p>
+          <p class="book-meta__label">{{ t('book.meta.bindingType') }}</p>
           <p class="book-meta__value">
-            {{ t(`book.values.binding_type.${book.binding_type}`) }}
+            {{ t(`book.values.bindingType.${book.binding_type}`) }}
           </p>
         </div>
       </div>
@@ -228,6 +232,8 @@ if (!isNaN(bookId)) {
   display: block;
   margin: $spacing-8 auto;
   max-width: 100%;
+  border-radius: $radius-5;
+
   @media (min-width: 900px) {
     margin: 0 auto;
   }
