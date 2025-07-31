@@ -87,21 +87,29 @@ export const useBooksStore = defineStore('books', () => {
 
     const start = page.value * pageSize
     const end = start + pageSize - 1
+    let queryBuilder
 
-    let queryBuilder = supabase
-      .from('books')
-      .select('*, author:authors(*), category:categories(*)')
-      .order(sort?.sortBy ?? 'created_at', {
-        ascending: sort?.ascending ?? true,
-      })
-      .range(start, end)
+    if (searchQuery) {
+      queryBuilder = supabase
+        .from('books_with_authors')
+        .select('*')
+        .or(`title.ilike.%${searchQuery}%,author_name.ilike.%${searchQuery}%`)
+        .order(sort?.sortBy ?? 'created_at', {
+          ascending: sort?.ascending ?? true,
+        })
+        .range(start, end)
+    } else {
+      queryBuilder = supabase
+        .from('books')
+        .select('*, author:authors(*), category:categories(*)')
+        .order(sort?.sortBy ?? 'created_at', {
+          ascending: sort?.ascending ?? true,
+        })
+        .range(start, end)
+    }
 
     if (categoryId) {
       queryBuilder = queryBuilder.eq('category_id', categoryId)
-    }
-
-    if (searchQuery) {
-      queryBuilder = queryBuilder.ilike('title', `%${searchQuery}%`)
     }
 
     if (filters?.binding?.length) {
@@ -130,9 +138,9 @@ export const useBooksStore = defineStore('books', () => {
 
   const searchBooks = async (query: string): Promise<Book[]> => {
     const { data } = await supabase
-      .from('books')
-      .select('*, author:authors(*), category:categories(*)')
-      .ilike('title', `%${query}%`)
+      .from('books_with_authors')
+      .select('*')
+      .or(`title.ilike.%${query}%,author_name.ilike.%${query}%`)
       .limit(5)
 
     return data ?? []

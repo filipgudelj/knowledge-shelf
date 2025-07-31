@@ -26,6 +26,7 @@ export interface Book {
   original_title: string | null
   translator: string | null
   is_staff_pick: boolean
+  author_name?: string
 }
 
 export type BookSort =

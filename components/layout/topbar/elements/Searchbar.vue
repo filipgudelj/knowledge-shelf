@@ -114,7 +114,7 @@ onClickOutside(searchResultsDropdownRef, () => {
           :alt="book.title"
         />
         <div class="search__result-details">
-          <p class="search__result-author">{{ book.author.name }}</p>
+          <p class="search__result-author">{{ book.author_name }}</p>
           <p class="search__result-title">{{ book.title }}</p>
           <p class="search__result-price">
             {{ formatNumberToEuro(book.price) }}

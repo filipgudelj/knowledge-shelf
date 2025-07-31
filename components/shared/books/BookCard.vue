@@ -19,7 +19,9 @@ const imageLoaded = ref(false)
       :class="{ loaded: imageLoaded }"
     />
     <p class="book__title">{{ props.book.title }}</p>
-    <p class="book__author">{{ props.book.author.name }}</p>
+    <p class="book__author">
+      {{ props.book.author?.name ?? props.book.author_name }}
+    </p>
     <p class="book__price">{{ formatNumberToEuro(props.book.price) }}</p>
   </NuxtLinkLocale>
 </template>
