@@ -6,7 +6,7 @@ import 'vue3-skeleton-loader/dist/style.css'
 // STATE
 const route = useRoute()
 const booksStore = useBooksStore()
-const { locale } = useI18n()
+const { t, locale } = useI18n()
 const currentLang = computed(() => locale.value as 'en' | 'hr')
 const authorId = Number(route.params.id)
 const author = ref<Author | null>(null)
@@ -14,6 +14,11 @@ const showSkeleton = ref(true)
 
 if (!isNaN(authorId)) {
   author.value = await booksStore.getAuthorById(authorId)
+} else {
+  throw createError({
+    statusCode: 404,
+    statusMessage: t('errors.invalidAuthorId'),
+  })
 }
 
 // COMPUTEDS

@@ -99,8 +99,7 @@
     "tabs": {
       "description": "Opis knjige",
       "authorBio": "O autoru"
-    },
-    "notFound": "Nažalost, knjiga koju tražite nije pronađena."
+    }
   },
 
   "sort": {
@@ -145,6 +144,9 @@
     "invalidSortBy": "Nevažeći sortBy parametar",
     "invalidSortOrder": "Nevažeći redoslijed sortiranja",
     "categoryNotFound": "Kategorija nije pronađena",
-    "bookNotFound": "Knjiga nije pronađena"
+    "bookNotFound": "Knjiga nije pronađena",
+    "authorNotFound": "Autor nije pronađen",
+    "invalidAuthorId": "ID autora mora biti broj",
+    "invalidBookId": "ID knjige mora biti broj"
   }
 }

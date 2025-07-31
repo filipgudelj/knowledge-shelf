@@ -37,6 +37,7 @@ const handleError = () => clearError({ redirect: localePath('/') })
 .error__message {
   color: $color-gray-700;
   font-size: $font-size-lg;
+  text-align: center;
 
   html.dark & {
     color: $color-gray-300;

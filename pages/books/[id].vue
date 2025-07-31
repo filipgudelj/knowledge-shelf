@@ -14,6 +14,11 @@ const showSkeleton = ref(true)
 
 if (!isNaN(bookId)) {
   book.value = await booksStore.getBookDetails(bookId)
+} else {
+  throw createError({
+    statusCode: 404,
+    statusMessage: t('errors.invalidBookId'),
+  })
 }
 
 // LCH
@@ -188,10 +193,6 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
     </div>
   </template>
 
-  <div v-else-if="!book && !showSkeleton" class="no-results">
-    {{ t('book.notFound') }}
-  </div>
-
   <div v-else class="book__skeleton">
     <VueSkeletonLoader
       type="text@5"
@@ -344,12 +345,6 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
 
 .book-insight {
   margin-top: $spacing-8;
-}
-
-.no-results {
-  margin-top: $spacing-6;
-  width: 100%;
-  font-size: $font-size-lg;
 }
 
 .book__skeleton {
