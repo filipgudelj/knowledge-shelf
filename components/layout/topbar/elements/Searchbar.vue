@@ -292,12 +292,18 @@ onClickOutside(searchResultsDropdownRef, () => {
       background-color: $color-gray-700;
     }
   }
+
+  @media (min-width: $screen-sm) {
+    border-bottom: none;
+  }
 }
 
 .search__result-image {
   display: none;
   width: 70px;
   height: 110px;
+  border-radius: $spacing-2;
+  object-fit: cover;
 
   @media (min-width: $screen-sm) {
     display: block;
@@ -306,7 +312,7 @@ onClickOutside(searchResultsDropdownRef, () => {
 
 .search__result-author {
   color: $color-gray-700;
-  font-size: $font-size-sm;
+  font-size: $font-size-xs;
 
   html.dark & {
     color: $color-gray-500;
@@ -314,10 +320,11 @@ onClickOutside(searchResultsDropdownRef, () => {
 }
 
 .search__result-title {
-  font-size: $font-size-lg;
+  font-size: $font-size-md;
+  font-weight: 700;
 }
 
 .search__result-price {
-  margin-top: $spacing-2;
+  margin-top: $spacing-1;
 }
 </style>
