@@ -153,13 +153,14 @@ onBeforeUnmount(() => {
             :key="book.id"
             :style="{ width: `calc(100% / ${totalSlides})` }"
             class="slide"
+            :class="{ visible: imageLoaded[index] }"
           >
             <NuxtLinkLocale :to="`/books/${book.id}`" class="slide__link">
               <img
                 :src="book.cover_url"
                 :alt="book.title"
                 @load="onImageLoad(index)"
-                :class="['slide__image', { loaded: imageLoaded[index] }]"
+                :class="['slide__image']"
               />
               <p class="slide__title">{{ book.title }}</p>
             </NuxtLinkLocale>
@@ -235,6 +236,7 @@ onBeforeUnmount(() => {
 .carousel__view {
   overflow: hidden;
   width: 100%;
+  min-height: 440px;
 }
 
 .carousel__track {
@@ -247,6 +249,12 @@ onBeforeUnmount(() => {
   @include flex(column, flex-start, center);
   gap: $spacing-1;
   perspective: 700px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.visible {
+    opacity: 1;
+  }
 }
 
 .slide__link {
@@ -271,10 +279,6 @@ onBeforeUnmount(() => {
   border-radius: $radius-4;
   aspect-ratio: 2 / 3;
   object-fit: cover;
-  opacity: 0;
-  transition:
-    opacity 0.3s ease,
-    transform 0.4s ease;
 }
 
 .slide__image.loaded {
