@@ -108,7 +108,11 @@ useHead({
           @load="imageLoaded = true"
         />
 
-        <icon v-else name="mdi:user-circle" class="author__avatar-image" />
+        <icon
+          v-else
+          name="mdi:user-circle"
+          class="author__avatar-image author__avatar-image--icon"
+        />
       </div>
 
       <h3 class="author__titles">{{ t('author.titles') }}</h3>
@@ -240,6 +244,14 @@ useHead({
   width: 100%;
   height: 100%;
   border-radius: 50%;
+
+  &--icon {
+    color: $color-gray-300;
+
+    html.dark & {
+      color: $color-gray-700;
+    }
+  }
 }
 
 .author__books {
