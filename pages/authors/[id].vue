@@ -11,6 +11,7 @@ const currentLang = computed(() => locale.value as 'en' | 'hr')
 const authorId = Number(route.params.id)
 const author = ref<Author | null>(null)
 const showSkeleton = ref(true)
+const imageLoaded = ref(false)
 
 if (!isNaN(authorId)) {
   author.value = await booksStore.getAuthorById(authorId)
@@ -77,7 +78,7 @@ onBeforeUnmount(() => {
 
 // HEAD
 useHead({
-  title: `Author | Knowledge Shelf`,
+  title: `${author.value?.name} | Knowledge Shelf`,
   htmlAttrs: {
     lang: locale.value,
   },
@@ -95,16 +96,22 @@ useHead({
         {{ author?.bio[currentLang] }}
       </p>
 
-      <div class="author__avatar">
+      <div
+        class="author__avatar"
+        :class="{ visible: imageLoaded || !author?.avatar_url }"
+      >
         <img
           v-if="author?.avatar_url"
           :src="author?.avatar_url"
           :alt="author?.name"
           class="author__avatar-image"
+          @load="imageLoaded = true"
         />
 
         <icon v-else name="mdi:user-circle" class="author__avatar-image" />
       </div>
+
+      <h3 class="author__titles">{{ t('author.titles') }}</h3>
     </div>
 
     <div v-else class="author__skeleton">
@@ -129,6 +136,13 @@ useHead({
         base-color="var(--skel-base)"
         highlight-color="var(--skel-highlight)"
         class="author__skeleton-avatar"
+      />
+      <VueSkeletonLoader
+        type="text@1"
+        height="50px"
+        base-color="var(--skel-base)"
+        highlight-color="var(--skel-highlight)"
+        class="author__skeleton-titles"
       />
     </div>
 
@@ -195,10 +209,20 @@ useHead({
   margin-top: $spacing-6;
 }
 
+.author__titles {
+  margin-top: $spacing-6;
+}
+
 .author__avatar {
   width: 80px;
   height: 80px;
   margin-bottom: $spacing-4;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.visible {
+    opacity: 1;
+  }
 
   @media (min-width: $screen-sm) {
     width: 96px;
@@ -219,7 +243,7 @@ useHead({
 }
 
 .author__books {
-  margin-top: $spacing-10;
+  margin-top: $spacing-6;
 }
 
 .author__skeleton {
@@ -271,6 +295,10 @@ useHead({
 
 .author__skeleton-bio {
   align-self: center;
+  margin-top: $spacing-6;
+}
+
+.author__skeleton-titles {
   margin-top: $spacing-6;
 }
 
