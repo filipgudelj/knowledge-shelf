@@ -83,8 +83,13 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 .books {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: $spacing-9;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: $spacing-6;
+
+  @media (min-width: $screen-md) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: $spacing-9;
+  }
 }
 
 .no-results {

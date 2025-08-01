@@ -32,7 +32,7 @@ const onImageLoad = (index: number) => {
 // COMPUTEDS
 const totalSlides = computed<number>(() => props.books.length)
 const visibleSlides = computed<number>(() => {
-  if (width.value < 567) return 1
+  if (width.value < 510) return 1
   if (width.value < 900) return 2
   if (width.value < 1150) return 3
   if (width.value < 1450) return 4
@@ -238,7 +238,11 @@ onBeforeUnmount(() => {
 .carousel__view {
   overflow: hidden;
   width: 100%;
-  min-height: 440px;
+  min-height: 375px;
+
+  @media (min-width: $screen-md) {
+    min-height: 440px;
+  }
 }
 
 .carousel__track {
