@@ -139,6 +139,8 @@ function decrement(event: MouseEvent) {
 }
 
 .input-number__label {
+  margin-bottom: $spacing-1;
+
   &:hover {
     cursor: pointer;
   }

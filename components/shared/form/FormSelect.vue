@@ -81,6 +81,7 @@ const onSelect = (value: string) => {
 
 .select__label {
   display: inline-block;
+  margin-bottom: $spacing-1;
 
   &:hover {
     cursor: pointer;

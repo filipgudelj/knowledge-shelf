@@ -56,6 +56,8 @@ function onInput(event: Event) {
 }
 
 .input__label {
+  margin-bottom: $spacing-1;
+
   &:hover {
     cursor: pointer;
   }
@@ -102,7 +104,7 @@ function onInput(event: Event) {
 
 .input__icon {
   position: absolute;
-  top: 35%;
+  top: 36%;
   @include flex();
   width: 32px;
   height: 24px;

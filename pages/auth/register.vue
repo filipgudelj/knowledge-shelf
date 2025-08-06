@@ -166,7 +166,7 @@ useHead({
   @include flex(row);
   gap: $spacing-5;
   width: 100%;
-  height: 435px;
+  height: 429px;
   margin-top: $spacing-6;
 }
 
