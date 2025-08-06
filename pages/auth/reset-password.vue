@@ -137,7 +137,7 @@ useHead({
   width: 50%;
   height: 100%;
   border-radius: $radius-4;
-  background-image: url('/svgs/enter-password.svg');
+  background-image: url('/svgs/guy-with-key.svg');
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: contain;
