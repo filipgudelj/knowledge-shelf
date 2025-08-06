@@ -184,9 +184,9 @@ function decrement(event: MouseEvent) {
     margin: 0;
   }
 
-  &[type='number'] {
-    -moz-appearance: textfield;
-  }
+  // &[type='number'] {
+  //   -moz-appearance: textfield;
+  // }
 }
 
 .input-number__controls {
