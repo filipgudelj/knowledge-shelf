@@ -32,13 +32,6 @@ const getSearchResults = async (query: string) => {
 }
 
 // WATCHERS
-watch(
-  () => route.params.searchQuery,
-  (query) => {
-    searchQuery.value = String(query || '')
-  },
-)
-
 watch(searchQuery, (newSearchQuery) => {
   const trimmedNewSearchQuery = newSearchQuery.trim()
   if (!trimmedNewSearchQuery) {
@@ -57,6 +50,7 @@ const doSearch = () => {
   abortController = null
   isSearching.value = false
   searchResults.value = []
+  searchQuery.value = ''
 
   router.push(localePath(`/search/${trimmedSearchQuery}`))
 }
