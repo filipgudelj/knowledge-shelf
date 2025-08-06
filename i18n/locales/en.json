@@ -26,7 +26,22 @@
     "emailPlaceholder": "Enter your email",
     "passwordLabel": "Password",
     "passwordPlaceholder": "Enter your password",
-    "submit": "Login"
+    "submit": "Login",
+    "forgotPassword": "Forgot password?"
+  },
+
+  "forgot-password": {
+    "title": "Reset your password",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "sendResetLink": "Send reset link"
+  },
+
+  "reset-password": {
+    "title": "Set a new password",
+    "newPasswordLabel": "New password",
+    "newPasswordPlaceholder": "Enter your new password",
+    "setNewPassword": "Set new password"
   },
 
   "register": {
@@ -138,6 +153,10 @@
     "invalidLoginCredentials": "Invalid login credentials",
     "linkExpired": "Email link is invalid or has expired",
     "emailConfirmed": "Email confirmed",
+    "resetLinkSent": "Password reset link sent",
+    "passwordUpdated": "Your password has been updated",
+    "authSessionMissing": "Authentication session missing",
+    "passwordSameAsOld": "New password must be different",
     "success": "Success",
     "error": "Error",
     "info": "Info"

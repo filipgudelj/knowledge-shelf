@@ -29,5 +29,19 @@ export const useAuthStore = defineStore('auth', () => {
     await supabase.auth.signOut()
   }
 
-  return { register, login, logout }
+  const sendPasswordResetLink = async (email: string) => {
+    const response = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `http://localhost:3000${localePath('/auth/reset-password')}`,
+    })
+
+    return response
+  }
+
+  const updateUserPassword = async (newPassword: string) => {
+    const response = await supabase.auth.updateUser({ password: newPassword })
+
+    return response
+  }
+
+  return { register, login, logout, sendPasswordResetLink, updateUserPassword }
 })

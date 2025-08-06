@@ -26,7 +26,22 @@
     "emailPlaceholder": "Unesite svoj email",
     "passwordLabel": "Lozinka",
     "passwordPlaceholder": "Unesite svoju lozinku",
-    "submit": "Prijavi se"
+    "submit": "Prijavi se",
+    "forgotPassword": "Zaboravljena lozinka?"
+  },
+
+  "forgot-password": {
+    "title": "Resetirajte svoju lozinku",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Unesite svoj email",
+    "sendResetLink": "Pošalji link za resetiranje"
+  },
+
+  "reset-password": {
+    "title": "Postavite novu lozinku",
+    "newPasswordLabel": "Nova lozinka",
+    "newPasswordPlaceholder": "Unesite novu lozinku",
+    "setNewPassword": "Postavi novu lozinku"
   },
 
   "register": {
@@ -138,6 +153,10 @@
     "invalidLoginCredentials": "Pogrešni podaci za prijavu",
     "linkExpired": "Link je nevažeći ili je istekao",
     "emailConfirmed": "Email je potvrđen",
+    "resetLinkSent": "Link za promjenu lozinke poslan",
+    "passwordUpdated": "Vaša lozinka je ažurirana",
+    "authSessionMissing": "Nedostaje autentikacijska sesija",
+    "passwordSameAsOld": "Nova lozinka mora biti drugačija",
     "success": "Uspjeh",
     "error": "Greška",
     "info": "Informacija"

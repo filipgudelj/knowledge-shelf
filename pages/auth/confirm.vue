@@ -51,5 +51,5 @@ useHead({
 </script>
 
 <template>
-  <Loader />
+  <!-- <Loader /> -->
 </template>

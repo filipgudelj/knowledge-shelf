@@ -18,8 +18,17 @@ const focusPassword = () => {
 
 // VALIDATION
 const schema = yup.object({
-  email: yup.string().required(t('validation.email.required')),
-  password: yup.string().required(t('validation.password.required')),
+  email: yup
+    .string()
+    .required(t('validation.email.required'))
+    .matches(
+      /^[^@]+?\.[^@]+?@[\w.-]+\.[a-zA-Z]{2,}$/,
+      t('validation.email.invalid'),
+    ),
+  password: yup
+    .string()
+    .required(t('validation.password.required'))
+    .min(6, t('validation.password.min')),
 })
 
 const submitted = ref(false)
@@ -109,6 +118,10 @@ useHead({
         </template>
       </FormInput>
 
+      <NuxtLinkLocale to="/auth/forgot-password" class="login__forgot">
+        {{ $t('login.forgotPassword') }}
+      </NuxtLinkLocale>
+
       <SubmitButton type="primary" size="lg" class="login__submit">{{
         $t('login.submit')
       }}</SubmitButton>
@@ -123,7 +136,7 @@ useHead({
   @include flex(row);
   gap: $spacing-5;
   width: 100%;
-  height: 344px;
+  height: 344px; // TODO: Change
   margin-top: $spacing-6;
 }
 
@@ -141,6 +154,16 @@ useHead({
   @include flex(column, center, flex-start);
   gap: $spacing-3;
   margin-bottom: $spacing-6;
+}
+
+.login__forgot {
+  align-self: flex-end;
+  font-size: $font-size-sm;
+  transition: all 0.4s ease;
+
+  &:hover {
+    color: $color-blue-500;
+  }
 }
 
 .login__submit {
