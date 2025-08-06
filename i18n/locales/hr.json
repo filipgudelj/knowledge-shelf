@@ -31,14 +31,14 @@
   },
 
   "forgot-password": {
-    "title": "Resetirajte svoju lozinku",
+    "title": "Resetiraj lozinku",
     "emailLabel": "Email",
     "emailPlaceholder": "Unesite svoj email",
     "sendResetLink": "Pošalji link za resetiranje"
   },
 
   "reset-password": {
-    "title": "Postavite novu lozinku",
+    "title": "Nova lozinka",
     "newPasswordLabel": "Nova lozinka",
     "newPasswordPlaceholder": "Unesite novu lozinku",
     "setNewPassword": "Postavi novu lozinku"

@@ -77,8 +77,8 @@ useHead({
 
 <template>
   <div v-if="shouldRender" class="reset-password">
-    <form @submit.prevent="onSubmitThrottled">
-      <h1>{{ $t('reset-password.title') }}</h1>
+    <form @submit.prevent="onSubmitThrottled" class="reset-password__form">
+      <h1 class="reset-password__title">{{ $t('reset-password.title') }}</h1>
 
       <FormInput
         :label="$t('reset-password.newPasswordLabel')"
@@ -96,9 +96,54 @@ useHead({
         </template>
       </FormInput>
 
-      <SubmitButton type="primary" size="lg">{{
+      <SubmitButton type="primary" size="lg" class="reset-password__submit">{{
         $t('reset-password.setNewPassword')
       }}</SubmitButton>
     </form>
+
+    <div class="reset-password__image" />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.reset-password {
+  @include flex(row);
+  gap: $spacing-5;
+  width: 100%;
+  height: 214px;
+  margin-top: $spacing-6;
+}
+
+.reset-password__form {
+  @include flex(column, center, flex-start);
+  gap: $spacing-1;
+  width: 100%;
+
+  @media (min-width: $screen-lg) {
+    width: 50%;
+  }
+}
+
+.reset-password__title {
+  margin-bottom: $spacing-5;
+}
+
+.reset-password__submit {
+  margin-top: $spacing-3;
+}
+
+.reset-password__image {
+  display: none;
+  width: 50%;
+  height: 100%;
+  border-radius: $radius-4;
+  background-image: url('/svgs/enter-password.svg');
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  @media (min-width: $screen-lg) {
+    display: block;
+  }
+}
+</style>

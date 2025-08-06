@@ -31,14 +31,14 @@
   },
 
   "forgot-password": {
-    "title": "Reset your password",
+    "title": "Reset password",
     "emailLabel": "Email",
     "emailPlaceholder": "Enter your email",
     "sendResetLink": "Send reset link"
   },
 
   "reset-password": {
-    "title": "Set a new password",
+    "title": "New password",
     "newPasswordLabel": "New password",
     "newPasswordPlaceholder": "Enter your new password",
     "setNewPassword": "Set new password"
