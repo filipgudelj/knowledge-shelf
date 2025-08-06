@@ -23,9 +23,9 @@
     "title": "Prijava",
     "subtitle": "Bok, dobrodošli nazad!",
     "emailLabel": "Email",
-    "emailPlaceholder": "Unesite svoj email",
+    "emailPlaceholder": "Unesi svoj email",
     "passwordLabel": "Lozinka",
-    "passwordPlaceholder": "Unesite svoju lozinku",
+    "passwordPlaceholder": "Unesi svoju lozinku",
     "submit": "Prijavi se",
     "forgotPassword": "Zaboravljena lozinka?"
   },
@@ -33,24 +33,24 @@
   "forgot-password": {
     "title": "Resetiraj lozinku",
     "emailLabel": "Email",
-    "emailPlaceholder": "Unesite svoj email",
+    "emailPlaceholder": "Unesi svoj email",
     "sendResetLink": "Pošalji link za resetiranje"
   },
 
   "reset-password": {
     "title": "Nova lozinka",
     "newPasswordLabel": "Nova lozinka",
-    "newPasswordPlaceholder": "Unesite novu lozinku",
+    "newPasswordPlaceholder": "Unesi novu lozinku",
     "setNewPassword": "Postavi novu lozinku"
   },
 
   "register": {
     "title": "Registracija",
-    "subtitle": "Kreirajte svoj račun!",
+    "subtitle": "Kreiraj svoj račun!",
     "emailLabel": "Email",
-    "emailPlaceholder": "Unesite svoj email",
+    "emailPlaceholder": "Unesi svoj email",
     "passwordLabel": "Lozinka",
-    "passwordPlaceholder": "Unesite svoju lozinku",
+    "passwordPlaceholder": "Unesi svoju lozinku",
     "confirmPasswordLabel": "Potvrdi lozinku",
     "confirmPasswordPlaceholder": "Ponovno unesi lozinku",
     "submit": "Registriraj se"
@@ -139,7 +139,7 @@
     "inStockOnly": "Samo dostupne knjige",
     "apply": "Primijeni filtere",
     "reset": "Poništi filtere",
-    "chooseOption": "-- Odaberite opciju --",
+    "chooseOption": "-- Odaberi opciju --",
     "english": "Engleski",
     "croatian": "Hrvatski",
     "softcover": "Meki uvez",
@@ -147,7 +147,7 @@
   },
 
   "toast": {
-    "requestTooSoon": "Pričekajte prije ponovnog pokušaja",
+    "requestTooSoon": "Pričekaj prije ponovnog pokušaja",
     "alreadyRegistered": "Email već registriran",
     "confirmationSent": "Potvrdni email poslan",
     "invalidLoginCredentials": "Pogrešni podaci za prijavu",
