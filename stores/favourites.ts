@@ -56,13 +56,19 @@ export const useFavouritesStore = defineStore('favourites', () => {
       return
     }
 
-    const { data } = await supabase
+    const { data } = (await supabase
       .from('books')
       .select('*, author:authors(*), category:categories(*)')
-      .in('id', nextIds)
+      .in('id', nextIds)) as unknown as {
+      data: Book[] | null
+    }
 
     if (data) {
-      favourites.value.push(...data)
+      const sorted = nextIds
+        .map((id) => data.find((book) => book.id === id))
+        .filter((b): b is Book => !!b)
+
+      favourites.value.push(...sorted)
     }
 
     page.value++
