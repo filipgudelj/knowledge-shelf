@@ -1,14 +1,23 @@
 <script setup lang="ts">
 // PROPS
 const props = defineProps<{
+  bookId: number
   variant: 'circle' | 'rectangle'
 }>()
 
 // STATE
+const favouritesStore = useFavouritesStore()
 const isFavourite = ref(false)
 
+isFavourite.value = await favouritesStore.checkBookFavouriteStatus(props.bookId)
+
 // HANDLERS
-const toggleFavourite = () => {
+const toggleFavourite = async () => {
+  if (isFavourite.value) {
+    await favouritesStore.removeFavourite(props.bookId)
+  } else {
+    await favouritesStore.addFavourite(props.bookId)
+  }
   isFavourite.value = !isFavourite.value
 }
 </script>
@@ -36,7 +45,7 @@ const toggleFavourite = () => {
   transition: all 0.3s ease;
 
   &--circle {
-    padding: $spacing-5 $spacing-5;
+    padding: $spacing-3 $spacing-3;
     border-radius: 50%;
   }
 

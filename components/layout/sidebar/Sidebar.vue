@@ -40,7 +40,7 @@ const user = useSupabaseUser()
       </NuxtLinkLocale>
 
       <NuxtLinkLocale
-        :to="'/'"
+        :to="'/favourites'"
         class="sidebar__nav-item"
         aria-label="Go to Favourites"
       >

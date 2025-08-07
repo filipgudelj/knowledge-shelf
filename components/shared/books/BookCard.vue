@@ -11,6 +11,12 @@ const imageLoaded = ref(false)
 
 <template>
   <div class="book" :class="{ visible: imageLoaded }">
+    <AddToFavourites
+      variant="circle"
+      :book-id="props.book.id"
+      class="book__favourite"
+    />
+
     <NuxtLinkLocale
       :to="`/books/${book.id}`"
       class="book__link"
@@ -38,6 +44,7 @@ const imageLoaded = ref(false)
 
 <style lang="scss" scoped>
 .book {
+  position: relative;
   @include flex(column, center, center);
   width: 100%;
   gap: $spacing-1;
@@ -51,6 +58,13 @@ const imageLoaded = ref(false)
   }
 }
 
+.book__favourite {
+  z-index: 1;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
 .book__link {
   @include flex(column, center, center);
 
@@ -59,7 +73,7 @@ const imageLoaded = ref(false)
   }
 
   &:hover .book__image {
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
 
   &:hover .book__title {

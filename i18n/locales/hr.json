@@ -80,6 +80,10 @@
     }
   },
 
+  "favourites": {
+    "title": "Tvoji favoriti"
+  },
+
   "books": {
     "noResults": "Trenutno nema nijednog artikla za prikaz."
   },

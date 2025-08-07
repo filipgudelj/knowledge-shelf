@@ -80,6 +80,10 @@
     }
   },
 
+  "favourites": {
+    "title": "Your favourites"
+  },
+
   "books": {
     "noResults": "There are currently no items available to display"
   },

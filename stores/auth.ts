@@ -3,6 +3,8 @@ import { defineStore } from 'pinia'
 export const useAuthStore = defineStore('auth', () => {
   const supabase = useSupabaseClient()
   const localePath = useLocalePath()
+  const { getAllFavouritesFromCookie, clearAllFavouritesFromCookie } =
+    useFavouritesCookie()
 
   const register = async (email: string, password: string) => {
     const response = await supabase.auth.signUp({
@@ -22,7 +24,43 @@ export const useAuthStore = defineStore('auth', () => {
       password: password,
     })
 
+    const user = response.data.user
+
+    if (user) {
+      await migrateAnonymousFavourites(user.id)
+    }
+
     return response
+  }
+
+  const migrateAnonymousFavourites = async (userId: string) => {
+    const cookieFavouriteIds = getAllFavouritesFromCookie()
+
+    if (!cookieFavouriteIds.length) return
+
+    const { data: existingFavourites } = (await supabase
+      .from('favourites')
+      .select('book_id')
+      .eq('user_id', userId)) as unknown as { data: { book_id: number }[] }
+
+    const existingFavouriteIds = new Set(
+      existingFavourites?.map((f) => f.book_id) ?? [],
+    )
+
+    const newFavouriteIds = cookieFavouriteIds.filter(
+      (id) => !existingFavouriteIds.has(id),
+    )
+
+    if (newFavouriteIds.length > 0) {
+      const inserts = newFavouriteIds.map((bookId) => ({
+        user_id: userId,
+        book_id: bookId,
+      }))
+
+      await supabase.from('favourites').insert(inserts as any)
+    }
+
+    clearAllFavouritesFromCookie()
   }
 
   const logout = async () => {

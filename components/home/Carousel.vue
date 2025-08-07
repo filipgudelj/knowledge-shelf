@@ -155,6 +155,12 @@ onBeforeUnmount(() => {
             class="slide"
             :class="{ visible: imageLoaded[index] }"
           >
+            <AddToFavourites
+              variant="circle"
+              :book-id="book.id"
+              class="slide__favourite"
+            />
+
             <NuxtLinkLocale :to="`/books/${book.id}`" class="slide__link">
               <img
                 :src="book.cover_url"
@@ -252,6 +258,7 @@ onBeforeUnmount(() => {
 }
 
 .slide {
+  position: relative;
   @include flex(column, flex-start, center);
   gap: $spacing-1;
   perspective: 700px;
@@ -263,6 +270,13 @@ onBeforeUnmount(() => {
   }
 }
 
+.slide__favourite {
+  z-index: 1;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
 .slide__link {
   @include flex(column, center, center);
 
@@ -271,7 +285,7 @@ onBeforeUnmount(() => {
   }
 
   &:hover .slide__image {
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
 
   &:hover .slide__title {
