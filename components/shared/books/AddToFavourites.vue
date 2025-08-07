@@ -39,7 +39,6 @@ const toggleFavourite = async () => {
 <style lang="scss" scoped>
 .favourite {
   @include flex(flex, center, center);
-  border: 1px solid $color-gray-300;
   background-color: $color-gray-200;
   color: $color-gray-900;
   transition: all 0.3s ease;
@@ -56,12 +55,12 @@ const toggleFavourite = async () => {
 
   html.dark & {
     &:hover {
-      background-color: $color-gray-400;
+      background-color: $color-gray-500;
     }
   }
 
   &:hover {
-    background-color: $color-gray-300;
+    background-color: $color-gray-400;
   }
 }
 

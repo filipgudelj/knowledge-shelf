@@ -59,7 +59,6 @@ const emits = defineEmits(['click'])
       cursor: not-allowed;
 
       html.dark & {
-        border: 1px solid $color-gray-800;
         color: $color-gray-400;
         background-color: $color-gray-700;
 
@@ -85,7 +84,7 @@ const emits = defineEmits(['click'])
   }
 
   &--secondary {
-    border: 1px solid $color-gray-300;
+    border: none;
     background-color: $color-gray-200;
     color: $color-gray-900;
 
@@ -95,7 +94,6 @@ const emits = defineEmits(['click'])
       cursor: not-allowed;
 
       html.dark & {
-        border: 1px solid $color-gray-800;
         color: $color-gray-400;
         background-color: $color-gray-700;
 
@@ -111,12 +109,12 @@ const emits = defineEmits(['click'])
 
     html.dark & {
       &:hover {
-        background-color: $color-gray-400;
+        background-color: $color-gray-500;
       }
     }
 
     &:hover {
-      background-color: $color-gray-300;
+      background-color: $color-gray-400;
     }
   }
 }

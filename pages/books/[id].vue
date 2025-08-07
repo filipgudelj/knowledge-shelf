@@ -84,7 +84,11 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
             }}
           </SubmitButton>
 
-          <AddToFavourites variant="rectangle" class="book__favourite" />
+          <AddToFavourites
+            variant="rectangle"
+            :book-id="book.id"
+            class="book__favourite"
+          />
         </div>
       </div>
 
