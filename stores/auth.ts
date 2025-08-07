@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useAuthStore = defineStore('auth', () => {
   const supabase = useSupabaseClient()
   const localePath = useLocalePath()
+  const router = useRouter()
   const { getAllFavouritesFromCookie, clearAllFavouritesFromCookie } =
     useFavouritesCookie()
 
@@ -65,6 +66,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const logout = async () => {
     await supabase.auth.signOut()
+    router.push(localePath('/auth/login'))
   }
 
   const sendPasswordResetLink = async (email: string) => {
