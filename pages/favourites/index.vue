@@ -41,6 +41,7 @@ useHead(() => ({
 
     <BooksList
       :books="favouritesStore.favourites"
+      :noResultsText="t('favourites.empty')"
       :isInitialLoading="isInitialLoading"
     />
   </div>

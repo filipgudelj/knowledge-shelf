@@ -180,7 +180,11 @@ useHead(() => ({
       <SortBooks v-model:sortBy="sortBy" v-model:order="sortOrder" />
     </div>
     <FilterBooks v-model:filters="filters" class="explore__filters" />
-    <BooksList :books="booksStore.books" :isInitialLoading="isInitialLoading" />
+    <BooksList
+      :books="booksStore.books"
+      :noResultsText="t('explore.categoryEmpty')"
+      :isInitialLoading="isInitialLoading"
+    />
   </div>
 </template>
 

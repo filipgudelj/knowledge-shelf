@@ -10,7 +10,8 @@
 
   "search": {
     "resultsFor": "Rezultati za",
-    "placeholder": "Pretraži knjige..."
+    "placeholder": "Pretraži knjige...",
+    "noResults": "Nema pronađenih rezultata."
   },
 
   "carousel": {
@@ -77,15 +78,13 @@
     },
     "headings": {
       "allBooks": "Sve knjige"
-    }
+    },
+    "categoryEmpty": "U ovoj kategoriji nema knjiga."
   },
 
   "favourites": {
-    "title": "Tvoji favoriti"
-  },
-
-  "books": {
-    "noResults": "Trenutno nema nijednog artikla za prikaz"
+    "title": "Tvoji favoriti",
+    "empty": "Još nemaš favorita."
   },
 
   "book": {
@@ -122,7 +121,8 @@
   },
 
   "author": {
-    "titles": "Knjige ovog autora:"
+    "titles": "Knjige ovog autora:",
+    "noBooks": "Ovaj autor nema knjiga."
   },
 
   "sort": {
@@ -159,7 +159,7 @@
     "summary": "Sveukupno",
     "clearCart": "Očisti košaricu",
     "checkout": "Plaćanje",
-    "empty": "Vaša košarica je prazna."
+    "empty": "Tvoja košarica je prazna."
   },
 
   "toast": {
@@ -170,7 +170,7 @@
     "linkExpired": "Link je nevažeći ili je istekao",
     "emailConfirmed": "Email je potvrđen",
     "resetLinkSent": "Link za promjenu lozinke poslan",
-    "passwordUpdated": "Vaša lozinka je ažurirana",
+    "passwordUpdated": "Tvoja lozinka je ažurirana",
     "authSessionMissing": "Nedostaje autentikacijska sesija",
     "passwordSameAsOld": "Nova lozinka mora biti drugačija",
     "success": "Uspjeh",

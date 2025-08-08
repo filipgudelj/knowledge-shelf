@@ -54,7 +54,11 @@ useHead(() => ({
     <h1 class="search__title">
       {{ t('search.resultsFor') + ' "' + currentQuery + '"' }}
     </h1>
-    <BooksList :books="booksStore.books" :isInitialLoading="isInitialLoading" />
+    <BooksList
+      :books="booksStore.books"
+      :noResultsText="t('search.noResults')"
+      :isInitialLoading="isInitialLoading"
+    />
   </div>
 </template>
 

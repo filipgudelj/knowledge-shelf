@@ -6,6 +6,7 @@ import type { Book } from '@/types'
 // PROPS
 const props = defineProps<{
   books: Book[]
+  noResultsText: string
   isInitialLoading: boolean
 }>()
 
@@ -71,7 +72,7 @@ onBeforeUnmount(() => {
     </VueSkeletonLoader>
 
     <p v-else-if="showNoResults" class="no-results">
-      {{ t('books.noResults') }}
+      {{ props.noResultsText }}
     </p>
 
     <div v-else v-for="book in props.books" :key="book.id">

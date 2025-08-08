@@ -152,6 +152,7 @@ useHead(() => ({
 
     <BooksList
       :books="booksStore.books"
+      :noResultsText="t('author.noBooks')"
       :isInitialLoading="isInitialLoading"
       class="author__books"
     />

@@ -10,7 +10,8 @@
 
   "search": {
     "resultsFor": "Results for",
-    "placeholder": "Search books..."
+    "placeholder": "Search books...",
+    "noResults": "No results found."
   },
 
   "carousel": {
@@ -77,15 +78,13 @@
     },
     "headings": {
       "allBooks": "All books"
-    }
+    },
+    "categoryEmpty": "There are no books in this category."
   },
 
   "favourites": {
-    "title": "Your favourites"
-  },
-
-  "books": {
-    "noResults": "There are currently no items available to display"
+    "title": "Your favourites",
+    "empty": "You don’t have any favourites yet."
   },
 
   "book": {
@@ -122,7 +121,8 @@
   },
 
   "author": {
-    "titles": "Books by this author:"
+    "titles": "Books by this author:",
+    "noBooks": "There are no books from this author."
   },
 
   "sort": {
