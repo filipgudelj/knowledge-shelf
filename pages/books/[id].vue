@@ -13,6 +13,7 @@ const book = ref<Book | null>(null)
 const showSkeleton = ref(true)
 const user = useSupabaseUser()
 const cartStore = useCartStore()
+const favouritesStore = useFavouritesStore()
 
 // COMPUTEDS
 const inCart = computed(() =>
@@ -20,6 +21,8 @@ const inCart = computed(() =>
 )
 
 // API
+await favouritesStore.loadFavourites()
+
 if (!isNaN(bookId)) {
   book.value = await booksStore.getBookDetails(bookId)
 } else {

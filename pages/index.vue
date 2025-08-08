@@ -8,8 +8,10 @@ const mostSoldBooks = ref<Book[]>([])
 const newestBooks = ref<Book[]>([])
 const staffPickedBooks = ref<Book[]>([])
 const cartStore = useCartStore()
+const favouritesStore = useFavouritesStore()
 
 // API
+await favouritesStore.loadFavourites()
 await cartStore.loadCart()
 
 await (async () => {

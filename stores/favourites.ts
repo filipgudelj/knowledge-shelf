@@ -79,16 +79,9 @@ export const useFavouritesStore = defineStore('favourites', () => {
     isLoading.value = false
   }
 
-  const checkBookFavouriteStatus = async (bookId: number) => {
+  const checkBookFavouriteStatus = (bookId: number) => {
     if (user.value) {
-      const { data } = await supabase
-        .from('favourites')
-        .select('book_id')
-        .eq('user_id', user.value.id)
-        .eq('book_id', bookId)
-        .maybeSingle()
-
-      return !!data
+      return allFavouriteIds.includes(bookId)
     } else {
       return isBookFavouriteInCookie(bookId)
     }

@@ -15,6 +15,7 @@ const { t } = useI18n()
 const showSkeleton = ref(true)
 let skeletonTimer: ReturnType<typeof setTimeout> | null = null
 const cartStore = useCartStore()
+const favouritesStore = useFavouritesStore()
 
 // COMPUTEDS
 const showNoResults = computed(() => {
@@ -24,6 +25,7 @@ const showNoResults = computed(() => {
 })
 
 // API
+await favouritesStore.loadFavourites()
 await cartStore.loadCart()
 
 // WATCHERS
