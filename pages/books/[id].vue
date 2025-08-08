@@ -29,19 +29,11 @@ onMounted(() => {
 })
 
 // HEAD
-useHead({
-  title: `${book.value?.title} | Knowledge Shelf`,
-  meta: [
-    {
-      name: 'description',
-      content:
-        'Explore detailed information about a selected book from our collection.',
-    },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
+useHead(() => ({
+  title: t('seo.book.title', { title: book.value?.title ?? '' }),
+  meta: [{ name: 'description', content: t('seo.book.description') }],
+  htmlAttrs: { lang: locale.value },
+}))
 const quantity = ref(book.value?.stock === 0 ? 0 : 1)
 </script>
 

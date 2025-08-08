@@ -62,18 +62,11 @@ const onSubmitThrottled = useThrottleFn((e: Event) => {
 }, 1000)
 
 // HEAD
-useHead({
-  title: 'Login | Knowledge Shelf',
-  meta: [
-    {
-      name: 'description',
-      content: 'Log in to continue using your account features.',
-    },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
+useHead(() => ({
+  title: t('seo.login.title'),
+  meta: [{ name: 'description', content: t('seo.login.description') }],
+  htmlAttrs: { lang: locale.value },
+}))
 </script>
 
 <template>

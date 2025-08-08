@@ -187,5 +187,56 @@
     "authorNotFound": "Author not found",
     "invalidAuthorId": "Author ID must be a number",
     "invalidBookId": "Book ID must be a number"
+  },
+
+  "seo": {
+    "confirm": {
+      "title": "Confirm ⎪ Knowledge Shelf",
+      "description": "Please confirm your email address to activate your account."
+    },
+    "forgotPassword": {
+      "title": "Forgot Password ⎪ Knowledge Shelf",
+      "description": "Forgot your password? Enter your email to receive a reset link."
+    },
+    "login": {
+      "title": "Login ⎪ Knowledge Shelf",
+      "description": "Log in to continue using your account features."
+    },
+    "register": {
+      "title": "Register ⎪ Knowledge Shelf",
+      "description": "Create your account."
+    },
+    "resetPassword": {
+      "title": "Reset Password ⎪ Knowledge Shelf",
+      "description": "Set a new password to access your account."
+    },
+    "author": {
+      "title": "{name} ⎪ Knowledge Shelf",
+      "description": "Learn more about the author and explore their books."
+    },
+    "book": {
+      "title": "{title} ⎪ Knowledge Shelf",
+      "description": "Explore detailed information about a selected book from our collection."
+    },
+    "cart": {
+      "title": "Cart ⎪ Knowledge Shelf",
+      "description": "View and manage the books in your shopping cart."
+    },
+    "category": {
+      "title": "{pageTitle} ⎪ Knowledge Shelf",
+      "description": "Explore our collection of books across various categories."
+    },
+    "favourites": {
+      "title": "Favourites ⎪ Knowledge Shelf",
+      "description": "View and manage your favourite books."
+    },
+    "search": {
+      "title": "Search: \"{q}\" ⎪ Knowledge Shelf",
+      "description": "Search for books from our extensive online collection."
+    },
+    "home": {
+      "title": "Knowledge Shelf",
+      "description": "Discover your next great read from a variety of books."
+    }
   }
 }

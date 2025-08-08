@@ -165,18 +165,11 @@ onBeforeUnmount(() => {
 })
 
 // HEAD
-useHead({
-  title: `${pageTitle.value} | Knowledge Shelf`,
-  meta: [
-    {
-      name: 'description',
-      content: `Explore our collection of ${pageTitle.value} books.`,
-    },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
+useHead(() => ({
+  title: t('seo.category.title', { pageTitle: pageTitle.value }),
+  meta: [{ name: 'description', content: t('seo.category.description') }],
+  htmlAttrs: { lang: locale.value },
+}))
 </script>
 
 <template>

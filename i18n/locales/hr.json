@@ -2,7 +2,7 @@
   "sidebar": {
     "home": "Početna",
     "explore": "Istraži",
-    "favourites": "Omiljeno",
+    "favourites": "Favoriti",
     "cart": "Košarica",
     "login": "Prijava",
     "register": "Registracija"
@@ -187,5 +187,56 @@
     "authorNotFound": "Autor nije pronađen",
     "invalidAuthorId": "ID autora mora biti broj",
     "invalidBookId": "ID knjige mora biti broj"
+  },
+
+  "seo": {
+    "confirm": {
+      "title": "Potvrda ⎪ Knowledge Shelf",
+      "description": "Potvrdite svoju adresu e-pošte kako biste aktivirali svoj račun."
+    },
+    "forgotPassword": {
+      "title": "Zaboravljena lozinka ⎪ Knowledge Shelf",
+      "description": "Unesite svoju adresu e-pošte kako biste primili poveznicu za resetiranje lozinke."
+    },
+    "login": {
+      "title": "Prijava ⎪ Knowledge Shelf",
+      "description": "Prijavite se kako biste nastavili koristiti značajke svog računa."
+    },
+    "register": {
+      "title": "Registracija ⎪ Knowledge Shelf",
+      "description": "Kreirajte svoj račun."
+    },
+    "resetPassword": {
+      "title": "Resetiranje lozinke ⎪ Knowledge Shelf",
+      "description": "Postavite novu lozinku za pristup svom računu."
+    },
+    "author": {
+      "title": "{name} ⎪ Knowledge Shelf",
+      "description": "Saznajte više o autoru i istražite njegove knjige."
+    },
+    "book": {
+      "title": "{title} ⎪ Knowledge Shelf",
+      "description": "Istražite detaljne informacije o odabranoj knjizi iz naše kolekcije."
+    },
+    "cart": {
+      "title": "Košarica ⎪ Knowledge Shelf",
+      "description": "Pregledajte i upravljajte knjigama u svojoj košarici."
+    },
+    "category": {
+      "title": "{pageTitle} ⎪ Knowledge Shelf",
+      "description": "Istražite našu kolekciju knjiga po različitim kategorijama."
+    },
+    "favourites": {
+      "title": "Favoriti ⎪ Knowledge Shelf",
+      "description": "Pregledajte i upravljajte svojim omiljenim knjigama."
+    },
+    "search": {
+      "title": "Pretraga: \"{q}\" ⎪ Knowledge Shelf",
+      "description": "Pretražite knjige iz naše opsežne online kolekcije."
+    },
+    "home": {
+      "title": "Knowledge Shelf",
+      "description": "Otkrijte svoju sljedeću omiljenu knjigu iz raznovrsne ponude."
+    }
   }
 }

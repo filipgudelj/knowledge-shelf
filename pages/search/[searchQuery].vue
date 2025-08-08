@@ -42,18 +42,11 @@ onBeforeUnmount(() => {
 })
 
 // HEAD
-useHead({
-  title: `Search: "${currentQuery.value}" | Knowledge Shelf`,
-  meta: [
-    {
-      name: 'description',
-      content: `Find books related to "${currentQuery.value}".`,
-    },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
+useHead(() => ({
+  title: t('seo.search.title', { q: currentQuery.value }),
+  meta: [{ name: 'description', content: t('seo.search.description') }],
+  htmlAttrs: { lang: locale.value },
+}))
 </script>
 
 <template>

@@ -36,18 +36,11 @@ onMounted(async () => {
 })
 
 // HEAD
-useHead({
-  title: 'Confirm | Knowledge Shelf',
-  meta: [
-    {
-      name: 'description',
-      content: 'Please confirm your email address to activate your account.',
-    },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
+useHead(() => ({
+  title: t('seo.confirm.title'),
+  meta: [{ name: 'description', content: t('seo.confirm.description') }],
+  htmlAttrs: { lang: locale.value },
+}))
 </script>
 
 <template>

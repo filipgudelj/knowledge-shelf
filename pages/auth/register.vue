@@ -76,18 +76,11 @@ const onSubmitThrottled = useThrottleFn((e: Event) => {
 }, 1000)
 
 // HEAD
-useHead({
-  title: 'Register | Knowledge Shelf',
-  meta: [
-    {
-      name: 'description',
-      content: 'Create your account.',
-    },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
+useHead(() => ({
+  title: t('seo.register.title'),
+  meta: [{ name: 'description', content: t('seo.register.description') }],
+  htmlAttrs: { lang: locale.value },
+}))
 </script>
 
 <template>

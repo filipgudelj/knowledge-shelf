@@ -77,12 +77,12 @@ onBeforeUnmount(() => {
 })
 
 // HEAD
-useHead({
-  title: `${author.value?.name} | Knowledge Shelf`,
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
+
+useHead(() => ({
+  title: t('seo.author.title', { name: author.value?.name ?? '' }),
+  meta: [{ name: 'description', content: t('seo.author.description') }],
+  htmlAttrs: { lang: locale.value },
+}))
 </script>
 
 <template>

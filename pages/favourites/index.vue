@@ -1,8 +1,7 @@
 <script setup lang="ts">
 // STATE
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const favouritesStore = useFavouritesStore()
-const user = useSupabaseUser()
 const isInitialLoading = computed(
   () => favouritesStore.isLoading && favouritesStore.favourites.length === 0,
 )
@@ -27,6 +26,13 @@ onMounted(async () => {
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', onScroll)
 })
+
+// HEAD
+useHead(() => ({
+  title: t('seo.favourites.title'),
+  meta: [{ name: 'description', content: t('seo.favourites.description') }],
+  htmlAttrs: { lang: locale.value },
+}))
 </script>
 
 <template>

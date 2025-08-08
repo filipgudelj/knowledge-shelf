@@ -26,18 +26,11 @@ onMounted(() => {
 })
 
 // HEAD
-useHead({
-  title: `${t('cart.title')} | Knowledge Shelf`,
-  meta: [
-    {
-      name: 'description',
-      content: 'View and manage the books in your shopping cart.',
-    },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
+useHead(() => ({
+  title: t('seo.cart.title'),
+  meta: [{ name: 'description', content: t('seo.cart.description') }],
+  htmlAttrs: { lang: locale.value },
+}))
 </script>
 
 <template>

@@ -40,19 +40,11 @@ const onSubmitThrottled = useThrottleFn((e: Event) => {
 }, 1000)
 
 // HEAD
-useHead({
-  title: 'Forgot Password | Knowledge Shelf',
-  meta: [
-    {
-      name: 'description',
-      content:
-        'Forgot your password? Enter your email to receive a reset link.',
-    },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
+useHead(() => ({
+  title: t('seo.forgotPassword.title'),
+  meta: [{ name: 'description', content: t('seo.forgotPassword.description') }],
+  htmlAttrs: { lang: locale.value },
+}))
 </script>
 
 <template>

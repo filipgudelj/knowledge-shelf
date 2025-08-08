@@ -22,18 +22,11 @@ await (async () => {
 })()
 
 // HEAD
-useHead({
-  title: 'Knowledge Shelf',
-  meta: [
-    {
-      name: 'description',
-      content: 'Browse and buy books online from a wide range of categories.',
-    },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
+useHead(() => ({
+  title: t('seo.home.title'),
+  meta: [{ name: 'description', content: t('seo.home.description') }],
+  htmlAttrs: { lang: locale.value },
+}))
 </script>
 
 <template>
