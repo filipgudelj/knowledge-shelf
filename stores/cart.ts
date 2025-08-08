@@ -21,14 +21,14 @@ export const useCartStore = defineStore('cart', () => {
     }
   }
 
-  const addToCart = async (bookId: number, qty = 1) => {
+  const addToCart = async (bookId: number, quantity = 1) => {
     if (!user.value) return
 
     await supabase.from('cart_items').upsert(
       {
         user_id: user.value.id,
         book_id: bookId,
-        quantity: qty,
+        quantity: quantity,
       } as any,
       { onConflict: 'user_id,book_id' },
     )
@@ -36,12 +36,12 @@ export const useCartStore = defineStore('cart', () => {
     await loadCart()
   }
 
-  const updateQuantity = async (bookId: number, qty: number) => {
+  const updateQuantity = async (bookId: number, quantity: number) => {
     if (!user.value) return
 
     await (supabase as any)
       .from('cart_items')
-      .update({ quantity: qty })
+      .update({ quantity: quantity })
       .eq('user_id', user.value.id)
       .eq('book_id', bookId)
 

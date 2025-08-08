@@ -236,8 +236,8 @@ useHead(() => ({
 
 .cart__product-image {
   display: block;
-  width: 100px;
-  height: 156px;
+  width: 110px;
+  height: 170px;
   border-radius: $radius-3;
   opacity: 0;
   transition: opacity 0.3s ease;

@@ -79,7 +79,7 @@ export const useFavouritesStore = defineStore('favourites', () => {
     isLoading.value = false
   }
 
-  const checkBookFavouriteStatus = (bookId: number) => {
+  const isBookFavourite = (bookId: number) => {
     if (user.value) {
       return allFavouriteIds.includes(bookId)
     } else {
@@ -133,7 +133,7 @@ export const useFavouritesStore = defineStore('favourites', () => {
     page,
     loadFavourites,
     loadMoreFavourites,
-    checkBookFavouriteStatus,
+    isBookFavourite,
     addFavourite,
     removeFavourite,
     resetFavourites,
