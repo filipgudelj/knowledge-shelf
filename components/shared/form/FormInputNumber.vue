@@ -163,19 +163,27 @@ function decrement(event: MouseEvent) {
   text-align: start;
   transition: border 0.3s ease;
 
-  &:focus {
-    outline: none;
-    border: 1px solid $color-blue-500;
-  }
-
   html.dark & {
     border-color: $color-gray-700;
     background-color: $color-gray-900;
     color: $color-gray-100;
 
+    &:hover {
+      border: 1px solid $color-gray-500;
+    }
+
     &:focus {
       border-color: $color-blue-500;
     }
+  }
+
+  &:hover {
+    border: 1px solid $color-gray-500;
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid $color-blue-500;
   }
 
   &::-webkit-outer-spin-button,
