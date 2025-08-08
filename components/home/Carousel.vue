@@ -21,6 +21,8 @@ const props = withDefaults(
 
 // STATE
 const { width } = useWindowSize()
+const user = useSupabaseUser()
+const cartStore = useCartStore()
 const currentSlideIndex = ref(0)
 const showSkeleton = ref(true)
 let skeletonTimer: ReturnType<typeof setTimeout> | null = null
@@ -179,7 +181,18 @@ onBeforeUnmount(() => {
             >
               {{ book.author.name }}
             </NuxtLinkLocale>
+
             <p class="slide__price">{{ formatNumberToEuro(book.price) }}</p>
+
+            <SubmitButton
+              v-if="user"
+              @click="cartStore.addToCart(book.id)"
+              type="primary"
+              size="md"
+              class="slide__button"
+            >
+              Add to basket
+            </SubmitButton>
           </div>
         </div>
       </div>
@@ -329,5 +342,9 @@ onBeforeUnmount(() => {
 
 .slide__price {
   font-size: $font-size-lg;
+}
+
+.slide__button {
+  margin-top: $spacing-3;
 }
 </style>

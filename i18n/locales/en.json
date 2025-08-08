@@ -150,6 +150,18 @@
     "hardcover": "Hardcover"
   },
 
+  "cart": {
+    "title": "Cart",
+    "productName": "Product Name",
+    "quantity": "Quantity",
+    "price": "Price",
+    "totalPrice": "Total Price",
+    "summary": "Total",
+    "clearCart": "Clear cart",
+    "checkout": "Checkout",
+    "empty": "Your cart is empty."
+  },
+
   "toast": {
     "requestTooSoon": "Please wait before trying again",
     "alreadyRegistered": "Email already registered",

@@ -7,6 +7,8 @@ const props = defineProps<{ book: Book }>()
 
 // STATE
 const imageLoaded = ref(false)
+const user = useSupabaseUser()
+const cartStore = useCartStore()
 </script>
 
 <template>
@@ -38,7 +40,18 @@ const imageLoaded = ref(false)
     >
       {{ props.book.author?.name ?? props.book.author_name }}
     </NuxtLinkLocale>
+
     <p class="book__price">{{ formatNumberToEuro(props.book.price) }}</p>
+
+    <SubmitButton
+      v-if="user"
+      @click="cartStore.addToCart(book.id)"
+      type="primary"
+      size="md"
+      class="book__button"
+    >
+      Add to basket
+    </SubmitButton>
   </div>
 </template>
 
@@ -120,5 +133,9 @@ const imageLoaded = ref(false)
   max-width: 90%;
   font-size: $font-size-lg;
   text-align: center;
+}
+
+.book__button {
+  margin-top: $spacing-3;
 }
 </style>

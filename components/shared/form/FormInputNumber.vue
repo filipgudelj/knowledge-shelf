@@ -153,7 +153,7 @@ function decrement(event: MouseEvent) {
 }
 
 .input-number__input {
-  flex: 1;
+  width: 100%;
   padding: $spacing-3 $spacing-5;
   border: 1px solid $color-gray-300;
   border-radius: $spacing-2;

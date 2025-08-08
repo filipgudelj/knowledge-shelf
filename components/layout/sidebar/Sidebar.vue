@@ -49,7 +49,8 @@ const user = useSupabaseUser()
       </NuxtLinkLocale>
 
       <NuxtLinkLocale
-        :to="'/'"
+        v-if="user"
+        :to="'/cart'"
         class="sidebar__nav-item"
         aria-label="Go to Cart"
       >

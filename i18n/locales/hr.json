@@ -85,7 +85,7 @@
   },
 
   "books": {
-    "noResults": "Trenutno nema nijednog artikla za prikaz."
+    "noResults": "Trenutno nema nijednog artikla za prikaz"
   },
 
   "book": {
@@ -148,6 +148,18 @@
     "croatian": "Hrvatski",
     "softcover": "Meki uvez",
     "hardcover": "Tvrdi uvez"
+  },
+
+  "cart": {
+    "title": "Košarica",
+    "productName": "Naziv proizvoda",
+    "quantity": "Količina",
+    "price": "Cijena",
+    "totalPrice": "Ukupna cijena",
+    "summary": "Sveukupno",
+    "clearCart": "Očisti košaricu",
+    "checkout": "Plaćanje",
+    "empty": "Vaša košarica je prazna."
   },
 
   "toast": {
