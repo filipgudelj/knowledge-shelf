@@ -1,8 +1,11 @@
 <script lang="ts" setup>
+import { onClickOutside } from '@vueuse/core'
+
 // STATE
 const user = useSupabaseUser()
 const authStore = useAuthStore()
 const showMenu = ref(false)
+const userDropdownRef = ref(null)
 
 // TOGGLE
 const toggleMenu = () => {
@@ -14,11 +17,15 @@ const handleLogout = () => {
   toggleMenu()
   authStore.logout()
 }
+
+onClickOutside(userDropdownRef, () => {
+  showMenu.value = false
+})
 </script>
 
 <template>
   <ClientOnly>
-    <div v-if="user" class="dropdown">
+    <div v-if="user" ref="userDropdownRef" class="dropdown">
       <button @click="toggleMenu" class="dropdown__button">
         {{ user?.email?.charAt(0).toUpperCase() }}
       </button>
