@@ -11,9 +11,6 @@ const cartStore = useCartStore()
 const favouritesStore = useFavouritesStore()
 
 // API
-await favouritesStore.loadFavourites()
-await cartStore.loadCart()
-
 await (async () => {
   const [mostSold, newest, staffPicked] = await Promise.all([
     booksStore.getMostSoldBooks(),
@@ -25,6 +22,12 @@ await (async () => {
   newestBooks.value = newest
   staffPickedBooks.value = staffPicked
 })()
+
+// LCH
+onMounted(async () => {
+  await favouritesStore.loadFavourites()
+  await cartStore.loadCart()
+})
 
 // HEAD
 useHead(() => ({

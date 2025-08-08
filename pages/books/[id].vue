@@ -21,8 +21,6 @@ const inCart = computed(() =>
 )
 
 // API
-await favouritesStore.loadFavourites()
-
 if (!isNaN(bookId)) {
   book.value = await booksStore.getBookDetails(bookId)
 } else {
@@ -33,6 +31,11 @@ if (!isNaN(bookId)) {
 }
 
 // LCH
+onMounted(async () => {
+  await favouritesStore.loadFavourites()
+  await cartStore.loadCart()
+})
+
 onMounted(() => {
   setTimeout(() => {
     showSkeleton.value = false

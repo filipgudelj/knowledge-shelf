@@ -24,10 +24,6 @@ const showNoResults = computed(() => {
   )
 })
 
-// API
-await favouritesStore.loadFavourites()
-await cartStore.loadCart()
-
 // WATCHERS
 watch(
   () => props.isInitialLoading,
@@ -49,6 +45,11 @@ watch(
 )
 
 // LCH
+onMounted(async () => {
+  await favouritesStore.loadFavourites()
+  await cartStore.loadCart()
+})
+
 onMounted(() => {
   skeletonTimer = setTimeout(() => {
     showSkeleton.value = false

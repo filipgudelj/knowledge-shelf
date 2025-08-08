@@ -20,7 +20,6 @@ const onScroll = async () => {
 
 // LCH
 onMounted(async () => {
-  await favouritesStore.loadFavourites()
   window.addEventListener('scroll', onScroll)
 })
 onBeforeUnmount(() => {

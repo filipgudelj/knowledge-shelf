@@ -32,7 +32,7 @@ const schema = yup.object({
 })
 
 const submitted = ref(false)
-const { handleSubmit, resetForm } = useForm({
+const { handleSubmit } = useForm({
   validationSchema: schema,
   validateOnMount: false,
 })
@@ -47,7 +47,6 @@ const onSubmit = handleSubmit(
     if (error?.code === 'invalid_credentials') {
       showToast('error', t('toast.invalidLoginCredentials'))
     } else if (!error) {
-      resetForm()
       router.push(localePath('/'))
     }
   },
