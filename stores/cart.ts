@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
+import type { CartItem } from '@/types'
 
 export const useCartStore = defineStore('cart', () => {
   const supabase = useSupabaseClient()
   const user = useSupabaseUser()
 
-  const items = ref<any[]>([])
+  const items: Ref<CartItem[]> = ref([])
 
   const loadCart = async () => {
     if (!user.value) return
@@ -15,7 +16,9 @@ export const useCartStore = defineStore('cart', () => {
       .eq('user_id', user.value.id)
       .order('created_at', { ascending: true })
 
-    if (!error) items.value = data
+    if (!error) {
+      items.value = (data ?? []) as CartItem[]
+    }
   }
 
   const addToCart = async (bookId: number, qty = 1) => {
