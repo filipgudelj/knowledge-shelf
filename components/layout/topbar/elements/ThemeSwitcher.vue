@@ -21,7 +21,7 @@ const toggleDark = useToggle(isDark)
           :name="
             isDark ? 'mdi:moon-waning-crescent' : 'mdi:white-balance-sunny'
           "
-          class="theme-switch__icon"
+          class="theme-switcher__icon"
         />
       </div>
     </button>
@@ -69,7 +69,7 @@ const toggleDark = useToggle(isDark)
   }
 }
 
-.theme-switch__icon {
+.theme-switcher__icon {
   color: $color-gray-700;
 
   html.dark & {
