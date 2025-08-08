@@ -20,6 +20,7 @@ const props = withDefaults(
 )
 
 // STATE
+const { t } = useI18n()
 const { width } = useWindowSize()
 const user = useSupabaseUser()
 const cartStore = useCartStore()
@@ -190,9 +191,14 @@ onBeforeUnmount(() => {
               type="button"
               variant="primary"
               size="md"
+              :disabled="book.stock === 0"
               class="slide__button"
             >
-              Add to basket
+              {{
+                book.stock > 0
+                  ? t('book.actions.addToBasket')
+                  : t('book.actions.unavailable')
+              }}
             </FormButton>
           </div>
         </div>

@@ -6,6 +6,7 @@ import { formatNumberToEuro } from '~/helpers/formatters'
 const props = defineProps<{ book: Book }>()
 
 // STATE
+const { t } = useI18n()
 const imageLoaded = ref(false)
 const user = useSupabaseUser()
 const cartStore = useCartStore()
@@ -49,9 +50,14 @@ const cartStore = useCartStore()
       type="button"
       variant="primary"
       size="md"
+      :disabled="book.stock === 0"
       class="book__button"
     >
-      Add to basket
+      {{
+        book.stock > 0
+          ? t('book.actions.addToBasket')
+          : t('book.actions.unavailable')
+      }}
     </FormButton>
   </div>
 </template>

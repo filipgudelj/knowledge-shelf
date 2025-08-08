@@ -11,7 +11,9 @@ const booksStore = useBooksStore()
 const bookId = Number(route.params.id)
 const book = ref<Book | null>(null)
 const showSkeleton = ref(true)
+const user = useSupabaseUser()
 
+// API
 if (!isNaN(bookId)) {
   book.value = await booksStore.getBookDetails(bookId)
 } else {
@@ -67,13 +69,15 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
             type="button"
             variant="primary"
             size="lg"
-            :disabled="book.stock === 0"
+            :disabled="!user || book.stock === 0"
             class="book__submit"
           >
             {{
-              book.stock > 0
-                ? t('book.actions.addToBasket')
-                : t('book.actions.unavailable')
+              !user
+                ? t('book.actions.loginToAdd')
+                : book.stock > 0
+                  ? t('book.actions.addToBasket')
+                  : t('book.actions.unavailable')
             }}
           </FormButton>
 

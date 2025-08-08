@@ -90,6 +90,7 @@
   "book": {
     "quantity": "Quantity",
     "actions": {
+      "loginToAdd": "Login for cart",
       "addToBasket": "Add to basket",
       "unavailable": "Unavailable"
     },

@@ -90,6 +90,7 @@
   "book": {
     "quantity": "Količina",
     "actions": {
+      "loginToAdd": "Prijavi se za košaricu",
       "addToBasket": "Dodaj u košaricu",
       "unavailable": "Nedostupno"
     },
