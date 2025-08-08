@@ -291,7 +291,7 @@ useHead(() => ({
 }
 
 .cart__actions {
-  margin-block: $spacing-6;
+  margin-top: $spacing-6;
   display: flex;
   justify-content: space-between;
 }

@@ -28,5 +28,6 @@
   max-width: calc(1920px - 250px);
   margin-inline: auto;
   padding-inline: $spacing-6;
+  padding-bottom: 50px;
 }
 </style>

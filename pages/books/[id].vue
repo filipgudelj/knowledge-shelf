@@ -207,7 +207,7 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
     />
     <VueSkeletonLoader
       type="text@7"
-      height="20px"
+      height="30px"
       base-color="var(--skel-base)"
       highlight-color="var(--skel-highlight)"
       class="book__skeleton-meta"
@@ -355,6 +355,7 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
     gap: $spacing-8;
 
     .book__skeleton-summary {
+      @include flex(column, flex-start);
       grid-column: 2;
       grid-row: 1;
     }
@@ -365,6 +366,7 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
     }
 
     .book__skeleton-meta {
+      @include flex(column, flex-start);
       grid-column: 2;
       grid-row: 2;
     }
