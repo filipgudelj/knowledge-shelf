@@ -92,6 +92,7 @@
     "actions": {
       "loginToAdd": "Prijavi se za košaricu",
       "addToBasket": "Dodaj u košaricu",
+      "addedToBasket": "Dodano u košaricu",
       "unavailable": "Nedostupno"
     },
     "meta": {

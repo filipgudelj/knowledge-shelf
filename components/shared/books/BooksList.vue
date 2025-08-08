@@ -14,6 +14,7 @@ const props = defineProps<{
 const { t } = useI18n()
 const showSkeleton = ref(true)
 let skeletonTimer: ReturnType<typeof setTimeout> | null = null
+const cartStore = useCartStore()
 
 // COMPUTEDS
 const showNoResults = computed(() => {
@@ -21,6 +22,9 @@ const showNoResults = computed(() => {
     !props.isInitialLoading && !showSkeleton.value && props.books.length === 0
   )
 })
+
+// API
+await cartStore.loadCart()
 
 // WATCHERS
 watch(

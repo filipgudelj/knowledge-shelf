@@ -10,6 +10,9 @@ const { t } = useI18n()
 const imageLoaded = ref(false)
 const user = useSupabaseUser()
 const cartStore = useCartStore()
+
+// COMPUTEDS
+const inCart = computed(() => cartStore.isInCart(props.book.id))
 </script>
 
 <template>
@@ -48,15 +51,17 @@ const cartStore = useCartStore()
       v-if="user"
       @click="cartStore.addToCart(book.id)"
       type="button"
-      variant="primary"
+      :variant="inCart ? 'tertiary' : 'primary'"
       size="md"
-      :disabled="book.stock === 0"
+      :disabled="book.stock === 0 || inCart"
       class="book__button"
     >
       {{
-        book.stock > 0
-          ? t('book.actions.addToBasket')
-          : t('book.actions.unavailable')
+        book.stock === 0
+          ? t('book.actions.unavailable')
+          : inCart
+            ? t('book.actions.addedToBasket')
+            : t('book.actions.addToBasket')
       }}
     </FormButton>
   </div>

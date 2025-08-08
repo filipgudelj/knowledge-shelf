@@ -7,8 +7,11 @@ const booksStore = useBooksStore()
 const mostSoldBooks = ref<Book[]>([])
 const newestBooks = ref<Book[]>([])
 const staffPickedBooks = ref<Book[]>([])
+const cartStore = useCartStore()
 
 // API
+await cartStore.loadCart()
+
 await (async () => {
   const [mostSold, newest, staffPicked] = await Promise.all([
     booksStore.getMostSoldBooks(),

@@ -92,6 +92,7 @@
     "actions": {
       "loginToAdd": "Login for cart",
       "addToBasket": "Add to basket",
+      "addedToBasket": "Added to basket",
       "unavailable": "Unavailable"
     },
     "meta": {

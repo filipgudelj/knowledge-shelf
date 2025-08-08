@@ -67,6 +67,10 @@ export const useCartStore = defineStore('cart', () => {
     items.value = []
   }
 
+  const isInCart = (bookId: number): boolean => {
+    return items.value.some((i) => i.book_id === bookId)
+  }
+
   return {
     items,
     loadCart,
@@ -74,5 +78,6 @@ export const useCartStore = defineStore('cart', () => {
     updateQuantity,
     removeFromCart,
     clearCart,
+    isInCart,
   }
 })

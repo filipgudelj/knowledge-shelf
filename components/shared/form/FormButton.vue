@@ -2,7 +2,7 @@
 // PROPS
 const props = defineProps<{
   type?: 'button' | 'submit' | 'reset'
-  variant: 'primary' | 'secondary'
+  variant: 'primary' | 'secondary' | 'tertiary'
   size?: 'sm' | 'md' | 'lg'
   disabled?: boolean
 }>()
@@ -60,8 +60,8 @@ const emits = defineEmits(['click'])
       cursor: not-allowed;
 
       html.dark & {
-        color: $color-gray-400;
         background-color: $color-gray-700;
+        color: $color-gray-400;
 
         &:hover {
           background-color: $color-gray-700;
@@ -95,8 +95,8 @@ const emits = defineEmits(['click'])
       cursor: not-allowed;
 
       html.dark & {
-        color: $color-gray-400;
         background-color: $color-gray-700;
+        color: $color-gray-400;
 
         &:hover {
           background-color: $color-gray-700;
@@ -116,6 +116,41 @@ const emits = defineEmits(['click'])
 
     &:hover {
       background-color: $color-gray-400;
+    }
+  }
+
+  &--tertiary {
+    border: none;
+    background-color: $color-green-500;
+    color: $color-gray-100;
+
+    &:disabled {
+      background-color: $color-green-300;
+      color: $color-gray-100;
+      cursor: not-allowed;
+
+      html.dark & {
+        background-color: $color-green-900;
+        color: $color-gray-500;
+
+        &:hover {
+          background-color: $color-green-900;
+        }
+      }
+
+      &:hover {
+        background-color: $color-green-300;
+      }
+    }
+
+    html.dark & {
+      &:hover {
+        background-color: $color-green-700;
+      }
+    }
+
+    &:hover {
+      background-color: $color-green-700;
     }
   }
 }

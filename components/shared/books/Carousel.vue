@@ -189,15 +189,17 @@ onBeforeUnmount(() => {
               v-if="user"
               @click="cartStore.addToCart(book.id)"
               type="button"
-              variant="primary"
+              :variant="cartStore.isInCart(book.id) ? 'tertiary' : 'primary'"
               size="md"
-              :disabled="book.stock === 0"
+              :disabled="book.stock === 0 || cartStore.isInCart(book.id)"
               class="slide__button"
             >
               {{
-                book.stock > 0
-                  ? t('book.actions.addToBasket')
-                  : t('book.actions.unavailable')
+                book.stock === 0
+                  ? t('book.actions.unavailable')
+                  : cartStore.isInCart(book.id)
+                    ? t('book.actions.addedToBasket')
+                    : t('book.actions.addToBasket')
               }}
             </FormButton>
           </div>

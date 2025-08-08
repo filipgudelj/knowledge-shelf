@@ -12,6 +12,12 @@ const bookId = Number(route.params.id)
 const book = ref<Book | null>(null)
 const showSkeleton = ref(true)
 const user = useSupabaseUser()
+const cartStore = useCartStore()
+
+// COMPUTEDS
+const inCart = computed(() =>
+  book.value ? cartStore.isInCart(book.value.id) : false,
+)
 
 // API
 if (!isNaN(bookId)) {
@@ -66,18 +72,21 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
           />
 
           <FormButton
+            @click="cartStore.addToCart(book.id, quantity)"
             type="button"
-            variant="primary"
+            :variant="inCart ? 'tertiary' : 'primary'"
             size="lg"
-            :disabled="!user || book.stock === 0"
+            :disabled="!user || book.stock === 0 || inCart"
             class="book__submit"
           >
             {{
               !user
                 ? t('book.actions.loginToAdd')
-                : book.stock > 0
-                  ? t('book.actions.addToBasket')
-                  : t('book.actions.unavailable')
+                : cartStore.isInCart(book.id)
+                  ? t('book.actions.addedToBasket')
+                  : book.stock > 0
+                    ? t('book.actions.addToBasket')
+                    : t('book.actions.unavailable')
             }}
           </FormButton>
 
