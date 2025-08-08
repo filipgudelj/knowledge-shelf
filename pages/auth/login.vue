@@ -115,9 +115,13 @@ useHead(() => ({
         {{ $t('login.forgotPassword') }}
       </NuxtLinkLocale>
 
-      <SubmitButton type="primary" size="lg" class="login__submit">{{
-        $t('login.submit')
-      }}</SubmitButton>
+      <FormButton
+        type="submit"
+        variant="primary"
+        size="lg"
+        class="login__submit"
+        >{{ $t('login.submit') }}</FormButton
+      >
     </form>
 
     <div class="login__image" />

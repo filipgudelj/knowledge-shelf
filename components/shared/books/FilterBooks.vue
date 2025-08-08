@@ -97,21 +97,23 @@ const resetFilters = () => {
 
       <ClientOnly>
         <div class="filters__actions" :style="{ width: `${actionsWidth}` }">
-          <SubmitButton
-            type="primary"
+          <FormButton
+            type="submit"
+            variant="primary"
             :size="buttonsSize"
             @click="applyFilters"
           >
             {{ t('filter.apply') }}
-          </SubmitButton>
+          </FormButton>
 
-          <SubmitButton
-            type="secondary"
+          <FormButton
+            type="reset"
+            variant="secondary"
             :size="buttonsSize"
             @click="resetFilters"
           >
             {{ t('filter.reset') }}
-          </SubmitButton>
+          </FormButton>
         </div>
       </ClientOnly>
     </div>

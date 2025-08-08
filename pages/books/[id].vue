@@ -63,8 +63,9 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
             class="book__quantity"
           />
 
-          <SubmitButton
-            type="primary"
+          <FormButton
+            type="button"
+            variant="primary"
             size="lg"
             :disabled="book.stock === 0"
             class="book__submit"
@@ -74,7 +75,7 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
                 ? t('book.actions.addToBasket')
                 : t('book.actions.unavailable')
             }}
-          </SubmitButton>
+          </FormButton>
 
           <AddToFavourites
             variant="rectangle"

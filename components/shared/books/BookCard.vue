@@ -43,15 +43,16 @@ const cartStore = useCartStore()
 
     <p class="book__price">{{ formatNumberToEuro(props.book.price) }}</p>
 
-    <SubmitButton
+    <FormButton
       v-if="user"
       @click="cartStore.addToCart(book.id)"
-      type="primary"
+      type="button"
+      variant="primary"
       size="md"
       class="book__button"
     >
       Add to basket
-    </SubmitButton>
+    </FormButton>
   </div>
 </template>
 

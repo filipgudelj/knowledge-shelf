@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 // PROPS
 const props = defineProps<{
-  type: 'primary' | 'secondary'
+  type?: 'button' | 'submit' | 'reset'
+  variant: 'primary' | 'secondary'
   size?: 'sm' | 'md' | 'lg'
   disabled?: boolean
 }>()
@@ -12,12 +13,12 @@ const emits = defineEmits(['click'])
 
 <template>
   <button
-    type="submit"
+    :type="props.type || 'button'"
     @click="emits('click')"
     :disabled="props.disabled"
     :class="[
       'button',
-      `button--${props.type}`,
+      `button--${props.variant}`,
       `button--${props.size || 'md'}`,
     ]"
   >

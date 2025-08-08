@@ -145,9 +145,13 @@ useHead(() => ({
         </template>
       </FormInput>
 
-      <SubmitButton type="primary" size="lg" class="register__submit">{{
-        $t('register.submit')
-      }}</SubmitButton>
+      <FormButton
+        type="submit"
+        variant="primary"
+        size="lg"
+        class="register__submit"
+        >{{ $t('register.submit') }}</FormButton
+      >
     </form>
 
     <div class="login__image" />

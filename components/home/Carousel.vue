@@ -184,15 +184,16 @@ onBeforeUnmount(() => {
 
             <p class="slide__price">{{ formatNumberToEuro(book.price) }}</p>
 
-            <SubmitButton
+            <FormButton
               v-if="user"
               @click="cartStore.addToCart(book.id)"
-              type="primary"
+              type="button"
+              variant="primary"
               size="md"
               class="slide__button"
             >
               Add to basket
-            </SubmitButton>
+            </FormButton>
           </div>
         </div>
       </div>

@@ -67,9 +67,13 @@ useHead(() => ({
         </template>
       </FormInput>
 
-      <SubmitButton type="primary" size="lg" class="forgot-password__submit">{{
-        $t('forgot-password.sendResetLink')
-      }}</SubmitButton>
+      <FormButton
+        type="submit"
+        variant="primary"
+        size="lg"
+        class="forgot-password__submit"
+        >{{ $t('forgot-password.sendResetLink') }}</FormButton
+      >
     </form>
 
     <div class="forgot-password__image" />

@@ -101,16 +101,22 @@ useHead(() => ({
       </div>
 
       <div class="cart__actions">
-        <SubmitButton
-          type="secondary"
+        <FormButton
+          type="button"
+          variant="secondary"
           @click="cartStore.clearCart()"
           class="cart__actions-button"
         >
           {{ t('cart.clearCart') }}
-        </SubmitButton>
-        <SubmitButton type="primary" class="cart__actions-button">
+        </FormButton>
+
+        <FormButton
+          type="button"
+          variant="primary"
+          class="cart__actions-button"
+        >
           {{ t('cart.checkout') }}
-        </SubmitButton>
+        </FormButton>
       </div>
     </div>
 
