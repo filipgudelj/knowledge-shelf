@@ -7,9 +7,11 @@ const props = defineProps<{
 
 // STATE
 const favouritesStore = useFavouritesStore()
-const isFavourite = ref(false)
 
-isFavourite.value = await favouritesStore.isBookFavourite(props.bookId)
+// COMPUTEDS
+const isFavourite = computed(() =>
+  favouritesStore.isBookFavourite(props.bookId),
+)
 
 // HANDLERS
 const toggleFavourite = async () => {
@@ -18,7 +20,6 @@ const toggleFavourite = async () => {
   } else {
     await favouritesStore.addFavourite(props.bookId)
   }
-  isFavourite.value = !isFavourite.value
 }
 </script>
 
