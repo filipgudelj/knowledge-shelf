@@ -173,7 +173,13 @@
       "email": "Email",
       "name": "Name",
       "surname": "Surname",
-      "phoneOptional": "Phone (optional)"
+      "phoneOptional": "Phone (optional)",
+      "placeholders": {
+        "email": "Enter your email",
+        "name": "Enter your first name",
+        "surname": "Enter your last name",
+        "phone": "Enter your phone number"
+      }
     },
 
     "shipping": {
@@ -185,6 +191,12 @@
       "methodTitle": "Shipping Method",
       "chooseMethod": "Choose shipping method",
       "notesOptional": "Order notes (optional)",
+      "placeholders": {
+        "address": "Enter your address",
+        "city": "Enter your city",
+        "zip": "Enter your postal code",
+        "notes": "Enter order notes (if any)"
+      },
       "methods": {
         "standard": "Standard Shipping",
         "express": "Express Shipping"

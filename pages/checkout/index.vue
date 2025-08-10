@@ -109,20 +109,35 @@ useHead(() => ({
               v-model="form.email"
               type="email"
               :label="t('checkout.contact.email')"
-            />
+              :placeholder="t('checkout.contact.placeholders.email')"
+            >
+              <template #icon>
+                <Icon name="mdi:email-outline" />
+              </template>
+            </FormInput>
 
             <div class="checkout__row">
               <FormInput
                 id="name"
                 v-model="form.name"
                 :label="t('checkout.contact.name')"
-              />
+                :placeholder="t('checkout.contact.placeholders.name')"
+              >
+                <template #icon>
+                  <Icon name="mdi:person" />
+                </template>
+              </FormInput>
 
               <FormInput
                 id="surname"
                 v-model="form.surname"
                 :label="t('checkout.contact.surname')"
-              />
+                :placeholder="t('checkout.contact.placeholders.surname')"
+              >
+                <template #icon>
+                  <Icon name="mdi:person" />
+                </template>
+              </FormInput>
             </div>
 
             <FormInput
@@ -130,7 +145,12 @@ useHead(() => ({
               v-model="form.phone"
               type="tel"
               :label="t('checkout.contact.phoneOptional')"
-            />
+              :placeholder="t('checkout.contact.placeholders.phone')"
+            >
+              <template #icon>
+                <Icon name="mdi:phone" />
+              </template>
+            </FormInput>
           </div>
 
           <div class="checkout__section">
@@ -150,20 +170,35 @@ useHead(() => ({
                 id="city"
                 v-model="form.city"
                 :label="t('checkout.shipping.city')"
-              />
+                :placeholder="t('checkout.shipping.placeholders.city')"
+              >
+                <template #icon>
+                  <Icon name="mdi:office-building-location-outline" />
+                </template>
+              </FormInput>
 
               <FormInput
                 id="zip"
                 v-model="form.zip"
                 :label="t('checkout.shipping.zip')"
-              />
+                :placeholder="t('checkout.shipping.placeholders.zip')"
+              >
+                <template #icon>
+                  <Icon name="mdi:archive-location-outline" />
+                </template>
+              </FormInput>
             </div>
 
             <FormInput
               id="address"
               v-model="form.address"
               :label="t('checkout.shipping.address')"
-            />
+              :placeholder="t('checkout.shipping.placeholders.address')"
+            >
+              <template #icon>
+                <Icon name="mdi:address-marker-outline" />
+              </template>
+            </FormInput>
           </div>
 
           <div class="checkout__section">
@@ -187,7 +222,12 @@ useHead(() => ({
               id="notes"
               v-model="form.notes"
               :label="t('checkout.shipping.notesOptional')"
-            />
+              :placeholder="t('checkout.shipping.placeholders.notes')"
+            >
+              <template #icon>
+                <Icon name="mdi:pencil" />
+              </template>
+            </FormInput>
           </div>
 
           <FormButton type="button" variant="primary" class="checkout__submit">

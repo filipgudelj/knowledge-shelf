@@ -23,8 +23,8 @@
   "login": {
     "title": "Prijava",
     "subtitle": "Bok, dobrodošli nazad!",
-    "emailLabel": "Email",
-    "emailPlaceholder": "Unesi svoj email",
+    "emailLabel": "E-pošta",
+    "emailPlaceholder": "Unesi svoju e-poštu",
     "passwordLabel": "Lozinka",
     "passwordPlaceholder": "Unesi svoju lozinku",
     "submit": "Prijavi se",
@@ -33,8 +33,8 @@
 
   "forgot-password": {
     "title": "Resetiraj lozinku",
-    "emailLabel": "Email",
-    "emailPlaceholder": "Unesi svoj email",
+    "emailLabel": "E-pošta",
+    "emailPlaceholder": "Unesi svoju e-poštu",
     "sendResetLink": "Pošalji link za resetiranje"
   },
 
@@ -48,8 +48,8 @@
   "register": {
     "title": "Registracija",
     "subtitle": "Kreiraj svoj račun!",
-    "emailLabel": "Email",
-    "emailPlaceholder": "Unesi svoj email",
+    "emailLabel": "E-pošta",
+    "emailPlaceholder": "Unesi svoju e-poštu",
     "passwordLabel": "Lozinka",
     "passwordPlaceholder": "Unesi svoju lozinku",
     "confirmPasswordLabel": "Potvrdi lozinku",
@@ -173,7 +173,13 @@
       "email": "E-pošta",
       "name": "Ime",
       "surname": "Prezime",
-      "phoneOptional": "Telefon (neobavezno)"
+      "phoneOptional": "Telefon (neobavezno)",
+      "placeholders": {
+        "email": "Unesi svoju e-poštu",
+        "name": "Unesi svoje ime",
+        "surname": "Unesi svoje prezime",
+        "phone": "Unesi svoj broj telefona"
+      }
     },
 
     "shipping": {
@@ -185,6 +191,12 @@
       "methodTitle": "Način dostave",
       "chooseMethod": "Odaberite način dostave",
       "notesOptional": "Napomene uz narudžbu (neobavezno)",
+      "placeholders": {
+        "address": "Unesi adresu",
+        "city": "Unesi grad",
+        "zip": "Unesi poštanski broj",
+        "notes": "Unesi napomene (ako ih imaš)"
+      },
       "methods": {
         "standard": "Standardna dostava",
         "express": "Brza dostava"
