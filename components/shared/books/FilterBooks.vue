@@ -127,6 +127,7 @@ const resetFilters = () => {
   width: 100%;
   padding: $spacing-4 $spacing-6;
   border: 1px solid $color-gray-300;
+  border-radius: $radius-4;
   background-color: $color-gray-100;
 
   html.dark & {

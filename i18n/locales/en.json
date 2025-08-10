@@ -164,6 +164,40 @@
     "empty": "Your cart is empty."
   },
 
+  "checkout": {
+    "title": "Checkout",
+    "empty": "You have no items to checkout.",
+
+    "contact": {
+      "title": "Contact Information",
+      "email": "Email",
+      "name": "Name",
+      "surname": "Surname",
+      "phoneOptional": "Phone (optional)"
+    },
+
+    "shipping": {
+      "title": "Shipping Address",
+      "address": "Address",
+      "city": "City",
+      "zip": "ZIP / Postal code",
+      "country": "Country",
+      "methodTitle": "Shipping Method",
+      "chooseMethod": "Choose shipping method",
+      "notesOptional": "Order notes (optional)",
+      "methods": {
+        "standard": "Standard Shipping",
+        "express": "Express Shipping"
+      }
+    },
+
+    "orderSummary": "Order Summary",
+    "subtotal": "Subtotal",
+    "shippingTotal": "Shipping",
+    "total": "Total",
+    "placeOrder": "Place Order"
+  },
+
   "toast": {
     "requestTooSoon": "Please wait before trying again",
     "alreadyRegistered": "Email already registered",
@@ -223,6 +257,10 @@
     "cart": {
       "title": "Cart ⎪ Knowledge Shelf",
       "description": "View and manage the books in your shopping cart."
+    },
+    "checkout": {
+      "title": "Checkout ⎪ Knowledge Shelf",
+      "description": "Complete your order securely and quickly."
     },
     "category": {
       "title": "{pageTitle} ⎪ Knowledge Shelf",

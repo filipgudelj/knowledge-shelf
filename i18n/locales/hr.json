@@ -164,6 +164,40 @@
     "empty": "Tvoja košarica je prazna."
   },
 
+  "checkout": {
+    "title": "Plaćanje",
+    "empty": "Nemaš proizvoda za naplatu.",
+
+    "contact": {
+      "title": "Kontakt informacije",
+      "email": "E-pošta",
+      "name": "Ime",
+      "surname": "Prezime",
+      "phoneOptional": "Telefon (neobavezno)"
+    },
+
+    "shipping": {
+      "title": "Adresa dostave",
+      "address": "Adresa",
+      "city": "Grad",
+      "zip": "Poštanski broj",
+      "country": "Država",
+      "methodTitle": "Način dostave",
+      "chooseMethod": "Odaberite način dostave",
+      "notesOptional": "Napomene uz narudžbu (neobavezno)",
+      "methods": {
+        "standard": "Standardna dostava",
+        "express": "Brza dostava"
+      }
+    },
+
+    "orderSummary": "Sažetak narudžbe",
+    "subtotal": "Međuzbroj",
+    "shippingTotal": "Dostava",
+    "total": "Ukupno",
+    "placeOrder": "Završi narudžbu"
+  },
+
   "toast": {
     "requestTooSoon": "Pričekaj prije ponovnog pokušaja",
     "alreadyRegistered": "Email već registriran",
@@ -223,6 +257,10 @@
     "cart": {
       "title": "Košarica ⎪ Knowledge Shelf",
       "description": "Pregledajte i upravljajte knjigama u svojoj košarici."
+    },
+    "checkout": {
+      "title": "Plaćanje ⎪ Knowledge Shelf",
+      "description": "Dovršite svoju narudžbu sigurno i brzo."
     },
     "category": {
       "title": "{pageTitle} ⎪ Knowledge Shelf",

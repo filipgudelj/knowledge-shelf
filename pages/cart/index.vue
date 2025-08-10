@@ -110,13 +110,15 @@ useHead(() => ({
           {{ t('cart.clearCart') }}
         </FormButton>
 
-        <FormButton
-          type="button"
-          variant="primary"
-          class="cart__actions-button"
-        >
-          {{ t('cart.checkout') }}
-        </FormButton>
+        <NuxtLinkLocale to="/checkout">
+          <FormButton
+            type="button"
+            variant="primary"
+            class="cart__actions-button"
+          >
+            {{ t('cart.checkout') }}
+          </FormButton>
+        </NuxtLinkLocale>
       </div>
     </div>
 
@@ -254,6 +256,14 @@ useHead(() => ({
   &:hover {
     color: $color-blue-500;
   }
+}
+
+.cart__price {
+  font-weight: 700;
+}
+
+.cart__total {
+  font-weight: 700;
 }
 
 .cart__remove {
