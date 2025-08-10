@@ -59,12 +59,12 @@ const shippingMethods = [
   {
     label: t('checkout.shipping.methods.standard'),
     value: 'standard',
-    price: 0,
+    price: 5,
   },
   {
     label: t('checkout.shipping.methods.express'),
     value: 'express',
-    price: 4.9,
+    price: 15,
   },
 ]
 
@@ -387,7 +387,11 @@ useHead(() => ({
                 class="summary__image"
               />
               <div class="summary__info">
-                <p class="summary__title">{{ i.book?.title }}</p>
+                <NuxtLinkLocale
+                  :to="`/books/${i.book?.id}`"
+                  class="summary__title"
+                  >{{ i.book?.title }}</NuxtLinkLocale
+                >
                 <p class="summary__meta">× {{ i.quantity }}</p>
               </div>
               <div class="summary__price">
@@ -431,7 +435,7 @@ useHead(() => ({
   gap: $spacing-8;
   margin-top: $spacing-6;
 
-  @media (min-width: $screen-xl) {
+  @media (min-width: $screen-lg) {
     grid-template-columns: 1.5fr 1fr;
   }
 }
@@ -508,6 +512,11 @@ useHead(() => ({
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 700;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: $color-blue-500;
+  }
 }
 
 .summary__meta {
