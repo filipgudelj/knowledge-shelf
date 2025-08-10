@@ -48,15 +48,17 @@ const user = useSupabaseUser()
         <span class="sidebar__nav-label">{{ $t('sidebar.favourites') }}</span>
       </NuxtLinkLocale>
 
-      <NuxtLinkLocale
-        v-if="user"
-        :to="'/cart'"
-        class="sidebar__nav-item"
-        aria-label="Go to Cart"
-      >
-        <Icon name="mdi:cart-outline" size="32px" />
-        <span class="sidebar__nav-label">{{ $t('sidebar.cart') }}</span>
-      </NuxtLinkLocale>
+      <ClientOnly>
+        <NuxtLinkLocale
+          v-if="user"
+          :to="'/cart'"
+          class="sidebar__nav-item"
+          aria-label="Go to Cart"
+        >
+          <Icon name="mdi:cart-outline" size="32px" />
+          <span class="sidebar__nav-label">{{ $t('sidebar.cart') }}</span>
+        </NuxtLinkLocale>
+      </ClientOnly>
 
       <div class="sidebar__nav-divider"></div>
 

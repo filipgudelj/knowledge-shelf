@@ -3,6 +3,7 @@ import type { Book } from '~/types'
 
 // STATE
 const { locale, t } = useI18n()
+const { showToast } = useToast()
 const booksStore = useBooksStore()
 const mostSoldBooks = ref<Book[]>([])
 const newestBooks = ref<Book[]>([])
@@ -27,6 +28,24 @@ await (async () => {
 onMounted(async () => {
   await favouritesStore.loadFavourites()
   await cartStore.loadCart()
+})
+
+onMounted(async () => {
+  if (!window.location.hash) return
+
+  const params = new URLSearchParams(window.location.hash.slice(1))
+  const code = params.get('error_code')
+
+  if (code) {
+    await nextTick()
+    showToast('error', t('toast.linkExpired'))
+  }
+
+  history.replaceState(
+    history.state,
+    '',
+    window.location.pathname + window.location.search,
+  )
 })
 
 // HEAD

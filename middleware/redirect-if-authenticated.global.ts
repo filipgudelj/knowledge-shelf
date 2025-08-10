@@ -6,6 +6,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
     '/auth/login',
     '/auth/register',
     '/auth/forgot-password',
+    '/auth/confirm',
   ]
 
   if (user.value && guestOnlyRoutes.some((route) => to.path.includes(route))) {
