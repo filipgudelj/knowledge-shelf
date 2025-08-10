@@ -69,6 +69,31 @@
     "confirmPassword": {
       "required": "Confirm password is required",
       "match": "Passwords must match"
+    },
+    "name": {
+      "required": "First name is required"
+    },
+    "surname": {
+      "required": "Last name is required"
+    },
+    "country": {
+      "required": "Country is required"
+    },
+    "city": {
+      "required": "City is required"
+    },
+    "zip": {
+      "required": "Postal code is required"
+    },
+    "address": {
+      "required": "Address is required",
+      "min": "Address must be at least 3 characters"
+    },
+    "shippingMethod": {
+      "required": "Shipping method is required"
+    },
+    "phone": {
+      "invalid": "Please enter a valid phone number"
     }
   },
 

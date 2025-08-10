@@ -59,8 +59,8 @@
 
   "validation": {
     "email": {
-      "required": "Email je obavezan",
-      "invalid": "Email mora biti valjana adresa"
+      "required": "E-pošta je obavezna",
+      "invalid": "E-pošta mora biti valjana adresa"
     },
     "password": {
       "required": "Lozinka je obavezna",
@@ -69,6 +69,30 @@
     "confirmPassword": {
       "required": "Potvrda lozinke je obavezna",
       "match": "Lozinke se moraju podudarati"
+    },
+    "name": {
+      "required": "Ime je obavezno"
+    },
+    "surname": {
+      "required": "Prezime je obavezno"
+    },
+    "country": {
+      "required": "Država je obavezna"
+    },
+    "city": {
+      "required": "Grad je obavezan"
+    },
+    "zip": {
+      "required": "Poštanski broj je obavezan"
+    },
+    "address": {
+      "required": "Adresa je obavezna"
+    },
+    "shippingMethod": {
+      "required": "Način dostave je obavezan"
+    },
+    "phone": {
+      "invalid": "Unesite ispravan broj telefona"
     }
   },
 
@@ -212,11 +236,11 @@
 
   "toast": {
     "requestTooSoon": "Pričekaj prije ponovnog pokušaja",
-    "alreadyRegistered": "Email već registriran",
-    "confirmationSent": "Potvrdni email poslan",
+    "alreadyRegistered": "E-pošta već registrirana",
+    "confirmationSent": "Potvrdna e-pošta poslana",
     "invalidLoginCredentials": "Pogrešni podaci za prijavu",
     "linkExpired": "Link je nevažeći ili je istekao",
-    "emailConfirmed": "Email je potvrđen",
+    "emailConfirmed": "E-pošta je potvrđena",
     "resetLinkSent": "Link za promjenu lozinke poslan",
     "passwordUpdated": "Tvoja lozinka je ažurirana",
     "authSessionMissing": "Nedostaje autentikacijska sesija",

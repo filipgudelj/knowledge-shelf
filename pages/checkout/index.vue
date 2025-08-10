@@ -2,24 +2,22 @@
 import { formatNumberToEuro } from '~/helpers/formatters'
 import VueSkeletonLoader from 'vue3-skeleton-loader'
 import 'vue3-skeleton-loader/dist/style.css'
+import { useForm, useField } from 'vee-validate'
+import * as yup from 'yup'
+import { useThrottleFn } from '@vueuse/core'
 
 // STATE
 const { t, locale } = useI18n()
 const cartStore = useCartStore()
 const showSkeleton = ref(true)
 
-const form = reactive({
-  email: '',
-  name: '',
-  surname: '',
-  phone: '',
-  address: '',
-  city: '',
-  zip: '',
-  country: 'HR',
-  shippingMethod: 'standard',
-  notes: '',
-})
+const nameInput = ref<{ focus: () => void } | null>(null)
+const surnameInput = ref<{ focus: () => void } | null>(null)
+const phoneInput = ref<{ focus: () => void } | null>(null)
+const cityInput = ref<{ focus: () => void } | null>(null)
+const zipInput = ref<{ focus: () => void } | null>(null)
+const addressInput = ref<{ focus: () => void } | null>(null)
+const notesInput = ref<{ focus: () => void } | null>(null)
 
 const countries = [
   { label: 'Croatia', value: 'HR' },
@@ -45,17 +43,86 @@ const shippingMethods = [
 
 // COMPUTEDS
 const subtotal = computed(() =>
-  cartStore.items.reduce((sum, i) => {
-    return sum + (i.book?.price ?? 0) * i.quantity
-  }, 0),
+  cartStore.items.reduce(
+    (sum, i) => sum + (i.book?.price ?? 0) * i.quantity,
+    0,
+  ),
 )
 
 const shippingPrice = computed(() => {
-  const sel = shippingMethods.find((m) => m.value === form.shippingMethod)
+  const sel = shippingMethods.find((m) => m.value === shippingMethod.value)
   return sel?.price ?? 0
 })
 
 const total = computed(() => subtotal.value + shippingPrice.value)
+
+// VALIDATION
+const schema = yup.object({
+  email: yup
+    .string()
+    .required(t('validation.email.required'))
+    .matches(
+      /^[^@]+?\.[^@]+?@[\w.-]+\.[a-zA-Z]{2,}$/,
+      t('validation.email.invalid'),
+    ),
+  name: yup.string().required(t('validation.name.required')),
+  surname: yup.string().required(t('validation.surname.required')),
+  phone: yup.string().optional(),
+  country: yup.string().required(t('validation.country.required')),
+  city: yup.string().required(t('validation.city.required')),
+  zip: yup.string().required(t('validation.zip.required')),
+  address: yup.string().required(t('validation.address.required')),
+  shippingMethod: yup
+    .string()
+    .required(t('validation.shippingMethod.required')),
+  notes: yup.string().optional(),
+})
+
+const { handleSubmit, errors } = useForm({
+  validationSchema: schema,
+  initialValues: {
+    email: '',
+    name: '',
+    surname: '',
+    phone: '',
+    address: '',
+    city: '',
+    zip: '',
+    country: 'HR',
+    shippingMethod: 'standard',
+    notes: '',
+  },
+})
+
+const { value: email } = useField<string>('email')
+const { value: name } = useField<string>('name')
+const { value: surname } = useField<string>('surname')
+const { value: phone } = useField<string>('phone')
+const { value: country } = useField<string>('country')
+const { value: city } = useField<string>('city')
+const { value: zip } = useField<string>('zip')
+const { value: address } = useField<string>('address')
+const { value: shippingMethod } = useField<string>('shippingMethod')
+const { value: notes } = useField<string>('notes')
+
+// HANDLERS
+const focusName = () => nameInput.value?.focus()
+const focusSurname = () => surnameInput.value?.focus()
+const focusPhone = () => phoneInput.value?.focus()
+const focusCity = () => cityInput.value?.focus()
+const focusZip = () => zipInput.value?.focus()
+const focusAddress = () => addressInput.value?.focus()
+const focusNotes = () => notesInput.value?.focus()
+
+// SUBMIT
+const onSubmit = handleSubmit(() => {
+  console.log('Submitted')
+})
+
+const onSubmitThrottled = useThrottleFn((e: Event) => {
+  e.preventDefault()
+  onSubmit()
+}, 1000)
 
 // LCH
 onMounted(async () => {
@@ -98,7 +165,7 @@ useHead(() => ({
       </div>
 
       <div v-else class="checkout__grid">
-        <form class="checkout__form">
+        <form class="checkout__form" @submit.prevent="onSubmitThrottled">
           <div class="checkout__section">
             <h2 class="checkout__section-title">
               {{ t('checkout.contact.title') }}
@@ -106,49 +173,68 @@ useHead(() => ({
 
             <FormInput
               id="email"
-              v-model="form.email"
+              v-model="email"
               type="email"
               :label="t('checkout.contact.email')"
               :placeholder="t('checkout.contact.placeholders.email')"
+              @keydown.enter.prevent="focusName"
             >
-              <template #icon>
-                <Icon name="mdi:email-outline" />
+              <template #icon><Icon name="mdi:email-outline" /></template>
+              <template #error>
+                <div v-if="errors.email">
+                  {{ errors.email }}
+                </div>
               </template>
             </FormInput>
 
             <div class="checkout__row">
               <FormInput
+                ref="nameInput"
                 id="name"
-                v-model="form.name"
+                v-model="name"
                 :label="t('checkout.contact.name')"
                 :placeholder="t('checkout.contact.placeholders.name')"
+                @keydown.enter.prevent="focusSurname"
               >
-                <template #icon>
-                  <Icon name="mdi:person" />
+                <template #icon><Icon name="mdi:account-outline" /></template>
+                <template #error>
+                  <div v-if="errors.name">
+                    {{ errors.name }}
+                  </div>
                 </template>
               </FormInput>
 
               <FormInput
+                ref="surnameInput"
                 id="surname"
-                v-model="form.surname"
+                v-model="surname"
                 :label="t('checkout.contact.surname')"
                 :placeholder="t('checkout.contact.placeholders.surname')"
+                @keydown.enter.prevent="focusPhone"
               >
-                <template #icon>
-                  <Icon name="mdi:person" />
+                <template #icon><Icon name="mdi:account-outline" /></template>
+                <template #error>
+                  <div v-if="errors.surname">
+                    {{ errors.surname }}
+                  </div>
                 </template>
               </FormInput>
             </div>
 
             <FormInput
+              ref="phoneInput"
               id="phone"
-              v-model="form.phone"
+              v-model="phone"
               type="tel"
               :label="t('checkout.contact.phoneOptional')"
               :placeholder="t('checkout.contact.placeholders.phone')"
+              @keydown.enter.prevent="focusCity"
             >
-              <template #icon>
-                <Icon name="mdi:phone" />
+              <template #icon><Icon name="mdi:phone" /></template>
+              <template #error>
+                <div v-if="errors.phone">
+                  {{ errors.phone }}
+                </div>
               </template>
             </FormInput>
           </div>
@@ -160,43 +246,62 @@ useHead(() => ({
 
             <FormSelect
               id="country"
-              v-model="form.country"
+              v-model="country"
               :label="t('checkout.shipping.country')"
               :options="countries"
             />
 
             <div class="checkout__row">
               <FormInput
+                ref="cityInput"
                 id="city"
-                v-model="form.city"
+                v-model="city"
                 :label="t('checkout.shipping.city')"
                 :placeholder="t('checkout.shipping.placeholders.city')"
+                @keydown.enter.prevent="focusZip"
               >
                 <template #icon>
                   <Icon name="mdi:office-building-location-outline" />
                 </template>
+                <template #error>
+                  <div v-if="errors.city">
+                    {{ errors.city }}
+                  </div>
+                </template>
               </FormInput>
 
               <FormInput
+                ref="zipInput"
                 id="zip"
-                v-model="form.zip"
+                v-model="zip"
                 :label="t('checkout.shipping.zip')"
                 :placeholder="t('checkout.shipping.placeholders.zip')"
+                @keydown.enter.prevent="focusAddress"
               >
-                <template #icon>
-                  <Icon name="mdi:archive-location-outline" />
+                <template #icon><Icon name="mdi:map-marker-path" /></template>
+                <template #error>
+                  <div v-if="errors.zip">
+                    {{ errors.zip }}
+                  </div>
                 </template>
               </FormInput>
             </div>
 
             <FormInput
+              ref="addressInput"
               id="address"
-              v-model="form.address"
+              v-model="address"
               :label="t('checkout.shipping.address')"
               :placeholder="t('checkout.shipping.placeholders.address')"
+              @keydown.enter.prevent="focusNotes"
             >
               <template #icon>
                 <Icon name="mdi:address-marker-outline" />
+              </template>
+              <template #error>
+                <div v-if="errors.address">
+                  {{ errors.address }}
+                </div>
               </template>
             </FormInput>
           </div>
@@ -208,7 +313,7 @@ useHead(() => ({
 
             <FormSelect
               id="shipping"
-              v-model="form.shippingMethod"
+              v-model="shippingMethod"
               :label="t('checkout.shipping.chooseMethod')"
               :options="
                 shippingMethods.map((m) => ({
@@ -219,18 +324,22 @@ useHead(() => ({
             />
 
             <FormInput
+              ref="notesInput"
               id="notes"
-              v-model="form.notes"
+              v-model="notes"
               :label="t('checkout.shipping.notesOptional')"
               :placeholder="t('checkout.shipping.placeholders.notes')"
             >
-              <template #icon>
-                <Icon name="mdi:pencil" />
+              <template #icon><Icon name="mdi:pencil" /></template>
+              <template #error>
+                <div v-if="errors.notes">
+                  {{ errors.notes }}
+                </div>
               </template>
             </FormInput>
           </div>
 
-          <FormButton type="button" variant="primary" class="checkout__submit">
+          <FormButton type="submit" variant="primary" class="checkout__submit">
             {{ t('checkout.placeOrder') }}
           </FormButton>
         </form>
