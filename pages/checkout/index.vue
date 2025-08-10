@@ -19,15 +19,42 @@ const zipInput = ref<{ focus: () => void } | null>(null)
 const addressInput = ref<{ focus: () => void } | null>(null)
 const notesInput = ref<{ focus: () => void } | null>(null)
 
-const countries = [
-  { label: 'Croatia', value: 'HR' },
-  { label: 'Slovenia', value: 'SI' },
-  { label: 'Bosnia and Herzegovina', value: 'BA' },
-  { label: 'Serbia', value: 'RS' },
-  { label: 'Hungary', value: 'HU' },
-  { label: 'Austria', value: 'AT' },
+const euCountryCodes = [
+  'AT',
+  'BE',
+  'BG',
+  'HR',
+  'CY',
+  'CZ',
+  'DK',
+  'EE',
+  'FI',
+  'FR',
+  'DE',
+  'GR',
+  'HU',
+  'IE',
+  'IT',
+  'LV',
+  'LT',
+  'LU',
+  'MT',
+  'NL',
+  'PL',
+  'PT',
+  'RO',
+  'SK',
+  'SI',
+  'ES',
+  'SE',
 ]
 
+const countries = computed(() =>
+  euCountryCodes.map((code) => ({
+    label: t(`countries.${code}`),
+    value: code,
+  })),
+)
 const shippingMethods = [
   {
     label: t('checkout.shipping.methods.standard'),

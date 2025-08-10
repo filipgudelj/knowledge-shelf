@@ -261,6 +261,36 @@
     "invalidBookId": "ID knjige mora biti broj"
   },
 
+  "countries": {
+    "AT": "Austrija",
+    "BE": "Belgija",
+    "BG": "Bugarska",
+    "HR": "Hrvatska",
+    "CY": "Cipar",
+    "CZ": "Češka",
+    "DK": "Danska",
+    "EE": "Estonija",
+    "FI": "Finska",
+    "FR": "Francuska",
+    "DE": "Njemačka",
+    "GR": "Grčka",
+    "HU": "Mađarska",
+    "IE": "Irska",
+    "IT": "Italija",
+    "LV": "Latvija",
+    "LT": "Litva",
+    "LU": "Luksemburg",
+    "MT": "Malta",
+    "NL": "Nizozemska",
+    "PL": "Poljska",
+    "PT": "Portugal",
+    "RO": "Rumunjska",
+    "SK": "Slovačka",
+    "SI": "Slovenija",
+    "ES": "Španjolska",
+    "SE": "Švedska"
+  },
+
   "seo": {
     "confirm": {
       "title": "Potvrda ⎪ Knowledge Shelf",

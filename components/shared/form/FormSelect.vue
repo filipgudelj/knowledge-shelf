@@ -139,6 +139,7 @@ const onSelect = (value: string) => {
   left: 0;
   z-index: 100;
   width: 100%;
+  max-height: 193px;
   border: 1px solid $color-gray-300;
   border-radius: $radius-3;
   box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.2);
@@ -148,6 +149,36 @@ const onSelect = (value: string) => {
   html.dark & {
     border: 1px solid $color-gray-700;
     background-color: $color-gray-900;
+  }
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: $radius-3;
+    background-color: $color-gray-300;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-gray-400;
+
+      html.dark & {
+        background-color: $color-gray-600;
+      }
+    }
+
+    html.dark & {
+      background-color: $color-gray-700;
+    }
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
   }
 }
 
