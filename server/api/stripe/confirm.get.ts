@@ -118,5 +118,51 @@ export default defineEventHandler(async (event) => {
     }
   }
 
+  const totalsByBook = productItems.reduce<Record<number, number>>((acc, i) => {
+    if (i.book_id == null) return acc
+    acc[i.book_id] = (acc[i.book_id] || 0) + i.quantity
+    return acc
+  }, {})
+
+  const bookIds = Object.keys(totalsByBook).map(Number)
+
+  if (bookIds.length) {
+    const { data: books, error: booksErr } = await supabase
+      .from('books')
+      .select('id, stock, sales_count')
+      .in('id', bookIds)
+
+    if (booksErr) {
+      throw createError({ statusCode: 500, statusMessage: booksErr.message })
+    }
+
+    for (const b of books ?? []) {
+      const need = totalsByBook[b.id] || 0
+      const current = Number(b.stock ?? 0)
+      if (current < need) {
+        throw createError({
+          statusCode: 409,
+          statusMessage: `Out of stock for book ${b.id}`,
+        })
+      }
+    }
+
+    const updates = (books ?? []).map((b) => {
+      const qty = totalsByBook[b.id] || 0
+      return supabase
+        .from('books')
+        .update({
+          stock: Number(b.stock ?? 0) - qty,
+          sales_count: Number(b.sales_count ?? 0) + qty,
+        })
+        .eq('id', b.id)
+    })
+
+    const results = await Promise.all(updates)
+    const updErr = results.find((r) => r.error)?.error
+    if (updErr) {
+      throw createError({ statusCode: 500, statusMessage: updErr.message })
+    }
+  }
   return { ok: true, order_id: order.id }
 })
