@@ -55,6 +55,12 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig: {
+    stripeSecretKey: process.env.STRIPE_SK_KEY,
+    public: {
+      stripePublishableKey: process.env.STRIPE_PK_KEY,
+    },
+  },
   compatibilityDate: '2025-05-15',
   supabase: {
     url: process.env.SUPABASE_URL,

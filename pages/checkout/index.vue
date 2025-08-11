@@ -5,6 +5,8 @@ import 'vue3-skeleton-loader/dist/style.css'
 import { useForm, useField } from 'vee-validate'
 import * as yup from 'yup'
 import { useThrottleFn } from '@vueuse/core'
+import { loadStripe } from '@stripe/stripe-js'
+const stripePromise = loadStripe(useRuntimeConfig().public.stripePublishableKey)
 
 // STATE
 const { t, locale } = useI18n()
@@ -142,8 +144,20 @@ const focusAddress = () => addressInput.value?.focus()
 const focusNotes = () => notesInput.value?.focus()
 
 // SUBMIT
-const onSubmit = handleSubmit(() => {
-  console.log('Submitted')
+const onSubmit = handleSubmit(async () => {
+  if (!cartStore.items.length) return
+
+  const amountCents = Math.round((subtotal.value + shippingPrice.value) * 100)
+
+  const { id } = await $fetch<{ id: string }>('/api/checkout', {
+    method: 'POST',
+    body: { amount: amountCents, email: email.value || undefined },
+  })
+
+  const stripe = await stripePromise
+
+  if (!stripe) return
+  await stripe.redirectToCheckout({ sessionId: id })
 })
 
 const onSubmitThrottled = useThrottleFn((e: Event) => {
