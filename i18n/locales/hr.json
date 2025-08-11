@@ -326,7 +326,11 @@
     },
     "checkout": {
       "title": "Plaćanje ⎪ Knowledge Shelf",
-      "description": "Dovršite svoju narudžbu sigurno i brzo."
+      "description": "Dovršite svoju narudžbu sigurno i brzo.",
+      "success": {
+        "title": "Uspješno plaćanje",
+        "description": "Vaša narudžba je dovršena."
+      }
     },
     "category": {
       "title": "{pageTitle} ⎪ Knowledge Shelf",

@@ -327,7 +327,11 @@
     },
     "checkout": {
       "title": "Checkout ⎪ Knowledge Shelf",
-      "description": "Complete your order securely and quickly."
+      "description": "Complete your order securely and quickly.",
+      "success": {
+        "title": "Payment successful",
+        "description": "Your order was completed."
+      }
     },
     "category": {
       "title": "{pageTitle} ⎪ Knowledge Shelf",

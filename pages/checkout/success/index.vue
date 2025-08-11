@@ -7,6 +7,8 @@ const route = useRoute()
 const sessionId = route.query.session_id as string | undefined
 const status = ref<'saving' | 'ok' | 'error'>('saving')
 const orderId = ref<number | null>(null)
+const cartStore = useCartStore()
+const { locale, t } = useI18n()
 
 // LCH
 onMounted(async () => {
@@ -22,6 +24,9 @@ onMounted(async () => {
         params: { session_id: sessionId },
       },
     )
+
+    cartStore.clearCart()
+
     orderId.value = res.order_id
     status.value = 'ok'
 
@@ -33,6 +38,15 @@ onMounted(async () => {
     return
   }
 })
+
+// HEAD
+useHead(() => ({
+  title: t('seo.checkout.success.title'),
+  meta: [
+    { name: 'description', content: t('seo.checkout.success.description') },
+  ],
+  htmlAttrs: { lang: locale.value },
+}))
 </script>
 
 <template>

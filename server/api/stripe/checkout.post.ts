@@ -84,7 +84,7 @@ export default defineEventHandler(async (event) => {
       total: String(body.total),
     },
     success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${origin}/checkout/cancelled`,
+    cancel_url: `${origin}/`,
   })
 
   return { id: session.id }
