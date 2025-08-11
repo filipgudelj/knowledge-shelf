@@ -24,6 +24,7 @@ export default defineEventHandler(async (event) => {
     shipping_price: number
     subtotal: number
     total: number
+    locale: string
   }>(event)
 
   const user = await serverSupabaseUser(event)
@@ -31,6 +32,9 @@ export default defineEventHandler(async (event) => {
   const stripe = new Stripe(config.stripeSecretKey as string)
   const url = new URL(getRequestURL(event))
   const origin = `${url.protocol}//${url.host}`
+
+  const locale = body.locale.toLowerCase()
+  const prefix = locale === 'en' ? '' : `/${locale}`
 
   const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] =
     body.items.map((i) => ({
@@ -83,8 +87,8 @@ export default defineEventHandler(async (event) => {
       subtotal: String(body.subtotal),
       total: String(body.total),
     },
-    success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${origin}/`,
+    success_url: `${origin}${prefix}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${origin}${prefix}/`,
   })
 
   return { id: session.id }

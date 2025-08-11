@@ -4,16 +4,18 @@ definePageMeta({ ssr: false })
 
 // STATE
 const route = useRoute()
+const router = useRouter()
 const sessionId = route.query.session_id as string | undefined
 const status = ref<'saving' | 'ok' | 'error'>('saving')
 const orderId = ref<number | null>(null)
 const cartStore = useCartStore()
 const { locale, t } = useI18n()
+const localePath = useLocalePath()
 
 // LCH
 onMounted(async () => {
   if (!sessionId) {
-    await navigateTo('/checkout', { replace: true })
+    await router.push(localePath(`/`))
     return
   }
 
@@ -34,7 +36,7 @@ onMounted(async () => {
     url.searchParams.delete('session_id')
     window.history.replaceState({}, '', url.pathname + url.search + url.hash)
   } catch {
-    await navigateTo('/checkout', { replace: true })
+    await router.push(localePath(`/`))
     return
   }
 })
@@ -55,9 +57,9 @@ useHead(() => ({
       <div class="success__icon">
         <Icon name="mdi:success-circle-outline" size="48px" />
       </div>
-      <h1>Payment success</h1>
+      <h1>{{ t('checkout.success.title') }}</h1>
     </div>
-    <p class="success__description">Your order was completed.</p>
+    <p class="success__description">{{ t('checkout.success.description') }}</p>
   </div>
 </template>
 

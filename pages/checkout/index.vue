@@ -172,6 +172,7 @@ const onSubmit = handleSubmit(async () => {
       shipping_price: shippingPrice.value,
       subtotal: subtotal.value,
       total: total.value,
+      locale: locale.value,
     },
   })
 

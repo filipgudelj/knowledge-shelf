@@ -231,7 +231,12 @@
     "subtotal": "Međuzbroj",
     "shippingTotal": "Dostava",
     "total": "Ukupno",
-    "placeOrder": "Završi narudžbu"
+    "placeOrder": "Završi narudžbu",
+
+    "success": {
+      "title": "Uspješno plaćanje",
+      "description": "Vaša narudžba je dovršena."
+    }
   },
 
   "toast": {
@@ -328,7 +333,7 @@
       "title": "Plaćanje ⎪ Knowledge Shelf",
       "description": "Dovršite svoju narudžbu sigurno i brzo.",
       "success": {
-        "title": "Uspješno plaćanje",
+        "title": "Uspješno plaćanje ⎪ Knowledge Shelf",
         "description": "Vaša narudžba je dovršena."
       }
     },
