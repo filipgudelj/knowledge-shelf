@@ -55,6 +55,6 @@ watch(selected, (newSelectedValue) => {
 
 <style lang="scss" scoped>
 .sort__select {
-  width: 230px;
+  max-width: 230px;
 }
 </style>
