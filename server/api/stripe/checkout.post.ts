@@ -55,8 +55,8 @@ export default defineEventHandler(async (event) => {
       quantity: 1,
       price_data: {
         currency: 'eur',
-        unit_amount: Math.round(body.shipping_price * 100), // convert € to cents
-        product_data: { name: label },
+        unit_amount: Math.round(body.shipping_price * 100),
+        product_data: { name: label, metadata: { kind: 'shipping' } },
       },
     })
   }

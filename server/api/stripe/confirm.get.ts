@@ -4,8 +4,9 @@ import { serverSupabaseClient } from '#supabase/server'
 
 export default defineEventHandler(async (event) => {
   const { session_id } = getQuery(event) as { session_id?: string }
-  if (!session_id)
+  if (!session_id) {
     throw createError({ statusCode: 400, statusMessage: 'Missing session_id' })
+  }
 
   const config = useRuntimeConfig(event)
   const stripe = new Stripe(config.stripeSecretKey as string)
@@ -15,15 +16,16 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: 'Payment not paid' })
   }
 
-  const supabase = await serverSupabaseClient(event)
+  const supabase = await serverSupabaseClient<any>(event)
 
   const { data: existing, error: existErr } = await supabase
     .from('orders')
     .select('id')
     .eq('stripe_session_id', session.id)
     .maybeSingle()
-  if (existErr)
+  if (existErr) {
     throw createError({ statusCode: 500, statusMessage: existErr.message })
+  }
   if (existing) {
     return { ok: true, order_id: existing.id }
   }
@@ -32,33 +34,50 @@ export default defineEventHandler(async (event) => {
     expand: ['data.price.product'],
   })
 
-  const items = li.data.map((row) => {
+  const mapped = li.data.map((row) => {
     const product = row.price?.product as Stripe.Product | null
+    const meta = (product?.metadata ?? {}) as Record<string, string>
     const title = product?.name || row.description || 'Item'
-    const bookIdStr = product?.metadata?.book_id
     const qty = row.quantity ?? 1
-    const unit = (row.amount_subtotal ?? 0) / qty / 100
+    const lineSubtotalCents = row.amount_subtotal ?? 0
+
+    const isShipping = meta.kind === 'shipping' || /^Shipping\b/i.test(title)
+
+    const unit = lineSubtotalCents / Math.max(qty, 1) / 100
 
     return {
-      book_id: bookIdStr ? Number(bookIdStr) : null,
+      isShipping,
+      book_id: meta.book_id ? Number(meta.book_id) : null,
       title_snapshot: title,
       unit_price: unit,
       quantity: qty,
+      line_total: lineSubtotalCents / 100,
     }
   })
 
+  const productItems = mapped.filter((i) => !i.isShipping)
+  const shippingAmount = mapped
+    .filter((i) => i.isShipping)
+    .reduce((s, i) => s + i.line_total, 0)
+
   const md = session.metadata ?? {}
-  const subtotal = md.subtotal
-    ? parseFloat(md.subtotal)
-    : (session.amount_subtotal ?? 0) / 100
+  const subtotal =
+    md.subtotal !== undefined
+      ? parseFloat(md.subtotal)
+      : productItems.reduce((s, i) => s + i.unit_price * i.quantity, 0)
 
-  const shipping_price = md.shipping_price ? parseFloat(md.shipping_price) : 0
+  const shipping_price =
+    md.shipping_price !== undefined
+      ? parseFloat(md.shipping_price)
+      : shippingAmount
 
-  const total = md.total
-    ? parseFloat(md.total)
-    : (session.amount_total ?? 0) / 100
+  const total =
+    md.total !== undefined
+      ? parseFloat(md.total)
+      : (session.amount_total ??
+          Math.round((subtotal + shipping_price) * 100)) / 100
 
-  const { data: order } = await supabase
+  const { data: order, error: orderErr } = await supabase
     .from('orders')
     .insert({
       stripe_session_id: session.id,
@@ -80,15 +99,24 @@ export default defineEventHandler(async (event) => {
     .select('id')
     .single()
 
-  const rows = items.map((i) => ({
-    order_id: order.id,
-    book_id: i.book_id,
-    title_snapshot: i.title_snapshot,
-    unit_price: i.unit_price.toFixed(2),
-    quantity: i.quantity,
-  }))
+  if (orderErr) {
+    throw createError({ statusCode: 500, statusMessage: orderErr.message })
+  }
 
-  await supabase.from('order_items').insert(rows)
+  if (productItems.length) {
+    const rows = productItems.map((i) => ({
+      order_id: order.id,
+      book_id: i.book_id,
+      title_snapshot: i.title_snapshot,
+      unit_price: i.unit_price.toFixed(2),
+      quantity: i.quantity,
+    }))
+
+    const { error: itemsErr } = await supabase.from('order_items').insert(rows)
+    if (itemsErr) {
+      throw createError({ statusCode: 500, statusMessage: itemsErr.message })
+    }
+  }
 
   return { ok: true, order_id: order.id }
 })
