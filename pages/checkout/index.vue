@@ -147,15 +147,35 @@ const focusNotes = () => notesInput.value?.focus()
 const onSubmit = handleSubmit(async () => {
   if (!cartStore.items.length) return
 
-  const amountCents = Math.round((subtotal.value + shippingPrice.value) * 100)
+  const items = cartStore.items.map((i) => ({
+    book_id: i.book_id,
+    title: i.book?.title ?? 'Book',
+    price: i.book?.price ?? 0,
+    quantity: i.quantity,
+    cover_url: i.book?.cover_url ?? undefined,
+  }))
 
-  const { id } = await $fetch<{ id: string }>('/api/checkout', {
+  const { id } = await $fetch<{ id: string }>('/api/stripe/checkout', {
     method: 'POST',
-    body: { amount: amountCents, email: email.value || undefined },
+    body: {
+      items,
+      email: email.value,
+      name: name.value,
+      surname: surname.value,
+      phone: phone.value,
+      country: country.value,
+      city: city.value,
+      zip: zip.value,
+      address: address.value,
+      notes: notes.value,
+      shipping_method: shippingMethod.value,
+      shipping_price: shippingPrice.value,
+      subtotal: subtotal.value,
+      total: total.value,
+    },
   })
 
   const stripe = await stripePromise
-
   if (!stripe) return
   await stripe.redirectToCheckout({ sessionId: id })
 })
