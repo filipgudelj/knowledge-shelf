@@ -76,6 +76,7 @@ const activeTab = ref<'description' | 'authorBio'>('description')
   margin-top: $spacing-4;
   color: $color-gray-800;
   line-height: 1.7;
+  text-align: justify;
 
   html.dark & {
     color: $color-gray-200;

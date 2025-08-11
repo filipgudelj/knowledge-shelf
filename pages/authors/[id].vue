@@ -212,6 +212,7 @@ useHead(() => ({
 .author__bio {
   align-self: center;
   margin-top: $spacing-6;
+  text-align: justify;
 }
 
 .author__titles {
