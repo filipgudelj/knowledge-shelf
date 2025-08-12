@@ -139,7 +139,7 @@ const onSelect = (value: string) => {
   left: 0;
   z-index: 100;
   width: 100%;
-  max-height: 193px;
+  max-height: 232px;
   border: 1px solid $color-gray-300;
   border-radius: $radius-3;
   box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.2);

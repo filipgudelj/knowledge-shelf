@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import type { BookSort, BookFilters } from '@/types'
 
+// PAGE META
+definePageMeta({
+  layout: 'explore',
+})
+
 // STATE
 const { t, locale } = useI18n()
 const route = useRoute()
@@ -15,10 +20,6 @@ const allowedQueryKeys = [
 ]
 
 // CATEGORY
-if (booksStore.categories.length === 0) {
-  await booksStore.getCategories()
-}
-
 const slug = computed(() => route.params.category as string)
 
 const category = computed(() =>
@@ -174,7 +175,6 @@ useHead(() => ({
 
 <template>
   <div class="explore">
-    <CategoryScroller :categories="booksStore.categories" />
     <div class="explore__header">
       <h1 class="explore__title">{{ pageTitle }}</h1>
       <SortBooks v-model:sortBy="sortBy" v-model:order="sortOrder" />
