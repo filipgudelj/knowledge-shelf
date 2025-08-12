@@ -2,13 +2,16 @@
 import { formatNumberToEuro } from '~/helpers/formatters'
 import VueSkeletonLoader from 'vue3-skeleton-loader'
 import 'vue3-skeleton-loader/dist/style.css'
+import { useWindowSize } from '@vueuse/core'
 
 // STATE
 const { t, locale } = useI18n()
 const ordersStore = useOrdersStore()
 const showSkeleton = ref(true)
+const { width } = useWindowSize()
 
 // COMPUTEDS
+const skeletonRowHeight = computed(() => (width.value < 768 ? '140px' : '40px'))
 const rows = computed(() =>
   ordersStore.orders.map((order, index) => ({
     number: index + 1,
@@ -69,13 +72,15 @@ useHead(() => ({
     <h1 class="orders__title">{{ t('orders.title') }}</h1>
 
     <div v-if="isInitialLoading" class="orders__skeleton">
-      <VueSkeletonLoader
-        type="text@12"
-        height="40px"
-        base-color="var(--skel-base)"
-        highlight-color="var(--skel-highlight)"
-        class="orders__skeleton-rows"
-      />
+      <ClientOnly>
+        <VueSkeletonLoader
+          type="text@12"
+          :height="skeletonRowHeight"
+          base-color="var(--skel-base)"
+          highlight-color="var(--skel-highlight)"
+          class="orders__skeleton-rows"
+        />
+      </ClientOnly>
     </div>
 
     <div v-else-if="!ordersStore.orders.length" class="orders__state">
@@ -194,10 +199,13 @@ useHead(() => ({
   @media (max-width: $screen-md) {
     grid-template-columns: 1fr;
     row-gap: $spacing-2;
+    margin-bottom: $spacing-3;
     border: 1px solid $color-gray-200;
     border-radius: $radius-4;
-    background-image: none;
-    margin-bottom: $spacing-3;
+
+    html.dark & {
+      border: 1px solid $color-gray-700;
+    }
   }
 }
 
