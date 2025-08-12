@@ -239,6 +239,18 @@
     }
   },
 
+  "orders": {
+    "title": "Tvoje narudžbe",
+    "empty": "Još nemaš narudžbi.",
+    "number": "Broj",
+    "order": "Narudžba",
+    "titles": "Naslovi",
+    "shippingMethod": "Način dostave",
+    "shipping": "dostava",
+    "totalPrice": "Ukupna cijena",
+    "createdAt": "Vrijeme narudžbe"
+  },
+
   "toast": {
     "requestTooSoon": "Pričekaj prije ponovnog pokušaja",
     "alreadyRegistered": "E-pošta već registrirana",
@@ -336,6 +348,10 @@
         "title": "Uspješno plaćanje ⎪ Knowledge Shelf",
         "description": "Vaša narudžba je dovršena."
       }
+    },
+    "orders": {
+      "title": "Tvoje narudžbe ⎪ Knowledge Shelf",
+      "description": "Pregledajte sve svoje prethodne narudžbe."
     },
     "category": {
       "title": "{pageTitle} ⎪ Knowledge Shelf",

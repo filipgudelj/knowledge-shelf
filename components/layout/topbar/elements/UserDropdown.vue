@@ -31,10 +31,14 @@ onClickOutside(userDropdownRef, () => {
       </button>
 
       <div v-if="showMenu" class="dropdown__menu">
-        <button class="dropdown__item">
-          <div class="dropdown__label">Settings</div>
+        <NuxtLinkLocale
+          @click="showMenu = false"
+          to="/orders"
+          class="dropdown__item"
+        >
+          <div class="dropdown__label">Orders</div>
           <Icon name="mdi:chevron-right" size="20px" class="dropdown__icon" />
-        </button>
+        </NuxtLinkLocale>
 
         <button
           @click="handleLogout"

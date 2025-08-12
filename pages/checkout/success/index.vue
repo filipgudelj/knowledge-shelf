@@ -52,7 +52,8 @@ useHead(() => ({
 </script>
 
 <template>
-  <div v-if="status === 'ok'" class="success">
+  <div v-if="status === 'saving'"><Loader /></div>
+  <div v-else-if="status === 'ok'" class="success">
     <div class="success__header">
       <div class="success__icon">
         <Icon name="mdi:success-circle-outline" size="48px" />

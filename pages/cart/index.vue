@@ -167,7 +167,6 @@ useHead(() => ({
 .cart__table-wrapper {
   overflow-x: auto;
   width: 100%;
-  padding-bottom: $spacing-3;
 
   &::-webkit-scrollbar {
     height: 12px;
