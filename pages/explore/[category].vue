@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BookSort, BookFilters } from '~/types'
+import type { BookSort, BookFilters } from '@/types'
 
 // STATE
 const { t, locale } = useI18n()

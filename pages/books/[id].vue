@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import VueSkeletonLoader from 'vue3-skeleton-loader'
 import 'vue3-skeleton-loader/dist/style.css'
-import type { Book } from '~/types'
+import type { Book } from '@/types'
 import { formatNumberToEuro } from '~/helpers/formatters'
 
 // STATE

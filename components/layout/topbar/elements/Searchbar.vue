@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Book } from '~/types'
+import type { Book } from '@/types'
 import { formatNumberToEuro } from '~/helpers/formatters'
 import { onClickOutside } from '@vueuse/core'
 

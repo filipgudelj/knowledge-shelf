@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Author } from '~/types'
+import type { Author } from '@/types'
 import VueSkeletonLoader from 'vue3-skeleton-loader'
 import 'vue3-skeleton-loader/dist/style.css'
 

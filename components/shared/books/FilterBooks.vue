@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useWindowSize } from '@vueuse/core'
-import type { BookFilters } from '~/types'
+import type { BookFilters } from '@/types'
 
 // PROPS
 const props = defineProps<{
