@@ -7,6 +7,8 @@ import { useThrottleFn } from '@vueuse/core'
 const authStore = useAuthStore()
 const { t, locale } = useI18n()
 const { showToast } = useToast()
+const loading = ref(false)
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 // VALIDATION
 const schema = yup.object({
@@ -25,9 +27,25 @@ const { value: email, errorMessage: emailError } = useField<string>('email')
 
 const onSubmit = handleSubmit(
   async () => {
-    await authStore.sendPasswordResetLink(email.value)
-    resetForm()
-    showToast('success', t('toast.resetLinkSent'))
+    loading.value = true
+    try {
+      const { error } = await Promise.all([
+        authStore.sendPasswordResetLink(email.value),
+        wait(500),
+      ]).then(([res]) => res)
+
+      if (error?.code === 'over_email_send_rate_limit') {
+        showToast('error', t('toast.requestTooSoon'))
+        resetForm()
+        return
+      }
+
+      resetForm()
+      showToast('success', t('toast.resetLinkSent'))
+    } finally {
+      await nextTick()
+      loading.value = false
+    }
   },
   () => {
     submitted.value = true
@@ -37,7 +55,7 @@ const onSubmit = handleSubmit(
 const onSubmitThrottled = useThrottleFn((e: Event) => {
   e.preventDefault()
   onSubmit()
-}, 1000)
+}, 500)
 
 // HEAD
 useHead(() => ({
@@ -50,13 +68,13 @@ useHead(() => ({
 <template>
   <div class="forgot-password">
     <form @submit.prevent="onSubmitThrottled" class="forgot-password__form">
-      <h1 class="forgot-password__title">{{ $t('forgot-password.title') }}</h1>
+      <h1 class="forgot-password__title">{{ $t('forgotPassword.title') }}</h1>
       <FormInput
-        :label="$t('forgot-password.emailLabel')"
+        :label="$t('forgotPassword.emailLabel')"
         v-model="email"
         id="email"
         type="text"
-        :placeholder="$t('forgot-password.emailPlaceholder')"
+        :placeholder="$t('forgotPassword.emailPlaceholder')"
       >
         <template #icon>
           <Icon name="mdi:email-outline" />
@@ -71,8 +89,17 @@ useHead(() => ({
         type="submit"
         variant="primary"
         size="lg"
+        :disabled="loading"
         class="forgot-password__submit"
-        >{{ $t('forgot-password.sendResetLink') }}</FormButton
+      >
+        <template v-if="loading">
+          <Icon name="mdi:loading" class="spin" /> &nbsp;{{
+            $t('forgotPassword.loading')
+          }}
+        </template>
+        <template v-else>
+          {{ $t('forgotPassword.sendResetLink') }}
+        </template></FormButton
       >
     </form>
 
@@ -119,6 +146,16 @@ useHead(() => ({
 
   @media (min-width: $screen-lg) {
     display: block;
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>

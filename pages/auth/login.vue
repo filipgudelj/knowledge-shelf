@@ -9,6 +9,8 @@ const { showToast } = useToast()
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
 const router = useRouter()
+const loading = ref(false)
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 const passwordInput = ref<{ focus: () => void } | null>(null)
 
 // HANDLERS
@@ -43,11 +45,26 @@ const { value: password, errorMessage: passwordError } =
 // SUBMIT
 const onSubmit = handleSubmit(
   async () => {
-    const { error } = await authStore.login(email.value, password.value)
-    if (error?.code === 'invalid_credentials') {
-      showToast('error', t('toast.invalidLoginCredentials'))
-    } else if (!error) {
-      router.push(localePath('/'))
+    loading.value = true
+    try {
+      const [res] = await Promise.all([
+        authStore.login(email.value, password.value),
+        wait(500),
+      ])
+
+      if (res?.error?.code === 'invalid_credentials') {
+        showToast('error', t('toast.invalidLoginCredentials'))
+        await nextTick()
+        loading.value = false
+        return
+      }
+
+      if (!res?.error) {
+        await router.push(localePath('/'))
+        return
+      }
+    } catch (e) {
+      loading.value = false
     }
   },
   () => {
@@ -58,7 +75,7 @@ const onSubmit = handleSubmit(
 const onSubmitThrottled = useThrottleFn((e: Event) => {
   e.preventDefault()
   onSubmit()
-}, 1000)
+}, 500)
 
 // HEAD
 useHead(() => ({
@@ -118,9 +135,16 @@ useHead(() => ({
         type="submit"
         variant="primary"
         size="lg"
+        :disabled="loading"
         class="login__submit"
-        >{{ $t('login.submit') }}</FormButton
       >
+        <template v-if="loading">
+          <Icon name="mdi:loading" class="spin" /> &nbsp;{{
+            $t('login.loading')
+          }}
+        </template>
+        <template v-else> {{ $t('login.submit') }} </template>
+      </FormButton>
     </form>
 
     <div class="login__image" />
@@ -178,6 +202,16 @@ useHead(() => ({
 
   @media (min-width: $screen-lg) {
     display: block;
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>

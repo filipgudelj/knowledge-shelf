@@ -7,6 +7,8 @@ import { useThrottleFn } from '@vueuse/core'
 const authStore = useAuthStore()
 const { showToast } = useToast()
 const { t, locale } = useI18n()
+const loading = ref(false)
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 const passwordInput = ref<{ focus: () => void } | null>(null)
 const confirmPasswordInput = ref<{ focus: () => void } | null>(null)
 
@@ -51,18 +53,26 @@ const { value: confirmPassword, errorMessage: confirmPasswordError } =
 // SUBMIT
 const onSubmit = handleSubmit(
   async () => {
-    const { data, error } = await authStore.register(
-      email.value,
-      password.value,
-    )
-    if (error?.code === 'over_email_send_rate_limit') {
-      showToast('error', t('toast.requestTooSoon'))
-    } else if (!error && data.user?.identities?.length === 0) {
-      showToast('info', t('toast.alreadyRegistered'))
-      resetForm()
-    } else if (!error && data.user?.identities?.length !== 0) {
-      showToast('success', t('toast.confirmationSent'))
-      resetForm()
+    loading.value = true
+    try {
+      const [{ data, error }] = await Promise.all([
+        authStore.register(email.value, password.value),
+        wait(500),
+      ])
+
+      if (error?.code === 'over_email_send_rate_limit') {
+        showToast('error', t('toast.requestTooSoon'))
+        resetForm()
+      } else if (!error && data.user?.identities?.length === 0) {
+        showToast('info', t('toast.alreadyRegistered'))
+        resetForm()
+      } else if (!error && data.user?.identities?.length !== 0) {
+        showToast('success', t('toast.confirmationSent'))
+        resetForm()
+      }
+    } finally {
+      await nextTick()
+      loading.value = false
     }
   },
   () => {
@@ -73,7 +83,7 @@ const onSubmit = handleSubmit(
 const onSubmitThrottled = useThrottleFn((e: Event) => {
   e.preventDefault()
   onSubmit()
-}, 1000)
+}, 500)
 
 // HEAD
 useHead(() => ({
@@ -149,12 +159,19 @@ useHead(() => ({
         type="submit"
         variant="primary"
         size="lg"
+        :disabled="loading"
         class="register__submit"
-        >{{ $t('register.submit') }}</FormButton
       >
+        <template v-if="loading">
+          <Icon name="mdi:loading" class="spin" /> &nbsp;{{
+            $t('register.loading')
+          }}
+        </template>
+        <template v-else> {{ $t('register.submit') }} </template>
+      </FormButton>
     </form>
 
-    <div class="login__image" />
+    <div class="register__image" />
   </div>
 </template>
 
@@ -187,7 +204,7 @@ useHead(() => ({
   margin-top: $spacing-3;
 }
 
-.login__image {
+.register__image {
   display: none;
   width: 50%;
   height: 100%;
@@ -199,6 +216,16 @@ useHead(() => ({
 
   @media (min-width: $screen-lg) {
     display: block;
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>

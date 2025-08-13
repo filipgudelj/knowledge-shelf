@@ -11,6 +11,8 @@ const { t, locale } = useI18n()
 const { showToast } = useToast()
 const localePath = useLocalePath()
 const shouldRender = ref(false)
+const loading = ref(false)
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 const { error_description } = route.query as Record<string, string>
 
 // LCH
@@ -39,15 +41,34 @@ const { value: password, errorMessage: passwordError } =
 
 const onSubmit = handleSubmit(
   async () => {
-    const { error } = await authStore.updateUserPassword(password.value)
+    loading.value = true
+    try {
+      const [res] = await Promise.all([
+        authStore.updateUserPassword(password.value),
+        wait(500),
+      ])
 
-    if (error?.message === 'Auth session missing!') {
-      showToast('error', t('toast.authSessionMissing'))
-    } else if (error?.code === 'same_password') {
-      showToast('error', t('toast.passwordSameAsOld'))
-    } else if (!error) {
-      showToast('success', t('toast.passwordUpdated'))
-      router.push(localePath('/'))
+      if (res?.error?.message === 'Auth session missing!') {
+        showToast('error', t('toast.authSessionMissing'))
+        await nextTick()
+        loading.value = false
+        return
+      }
+
+      if (res?.error?.code === 'same_password') {
+        showToast('error', t('toast.passwordSameAsOld'))
+        await nextTick()
+        loading.value = false
+        return
+      }
+
+      if (!res?.error) {
+        showToast('success', t('toast.passwordUpdated'))
+        await router.push(localePath('/'))
+        return
+      }
+    } catch (e) {
+      loading.value = false
     }
   },
   () => {
@@ -58,7 +79,7 @@ const onSubmit = handleSubmit(
 const onSubmitThrottled = useThrottleFn((e: Event) => {
   e.preventDefault()
   onSubmit()
-}, 1000)
+}, 500)
 
 // HEAD
 useHead(() => ({
@@ -71,14 +92,14 @@ useHead(() => ({
 <template>
   <div v-if="shouldRender" class="reset-password">
     <form @submit.prevent="onSubmitThrottled" class="reset-password__form">
-      <h1 class="reset-password__title">{{ $t('reset-password.title') }}</h1>
+      <h1 class="reset-password__title">{{ $t('resetPassword.title') }}</h1>
 
       <FormInput
-        :label="$t('reset-password.newPasswordLabel')"
+        :label="$t('resetPassword.newPasswordLabel')"
         v-model="password"
         id="new-password"
         type="password"
-        :placeholder="$t('reset-password.newPasswordPlaceholder')"
+        :placeholder="$t('resetPassword.newPasswordPlaceholder')"
       >
         <template #icon>
           <Icon name="mdi:password-outline" />
@@ -93,9 +114,16 @@ useHead(() => ({
         type="submit"
         variant="primary"
         size="lg"
+        :disabled="loading"
         class="reset-password__submit"
-        >{{ $t('reset-password.setNewPassword') }}</FormButton
       >
+        <template v-if="loading">
+          <Icon name="mdi:loading" class="spin" /> &nbsp;{{
+            $t('resetPassword.loading')
+          }}
+        </template>
+        <template v-else> {{ $t('resetPassword.setNewPassword') }} </template>
+      </FormButton>
     </form>
 
     <div class="reset-password__image" />
@@ -141,6 +169,16 @@ useHead(() => ({
 
   @media (min-width: $screen-lg) {
     display: block;
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>

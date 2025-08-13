@@ -28,21 +28,24 @@
     "passwordLabel": "Password",
     "passwordPlaceholder": "Enter your password",
     "submit": "Login",
-    "forgotPassword": "Forgot password?"
+    "forgotPassword": "Forgot password?",
+    "loading": "Logging in..."
   },
 
-  "forgot-password": {
+  "forgotPassword": {
     "title": "Reset password",
     "emailLabel": "Email",
     "emailPlaceholder": "Enter your email",
-    "sendResetLink": "Send reset link"
+    "sendResetLink": "Send reset link",
+    "loading": "Sending link..."
   },
 
-  "reset-password": {
+  "resetPassword": {
     "title": "New password",
     "newPasswordLabel": "New password",
     "newPasswordPlaceholder": "Enter your new password",
-    "setNewPassword": "Set new password"
+    "setNewPassword": "Set new password",
+    "loading": "Setting password..."
   },
 
   "register": {
@@ -54,7 +57,8 @@
     "passwordPlaceholder": "Enter your password",
     "confirmPasswordLabel": "Confirm Password",
     "confirmPasswordPlaceholder": "Re-enter your password",
-    "submit": "Register"
+    "submit": "Register",
+    "loading": "Signing you up…"
   },
 
   "validation": {

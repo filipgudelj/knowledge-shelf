@@ -28,21 +28,24 @@
     "passwordLabel": "Lozinka",
     "passwordPlaceholder": "Unesi svoju lozinku",
     "submit": "Prijavi se",
-    "forgotPassword": "Zaboravljena lozinka?"
+    "forgotPassword": "Zaboravljena lozinka?",
+    "loading": "Prijavljujem…"
   },
 
-  "forgot-password": {
+  "forgotPassword": {
     "title": "Resetiraj lozinku",
     "emailLabel": "E-pošta",
     "emailPlaceholder": "Unesi svoju e-poštu",
-    "sendResetLink": "Pošalji link za resetiranje"
+    "sendResetLink": "Pošalji link za resetiranje",
+    "loading": "Šaljem poveznicu..."
   },
 
-  "reset-password": {
+  "resetPassword": {
     "title": "Nova lozinka",
     "newPasswordLabel": "Nova lozinka",
     "newPasswordPlaceholder": "Unesi novu lozinku",
-    "setNewPassword": "Postavi novu lozinku"
+    "setNewPassword": "Postavi novu lozinku",
+    "loading": "Postavljam lozinku..."
   },
 
   "register": {
@@ -54,7 +57,8 @@
     "passwordPlaceholder": "Unesi svoju lozinku",
     "confirmPasswordLabel": "Potvrdi lozinku",
     "confirmPasswordPlaceholder": "Ponovno unesi lozinku",
-    "submit": "Registriraj se"
+    "submit": "Registriraj se",
+    "loading": "Registriram…"
   },
 
   "validation": {
