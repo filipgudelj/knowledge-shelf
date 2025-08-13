@@ -237,10 +237,11 @@
     "shippingTotal": "Shipping",
     "total": "Total",
     "placeOrder": "Place Order",
+    "loading": "Processing order…",
 
     "success": {
       "title": "Payment successful",
-      "description": "Your order was completed."
+      "description": "Your order confirmation email has been sent."
     }
   },
 

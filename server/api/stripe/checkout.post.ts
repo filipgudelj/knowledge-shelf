@@ -86,6 +86,7 @@ export default defineEventHandler(async (event) => {
       shipping_price: String(body.shipping_price),
       subtotal: String(body.subtotal),
       total: String(body.total),
+      locale: (body.locale || 'en').toLowerCase(),
     },
     success_url: `${origin}${prefix}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}${prefix}/`,

@@ -1,6 +1,7 @@
 import Stripe from 'stripe'
 import { getQuery } from 'h3'
 import { serverSupabaseClient } from '#supabase/server'
+import nodemailer from 'nodemailer'
 
 export default defineEventHandler(async (event) => {
   const { session_id } = getQuery(event) as { session_id?: string }
@@ -164,5 +165,156 @@ export default defineEventHandler(async (event) => {
       throw createError({ statusCode: 500, statusMessage: updErr.message })
     }
   }
+
+  const toEmail = session.customer_details?.email ?? (md.email || '')
+  if (toEmail) {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: { user: process.env.SMTP_USER!, pass: process.env.SMTP_PASS! },
+    })
+
+    const lang = String(md.locale || 'en').toLowerCase()
+    const t =
+      lang === 'hr'
+        ? {
+            thanks: 'Hvala na narudžbi!',
+            order: 'Narudžba',
+            item: 'Artikl',
+            quantity: 'Količina',
+            price: 'Cijena',
+            subtotal: 'Međuzbroj',
+            shipping: 'Dostava',
+            total: 'Ukupno',
+            shipTo: 'Dostava na',
+            phone: 'Telefon',
+            notes: 'Napomena',
+            rights: 'Sva prava pridržana.',
+          }
+        : {
+            thanks: 'Thanks for your order!',
+            order: 'Order',
+            item: 'Item',
+            quantity: 'Quantity',
+            price: 'Price',
+            subtotal: 'Subtotal',
+            shipping: 'Shipping',
+            total: 'Total',
+            shipTo: 'Shipping to',
+            phone: 'Phone',
+            notes: 'Notes',
+            rights: 'All rights reserved.',
+          }
+
+    const itemRows = productItems
+      .map(
+        (i) => `
+        <tr>
+          <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;">${i.title_snapshot}</td>
+          <td align="center" style="padding:8px 0;border-bottom:1px solid #f1f5f9;">${i.quantity}</td>
+          <td align="right" style="padding:8px 0;border-bottom:1px solid #f1f5f9;">${i.unit_price.toFixed(2)} €</td>
+        </tr>
+      `,
+      )
+      .join('')
+
+    const html = `
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+</head>
+<body style="margin:0;padding:0;background:#f6f7f9;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f6f7f9;">
+    <tr>
+      <td align="center" style="padding:24px;">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;">
+          <tr>
+            <td style="background:#1aa3ff;color:#ffffff;padding:20px 24px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:20px;font-weight:700;letter-spacing:.3px;">
+              Knowledge Shelf
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:24px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#111827;">
+              <h2 style="margin:0 0 8px;font-size:22px;font-weight:700;color:#111827;">${t.thanks}</h2>
+              <p style="margin:0 0 16px;font-size:14px;color:#374151;">${t.order} <strong>#${order.id}</strong></p>
+
+              <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                <thead>
+                  <tr>
+                    <th align="left"   style="font-size:12px;color:#6b7280;padding:8px 0;border-bottom:1px solid #f1f5f9;">${t.item}</th>
+                    <th align="center" style="font-size:12px;color:#6b7280;padding:8px 0;border-bottom:1px solid #f1f5f9;">${t.quantity}</th>
+                    <th align="right"  style="font-size:12px;color:#6b7280;padding:8px 0;border-bottom:1px solid #f1f5f9;">${t.price}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${itemRows}
+                </tbody>
+              </table>
+
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:18px;border-collapse:collapse;">
+                <tr>
+                  <td align="left"  style="padding:6px 0;font-size:14px;color:#111827;">${t.subtotal}</td>
+                  <td align="right" style="padding:6px 0;font-size:14px;color:#111827;"><strong>${Number(subtotal).toFixed(2)} €</strong></td>
+                </tr>
+                <tr>
+                  <td align="left"  style="padding:6px 0;font-size:14px;color:#111827;">${t.shipping}</td>
+                  <td align="right" style="padding:6px 0;font-size:14px;color:#111827;"><strong>${Number(shipping_price).toFixed(2)} €</strong></td>
+                </tr>
+                <tr>
+                  <td align="left"  style="padding:8px 0;border-top:1px solid #f1f5f9;font-size:16px;font-weight:700;color:#111827;">${t.total}</td>
+                  <td align="right" style="padding:8px 0;border-top:1px solid #f1f5f9;font-size:16px;font-weight:700;color:#111827;">${Number(total).toFixed(2)} €</td>
+                </tr>
+              </table>
+
+              <div style="margin-top:16px;padding:12px;background:#fcfcfc;border:1px solid #e5e7eb;border-radius:6px;">
+                <p style="margin:0 0 4px;font-size:14px;color:#111827;"><strong>${t.shipTo}</strong></p>
+                <p style="margin:0;font-size:14px;color:#374151;">
+                  ${md.name || ''} ${md.surname || ''}<br/>
+                  ${md.address || ''}<br/>
+                  ${md.zip || ''} ${md.city || ''}, ${md.country || ''}<br/>
+                  ${md.phone ? `${t.phone}: ${md.phone}<br/>` : ``}
+                </p>
+              </div>
+
+              ${
+                md.notes
+                  ? `
+              <div style="margin-top:12px;padding:12px;background:#fcfcfc;border:1px solid #e5e7eb;border-radius:6px;">
+                <p style="margin:0 0 4px;font-size:14px;color:#111827;"><strong>${t.notes}</strong></p>
+                <p style="margin:0;font-size:14px;color:#374151;">${String(md.notes).replace(/\n/g, '<br/>')}</p>
+              </div>`
+                  : ``
+              }
+            </td>
+          </tr>
+
+          <tr>
+            <td style="background:#f3f4f6;color:#6b7280;padding:12px 24px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:12px;text-align:center;">
+              © ${new Date().getFullYear()} Knowledge Shelf. ${t.rights}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+`
+
+    try {
+      await transporter.sendMail({
+        from: process.env.SMTP_USER!,
+        to: toEmail,
+        subject: `${t.order} #${order.id} ${lang === 'hr' ? 'potvrda' : 'confirmation'}`,
+        html,
+        replyTo: process.env.SMTP_USER!,
+      })
+    } catch (err) {
+      console.error('Order confirmation email failed', err)
+    }
+  }
+
   return { ok: true, order_id: order.id }
 })

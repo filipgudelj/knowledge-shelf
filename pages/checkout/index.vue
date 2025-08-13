@@ -12,6 +12,9 @@ const stripePromise = loadStripe(useRuntimeConfig().public.stripePublishableKey)
 const { t, locale } = useI18n()
 const cartStore = useCartStore()
 const showSkeleton = ref(true)
+const user = useSupabaseUser()
+const loading = ref(false)
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 const nameInput = ref<{ focus: () => void } | null>(null)
 const surnameInput = ref<{ focus: () => void } | null>(null)
@@ -110,7 +113,7 @@ const schema = yup.object({
 const { handleSubmit, errors } = useForm({
   validationSchema: schema,
   initialValues: {
-    email: '',
+    email: user.value?.email,
     name: '',
     surname: '',
     phone: '',
@@ -147,44 +150,59 @@ const focusNotes = () => notesInput.value?.focus()
 const onSubmit = handleSubmit(async () => {
   if (!cartStore.items.length) return
 
-  const items = cartStore.items.map((i) => ({
-    book_id: i.book_id,
-    title: i.book?.title ?? 'Book',
-    price: i.book?.price ?? 0,
-    quantity: i.quantity,
-    cover_url: i.book?.cover_url ?? undefined,
-  }))
+  loading.value = true
+  try {
+    const items = cartStore.items.map((i) => ({
+      book_id: i.book_id,
+      title: i.book?.title ?? 'Book',
+      price: i.book?.price ?? 0,
+      quantity: i.quantity,
+      cover_url: i.book?.cover_url ?? undefined,
+    }))
 
-  const { id } = await $fetch<{ id: string }>('/api/stripe/checkout', {
-    method: 'POST',
-    body: {
-      items,
-      email: email.value,
-      name: name.value,
-      surname: surname.value,
-      phone: phone.value,
-      country: country.value,
-      city: city.value,
-      zip: zip.value,
-      address: address.value,
-      notes: notes.value,
-      shipping_method: shippingMethod.value,
-      shipping_price: shippingPrice.value,
-      subtotal: subtotal.value,
-      total: total.value,
-      locale: locale.value,
-    },
-  })
+    const [{ id }] = await Promise.all([
+      $fetch<{ id: string }>('/api/stripe/checkout', {
+        method: 'POST',
+        body: {
+          items,
+          email: email.value,
+          name: name.value,
+          surname: surname.value,
+          phone: phone.value,
+          country: country.value,
+          city: city.value,
+          zip: zip.value,
+          address: address.value,
+          notes: notes.value,
+          shipping_method: shippingMethod.value,
+          shipping_price: shippingPrice.value,
+          subtotal: subtotal.value,
+          total: total.value,
+          locale: locale.value,
+        },
+      }),
+      wait(500),
+    ])
 
-  const stripe = await stripePromise
-  if (!stripe) return
-  await stripe.redirectToCheckout({ sessionId: id })
+    const stripe = await stripePromise
+
+    if (!stripe) {
+      await nextTick()
+      loading.value = false
+      return
+    }
+
+    await stripe.redirectToCheckout({ sessionId: id })
+  } catch (e) {
+    await nextTick()
+    loading.value = false
+  }
 })
 
 const onSubmitThrottled = useThrottleFn((e: Event) => {
   e.preventDefault()
   onSubmit()
-}, 1000)
+}, 500)
 
 // LCH
 onMounted(async () => {
@@ -401,8 +419,20 @@ useHead(() => ({
             </FormInput>
           </div>
 
-          <FormButton type="submit" variant="primary" class="checkout__submit">
-            {{ t('checkout.placeOrder') }}
+          <FormButton
+            type="submit"
+            variant="primary"
+            :disabled="loading"
+            class="checkout__submit"
+          >
+            <template v-if="loading">
+              <Icon name="mdi:loading" class="spin" />&nbsp;{{
+                t('checkout.loading')
+              }}
+            </template>
+            <template v-else>
+              {{ t('checkout.placeOrder') }}
+            </template>
           </FormButton>
         </form>
 
@@ -608,5 +638,15 @@ useHead(() => ({
 .skeleton__left {
   @include flex(column);
   gap: $spacing-6;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

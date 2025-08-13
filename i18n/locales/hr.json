@@ -236,10 +236,11 @@
     "shippingTotal": "Dostava",
     "total": "Ukupno",
     "placeOrder": "Završi narudžbu",
+    "loading": "Obrada narudžbe…",
 
     "success": {
       "title": "Uspješno plaćanje",
-      "description": "Vaša narudžba je dovršena."
+      "description": "E-poruka s potvrdom narudžbe je poslana."
     }
   },
 
