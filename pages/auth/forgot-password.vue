@@ -25,6 +25,7 @@ const submitted = ref(false)
 const { handleSubmit, resetForm } = useForm({ validationSchema: schema })
 const { value: email, errorMessage: emailError } = useField<string>('email')
 
+// SUBMIT
 const onSubmit = handleSubmit(
   async () => {
     loading.value = true
