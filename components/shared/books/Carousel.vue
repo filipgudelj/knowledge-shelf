@@ -35,12 +35,15 @@ const onImageLoad = (index: number) => {
 // COMPUTEDS
 const totalSlides = computed<number>(() => props.books.length)
 const visibleSlides = computed<number>(() => {
-  if (width.value < 510) return 1
-  if (width.value < 900) return 2
-  if (width.value < 1150) return 3
-  if (width.value < 1450) return 4
-  if (width.value < 1700) return 5
-  return 6
+  if (width.value < 495) return 1
+  if (width.value < 685) return 2
+  if (width.value < 768) return 3
+  if (width.value < 967) return 2
+  if (width.value < 1200) return 3
+  if (width.value < 1433) return 4
+  if (width.value < 1665) return 5
+  if (width.value < 1902) return 6
+  return 7
 })
 const isPreviousButtonDisabled = computed(() => currentSlideIndex.value === 0)
 const isNextButtonDisabled = computed(
