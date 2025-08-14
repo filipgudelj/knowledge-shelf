@@ -10,12 +10,12 @@ const { showToast } = useToast()
 const loading = ref(false)
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 const trim = (s?: string) => (s ?? '').trim()
-console.log(user.value)
+const emailDisplay = user.value?.email
+
 const nameInput = ref<{ focus: () => void } | null>(null)
 const surnameInput = ref<{ focus: () => void } | null>(null)
 
 const lastSaved = ref({
-  email: trim(user.value?.user_metadata?.email ?? ''),
   name: trim(user.value?.user_metadata?.name ?? ''),
   surname: trim(user.value?.user_metadata?.surname ?? ''),
 })
@@ -23,20 +23,12 @@ const lastSaved = ref({
 // COMPUTEDS
 const isChanged = computed(
   () =>
-    trim(email.value) !== lastSaved.value.email ||
     trim(name.value) !== lastSaved.value.name ||
     trim(surname.value) !== lastSaved.value.surname,
 )
 
 // VALIDATION
 const schema = yup.object({
-  email: yup
-    .string()
-    .required(t('validation.email.required'))
-    .matches(
-      /^[^@]+?\.[^@]+?@[\w.-]+\.[a-zA-Z]{2,}$/,
-      t('validation.email.invalid'),
-    ),
   name: yup.string().required(t('validation.name.required')),
   surname: yup.string().required(t('validation.surname.required')),
 })
@@ -45,44 +37,34 @@ const submitted = ref(false)
 const { handleSubmit, errors } = useForm({
   validationSchema: schema,
   initialValues: {
-    email: user.value?.user_metadata.email,
     name: user.value?.user_metadata.name,
     surname: user.value?.user_metadata.surname,
   },
 })
 
-const { value: email } = useField<string>('email')
 const { value: name } = useField<string>('name')
 const { value: surname } = useField<string>('surname')
 
 // HANDLERS
-const focusName = () => nameInput.value?.focus()
 const focusSurname = () => surnameInput.value?.focus()
 
 // SUBMIT
 const onSubmit = handleSubmit(
   async () => {
-    if (!email.value) return
     loading.value = true
 
     try {
       const [res] = await Promise.all([
         supabase.auth.updateUser({
-          email: email.value,
           data: { name: name.value, surname: surname.value },
         }),
         wait(500),
       ])
 
-      if (res?.error?.code === 'over_email_send_rate_limit') {
-        showToast('error', t('toast.requestTooSoon'))
-      }
-
       if (!res?.error) {
         await supabase.auth.refreshSession()
         showToast('success', t('toast.profileUpdated'))
         lastSaved.value = {
-          email: trim(email.value),
           name: trim(name.value),
           surname: trim(surname.value),
         }
@@ -111,21 +93,10 @@ useHead(() => ({
         {{ t('settings.title') }}
       </h1>
 
-      <FormInput
-        id="email"
-        v-model="email"
-        type="email"
-        :label="t('settings.email')"
-        :placeholder="t('settings.placeholders.email')"
-        @keydown.enter.prevent="focusName"
-      >
-        <template #icon><Icon name="mdi:email-outline" /></template>
-        <template #error>
-          <div v-if="errors.email">
-            {{ errors.email }}
-          </div>
-        </template>
-      </FormInput>
+      <div class="settings__email-block">
+        <div class="settings__label">{{ t('settings.email') }}</div>
+        <p class="settings__email">{{ emailDisplay }}</p>
+      </div>
 
       <FormInput
         ref="nameInput"
@@ -185,12 +156,8 @@ useHead(() => ({
   @include flex(row);
   gap: $spacing-5;
   width: 100%;
-  height: 400px;
+  height: 360px;
   margin-top: $spacing-6;
-}
-
-.settings__title {
-  margin-bottom: $spacing-6;
 }
 
 .settings__form {
@@ -201,6 +168,20 @@ useHead(() => ({
   @media (min-width: $screen-lg) {
     width: 50%;
   }
+}
+
+.settings__email-block {
+  width: 100%;
+  margin-block: $spacing-3;
+}
+
+.settings__label {
+  font-size: $font-size-sm;
+}
+
+.settings__email {
+  padding-bottom: $spacing-3;
+  font-size: $font-size-lg;
 }
 
 .settings__submit {
