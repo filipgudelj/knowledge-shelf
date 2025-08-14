@@ -115,7 +115,7 @@ export const useBooksStore = defineStore('books', () => {
         .select('*')
         .or(`title.ilike.%${searchQuery}%,author_name.ilike.%${searchQuery}%`)
         .order(sort?.sortBy ?? 'created_at', {
-          ascending: sort?.ascending ?? true,
+          ascending: sort?.ascending ?? false,
         })
         .range(start, end)
     } else {
@@ -123,7 +123,7 @@ export const useBooksStore = defineStore('books', () => {
         .from('books')
         .select('*, author:authors(*), category:categories(*)')
         .order(sort?.sortBy ?? 'created_at', {
-          ascending: sort?.ascending ?? true,
+          ascending: sort?.ascending ?? false,
         })
         .range(start, end)
     }
