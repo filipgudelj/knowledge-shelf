@@ -33,6 +33,15 @@ onClickOutside(userDropdownRef, () => {
       <div v-if="showMenu" class="dropdown__menu">
         <NuxtLinkLocale
           @click="showMenu = false"
+          to="/settings"
+          class="dropdown__item"
+        >
+          <div class="dropdown__label">Settings</div>
+          <Icon name="mdi:chevron-right" size="20px" class="dropdown__icon" />
+        </NuxtLinkLocale>
+
+        <NuxtLinkLocale
+          @click="showMenu = false"
           to="/orders"
           class="dropdown__item"
         >

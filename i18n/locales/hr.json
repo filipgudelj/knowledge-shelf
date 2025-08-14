@@ -256,6 +256,20 @@
     "createdAt": "Vrijeme narudžbe"
   },
 
+  "settings": {
+    "title": "Postavke",
+    "email": "E-pošta",
+    "name": "Ime",
+    "surname": "Prezime",
+    "placeholders": {
+      "email": "Unesi svoju e-poštu",
+      "name": "Unesi svoje ime",
+      "surname": "Unesi svoje prezime"
+    },
+    "loading": "Spremanje…",
+    "save": "Spremi"
+  },
+
   "toast": {
     "requestTooSoon": "Pričekaj prije ponovnog pokušaja",
     "alreadyRegistered": "E-pošta već registrirana",
@@ -267,6 +281,7 @@
     "passwordUpdated": "Tvoja lozinka je ažurirana",
     "authSessionMissing": "Nedostaje autentikacijska sesija",
     "passwordSameAsOld": "Nova lozinka mora biti drugačija",
+    "profileUpdated": "Profil je ažuriran",
     "success": "Uspjeh",
     "error": "Greška",
     "info": "Informacija"
@@ -357,6 +372,10 @@
     "orders": {
       "title": "Tvoje narudžbe ⎪ Knowledge Shelf",
       "description": "Pregledajte sve svoje prethodne narudžbe."
+    },
+    "settings": {
+      "title": "Postavke ⎪ Knowledge Shelf",
+      "description": "Upravljajte podacima profila i postavkama računa."
     },
     "category": {
       "title": "{pageTitle} ⎪ Knowledge Shelf",

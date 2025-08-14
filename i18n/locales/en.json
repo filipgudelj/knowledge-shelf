@@ -245,6 +245,20 @@
     }
   },
 
+  "settings": {
+    "title": "Settings",
+    "email": "Email",
+    "name": "Name",
+    "surname": "Surname",
+    "placeholders": {
+      "email": "Enter your email",
+      "name": "Enter your first name",
+      "surname": "Enter your last name"
+    },
+    "loading": "Saving…",
+    "save": "Save"
+  },
+
   "orders": {
     "title": "Your Orders",
     "empty": "You have no orders yet.",
@@ -268,6 +282,7 @@
     "passwordUpdated": "Your password has been updated",
     "authSessionMissing": "Authentication session missing",
     "passwordSameAsOld": "New password must be different",
+    "profileUpdated": "Profile updated",
     "success": "Success",
     "error": "Error",
     "info": "Info"
@@ -358,6 +373,10 @@
     "orders": {
       "title": "Your Orders ⎪ Knowledge Shelf",
       "description": "View all your past orders."
+    },
+    "settings": {
+      "title": "Settings ⎪ Knowledge Shelf",
+      "description": "Manage your profile information and account settings."
     },
     "category": {
       "title": "{pageTitle} ⎪ Knowledge Shelf",

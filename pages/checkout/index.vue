@@ -114,8 +114,8 @@ const { handleSubmit, errors } = useForm({
   validationSchema: schema,
   initialValues: {
     email: user.value?.email,
-    name: '',
-    surname: '',
+    name: user.value?.user_metadata.name ?? '',
+    surname: user.value?.user_metadata.surname ?? '',
     phone: '',
     country: 'HR',
     city: '',
@@ -422,6 +422,7 @@ useHead(() => ({
           <FormButton
             type="submit"
             variant="primary"
+            size="lg"
             :disabled="loading"
             class="checkout__submit"
           >
