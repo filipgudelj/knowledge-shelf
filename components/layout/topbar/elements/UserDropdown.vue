@@ -67,10 +67,21 @@ onClickOutside(userDropdownRef, () => {
   width: 32px;
   height: 32px;
   border-radius: 50%;
+  border: 1px solid $color-gray-400;
   background-color: $color-gray-200;
+  transition: all 0.4s ease;
 
   html.dark & {
+    border: 1px solid $color-gray-600;
     background-color: $color-gray-800;
+
+    &:hover {
+      border: 1px solid $color-blue-500;
+    }
+  }
+
+  &:hover {
+    border: 1px solid $color-blue-500;
   }
 }
 
