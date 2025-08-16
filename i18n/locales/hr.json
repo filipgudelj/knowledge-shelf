@@ -261,11 +261,16 @@
     "email": "E-pošta",
     "name": "Ime",
     "surname": "Prezime",
+    "phone": "Telefon",
     "placeholders": {
       "email": "Unesi svoju e-poštu",
       "name": "Unesi svoje ime",
-      "surname": "Unesi svoje prezime"
+      "surname": "Unesi svoje prezime",
+      "phone": "Unesi svoj broj telefona"
     },
+    "password": "Lozinka",
+    "resetPasswordText": "Za promjenu lozinke,",
+    "resetPasswordLink": "kliknite ovdje.",
     "loading": "Spremanje…",
     "save": "Spremi"
   },

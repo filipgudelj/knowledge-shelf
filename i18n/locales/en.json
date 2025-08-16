@@ -250,11 +250,16 @@
     "email": "Email",
     "name": "Name",
     "surname": "Surname",
+    "phone": "Phone",
     "placeholders": {
       "email": "Enter your email",
       "name": "Enter your first name",
-      "surname": "Enter your last name"
+      "surname": "Enter your last name",
+      "phone": "Enter your phone number"
     },
+    "password": "Password",
+    "resetPasswordText": "To change your password,",
+    "resetPasswordLink": "click here.",
     "loading": "Saving…",
     "save": "Save"
   },

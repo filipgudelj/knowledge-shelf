@@ -116,7 +116,7 @@ const { handleSubmit, errors } = useForm({
     email: user.value?.email,
     name: user.value?.user_metadata.name ?? '',
     surname: user.value?.user_metadata.surname ?? '',
-    phone: '',
+    phone: user.value?.user_metadata.phone ?? '',
     country: 'HR',
     city: '',
     zip: '',
