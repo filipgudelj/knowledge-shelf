@@ -123,7 +123,6 @@ const resetFilters = () => {
 <style lang="scss" scoped>
 .filters {
   @include flex(column, flex-start, stretch);
-  gap: $spacing-5;
   width: 100%;
   padding: $spacing-4 $spacing-6;
   border: 1px solid $color-gray-300;
@@ -137,11 +136,11 @@ const resetFilters = () => {
 }
 
 .filters__select {
-  @include flex(row, flex-start, stretch);
-  gap: $spacing-4;
+  @include flex(column, flex-start, stretch);
 
-  @media (max-width: $screen-lg) {
-    flex-direction: column;
+  @media (min-width: $screen-lg) {
+    @include flex(row, flex-start, stretch);
+    gap: $spacing-4;
   }
 }
 

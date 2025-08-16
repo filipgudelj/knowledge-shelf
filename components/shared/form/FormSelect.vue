@@ -20,6 +20,10 @@ const isOpen = ref(false)
 const triggerRef = ref<HTMLElement | null>(null)
 
 // COMPUTEDS
+const isPlaceholder = computed(() => {
+  return !props.options.some((opt) => opt.value === props.modelValue)
+})
+
 const selectedLabel = computed(() => {
   const selected = props.options.find((opt) => opt.value === props.modelValue)
   return selected ? selected.label : props.placeholder
@@ -51,14 +55,15 @@ const onSelect = (value: string) => {
       @click="toggleDropdown"
       type="button"
     >
-      <span>{{ selectedLabel }}</span>
+      <span :class="{ select__placeholder: isPlaceholder }">
+        {{ selectedLabel }}
+      </span>
       <icon
         name="mdi:chevron-left"
         class="select__icon"
         :class="{ 'select__icon--rotated': isOpen }"
       />
     </button>
-
     <div v-if="isOpen" class="select__options">
       <div
         v-for="option in props.options"
@@ -70,6 +75,8 @@ const onSelect = (value: string) => {
         {{ option.label }}
       </div>
     </div>
+
+    <div class="select__error"><slot name="error" /></div>
   </div>
 </template>
 
@@ -135,7 +142,7 @@ const onSelect = (value: string) => {
 
 .select__options {
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% - 16px);
   left: 0;
   z-index: 100;
   width: 100%;
@@ -199,5 +206,16 @@ const onSelect = (value: string) => {
     background-color: $color-blue-500;
     color: $color-gray-100;
   }
+}
+
+.select__placeholder {
+  color: $color-gray-600;
+}
+
+.select__error {
+  height: 20px;
+  margin-top: $spacing-1;
+  color: $color-red-500;
+  font-size: $font-size-sm;
 }
 </style>

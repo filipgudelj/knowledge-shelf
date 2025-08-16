@@ -117,7 +117,7 @@ const { handleSubmit, errors } = useForm({
     name: user.value?.user_metadata.name ?? '',
     surname: user.value?.user_metadata.surname ?? '',
     phone: user.value?.user_metadata.phone ?? '',
-    country: 'HR',
+    country: '',
     city: '',
     zip: '',
     address: '',
@@ -328,8 +328,15 @@ useHead(() => ({
               id="country"
               v-model="country"
               :label="t('checkout.shipping.country')"
+              :placeholder="t('checkout.shipping.placeholders.country')"
               :options="countries"
-            />
+            >
+              <template #error>
+                <div v-if="errors.country">
+                  {{ errors.country }}
+                </div>
+              </template>
+            </FormSelect>
 
             <div class="checkout__row">
               <FormInput
@@ -619,10 +626,6 @@ useHead(() => ({
 .checkout__empty {
   margin-top: $spacing-6;
   font-size: $font-size-lg;
-}
-
-.select {
-  margin-bottom: $spacing-6;
 }
 
 .checkout__skeleton {

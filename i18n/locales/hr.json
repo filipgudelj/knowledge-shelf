@@ -96,7 +96,7 @@
       "required": "Način dostave je obavezan"
     },
     "phone": {
-      "invalid": "Unesite ispravan broj telefona"
+      "invalid": "Unesi ispravan broj telefona"
     }
   },
 
@@ -217,9 +217,10 @@
       "zip": "Poštanski broj",
       "country": "Država",
       "methodTitle": "Način dostave",
-      "chooseMethod": "Odaberite način dostave",
+      "chooseMethod": "Odaberi način dostave",
       "notesOptional": "Napomene uz narudžbu (neobavezno)",
       "placeholders": {
+        "country": "-- Odaberi državu --",
         "address": "Unesi adresu",
         "city": "Unesi grad",
         "zip": "Unesi poštanski broj",
@@ -270,7 +271,7 @@
     },
     "password": "Lozinka",
     "resetPasswordText": "Za promjenu lozinke,",
-    "resetPasswordLink": "kliknite ovdje.",
+    "resetPasswordLink": "klikni ovdje.",
     "loading": "Spremanje…",
     "save": "Spremi"
   },
