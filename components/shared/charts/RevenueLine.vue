@@ -14,7 +14,7 @@ const showSkeleton = ref(true)
 
 // API
 const fetchRevenue = async () => {
-  const { data, error } = await supabase.rpc('revenue_last_30d')
+  const { data } = await supabase.rpc('revenue_last_30d')
   if (data) {
     rows.value = data
   }
@@ -55,7 +55,7 @@ onMounted(async () => {
       :key="'skeleton-' + n"
       type="image@1"
       width="'100%'"
-      :height="'390px'"
+      :height="'385px'"
       base-color="var(--skel-base)"
       highlight-color="var(--skel-highlight)"
     >
@@ -73,7 +73,6 @@ onMounted(async () => {
       :y-grid-line="true"
       :height="320"
       :hide-legend="true"
-      class="chart__body"
     >
       <template #tooltip="{ values }">
         <div class="chart__tooltip">

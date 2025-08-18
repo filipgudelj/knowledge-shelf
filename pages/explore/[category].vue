@@ -194,14 +194,13 @@ useHead(() => ({
 }
 
 .explore__header {
-  @include flex(row, space-between, flex-end);
+  @include flex(row, space-between, center);
   flex-wrap: wrap;
   gap: $spacing-2;
   margin-top: $spacing-6;
 }
 
 .explore__title {
-  align-self: flex-start;
   margin-right: $spacing-9;
 }
 

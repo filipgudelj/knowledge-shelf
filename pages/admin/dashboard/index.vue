@@ -17,9 +17,9 @@ useHead(() => ({
     <ClientOnly>
       <RevenueLine />
 
-      <div class="dashboard__row">
-        <!-- <CategoryPie />
-        <TopBooks /> -->
+      <div class="dashboard__flex">
+        <CategoryDonut />
+        <TopBooks />
       </div>
     </ClientOnly>
   </div>
@@ -33,9 +33,14 @@ useHead(() => ({
   margin-top: $spacing-6;
 }
 
-.dashboard__row {
+.dashboard__flex {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  @include flex(column);
   gap: $spacing-3;
+  width: 100%;
+
+  @media (min-width: $screen-lg) {
+    @include flex(row);
+  }
 }
 </style>

@@ -17,7 +17,7 @@
 
   --vis-tooltip-text-color: #{colors.$color-gray-900} !important;
   --vis-axis-tick-label-color: #{colors.$color-gray-900} !important;
-  // --vis-legend-label-color: red !important;
+  --vis-legend-label-color: #{colors.$color-gray-700} !important;
 
   // --vis-axis-label-color: red !important;
   // --vis-legend-label-color: red !important;
@@ -40,7 +40,7 @@ html.dark {
 
   --vis-tooltip-text-color: #{colors.$color-gray-100} !important;
   --vis-axis-tick-label-color: #{colors.$color-gray-100} !important;
-  // --vis-legend-label-color: red !important;
+  --vis-legend-label-color: #{colors.$color-gray-300} !important;
 
   // --vis-axis-label-color: red !important;
   // --vis-legend-label-color: red !important;
