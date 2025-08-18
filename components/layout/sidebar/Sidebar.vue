@@ -208,8 +208,8 @@ const cartStore = useCartStore()
   top: 0;
   left: 30px;
   @include flex(row, center, center);
-  width: 16px;
-  height: 16px;
+  width: 17px;
+  height: 17px;
   border-radius: 50%;
   background-color: $color-red-500;
   color: $color-gray-100;
