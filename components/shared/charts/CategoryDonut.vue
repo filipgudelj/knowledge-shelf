@@ -44,17 +44,9 @@ const fetchCategories = async () => {
 }
 
 // COMPUTEDS
-const donutData = computed<number[]>(() => {
-  if (!rows.value.length) return []
-
-  const total = rows.value.reduce(
-    (sum, row) => sum + Number(row.book_count ?? 0),
-    0,
-  )
-  return rows.value.map((row) =>
-    Math.round((Number(row.book_count ?? 0) / total) * 100),
-  )
-})
+const donutData = computed<number[]>(() =>
+  rows.value.map((row) => Number(row.book_count ?? 0)),
+)
 
 const labels = computed(() =>
   rows.value.map((row, index) => ({

@@ -90,7 +90,7 @@ onMounted(async () => {
   @include flex(row, flex-start, center);
   gap: $spacing-2;
   margin-bottom: $spacing-6;
-  font-size: $font-size-lg;
+  font-size: $font-size-xl;
   font-weight: 700;
 }
 
