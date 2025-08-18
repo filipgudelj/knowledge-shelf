@@ -55,7 +55,7 @@ onMounted(async () => {
       :key="'skeleton-' + n"
       type="image@1"
       width="'100%'"
-      :height="'365px'"
+      :height="'370px'"
       base-color="var(--skel-base)"
       highlight-color="var(--skel-highlight)"
     >
@@ -101,6 +101,12 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .skeleton {
   width: 100%;
+
+  :deep(.vue-skeleton-loader-bone),
+  :deep(.v-skeleton-loader-image),
+  :deep(.wave) {
+    margin-bottom: 0 !important;
+  }
 }
 
 .chart {
