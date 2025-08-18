@@ -187,7 +187,7 @@ export default defineEventHandler(async (event) => {
             total: 'Ukupno',
             shipTo: 'Dostava na:',
             phone: 'Telefon',
-            notes: 'Napomena',
+            notes: 'Napomena:',
             rights: 'Sva prava pridržana.',
           }
         : {
@@ -201,7 +201,7 @@ export default defineEventHandler(async (event) => {
             total: 'Total',
             shipTo: 'Shipping to:',
             phone: 'Phone',
-            notes: 'Notes',
+            notes: 'Notes:',
             rights: 'All rights reserved.',
           }
 

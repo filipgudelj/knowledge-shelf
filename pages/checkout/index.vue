@@ -634,7 +634,7 @@ useHead(() => ({
   gap: $spacing-8;
   margin-top: $spacing-6;
 
-  @media (min-width: $screen-xl) {
+  @media (min-width: $screen-lg) {
     grid-template-columns: 1.5fr 1fr;
   }
 }
