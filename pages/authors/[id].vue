@@ -63,9 +63,32 @@ const onScroll = async () => {
 
 // LCH
 onMounted(() => {
+  let minDelayDone = false
+  let imageDone = false
+
+  const finish = () => {
+    if (minDelayDone && imageDone) {
+      showSkeleton.value = false
+      imageLoaded.value = true
+    }
+  }
+
   setTimeout(() => {
-    showSkeleton.value = false
+    minDelayDone = true
+    finish()
   }, 500)
+
+  if (author.value?.avatar_url) {
+    const img = new Image()
+    img.src = author.value.avatar_url
+    img.onload = () => {
+      imageDone = true
+      finish()
+    }
+  } else {
+    imageDone = true
+    finish()
+  }
 })
 
 onMounted(() => {
@@ -168,7 +191,7 @@ useHead(() => ({
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto auto auto;
-  column-gap: $spacing-12;
+  column-gap: $spacing-16;
   margin-top: $spacing-6;
 
   .author__name {
@@ -297,7 +320,7 @@ useHead(() => ({
     .author__skeleton-avatar {
       grid-column: 2;
       grid-row: 1 / span 2;
-      justify-self: end;
+      justify-self: center;
       align-self: center;
     }
   }
