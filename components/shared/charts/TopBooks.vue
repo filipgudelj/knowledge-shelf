@@ -52,7 +52,7 @@ onMounted(async () => {
   <div v-else class="top-books">
     <h2 class="top-books__title">
       <Icon name="mdi:trophy-outline" class="top-books__icon" />
-      {{ 'Top Selling Books' }}
+      {{ $t('admin.topSellingBooks') }}
     </h2>
     <div class="top-books__list">
       <div

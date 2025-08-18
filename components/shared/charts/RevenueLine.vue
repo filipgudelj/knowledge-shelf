@@ -63,7 +63,7 @@ onMounted(async () => {
   </div>
 
   <div v-else class="chart">
-    <div class="chart__title">Revenue (last 30 days)</div>
+    <div class="chart__title">{{ $t('admin.revenue30days') }}</div>
 
     <LineChart
       :data="revenueData"
@@ -89,7 +89,7 @@ onMounted(async () => {
             <div class="chart__tooltip-divider" />
           </div>
           <div class="chart__tooltip-value">
-            <span class="chart__tooltip-label">Revenue:</span>
+            <span class="chart__tooltip-label">{{ $t('admin.revenue') }}</span>
             <span class="chart__tooltip-amount">{{ values?.revenue }} €</span>
           </div>
         </div>

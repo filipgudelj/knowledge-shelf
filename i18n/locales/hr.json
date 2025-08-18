@@ -276,6 +276,14 @@
     "save": "Spremi"
   },
 
+  "admin": {
+    "dashboard": "Admin nadzorna ploča",
+    "revenue": "Prihod:",
+    "revenue30days": "Prihod (zadnjih 30 dana)",
+    "topSellingBooks": "Najprodavanije knjige",
+    "booksByCategory": "Broj knjiga po kategoriji"
+  },
+
   "toast": {
     "requestTooSoon": "Pričekaj prije ponovnog pokušaja",
     "alreadyRegistered": "E-pošta već registrirana",

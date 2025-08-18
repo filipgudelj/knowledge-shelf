@@ -80,7 +80,7 @@ onMounted(async () => {
 
   <div v-else class="chart">
     <div class="chart__title">
-      {{ 'Books by Category' }}
+      {{ t('admin.booksByCategory') }}
     </div>
 
     <div class="chart__body">
