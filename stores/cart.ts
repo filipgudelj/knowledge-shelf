@@ -71,6 +71,10 @@ export const useCartStore = defineStore('cart', () => {
     return items.value.some((i) => i.book_id === bookId)
   }
 
+  const cartCount = computed(() =>
+    items.value.reduce((sum, item) => sum + item.quantity, 0),
+  )
+
   return {
     items,
     loadCart,
@@ -79,5 +83,6 @@ export const useCartStore = defineStore('cart', () => {
     removeFromCart,
     clearCart,
     isInCart,
+    cartCount,
   }
 })

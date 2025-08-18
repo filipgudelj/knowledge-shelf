@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 // STATE
 const user = useSupabaseUser()
+const cartStore = useCartStore()
 </script>
 
 <template>
@@ -52,10 +53,13 @@ const user = useSupabaseUser()
         <NuxtLinkLocale
           v-if="user"
           :to="'/cart'"
-          class="sidebar__nav-item"
+          class="sidebar__nav-item sidebar__nav-cart"
           aria-label="Go to Cart"
         >
-          <Icon name="mdi:cart-outline" size="32px" />
+          <Icon name="mdi:cart-outline" size="32px"></Icon>
+          <span v-if="cartStore.cartCount > 0" class="sidebar__nav-cart-badge">
+            {{ cartStore.cartCount }}
+          </span>
           <span class="sidebar__nav-label">{{ $t('sidebar.cart') }}</span>
         </NuxtLinkLocale>
       </ClientOnly>
@@ -192,6 +196,27 @@ const user = useSupabaseUser()
 
   html.dark & {
     background-color: $color-gray-700;
+  }
+}
+
+.sidebar__nav-cart {
+  position: relative;
+}
+
+.sidebar__nav-cart-badge {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  @include flex(row, center, center);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: $color-red-500;
+  color: $color-gray-100;
+  font-size: $font-size-xxs;
+
+  @media (min-width: $screen-md) {
+    left: 24px;
   }
 }
 </style>
