@@ -95,7 +95,7 @@ onMounted(async () => {
 }
 
 .top-books__icon {
-  color: #f59e0b;
+  color: $color-gold-500;
   font-size: $font-size-2xl;
 }
 
