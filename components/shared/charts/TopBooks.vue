@@ -105,7 +105,10 @@ onMounted(async () => {
 }
 
 .top-books__item {
-  @include flex(row, space-between, center);
+  display: grid;
+  grid-template-columns: 25px 1fr auto;
+  align-items: center;
+  gap: $spacing-3;
   padding: $spacing-2 $spacing-3;
   border-radius: $radius-2;
 
