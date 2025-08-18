@@ -278,7 +278,7 @@
   },
 
   "admin": {
-    "dashboard": "Admin Dashboard",
+    "dashboard": "Dashboard",
     "revenue": "Revenue:",
     "revenue30days": "Revenue (last 30 days)",
     "topSellingBooks": "Top Selling Books",
@@ -409,7 +409,7 @@
       "description": "Search for books from our extensive online collection."
     },
     "dashboard": {
-      "title": "Admin Dashboard ⎪ Knowledge Shelf",
+      "title": "Dashboard ⎪ Knowledge Shelf",
       "description": "Analytics and insights at a glance."
     }
   }

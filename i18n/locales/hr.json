@@ -277,7 +277,7 @@
   },
 
   "admin": {
-    "dashboard": "Admin nadzorna ploča",
+    "dashboard": "Nadzorna ploča",
     "revenue": "Prihod:",
     "revenue30days": "Prihod (zadnjih 30 dana)",
     "topSellingBooks": "Najprodavanije knjige",
@@ -408,7 +408,7 @@
       "description": "Pretražite knjige iz naše opsežne online kolekcije."
     },
     "dashboard": {
-      "title": "Admin Nadzorna ploča ⎪ Knowledge Shelf",
+      "title": "Nadzorna ploča ⎪ Knowledge Shelf",
       "description": "Analitika i uvidi na prvi pogled."
     }
   }

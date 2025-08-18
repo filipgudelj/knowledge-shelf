@@ -12,7 +12,7 @@ useHead(() => ({
 
 <template>
   <div class="dashboard">
-    <h1>Admin Dashboard</h1>
+    <h1>{{ $t('admin.dashboard') }}</h1>
 
     <ClientOnly>
       <RevenueLine />
