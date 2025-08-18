@@ -336,6 +336,10 @@
   },
 
   "seo": {
+    "home": {
+      "title": "Knowledge Shelf",
+      "description": "Discover your next great read from a variety of books."
+    },
     "confirm": {
       "title": "Confirm ⎪ Knowledge Shelf",
       "description": "Please confirm your email address to activate your account."
@@ -396,9 +400,9 @@
       "title": "Search: \"{q}\" ⎪ Knowledge Shelf",
       "description": "Search for books from our extensive online collection."
     },
-    "home": {
-      "title": "Knowledge Shelf",
-      "description": "Discover your next great read from a variety of books."
+    "dashboard": {
+      "title": "Admin Dashboard ⎪ Knowledge Shelf",
+      "description": "Analytics and insights at a glance."
     }
   }
 }

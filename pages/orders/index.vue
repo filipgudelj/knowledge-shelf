@@ -109,7 +109,15 @@ useHead(() => ({
           {{ formatNumberToEuro(r.total) }}
         </div>
         <div class="orders__cell align-text">
-          {{ new Date(r.createdAt).toLocaleString(locale) }}
+          {{
+            new Date(r.createdAt).toLocaleString(locale, {
+              year: 'numeric',
+              month: 'short',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+            })
+          }}
         </div>
       </div>
     </div>

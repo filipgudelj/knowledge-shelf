@@ -49,6 +49,16 @@ onClickOutside(userDropdownRef, () => {
           <Icon name="mdi:chevron-right" size="20px" class="dropdown__icon" />
         </NuxtLinkLocale>
 
+        <NuxtLinkLocale
+          v-if="user.app_metadata.role === 'admin'"
+          @click="showMenu = false"
+          to="/admin/dashboard"
+          class="dropdown__item"
+        >
+          <div class="dropdown__label">Dashboard</div>
+          <Icon name="mdi:chevron-right" size="20px" class="dropdown__icon" />
+        </NuxtLinkLocale>
+
         <button
           @click="handleLogout"
           class="dropdown__item dropdown__item--logout"

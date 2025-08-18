@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/fonts',
     '@nuxtjs/i18n',
+    'nuxt-charts',
   ],
   components: [
     {
@@ -50,6 +51,7 @@ export default defineNuxtConfig({
             @use "~/assets/styles/_typography.scss" as *;
             @use "~/assets/styles/_base.scss" as *;
             @use "~/assets/styles/_skeleton.scss" as *;
+            @use "~/assets/styles/_charts.scss" as *;
           `,
         },
       },

@@ -2,7 +2,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const user = useSupabaseUser()
   const localePath = useLocalePath()
 
-  const guestOnlyRoutes = [
+  const authOnlyRoutes = [
     '/cart',
     '/checkout',
     '/checkout/success',
@@ -10,7 +10,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
     '/settings',
   ]
 
-  if (!user.value && guestOnlyRoutes.some((route) => to.path.includes(route))) {
+  if (!user.value && authOnlyRoutes.some((route) => to.path.includes(route))) {
     return navigateTo(localePath('/'))
   }
 })

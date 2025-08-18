@@ -335,6 +335,10 @@
   },
 
   "seo": {
+    "home": {
+      "title": "Knowledge Shelf",
+      "description": "Otkrijte svoju sljedeću omiljenu knjigu iz raznovrsne ponude."
+    },
     "confirm": {
       "title": "Potvrda ⎪ Knowledge Shelf",
       "description": "Potvrdite svoju adresu e-pošte kako biste aktivirali svoj račun."
@@ -395,9 +399,9 @@
       "title": "Pretraga: \"{q}\" ⎪ Knowledge Shelf",
       "description": "Pretražite knjige iz naše opsežne online kolekcije."
     },
-    "home": {
-      "title": "Knowledge Shelf",
-      "description": "Otkrijte svoju sljedeću omiljenu knjigu iz raznovrsne ponude."
+    "dashboard": {
+      "title": "Admin Nadzorna ploča ⎪ Knowledge Shelf",
+      "description": "Analitika i uvidi na prvi pogled."
     }
   }
 }

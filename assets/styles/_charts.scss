@@ -1,0 +1,47 @@
+@use 'colors';
+
+:root {
+  //   --vis-color0:  red !important;
+  //   --vis-color1:  red !important;
+
+  // --tooltip-label-color: red !important;
+  // --tooltip-value-color: red !important;
+
+  --vis-axis-grid-color: #{colors.$color-gray-200} !important;
+
+  --vis-tooltip-background-color: #{colors.$color-gray-100} !important;
+  --vis-tooltip-border-color: #{colors.$color-gray-200} !important;
+
+  // --tooltip-label-color: red;
+  // --tooltip-value-color: red;
+
+  --vis-tooltip-text-color: #{colors.$color-gray-900} !important;
+  --vis-axis-tick-label-color: #{colors.$color-gray-900} !important;
+  // --vis-legend-label-color: red !important;
+
+  // --vis-axis-label-color: red !important;
+  // --vis-legend-label-color: red !important;
+}
+
+html.dark {
+  // --vis-color0: red !important;
+  // --vis-color1: red !important;
+
+  // --tooltip-label-color: red !important;
+  // --tooltip-value-color: red !important;
+
+  --vis-axis-grid-color: #{colors.$color-gray-800} !important;
+
+  --vis-tooltip-background-color: #{colors.$color-gray-900} !important;
+  --vis-tooltip-border-color: #{colors.$color-gray-800} !important;
+
+  // --tooltip-label-color: red;
+  // --tooltip-value-color: red;
+
+  --vis-tooltip-text-color: #{colors.$color-gray-100} !important;
+  --vis-axis-tick-label-color: #{colors.$color-gray-100} !important;
+  // --vis-legend-label-color: red !important;
+
+  // --vis-axis-label-color: red !important;
+  // --vis-legend-label-color: red !important;
+}
