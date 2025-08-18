@@ -80,7 +80,7 @@ onMounted(async () => {
       :key="'skeleton-' + n"
       type="image@1"
       width="'100%'"
-      :height="'355px'"
+      :height="'425px'"
       base-color="var(--skel-base)"
       highlight-color="var(--skel-highlight)"
     />
@@ -91,21 +91,23 @@ onMounted(async () => {
       {{ 'Books by Category' }}
     </div>
 
-    <DonutChart
-      :data="donutData"
-      :arc-width="55"
-      :labels="labels"
-      :height="240"
-      :radius="0"
-      :type="'full'"
-      :crosshair="false"
-    >
-      <template #tooltip="{ values }">
-        <div class="chart__tooltip">
-          {{ values?.value }}
-        </div>
-      </template>
-    </DonutChart>
+    <div class="chart__body">
+      <DonutChart
+        :data="donutData"
+        :arc-width="45"
+        :labels="labels"
+        :height="305"
+        :radius="0"
+        :type="'full'"
+        :crosshair="false"
+      >
+        <template #tooltip="{ values }">
+          <div class="chart__tooltip">
+            {{ values?.value }}
+          </div>
+        </template>
+      </DonutChart>
+    </div>
   </div>
 </template>
 
@@ -129,5 +131,10 @@ onMounted(async () => {
   margin-bottom: $spacing-6;
   font-size: $font-size-xl;
   font-weight: 700;
+}
+
+.chart__body {
+  justify-self: center;
+  width: 240px;
 }
 </style>

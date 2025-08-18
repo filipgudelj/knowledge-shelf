@@ -55,7 +55,7 @@ onMounted(async () => {
       :key="'skeleton-' + n"
       type="image@1"
       width="'100%'"
-      :height="'385px'"
+      :height="'365px'"
       base-color="var(--skel-base)"
       highlight-color="var(--skel-highlight)"
     >
@@ -71,7 +71,7 @@ onMounted(async () => {
       :x-formatter="xFormatter"
       :y-formatter="yFormatter"
       :y-grid-line="true"
-      :height="320"
+      :height="300"
       :hide-legend="true"
     >
       <template #tooltip="{ values }">
