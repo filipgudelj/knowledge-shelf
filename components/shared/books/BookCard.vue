@@ -25,6 +25,14 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
 
     <NuxtLinkLocale
       :to="`/books/${book.id}`"
+      v-if="book.sale_price"
+      class="book__discount"
+    >
+      <Icon name="mdi:cart-percent" size="24px" />
+    </NuxtLinkLocale>
+
+    <NuxtLinkLocale
+      :to="`/books/${book.id}`"
       class="book__link"
       :aria-label="`View details for book ${props.book.title}`"
     >
@@ -45,7 +53,14 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
       {{ props.book.author?.name ?? props.book.author_name }}
     </NuxtLinkLocale>
 
-    <p class="book__price">{{ formatNumberToEuro(props.book.price) }}</p>
+    <p class="book__price">
+      <span v-if="book.sale_price" class="book__price--old">
+        {{ formatNumberToEuro(book.price) }}
+      </span>
+      <span class="book__price--current">
+        {{ formatNumberToEuro(book.sale_price ?? book.price) }}
+      </span>
+    </p>
 
     <FormButton
       v-if="user"
@@ -55,6 +70,7 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
       size="md"
       :disabled="book.stock === 0 || inCart"
       class="book__button"
+      :class="{ 'book__button--extra-margin': !book.sale_price }"
     >
       {{
         book.stock === 0
@@ -81,6 +97,22 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
   &.visible {
     opacity: 1;
   }
+
+  &:has(.book__discount:hover) .book__title {
+    color: $color-blue-500;
+  }
+}
+
+.book__discount {
+  z-index: 1;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  @include flex(row, center, center);
+  padding: $spacing-3 $spacing-3;
+  border-radius: 50%;
+  background-color: $color-red-500;
+  color: $color-gray-100;
 }
 
 .book__favourite {
@@ -95,10 +127,6 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
 
   &:hover {
     cursor: pointer;
-  }
-
-  &:hover .book__image {
-    transform: scale(0.95);
   }
 
   &:hover .book__title {
@@ -127,6 +155,7 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
   max-width: 90%;
   color: $color-gray-600;
   text-align: center;
+  transition: all 0.4s ease;
 
   html.dark & {
     color: $color-gray-500;
@@ -142,12 +171,25 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
 }
 
 .book__price {
-  max-width: 90%;
+  @include flex(column, center, center);
   font-size: $font-size-lg;
-  text-align: center;
+
+  &--old {
+    color: $color-gray-700;
+    font-size: $font-size-sm;
+    text-decoration: line-through;
+
+    html.dark & {
+      color: $color-gray-400;
+    }
+  }
 }
 
 .book__button {
   margin-top: $spacing-3;
+
+  &--extra-margin {
+    margin-top: 27.5px;
+  }
 }
 </style>

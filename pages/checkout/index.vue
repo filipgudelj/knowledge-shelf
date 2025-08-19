@@ -76,7 +76,7 @@ const shippingMethods = [
 // COMPUTEDS
 const subtotal = computed(() =>
   cartStore.items.reduce(
-    (sum, i) => sum + (i.book?.price ?? 0) * i.quantity,
+    (sum, i) => sum + (i.book?.sale_price ?? i.book?.price ?? 0) * i.quantity,
     0,
   ),
 )
@@ -155,7 +155,7 @@ const onSubmit = handleSubmit(async () => {
     const items = cartStore.items.map((i) => ({
       book_id: i.book_id,
       title: i.book?.title ?? 'Book',
-      price: i.book?.price ?? 0,
+      price: i.book?.sale_price ?? i.book?.price ?? 0,
       quantity: i.quantity,
       cover_url: i.book?.cover_url ?? undefined,
     }))
@@ -468,7 +468,11 @@ useHead(() => ({
                 <p class="summary__meta">× {{ i.quantity }}</p>
               </div>
               <div class="summary__price">
-                {{ formatNumberToEuro((i.book?.price ?? 0) * i.quantity) }}
+                {{
+                  formatNumberToEuro(
+                    (i.book?.sale_price ?? i.book?.price ?? 0) * i.quantity,
+                  )
+                }}
               </div>
             </div>
           </div>

@@ -167,6 +167,14 @@ onBeforeUnmount(() => {
               class="slide__favourite"
             />
 
+            <NuxtLinkLocale
+              :to="`/books/${book.id}`"
+              v-if="book.sale_price"
+              class="slide__discount"
+            >
+              <Icon name="mdi:cart-percent" size="24px" />
+            </NuxtLinkLocale>
+
             <NuxtLinkLocale :to="`/books/${book.id}`" class="slide__link">
               <img
                 :src="book.cover_url"
@@ -186,7 +194,14 @@ onBeforeUnmount(() => {
               {{ book.author.name }}
             </NuxtLinkLocale>
 
-            <p class="slide__price">{{ formatNumberToEuro(book.price) }}</p>
+            <p class="slide__price">
+              <span v-if="book.sale_price" class="slide__price--old">
+                {{ formatNumberToEuro(book.price) }}
+              </span>
+              <span class="slide__price--current">
+                {{ formatNumberToEuro(book.sale_price ?? book.price) }}
+              </span>
+            </p>
 
             <FormButton
               v-if="user"
@@ -196,6 +211,7 @@ onBeforeUnmount(() => {
               size="md"
               :disabled="book.stock === 0 || cartStore.isInCart(book.id)"
               class="slide__button"
+              :class="{ 'slide__button--extra-margin': !book.sale_price }"
             >
               {{
                 book.stock === 0
@@ -293,6 +309,22 @@ onBeforeUnmount(() => {
   &.visible {
     opacity: 1;
   }
+
+  &:has(.slide__discount:hover) .slide__title {
+    color: $color-blue-500;
+  }
+}
+
+.slide__discount {
+  z-index: 1;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  @include flex(row, center, center);
+  padding: $spacing-3 $spacing-3;
+  border-radius: 50%;
+  background-color: $color-red-500;
+  color: $color-gray-100;
 }
 
 .slide__favourite {
@@ -307,10 +339,6 @@ onBeforeUnmount(() => {
 
   &:hover {
     cursor: pointer;
-  }
-
-  &:hover .slide__image {
-    transform: scale(0.95);
   }
 
   &:hover .slide__title {
@@ -332,12 +360,14 @@ onBeforeUnmount(() => {
   font-size: $font-size-lg;
   font-weight: 700;
   text-align: center;
+  transition: all 0.4s ease;
 }
 
 .slide__author {
   max-width: 90%;
   color: $color-gray-600;
   text-align: center;
+  transition: all 0.4s ease;
 
   html.dark & {
     color: $color-gray-500;
@@ -353,10 +383,25 @@ onBeforeUnmount(() => {
 }
 
 .slide__price {
+  @include flex(column, center, center);
   font-size: $font-size-lg;
+
+  &--old {
+    color: $color-gray-700;
+    font-size: $font-size-sm;
+    text-decoration: line-through;
+
+    html.dark & {
+      color: $color-gray-400;
+    }
+  }
 }
 
 .slide__button {
   margin-top: $spacing-3;
+
+  &--extra-margin {
+    margin-top: 27.5px;
+  }
 }
 </style>

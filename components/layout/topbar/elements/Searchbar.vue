@@ -126,7 +126,12 @@ onClickOutside(searchResultsDropdownRef, () => {
           <p class="search__result-author">{{ book.author_name }}</p>
           <p class="search__result-title">{{ book.title }}</p>
           <p class="search__result-price">
-            {{ formatNumberToEuro(book.price) }}
+            <span v-if="book.sale_price" class="search__result-price--old">
+              {{ formatNumberToEuro(book.price) }}
+            </span>
+            <span class="search__result-price--current">
+              {{ formatNumberToEuro(book.sale_price ?? book.price) }}
+            </span>
           </p>
         </div>
       </div>
@@ -291,9 +296,21 @@ onClickOutside(searchResultsDropdownRef, () => {
   @include flex(row, flex-start, center);
   gap: $spacing-5;
   padding: $spacing-3 $spacing-4;
-  border-bottom: 1px solid $color-gray-400;
+  border-bottom: 1px solid $color-gray-300;
   cursor: pointer;
   transition: all 0.3s ease;
+
+  html.dark & {
+    border-bottom: 1px solid $color-gray-700;
+  }
+
+  &:last-child {
+    border-bottom: none;
+
+    html.dark & {
+      border-bottom: none;
+    }
+  }
 
   &:hover {
     background-color: $color-gray-200;
@@ -305,6 +322,10 @@ onClickOutside(searchResultsDropdownRef, () => {
 
   @media (min-width: $screen-sm) {
     border-bottom: none;
+
+    html.dark & {
+      border-bottom: none;
+    }
   }
 }
 
@@ -335,7 +356,20 @@ onClickOutside(searchResultsDropdownRef, () => {
 }
 
 .search__result-price {
+  display: flex;
+  gap: $spacing-2;
   margin-top: $spacing-1;
+
+  &--old {
+    align-self: center;
+    color: $color-gray-700;
+    text-decoration: line-through;
+    font-size: $font-size-sm;
+
+    html.dark & {
+      color: $color-gray-400;
+    }
+  }
 }
 
 .search__loading {

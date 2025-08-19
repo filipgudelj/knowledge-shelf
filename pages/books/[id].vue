@@ -61,9 +61,16 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
           :aria-label="`View details about author ${book.author.name}`"
           >{{ book.author.name }}
         </NuxtLinkLocale>
+
         <h1>{{ book.title }}</h1>
+
         <div class="book-summary__price">
-          {{ formatNumberToEuro(book.price) }}
+          <span v-if="book.sale_price" class="book-summary__price--old">
+            {{ formatNumberToEuro(book.price) }}
+          </span>
+          <span class="book-summary__price--current">
+            {{ formatNumberToEuro(book.sale_price ?? book.price) }}
+          </span>
         </div>
 
         <div class="book__actions">
@@ -277,6 +284,7 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
 .book-summary__author {
   font-size: $font-size-xl;
   color: $color-gray-700;
+  transition: all 0.4s ease;
 
   html.dark & {
     color: $color-gray-300;
@@ -292,9 +300,22 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
 }
 
 .book-summary__price {
+  display: flex;
+  gap: $spacing-3;
   margin-top: $spacing-5;
   font-size: $font-size-2xl;
   font-weight: 700;
+
+  &--old {
+    align-self: center;
+    color: $color-gray-700;
+    text-decoration: line-through;
+    font-size: $font-size-xl;
+
+    html.dark & {
+      color: $color-gray-400;
+    }
+  }
 }
 
 .book__actions {

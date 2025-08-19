@@ -28,6 +28,7 @@ export interface Book {
   translator: string | null
   is_staff_pick: boolean
   author_name?: string
+  sale_price?: number | null
 }
 
 export type BookSort =

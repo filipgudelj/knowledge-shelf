@@ -12,7 +12,8 @@ const imageLoaded = ref(false)
 // COMPUTEDS
 const cartTotal = computed(() =>
   cartStore.items.reduce(
-    (sum, item) => sum + (item.book?.price ?? 0) * item.quantity,
+    (sum, item) =>
+      sum + (item.book?.sale_price ?? item.book?.price ?? 0) * item.quantity,
     0,
   ),
 )
@@ -80,11 +81,25 @@ useHead(() => ({
           </div>
 
           <div class="cart__price center-text">
-            {{ formatNumberToEuro(item.book?.price ?? 0) }}
+            <span v-if="item.book?.sale_price" class="cart__price--old">
+              {{ formatNumberToEuro(item.book?.price ?? 0) }}
+            </span>
+            <span class="cart__price--current">
+              {{
+                formatNumberToEuro(
+                  item.book?.sale_price ?? item.book?.price ?? 0,
+                )
+              }}
+            </span>
           </div>
 
           <div class="cart__total center-text">
-            {{ formatNumberToEuro((item.book?.price ?? 0) * item.quantity) }}
+            {{
+              formatNumberToEuro(
+                (item.book?.sale_price ?? item.book?.price ?? 0) *
+                  item.quantity,
+              )
+            }}
           </div>
 
           <button
@@ -203,7 +218,7 @@ useHead(() => ({
 .cart__item {
   display: grid;
   grid-template-columns:
-    minmax(225px, 1.5fr) minmax(145px, 0.75fr) minmax(125px, 1fr)
+    minmax(225px, 1.5fr) minmax(145px, 0.75fr) minmax(135px, 1fr)
     minmax(125px, 1fr) 60px;
   align-items: center;
   gap: $spacing-6;
@@ -258,7 +273,23 @@ useHead(() => ({
 }
 
 .cart__price {
+  @include flex(row);
+  gap: $spacing-3;
   font-weight: 700;
+
+  &--old {
+    align-self: center;
+    color: $color-gray-700;
+    text-decoration: line-through;
+    font-size: $font-size-sm;
+
+    html.dark & {
+      color: $color-gray-400;
+    }
+  }
+  &--current {
+    font-weight: 700;
+  }
 }
 
 .cart__total {
