@@ -54,12 +54,6 @@ const euCountryCodes = [
   'SE',
 ]
 
-const countries = computed(() =>
-  euCountryCodes.map((code) => ({
-    label: t(`countries.${code}`),
-    value: code,
-  })),
-)
 const shippingMethods = [
   {
     label: t('checkout.shipping.methods.standard'),
@@ -74,6 +68,13 @@ const shippingMethods = [
 ]
 
 // COMPUTEDS
+const countries = computed(() =>
+  euCountryCodes.map((code) => ({
+    label: t(`countries.${code}`),
+    value: code,
+  })),
+)
+
 const subtotal = computed(() =>
   cartStore.items.reduce(
     (sum, i) => sum + (i.book?.sale_price ?? i.book?.price ?? 0) * i.quantity,

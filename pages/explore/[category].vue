@@ -20,7 +20,7 @@ const allowedQueryKeys = [
   'onSaleOnly',
 ]
 
-// CATEGORY
+// COMPUTEDS
 const slug = computed(() => route.params.category as string)
 
 const category = computed(() =>

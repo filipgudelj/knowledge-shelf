@@ -13,6 +13,7 @@ const author = ref<Author | null>(null)
 const showSkeleton = ref(true)
 const imageLoaded = ref(false)
 
+// API
 if (!isNaN(authorId)) {
   author.value = await booksStore.getAuthorById(authorId)
 } else {
@@ -100,7 +101,6 @@ onBeforeUnmount(() => {
 })
 
 // HEAD
-
 useHead(() => ({
   title: t('seo.author.title', { name: author.value?.name ?? '' }),
   meta: [{ name: 'description', content: t('seo.author.description') }],
