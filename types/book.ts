@@ -30,6 +30,7 @@ export interface Book {
   is_staff_pick: boolean
   author_name?: string
   sale_price: number | null
+  effective_price: number
 }
 
 export type BookSort =

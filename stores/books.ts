@@ -107,13 +107,15 @@ export const useBooksStore = defineStore('books', () => {
     const start = page.value * pageSize
     const end = start + pageSize - 1
     let queryBuilder
+    const mapSortBy = (sortBy?: string) =>
+      sortBy === 'price' ? 'effective_price' : (sortBy ?? 'created_at')
 
     if (searchQuery) {
       queryBuilder = supabase
         .from('books_with_authors')
         .select('*')
         .or(`title.ilike.%${searchQuery}%,author_name.ilike.%${searchQuery}%`)
-        .order(sort?.sortBy ?? 'created_at', {
+        .order('created_at', {
           ascending: sort?.ascending ?? false,
         })
         .range(start, end)
@@ -121,7 +123,7 @@ export const useBooksStore = defineStore('books', () => {
       queryBuilder = supabase
         .from('books')
         .select('*, author:authors(*), category:categories(*)')
-        .order(sort?.sortBy ?? 'created_at', {
+        .order(mapSortBy(sort?.sortBy) ?? 'created_at', {
           ascending: sort?.ascending ?? false,
         })
         .range(start, end)
