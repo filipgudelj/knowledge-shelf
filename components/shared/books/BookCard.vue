@@ -145,14 +145,18 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
 }
 
 .book__title {
+  @include flex(column, center, center);
   max-width: 90%;
+  height: 48px;
   font-size: $font-size-lg;
   font-weight: 700;
   text-align: center;
+  line-height: normal;
   transition: color 0.4s ease;
 }
 
 .book__author {
+  @include flex(column, center, center);
   max-width: 90%;
   color: $color-gray-600;
   text-align: center;
@@ -173,6 +177,7 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
 
 .book__price {
   @include flex(column, center, center);
+  height: 50px;
   font-size: $font-size-lg;
 
   &--old {
@@ -190,7 +195,7 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
   margin-top: $spacing-3;
 
   &--extra-margin {
-    margin-top: 27.5px;
+    margin-top: $spacing-3;
   }
 }
 </style>

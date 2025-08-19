@@ -148,7 +148,7 @@ onBeforeUnmount(() => {
             v-for="n in visibleSlides"
             :key="'skeleton-' + n"
             type="image@1"
-            :height="'420px'"
+            :height="'460px'"
             base-color="var(--skel-base)"
             highlight-color="var(--skel-highlight)"
             :style="{ width: `calc(100% / ${totalSlides} - 1rem)` }"
@@ -358,14 +358,18 @@ onBeforeUnmount(() => {
 }
 
 .slide__title {
+  @include flex(column, center, center);
   max-width: 90%;
+  height: 48px;
   font-size: $font-size-lg;
   font-weight: 700;
   text-align: center;
+  line-height: normal;
   transition: all 0.4s ease;
 }
 
 .slide__author {
+  @include flex(column, center, center);
   max-width: 90%;
   color: $color-gray-600;
   text-align: center;
@@ -386,6 +390,7 @@ onBeforeUnmount(() => {
 
 .slide__price {
   @include flex(column, center, center);
+  height: 50px;
   font-size: $font-size-lg;
 
   &--old {
@@ -403,7 +408,7 @@ onBeforeUnmount(() => {
   margin-top: $spacing-3;
 
   &--extra-margin {
-    margin-top: 27.5px;
+    margin-top: $spacing-3;
   }
 }
 </style>

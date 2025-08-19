@@ -222,11 +222,11 @@ useHead(() => ({
 .cart__item {
   display: grid;
   grid-template-columns:
-    minmax(225px, 1.5fr) minmax(145px, 0.75fr) minmax(135px, 1fr)
+    minmax(250px, 1.5fr) minmax(145px, 0.75fr) minmax(135px, 1fr)
     minmax(125px, 1fr) 60px;
   align-items: center;
   gap: $spacing-6;
-  min-width: 800px;
+  min-width: 850px;
 }
 
 .cart__header {
