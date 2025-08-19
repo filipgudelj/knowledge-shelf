@@ -9,7 +9,6 @@ export const useFavouritesStore = defineStore('favourites', () => {
     addFavouriteToCookie,
     removeFavouriteFromCookie,
   } = useFavouritesCookie()
-
   const favourites = ref<Book[]>([])
   const allFavouriteIds = ref<number[]>([])
   const page = ref(0)

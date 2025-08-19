@@ -3,10 +3,10 @@ import type { Category } from './category'
 
 export interface Book {
   id: number
-  created_at: string // ISO 8601 timestamp
+  created_at: string
   title: string
-  author: Author
-  author_id?: number
+  author?: Author
+  author_id: number
   price: number
   stock: number
   cover_url: string
@@ -19,7 +19,8 @@ export interface Book {
   binding_type: 'hardcover' | 'softcover'
   weight_kg: number
   sales_count: number
-  category: Category
+  category?: Category
+  category_id: number
   description: {
     en: string
     hr: string
@@ -28,7 +29,7 @@ export interface Book {
   translator: string | null
   is_staff_pick: boolean
   author_name?: string
-  sale_price?: number | null
+  sale_price: number | null
 }
 
 export type BookSort =

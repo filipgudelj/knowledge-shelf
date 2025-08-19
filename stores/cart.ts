@@ -4,7 +4,6 @@ import type { CartItem } from '@/types'
 export const useCartStore = defineStore('cart', () => {
   const supabase = useSupabaseClient()
   const user = useSupabaseUser()
-
   const items: Ref<CartItem[]> = ref([])
 
   const loadCart = async () => {

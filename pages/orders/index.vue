@@ -17,7 +17,7 @@ const rows = computed(() =>
     number: index + 1,
     titles: (order.items ?? []).map((i) => i.title_snapshot).join(', '),
     shipping_method: order.shipping_method,
-    total: (order as any).total,
+    total: order.total,
     createdAt: order.created_at,
   })),
 )

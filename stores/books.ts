@@ -3,7 +3,6 @@ import type { Book, BookFilters, BookSort, Category, Author } from '@/types'
 
 export const useBooksStore = defineStore('books', () => {
   const supabase = useSupabaseClient()
-
   const books = ref<Book[]>([])
   const categories = ref<Category[]>([])
   const page = ref(0)
