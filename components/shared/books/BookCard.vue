@@ -27,6 +27,7 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
       :to="`/books/${book.id}`"
       v-if="book.sale_price"
       class="book__discount"
+      :aria-label="`View details for book ${props.book.title}`"
     >
       <Icon name="mdi:cart-percent" size="24px" />
     </NuxtLinkLocale>
@@ -38,7 +39,7 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
     >
       <img
         :src="props.book.cover_url"
-        :alt="props.book.title"
+        :alt="`${props.book.title} book cover`"
         @load="imageLoaded = true"
         class="book__image"
       />

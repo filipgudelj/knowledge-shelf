@@ -5,7 +5,7 @@ export interface Book {
   id: number
   created_at: string
   title: string
-  author?: Author
+  author: Author
   author_id: number
   price: number
   stock: number

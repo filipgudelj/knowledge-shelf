@@ -172,6 +172,7 @@ onBeforeUnmount(() => {
               :to="`/books/${book.id}`"
               v-if="book.sale_price"
               class="slide__discount"
+              :aria-label="`View details for book ${book.title}`"
             >
               <Icon name="mdi:cart-percent" size="24px" />
             </NuxtLinkLocale>
@@ -179,7 +180,7 @@ onBeforeUnmount(() => {
             <NuxtLinkLocale :to="`/books/${book.id}`" class="slide__link">
               <img
                 :src="book.cover_url"
-                :alt="book.title"
+                :alt="`${book.title} book cover`"
                 @load="onImageLoad(index)"
                 :class="['slide__image']"
                 :aria-label="`View details for book ${book.title}`"
