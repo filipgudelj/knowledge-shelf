@@ -17,6 +17,7 @@ const allowedQueryKeys = [
   'language',
   'binding',
   'inStockOnly',
+  'onSaleOnly',
 ]
 
 // CATEGORY
@@ -87,6 +88,7 @@ const filters = ref<BookFilters>({
   language: (route.query.language as 'en' | 'hr') ?? '',
   binding: (route.query.binding as 'softcover' | 'hardcover') ?? '',
   inStockOnly: route.query.inStockOnly === 'true',
+  onSaleOnly: route.query.onSaleOnly === 'true',
 })
 
 // WATCHERS
@@ -119,6 +121,12 @@ watch(filters, (newFilters) => {
     query.inStockOnly = 'true'
   } else {
     delete query.inStockOnly
+  }
+
+  if (newFilters.onSaleOnly) {
+    query.onSaleOnly = 'true'
+  } else {
+    delete query.onSaleOnly
   }
 
   router.replace({ query })

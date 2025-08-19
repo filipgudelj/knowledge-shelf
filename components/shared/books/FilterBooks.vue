@@ -35,6 +35,7 @@ watch(
     localFilters.language = newFilters.language
     localFilters.binding = newFilters.binding
     localFilters.inStockOnly = newFilters.inStockOnly
+    localFilters.onSaleOnly = newFilters.onSaleOnly
   },
 )
 
@@ -52,6 +53,7 @@ const resetFilters = () => {
   localFilters.language = ''
   localFilters.binding = ''
   localFilters.inStockOnly = false
+  localFilters.onSaleOnly = false
 
   const current = JSON.stringify(localFilters)
   const original = JSON.stringify(props.filters)
@@ -89,11 +91,19 @@ const resetFilters = () => {
     </div>
 
     <div class="filters__bottom">
-      <FormCheckbox
-        id="in-stock-checkbox"
-        :label="t('filter.inStockOnly')"
-        v-model="localFilters.inStockOnly"
-      />
+      <div class="filters__checkboxes">
+        <FormCheckbox
+          id="in-stock-checkbox"
+          :label="t('filter.inStockOnly')"
+          v-model="localFilters.inStockOnly"
+        />
+
+        <FormCheckbox
+          id="on-sale-checkbox"
+          :label="t('filter.onSaleOnly')"
+          v-model="localFilters.onSaleOnly"
+        />
+      </div>
 
       <ClientOnly>
         <div class="filters__actions" :style="{ width: `${actionsWidth}` }">
@@ -150,6 +160,16 @@ const resetFilters = () => {
 
   @media (min-width: $screen-lg) {
     @include flex(row, space-between, flex-start);
+  }
+}
+
+.filters__checkboxes {
+  @include flex(column, flex-start, flex-start);
+  gap: $spacing-3;
+  margin-bottom: $spacing-3;
+
+  @media (min-width: $screen-sm) {
+    @include flex(row, flex-start, flex-start);
   }
 }
 

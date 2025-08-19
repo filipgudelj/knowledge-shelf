@@ -86,7 +86,8 @@
   "filter": {
     "language": "Jezik",
     "binding": "Uvez",
-    "inStockOnly": "Samo dostupne knjige",
+    "inStockOnly": "Samo dostupno",
+    "onSaleOnly": "Samo na sniženju",
     "apply": "Primijeni filtere",
     "reset": "Poništi filtere",
     "chooseOption": "-- Odaberi opciju --",

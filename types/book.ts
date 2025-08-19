@@ -41,4 +41,5 @@ export type BookFilters = {
   language?: 'en' | 'hr' | ''
   binding?: 'hardcover' | 'softcover' | ''
   inStockOnly?: boolean
+  onSaleOnly?: boolean
 }

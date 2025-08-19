@@ -87,6 +87,7 @@
     "language": "Language",
     "binding": "Binding",
     "inStockOnly": "In Stock Only",
+    "onSaleOnly": "On Sale Only",
     "apply": "Apply Filters",
     "reset": "Reset Filters",
     "chooseOption": "-- Select an option --",

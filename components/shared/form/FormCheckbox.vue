@@ -79,6 +79,8 @@ const onCheck = (event: Event) => {
 }
 
 .checkbox__label {
+  @include flex(row, center, center);
+  height: 17px;
   padding-inline: $spacing-3;
   user-select: none;
   cursor: pointer;

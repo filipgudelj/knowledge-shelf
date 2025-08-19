@@ -143,6 +143,10 @@ export const useBooksStore = defineStore('books', () => {
       queryBuilder = queryBuilder.gt('stock', 0)
     }
 
+    if (filters?.onSaleOnly) {
+      queryBuilder = queryBuilder.not('sale_price', 'is', null)
+    }
+
     if (authorId) {
       queryBuilder = queryBuilder.eq('author_id', authorId)
     }
