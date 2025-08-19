@@ -54,26 +54,27 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
 <template>
   <template v-if="book && !showSkeleton">
     <div class="book">
-      <div class="book-summary">
+      <div class="book__summary">
         <NuxtLinkLocale
           :to="`/authors/${book.author.id}`"
-          class="book-summary__author"
+          class="book__summary-author"
           :aria-label="`View details about author ${book.author.name}`"
-          >{{ book.author.name }}
+        >
+          {{ book.author.name }}
         </NuxtLinkLocale>
 
-        <h1>{{ book.title }}</h1>
+        <h1 class="book__summary-title">{{ book.title }}</h1>
 
-        <div class="book-summary__price">
-          <span v-if="book.sale_price" class="book-summary__price--old">
+        <div class="book__summary-price">
+          <span v-if="book.sale_price" class="book__summary-price--old">
             {{ formatNumberToEuro(book.price) }}
           </span>
-          <span class="book-summary__price--current">
+          <span class="book__summary-price--current">
             {{ formatNumberToEuro(book.sale_price ?? book.price) }}
           </span>
         </div>
 
-        <div class="book__actions">
+        <div class="book__summary-actions">
           <FormInputNumber
             id="quantity"
             v-model="quantity"
@@ -81,7 +82,7 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
             :min="book.stock === 0 ? 0 : 1"
             :max="book.stock"
             :step="1"
-            class="book__quantity"
+            class="book__summary-quantity"
           />
 
           <FormButton
@@ -90,7 +91,7 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
             :variant="inCart ? 'tertiary' : 'primary'"
             size="lg"
             :disabled="!user || book.stock === 0 || inCart"
-            class="book__submit"
+            class="book__summary-submit"
           >
             {{
               !user
@@ -106,108 +107,108 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
           <AddToFavourites
             variant="rectangle"
             :book-id="book.id"
-            class="book__favourite"
+            class="book__summary-favourite"
           />
         </div>
       </div>
 
-      <div class="book-media">
+      <div class="book__media">
         <img :src="book.cover_url" :alt="book.title" />
       </div>
 
-      <div class="book-meta">
-        <div class="book-meta__item" v-if="book.original_title">
-          <Icon name="mdi:flag-variant" size="24px" class="book-meta__icon" />
-          <div class="book-meta__content">
-            <p class="book-meta__label">{{ t('book.meta.originalTitle') }}</p>
-            <p class="book-meta__value">{{ book.original_title }}</p>
+      <div class="book__meta">
+        <div class="book__meta-item" v-if="book.original_title">
+          <Icon name="mdi:flag-variant" size="24px" class="book__meta-icon" />
+          <div class="book__meta-content">
+            <p class="book__meta-label">{{ t('book.meta.originalTitle') }}</p>
+            <p class="book__meta-value">{{ book.original_title }}</p>
           </div>
         </div>
 
-        <div class="book-meta__item" v-if="book.translator">
-          <Icon name="mdi:translate" size="24px" class="book-meta__icon" />
-          <div class="book-meta__content">
-            <p class="book-meta__label">{{ t('book.meta.translator') }}</p>
-            <p class="book-meta__value">{{ book.translator }}</p>
+        <div class="book__meta-item" v-if="book.translator">
+          <Icon name="mdi:translate" size="24px" class="book__meta-icon" />
+          <div class="book__meta-content">
+            <p class="book__meta-label">{{ t('book.meta.translator') }}</p>
+            <p class="book__meta-value">{{ book.translator }}</p>
           </div>
         </div>
 
-        <div class="book-meta__item">
+        <div class="book__meta-item">
           <Icon
             name="mdi:calendar-month-outline"
             size="24px"
-            class="book-meta__icon"
+            class="book__meta-icon"
           />
-          <div class="book-meta__content">
-            <p class="book-meta__label">{{ t('book.meta.yearPublished') }}</p>
-            <p class="book-meta__value">{{ book.year_published }}</p>
+          <div class="book__meta-content">
+            <p class="book__meta-label">{{ t('book.meta.yearPublished') }}</p>
+            <p class="book__meta-value">{{ book.year_published }}</p>
           </div>
         </div>
 
-        <div class="book-meta__item">
-          <Icon name="mdi:language" size="24px" class="book-meta__icon" />
-          <div class="book-meta__content">
-            <p class="book-meta__label">{{ t('book.meta.language') }}</p>
-            <p class="book-meta__value">
+        <div class="book__meta-item">
+          <Icon name="mdi:language" size="24px" class="book__meta-icon" />
+          <div class="book__meta-content">
+            <p class="book__meta-label">{{ t('book.meta.language') }}</p>
+            <p class="book__meta-value">
               {{ t(`book.values.language.${book.language}`) }}
             </p>
           </div>
         </div>
 
-        <div class="book-meta__item">
-          <Icon name="mdi:bank" size="24px" class="book-meta__icon" />
-          <div class="book-meta__content">
-            <p class="book-meta__label">{{ t('book.meta.publisher') }}</p>
-            <p class="book-meta__value">{{ book.publisher }}</p>
+        <div class="book__meta-item">
+          <Icon name="mdi:bank" size="24px" class="book__meta-icon" />
+          <div class="book__meta-content">
+            <p class="book__meta-label">{{ t('book.meta.publisher') }}</p>
+            <p class="book__meta-value">{{ book.publisher }}</p>
           </div>
         </div>
 
-        <div class="book-meta__item">
-          <Icon name="mdi:cube-outline" size="24px" class="book-meta__icon" />
-          <div class="book-meta__content">
-            <p class="book-meta__label">{{ t('book.meta.format') }}</p>
-            <p class="book-meta__value">
+        <div class="book__meta-item">
+          <Icon name="mdi:cube-outline" size="24px" class="book__meta-icon" />
+          <div class="book__meta-content">
+            <p class="book__meta-label">{{ t('book.meta.format') }}</p>
+            <p class="book__meta-value">
               {{ book.format_width_mm }} × {{ book.format_height_mm }} mm
             </p>
           </div>
         </div>
 
-        <div class="book-meta__item">
+        <div class="book__meta-item">
           <Icon
             name="mdi:format-align-justify"
             size="24px"
-            class="book-meta__icon"
+            class="book__meta-icon"
           />
-          <div class="book-meta__content">
-            <p class="book-meta__label">{{ t('book.meta.pagesCount') }}</p>
-            <p class="book-meta__value">{{ book.pages_count }}</p>
+          <div class="book__meta-content">
+            <p class="book__meta-label">{{ t('book.meta.pagesCount') }}</p>
+            <p class="book__meta-value">{{ book.pages_count }}</p>
           </div>
         </div>
 
-        <div class="book-meta__item">
+        <div class="book__meta-item">
           <Icon
             name="mdi:book-open-variant"
             size="24px"
-            class="book-meta__icon"
+            class="book__meta-icon"
           />
-          <div class="book-meta__content">
-            <p class="book-meta__label">{{ t('book.meta.bindingType') }}</p>
-            <p class="book-meta__value">
+          <div class="book__meta-content">
+            <p class="book__meta-label">{{ t('book.meta.bindingType') }}</p>
+            <p class="book__meta-value">
               {{ t(`book.values.bindingType.${book.binding_type}`) }}
             </p>
           </div>
         </div>
 
-        <div class="book-meta__item">
-          <Icon name="mdi:scale-balance" size="24px" class="book-meta__icon" />
-          <div class="book-meta__content">
-            <p class="book-meta__label">{{ t('book.meta.weight') }}</p>
-            <p class="book-meta__value">{{ book.weight_kg }} kg</p>
+        <div class="book__meta-item">
+          <Icon name="mdi:scale-balance" size="24px" class="book__meta-icon" />
+          <div class="book__meta-content">
+            <p class="book__meta-label">{{ t('book.meta.weight') }}</p>
+            <p class="book__meta-value">{{ book.weight_kg }} kg</p>
           </div>
         </div>
       </div>
 
-      <div class="book-insight">
+      <div class="book__insight">
         <BookTabs
           :description="book.description"
           :author-bio="book.author.bio"
@@ -259,29 +260,29 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
     grid-template-columns: 1fr 1.5fr;
     gap: $spacing-8;
 
-    .book-summary {
+    .book__summary {
       grid-column: 2;
       grid-row: 1;
     }
 
-    .book-media {
+    .book__media {
       grid-column: 1;
       grid-row: 1 / span 2;
     }
 
-    .book-meta {
+    .book__meta {
       grid-column: 2;
       grid-row: 2;
     }
 
-    .book-insight {
+    .book__insight {
       grid-column: 1 / span 2;
       grid-row: 3;
     }
   }
 }
 
-.book-summary__author {
+.book__summary-author {
   font-size: $font-size-xl;
   color: $color-gray-700;
   transition: all 0.4s ease;
@@ -299,7 +300,7 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
   }
 }
 
-.book-summary__price {
+.book__summary-price {
   display: flex;
   gap: $spacing-3;
   margin-top: $spacing-5;
@@ -318,7 +319,7 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
   }
 }
 
-.book__actions {
+.book__summary-actions {
   display: grid;
   grid-template-columns: minmax(0, 550px) 80px;
   grid-template-rows: auto auto;
@@ -326,25 +327,25 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
   margin-top: $spacing-5;
 }
 
-.book__quantity {
+.book__summary-quantity {
   grid-column: 1 / span 2;
   grid-row: 1;
   width: 100%;
 }
 
-.book__submit {
+.book__summary-submit {
   grid-column: 1;
   grid-row: 2;
   width: 100%;
 }
 
-.book__favourite {
+.book__summary-favourite {
   grid-column: 2;
   grid-row: 2;
   width: auto;
 }
 
-.book-media img {
+.book__media img {
   display: block;
   margin: $spacing-8 auto;
   max-width: 100%;
@@ -355,7 +356,7 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
   }
 }
 
-.book-meta {
+.book__meta {
   display: grid;
   grid-template-columns: 1fr;
   gap: $spacing-5;
@@ -365,22 +366,22 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
   }
 }
 
-.book-meta__item {
+.book__meta-item {
   @include flex(row, flex-start, center);
   gap: $spacing-4;
   font-size: $font-size-lg;
 }
 
-.book-meta__content {
+.book__meta-content {
   @include flex(column, flex-start, flex-start);
   gap: $spacing-2;
 }
 
-.book-meta__label {
+.book__meta-label {
   font-weight: 700;
 }
 
-.book-insight {
+.book__insight {
   margin-top: $spacing-8;
 }
 
