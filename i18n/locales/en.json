@@ -14,12 +14,6 @@
     "noResults": "No results found."
   },
 
-  "carousel": {
-    "mostSold": "Best Sellers",
-    "newest": "New Arrivals",
-    "staffPicks": "Staff Picks"
-  },
-
   "login": {
     "title": "Login",
     "subtitle": "Hi, welcome back!",
@@ -61,44 +55,10 @@
     "loading": "Signing you up…"
   },
 
-  "validation": {
-    "email": {
-      "required": "Email is required",
-      "invalid": "Email must be a valid email address"
-    },
-    "password": {
-      "required": "Password is required",
-      "min": "Password must be at least 6 characters"
-    },
-    "confirmPassword": {
-      "required": "Confirm password is required",
-      "match": "Passwords must match"
-    },
-    "name": {
-      "required": "First name is required"
-    },
-    "surname": {
-      "required": "Last name is required"
-    },
-    "country": {
-      "required": "Country is required"
-    },
-    "city": {
-      "required": "City is required"
-    },
-    "zip": {
-      "required": "Postal code is required"
-    },
-    "address": {
-      "required": "Address is required",
-      "min": "Address must be at least 3 characters"
-    },
-    "shippingMethod": {
-      "required": "Shipping method is required"
-    },
-    "phone": {
-      "invalid": "Please enter a valid phone number"
-    }
+  "carousel": {
+    "mostSold": "Best Sellers",
+    "newest": "New Arrivals",
+    "staffPicks": "Staff Picks"
   },
 
   "explore": {
@@ -111,9 +71,29 @@
     "categoryEmpty": "There are no books in this category."
   },
 
-  "favourites": {
-    "title": "Your favourites",
-    "empty": "You don’t have any favourites yet."
+  "sort": {
+    "label": "Sort by:",
+    "sortBy": {
+      "dateDesc": "Date (new → old)",
+      "dateAsc": "Date (old → new)",
+      "priceAsc": "Price (low → high)",
+      "priceDesc": "Price (high → low)",
+      "titleAsc": "Title (A → Z)",
+      "titleDesc": "Title (Z → A)"
+    }
+  },
+
+  "filter": {
+    "language": "Language",
+    "binding": "Binding",
+    "inStockOnly": "In Stock Only",
+    "apply": "Apply Filters",
+    "reset": "Reset Filters",
+    "chooseOption": "-- Select an option --",
+    "english": "English",
+    "croatian": "Croatian",
+    "softcover": "Softcover",
+    "hardcover": "Hardcover"
   },
 
   "book": {
@@ -156,29 +136,9 @@
     "noBooks": "There are no books from this author."
   },
 
-  "sort": {
-    "label": "Sort by:",
-    "sortBy": {
-      "dateDesc": "Date (new → old)",
-      "dateAsc": "Date (old → new)",
-      "priceAsc": "Price (low → high)",
-      "priceDesc": "Price (high → low)",
-      "titleAsc": "Title (A → Z)",
-      "titleDesc": "Title (Z → A)"
-    }
-  },
-
-  "filter": {
-    "language": "Language",
-    "binding": "Binding",
-    "inStockOnly": "In Stock Only",
-    "apply": "Apply Filters",
-    "reset": "Reset Filters",
-    "chooseOption": "-- Select an option --",
-    "english": "English",
-    "croatian": "Croatian",
-    "softcover": "Softcover",
-    "hardcover": "Hardcover"
+  "favourites": {
+    "title": "Your favourites",
+    "empty": "You don’t have any favourites yet."
   },
 
   "cart": {
@@ -290,6 +250,46 @@
     "revenue30days": "Revenue (last 30 days)",
     "topSellingBooks": "Top Selling Books",
     "booksByCategory": "Number of Books by Category"
+  },
+
+  "validation": {
+    "email": {
+      "required": "Email is required",
+      "invalid": "Email must be a valid email address"
+    },
+    "password": {
+      "required": "Password is required",
+      "min": "Password must be at least 6 characters"
+    },
+    "confirmPassword": {
+      "required": "Confirm password is required",
+      "match": "Passwords must match"
+    },
+    "name": {
+      "required": "First name is required"
+    },
+    "surname": {
+      "required": "Last name is required"
+    },
+    "country": {
+      "required": "Country is required"
+    },
+    "city": {
+      "required": "City is required"
+    },
+    "zip": {
+      "required": "Postal code is required"
+    },
+    "address": {
+      "required": "Address is required",
+      "min": "Address must be at least 3 characters"
+    },
+    "shippingMethod": {
+      "required": "Shipping method is required"
+    },
+    "phone": {
+      "invalid": "Please enter a valid phone number"
+    }
   },
 
   "toast": {
