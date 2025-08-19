@@ -20,7 +20,7 @@ const props = withDefaults(
 )
 
 // STATE
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const { width } = useWindowSize()
 const user = useSupabaseUser()
 const cartStore = useCartStore()
@@ -67,19 +67,6 @@ watch(
   { immediate: true },
 )
 
-// HANDLERS
-const nextSlide = () => {
-  if (currentSlideIndex.value < maxSlideIndex.value) {
-    currentSlideIndex.value++
-  }
-}
-const previousSlide = () => {
-  if (currentSlideIndex.value > 0) {
-    currentSlideIndex.value--
-  }
-}
-
-// SKELETON LOADER
 watch(
   () => props.isLoading,
   (isLoading) => {
@@ -96,6 +83,20 @@ watch(
   { immediate: true },
 )
 
+// HANDLERS
+const nextSlide = () => {
+  if (currentSlideIndex.value < maxSlideIndex.value) {
+    currentSlideIndex.value++
+  }
+}
+
+const previousSlide = () => {
+  if (currentSlideIndex.value > 0) {
+    currentSlideIndex.value--
+  }
+}
+
+// LCH
 onMounted(() => {
   skeletonTimer = setTimeout(() => {
     showSkeleton.value = false
@@ -196,10 +197,10 @@ onBeforeUnmount(() => {
 
             <p class="slide__price">
               <span v-if="book.sale_price" class="slide__price--old">
-                {{ formatNumberToEuro(book.price) }}
+                {{ formatNumberToEuro(book.price, locale) }}
               </span>
               <span class="slide__price--current">
-                {{ formatNumberToEuro(book.sale_price ?? book.price) }}
+                {{ formatNumberToEuro(book.sale_price ?? book.price, locale) }}
               </span>
             </p>
 

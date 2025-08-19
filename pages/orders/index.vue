@@ -106,7 +106,7 @@ useHead(() => ({
           <span class="orders__shipping">{{ t('orders.shipping') }}</span>
         </div>
         <div class="orders__cell orders__total align-text">
-          {{ formatNumberToEuro(r.total) }}
+          {{ formatNumberToEuro(r.total, locale) }}
         </div>
         <div class="orders__cell align-text">
           {{

@@ -67,10 +67,10 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
 
         <div class="book__summary-price">
           <span v-if="book.sale_price" class="book__summary-price--old">
-            {{ formatNumberToEuro(book.price) }}
+            {{ formatNumberToEuro(book.price, locale) }}
           </span>
           <span class="book__summary-price--current">
-            {{ formatNumberToEuro(book.sale_price ?? book.price) }}
+            {{ formatNumberToEuro(book.sale_price ?? book.price, locale) }}
           </span>
         </div>
 

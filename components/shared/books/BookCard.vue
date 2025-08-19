@@ -6,7 +6,7 @@ import { formatNumberToEuro } from '~/helpers/formatters'
 const props = defineProps<{ book: Book }>()
 
 // STATE
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const imageLoaded = ref(false)
 const user = useSupabaseUser()
 const cartStore = useCartStore()
@@ -55,10 +55,10 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
 
     <p class="book__price">
       <span v-if="book.sale_price" class="book__price--old">
-        {{ formatNumberToEuro(book.price) }}
+        {{ formatNumberToEuro(book.price, locale) }}
       </span>
       <span class="book__price--current">
-        {{ formatNumberToEuro(book.sale_price ?? book.price) }}
+        {{ formatNumberToEuro(book.sale_price ?? book.price, locale) }}
       </span>
     </p>
 

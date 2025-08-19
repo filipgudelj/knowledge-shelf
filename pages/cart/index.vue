@@ -82,12 +82,13 @@ useHead(() => ({
 
           <div class="cart__price center-text">
             <span v-if="item.book?.sale_price" class="cart__price--old">
-              {{ formatNumberToEuro(item.book?.price ?? 0) }}
+              {{ formatNumberToEuro(item.book?.price ?? 0, locale) }}
             </span>
             <span class="cart__price--current">
               {{
                 formatNumberToEuro(
                   item.book?.sale_price ?? item.book?.price ?? 0,
+                  locale,
                 )
               }}
             </span>
@@ -98,6 +99,7 @@ useHead(() => ({
               formatNumberToEuro(
                 (item.book?.sale_price ?? item.book?.price ?? 0) *
                   item.quantity,
+                locale,
               )
             }}
           </div>
@@ -112,7 +114,9 @@ useHead(() => ({
         </div>
       </div>
       <div class="cart__summary">
-        <p>{{ t('cart.summary') }}: {{ formatNumberToEuro(cartTotal) }}</p>
+        <p>
+          {{ t('cart.summary') }}: {{ formatNumberToEuro(cartTotal, locale) }}
+        </p>
       </div>
 
       <div class="cart__actions">

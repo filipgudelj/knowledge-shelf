@@ -2,6 +2,7 @@ import Stripe from 'stripe'
 import { getQuery } from 'h3'
 import { serverSupabaseClient } from '#supabase/server'
 import nodemailer from 'nodemailer'
+import { formatNumberToEuro } from '~/helpers/formatters'
 
 export default defineEventHandler(async (event) => {
   const { session_id } = getQuery(event) as { session_id?: string }
@@ -174,6 +175,7 @@ export default defineEventHandler(async (event) => {
     })
 
     const lang = String(md.locale || 'en').toLowerCase()
+    const fmt = (n: number) => formatNumberToEuro(Number(n), lang)
     const t =
       lang === 'hr'
         ? {
@@ -211,7 +213,7 @@ export default defineEventHandler(async (event) => {
         <tr>
           <td style="padding:8px 0;border-bottom:1px solid #f1f5f9;">${i.title_snapshot}</td>
           <td align="center" style="padding:8px 0;border-bottom:1px solid #f1f5f9;">${i.quantity}</td>
-          <td align="right" style="padding:8px 0;border-bottom:1px solid #f1f5f9;">${i.unit_price.toFixed(2)} €</td>
+          <td align="right" style="padding:8px 0;border-bottom:1px solid #f1f5f9;">${fmt(i.unit_price)}</td>
         </tr>
       `,
       )
@@ -256,15 +258,15 @@ export default defineEventHandler(async (event) => {
               <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:18px;border-collapse:collapse;">
                 <tr>
                   <td align="left"  style="padding:6px 0;font-size:14px;color:#111827;">${t.subtotal}</td>
-                  <td align="right" style="padding:6px 0;font-size:14px;color:#111827;"><strong>${Number(subtotal).toFixed(2)} €</strong></td>
+                  <td align="right" style="padding:6px 0;font-size:14px;color:#111827;"><strong>${fmt(subtotal)}</strong></td>
                 </tr>
                 <tr>
                   <td align="left"  style="padding:6px 0;font-size:14px;color:#111827;">${t.shipping}</td>
-                  <td align="right" style="padding:6px 0;font-size:14px;color:#111827;"><strong>${Number(shipping_price).toFixed(2)} €</strong></td>
+                  <td align="right" style="padding:6px 0;font-size:14px;color:#111827;"><strong>${fmt(shipping_price)}</strong></td>
                 </tr>
                 <tr>
                   <td align="left"  style="padding:8px 0;border-top:1px solid #f1f5f9;font-size:16px;font-weight:700;color:#111827;">${t.total}</td>
-                  <td align="right" style="padding:8px 0;border-top:1px solid #f1f5f9;font-size:16px;font-weight:700;color:#111827;">${Number(total).toFixed(2)} €</td>
+                  <td align="right" style="padding:8px 0;border-top:1px solid #f1f5f9;font-size:16px;font-weight:700;color:#111827;">${fmt(total)}</td>
                 </tr>
               </table>
 

@@ -11,6 +11,7 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: boolean): void
 }>()
 
+// HANDLERS
 const onCheck = (event: Event) => {
   emit('update:modelValue', (event.target as HTMLInputElement).checked)
 }

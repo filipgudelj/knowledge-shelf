@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import VueSkeletonLoader from 'vue3-skeleton-loader'
 import 'vue3-skeleton-loader/dist/style.css'
+import { formatNumberToEuro } from '~/helpers/formatters'
 
 // TYPES
 type Row = { day: string; revenue: number }
@@ -37,7 +38,8 @@ const xFormatter = (index: number) =>
     day: 'numeric',
   })
 
-const yFormatter = (value: number) => `${value} €`
+const yFormatter = (value: number) =>
+  formatNumberToEuro(Number(value) || 0, locale.value)
 
 // LCH
 onMounted(async () => {
@@ -90,7 +92,11 @@ onMounted(async () => {
           </div>
           <div class="chart__tooltip-value">
             <span class="chart__tooltip-label">{{ $t('admin.revenue') }}</span>
-            <span class="chart__tooltip-amount">{{ values?.revenue }} €</span>
+            <span class="chart__tooltip-amount">
+              {{
+                formatNumberToEuro(Number(values?.revenue ?? 0), locale)
+              }}</span
+            >
           </div>
         </div>
       </template>

@@ -404,7 +404,7 @@ useHead(() => ({
               :label="t('checkout.shipping.chooseMethod')"
               :options="
                 shippingMethods.map((m) => ({
-                  label: `${m.label} (${formatNumberToEuro(m.price)})`,
+                  label: `${m.label} (${formatNumberToEuro(m.price, locale)})`,
                   value: m.value,
                 }))
               "
@@ -471,6 +471,7 @@ useHead(() => ({
                 {{
                   formatNumberToEuro(
                     (i.book?.sale_price ?? i.book?.price ?? 0) * i.quantity,
+                    locale,
                   )
                 }}
               </div>
@@ -479,17 +480,17 @@ useHead(() => ({
 
           <div class="summary__row summary__row--subtotal">
             <span>{{ t('checkout.subtotal') }}</span>
-            <strong>{{ formatNumberToEuro(subtotal) }}</strong>
+            <strong>{{ formatNumberToEuro(subtotal, locale) }}</strong>
           </div>
 
           <div class="summary__row">
             <span>{{ t('checkout.shippingTotal') }}</span>
-            <strong>{{ formatNumberToEuro(shippingPrice) }}</strong>
+            <strong>{{ formatNumberToEuro(shippingPrice, locale) }}</strong>
           </div>
 
           <div class="summary__row summary__row--total">
             <span>{{ t('checkout.total') }}</span>
-            <strong>{{ formatNumberToEuro(total) }}</strong>
+            <strong>{{ formatNumberToEuro(total, locale) }}</strong>
           </div>
         </aside>
       </div>

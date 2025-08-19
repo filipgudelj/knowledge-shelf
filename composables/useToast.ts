@@ -1,6 +1,5 @@
 import type { Toast, ToastType } from '@/types'
 
-// STATE
 const toasts = ref<Toast[]>([])
 let toastId = 0
 

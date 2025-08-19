@@ -7,6 +7,7 @@ import { onClickOutside } from '@vueuse/core'
 const localePath = useLocalePath()
 const router = useRouter()
 const route = useRoute()
+const { locale } = useI18n()
 const booksStore = useBooksStore()
 const searchQuery = ref(String(route.params.searchQuery || ''))
 const searchResults = ref<Book[]>([])
@@ -127,10 +128,10 @@ onClickOutside(searchResultsDropdownRef, () => {
           <p class="search__result-title">{{ book.title }}</p>
           <p class="search__result-price">
             <span v-if="book.sale_price" class="search__result-price--old">
-              {{ formatNumberToEuro(book.price) }}
+              {{ formatNumberToEuro(book.price, locale) }}
             </span>
             <span class="search__result-price--current">
-              {{ formatNumberToEuro(book.sale_price ?? book.price) }}
+              {{ formatNumberToEuro(book.sale_price ?? book.price, locale) }}
             </span>
           </p>
         </div>

@@ -29,6 +29,7 @@ defineExpose({
 // EMITS
 const emits = defineEmits(['update:modelValue'])
 
+// HANDLERS
 function updateValue(newValue: number) {
   const min = props.min ?? 1
   const max = props.max
@@ -40,7 +41,6 @@ function updateValue(newValue: number) {
   localValue.value = newValue
 }
 
-// HANDLERS
 function onInput(event: Event) {
   const target = event.target as HTMLInputElement
   const raw = target.value.trim()

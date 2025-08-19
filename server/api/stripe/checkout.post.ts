@@ -69,7 +69,9 @@ export default defineEventHandler(async (event) => {
     mode: 'payment',
     payment_method_types: ['card'],
     customer_email: body.email,
-    locale: 'auto',
+    locale:
+      (body.locale?.toLowerCase() as Stripe.Checkout.SessionCreateParams.Locale) ||
+      'auto',
     line_items,
     metadata: {
       user_id: user?.id ?? '',

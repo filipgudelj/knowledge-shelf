@@ -4,6 +4,8 @@ import { useI18n } from 'vue-i18n'
 // STATE
 const { toasts, closeToast } = useToast()
 const { t } = useI18n()
+
+// HELPERS
 const getTypeLabel = (type: string) => t(`toast.${type}`)
 const getIconName = (type: string) => {
   switch (type) {

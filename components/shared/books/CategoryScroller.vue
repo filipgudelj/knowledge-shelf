@@ -13,6 +13,7 @@ const activeCategory = computed(() => {
   return (route.params.category as string) || 'all'
 })
 
+// HELPERS
 const localizedName = (category: Category) => category.name[locale.value]
 </script>
 
