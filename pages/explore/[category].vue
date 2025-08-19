@@ -175,8 +175,8 @@ onBeforeUnmount(() => {
 
 // HEAD
 useHead(() => ({
-  title: t('seo.category.title', { pageTitle: pageTitle.value }),
-  meta: [{ name: 'description', content: t('seo.category.description') }],
+  title: t('seo.explore.title', { pageTitle: pageTitle.value }),
+  meta: [{ name: 'description', content: t('seo.explore.description') }],
   htmlAttrs: { lang: locale.value },
 }))
 </script>

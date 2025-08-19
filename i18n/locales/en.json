@@ -352,9 +352,13 @@
   },
 
   "seo": {
-    "home": {
-      "title": "Knowledge Shelf",
-      "description": "Discover your next great read from a variety of books."
+    "search": {
+      "title": "Search: \"{q}\" ⎪ Knowledge Shelf",
+      "description": "Search for books from our extensive online collection."
+    },
+    "login": {
+      "title": "Login ⎪ Knowledge Shelf",
+      "description": "Log in to continue using your account features."
     },
     "confirm": {
       "title": "Confirm ⎪ Knowledge Shelf",
@@ -364,25 +368,33 @@
       "title": "Forgot Password ⎪ Knowledge Shelf",
       "description": "Forgot your password? Enter your email to receive a reset link."
     },
-    "login": {
-      "title": "Login ⎪ Knowledge Shelf",
-      "description": "Log in to continue using your account features."
+    "resetPassword": {
+      "title": "Reset Password ⎪ Knowledge Shelf",
+      "description": "Set a new password to access your account."
     },
     "register": {
       "title": "Register ⎪ Knowledge Shelf",
       "description": "Create your account."
     },
-    "resetPassword": {
-      "title": "Reset Password ⎪ Knowledge Shelf",
-      "description": "Set a new password to access your account."
+    "home": {
+      "title": "Knowledge Shelf",
+      "description": "Discover your next great read from a variety of books."
+    },
+    "explore": {
+      "title": "{pageTitle} ⎪ Knowledge Shelf",
+      "description": "Explore our collection of books across various categories."
+    },
+    "book": {
+      "title": "{title} ⎪ Knowledge Shelf",
+      "description": "Explore detailed information about a selected book from our collection."
     },
     "author": {
       "title": "{name} ⎪ Knowledge Shelf",
       "description": "Learn more about the author and explore their books."
     },
-    "book": {
-      "title": "{title} ⎪ Knowledge Shelf",
-      "description": "Explore detailed information about a selected book from our collection."
+    "favourites": {
+      "title": "Favourites ⎪ Knowledge Shelf",
+      "description": "View and manage your favourite books."
     },
     "cart": {
       "title": "Cart ⎪ Knowledge Shelf",
@@ -396,25 +408,13 @@
         "description": "Your order was completed."
       }
     },
-    "orders": {
-      "title": "Your Orders ⎪ Knowledge Shelf",
-      "description": "View all your past orders."
-    },
     "settings": {
       "title": "Settings ⎪ Knowledge Shelf",
       "description": "Manage your profile information and account settings."
     },
-    "category": {
-      "title": "{pageTitle} ⎪ Knowledge Shelf",
-      "description": "Explore our collection of books across various categories."
-    },
-    "favourites": {
-      "title": "Favourites ⎪ Knowledge Shelf",
-      "description": "View and manage your favourite books."
-    },
-    "search": {
-      "title": "Search: \"{q}\" ⎪ Knowledge Shelf",
-      "description": "Search for books from our extensive online collection."
+    "orders": {
+      "title": "Your Orders ⎪ Knowledge Shelf",
+      "description": "View all your past orders."
     },
     "dashboard": {
       "title": "Dashboard ⎪ Knowledge Shelf",

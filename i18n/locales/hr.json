@@ -351,9 +351,13 @@
   },
 
   "seo": {
-    "home": {
-      "title": "Knowledge Shelf",
-      "description": "Otkrijte svoju sljedeću omiljenu knjigu iz raznovrsne ponude."
+    "search": {
+      "title": "Pretraga: \"{q}\" ⎪ Knowledge Shelf",
+      "description": "Pretražite knjige iz naše opsežne online kolekcije."
+    },
+    "login": {
+      "title": "Prijava ⎪ Knowledge Shelf",
+      "description": "Prijavite se kako biste nastavili koristiti značajke svog računa."
     },
     "confirm": {
       "title": "Potvrda ⎪ Knowledge Shelf",
@@ -363,25 +367,33 @@
       "title": "Zaboravljena lozinka ⎪ Knowledge Shelf",
       "description": "Unesite svoju adresu e-pošte kako biste primili poveznicu za resetiranje lozinke."
     },
-    "login": {
-      "title": "Prijava ⎪ Knowledge Shelf",
-      "description": "Prijavite se kako biste nastavili koristiti značajke svog računa."
+    "resetPassword": {
+      "title": "Resetiranje lozinke ⎪ Knowledge Shelf",
+      "description": "Postavite novu lozinku za pristup svom računu."
     },
     "register": {
       "title": "Registracija ⎪ Knowledge Shelf",
       "description": "Kreirajte svoj račun."
     },
-    "resetPassword": {
-      "title": "Resetiranje lozinke ⎪ Knowledge Shelf",
-      "description": "Postavite novu lozinku za pristup svom računu."
+    "home": {
+      "title": "Knowledge Shelf",
+      "description": "Otkrijte svoju sljedeću omiljenu knjigu iz raznovrsne ponude."
+    },
+    "explore": {
+      "title": "{pageTitle} ⎪ Knowledge Shelf",
+      "description": "Istražite našu kolekciju knjiga po različitim kategorijama."
+    },
+    "book": {
+      "title": "{title} ⎪ Knowledge Shelf",
+      "description": "Istražite detaljne informacije o odabranoj knjizi iz naše kolekcije."
     },
     "author": {
       "title": "{name} ⎪ Knowledge Shelf",
       "description": "Saznajte više o autoru i istražite njegove knjige."
     },
-    "book": {
-      "title": "{title} ⎪ Knowledge Shelf",
-      "description": "Istražite detaljne informacije o odabranoj knjizi iz naše kolekcije."
+    "favourites": {
+      "title": "Favoriti ⎪ Knowledge Shelf",
+      "description": "Pregledajte i upravljajte svojim omiljenim knjigama."
     },
     "cart": {
       "title": "Košarica ⎪ Knowledge Shelf",
@@ -395,25 +407,13 @@
         "description": "Vaša narudžba je dovršena."
       }
     },
-    "orders": {
-      "title": "Tvoje narudžbe ⎪ Knowledge Shelf",
-      "description": "Pregledajte sve svoje prethodne narudžbe."
-    },
     "settings": {
       "title": "Postavke ⎪ Knowledge Shelf",
       "description": "Upravljajte podacima profila i postavkama računa."
     },
-    "category": {
-      "title": "{pageTitle} ⎪ Knowledge Shelf",
-      "description": "Istražite našu kolekciju knjiga po različitim kategorijama."
-    },
-    "favourites": {
-      "title": "Favoriti ⎪ Knowledge Shelf",
-      "description": "Pregledajte i upravljajte svojim omiljenim knjigama."
-    },
-    "search": {
-      "title": "Pretraga: \"{q}\" ⎪ Knowledge Shelf",
-      "description": "Pretražite knjige iz naše opsežne online kolekcije."
+    "orders": {
+      "title": "Tvoje narudžbe ⎪ Knowledge Shelf",
+      "description": "Pregledajte sve svoje prethodne narudžbe."
     },
     "dashboard": {
       "title": "Nadzorna ploča ⎪ Knowledge Shelf",
