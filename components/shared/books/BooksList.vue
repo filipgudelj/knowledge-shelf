@@ -72,7 +72,7 @@ onBeforeUnmount(() => {
       :key="'skeleton-' + n"
       type="image@1"
       :width="'100%'"
-      :height="'400px'"
+      :height="'420px'"
       base-color="var(--skel-base)"
       highlight-color="var(--skel-highlight)"
     >
