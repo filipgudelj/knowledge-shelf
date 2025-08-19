@@ -245,6 +245,13 @@
     }
   },
 
+  "dropdown": {
+    "settings": "Postavke",
+    "orders": "Narudžbe",
+    "dashboard": "Nadzorna ploča",
+    "logout": "Odjava"
+  },
+
   "orders": {
     "title": "Tvoje narudžbe",
     "empty": "Još nemaš narudžbi.",

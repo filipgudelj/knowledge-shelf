@@ -6,13 +6,13 @@ const user = useSupabaseUser()
 const authStore = useAuthStore()
 const showMenu = ref(false)
 const userDropdownRef = ref(null)
+const { t } = useI18n()
 
-// TOGGLE
+// HANDLERS
 const toggleMenu = () => {
   showMenu.value = !showMenu.value
 }
 
-// HANDLERS
 const handleLogout = () => {
   toggleMenu()
   authStore.logout()
@@ -36,7 +36,7 @@ onClickOutside(userDropdownRef, () => {
           to="/settings"
           class="dropdown__item"
         >
-          <div class="dropdown__label">Settings</div>
+          <div class="dropdown__label">{{ $t('dropdown.settings') }}</div>
           <Icon name="mdi:chevron-right" size="20px" class="dropdown__icon" />
         </NuxtLinkLocale>
 
@@ -45,7 +45,7 @@ onClickOutside(userDropdownRef, () => {
           to="/orders"
           class="dropdown__item"
         >
-          <div class="dropdown__label">Orders</div>
+          <div class="dropdown__label">{{ $t('dropdown.orders') }}</div>
           <Icon name="mdi:chevron-right" size="20px" class="dropdown__icon" />
         </NuxtLinkLocale>
 
@@ -55,7 +55,7 @@ onClickOutside(userDropdownRef, () => {
           to="/admin/dashboard"
           class="dropdown__item"
         >
-          <div class="dropdown__label">Dashboard</div>
+          <div class="dropdown__label">{{ $t('dropdown.dashboard') }}</div>
           <Icon name="mdi:chevron-right" size="20px" class="dropdown__icon" />
         </NuxtLinkLocale>
 
@@ -63,7 +63,7 @@ onClickOutside(userDropdownRef, () => {
           @click="handleLogout"
           class="dropdown__item dropdown__item--logout"
         >
-          Logout
+          {{ $t('dropdown.logout') }}
         </button>
       </div>
     </div>
@@ -107,7 +107,7 @@ onClickOutside(userDropdownRef, () => {
   top: calc(100% + 6px);
   right: 0;
   z-index: 100;
-  width: 150px;
+  width: 190px;
   padding-inline: $spacing-4;
   padding-block: $spacing-4;
   border-radius: $radius-4;

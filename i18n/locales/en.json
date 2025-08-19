@@ -246,6 +246,13 @@
     }
   },
 
+  "dropdown": {
+    "settings": "Settings",
+    "orders": "Orders",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+
   "settings": {
     "title": "Settings",
     "email": "Email",
