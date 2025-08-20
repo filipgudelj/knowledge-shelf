@@ -90,7 +90,6 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
   @include flex(column, center, center);
   width: 100%;
   gap: $spacing-1;
-  padding-block: $spacing-3;
   perspective: 1300px;
   opacity: 0;
   transition: opacity 0.3s ease;

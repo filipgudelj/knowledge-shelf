@@ -205,7 +205,7 @@ useHead(() => ({
   @include flex(row, space-between, center);
   flex-wrap: wrap;
   gap: $spacing-2;
-  margin-top: $spacing-6;
+  margin-top: $spacing-2;
 }
 
 .explore__title {

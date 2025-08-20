@@ -222,7 +222,6 @@ useHead(() => ({
 }
 
 .cart__header {
-  margin-top: $spacing-3;
   padding: $spacing-6 0;
   border-bottom: 1px solid $color-gray-300;
   font-weight: 700;
