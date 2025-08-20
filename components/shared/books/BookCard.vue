@@ -114,6 +114,31 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
   border-radius: 50%;
   background-color: $color-red-500;
   color: $color-gray-100;
+  overflow: visible;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba($color-red-500, 1);
+    animation: pulse 4s ease-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  17% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
 }
 
 .book__favourite {
