@@ -62,13 +62,13 @@ export default defineNuxtConfig({
     smtpUser: process.env.SMTP_USER,
     smtpPass: process.env.SMTP_PASS,
     public: {
-      stripePublishableKey: process.env.STRIPE_PK_KEY,
+      stripePublishableKey: process.env.NUXT_PUBLIC_STRIPE_PK_KEY,
     },
   },
   compatibilityDate: '2025-05-15',
   supabase: {
-    url: process.env.SUPABASE_URL,
-    key: process.env.SUPABASE_KEY,
+    url: process.env.NUXT_PUBLIC_SUPABASE_URL,
+    key: process.env.NUXT_PUBLIC_SUPABASE_KEY,
     redirect: false,
   },
 })
