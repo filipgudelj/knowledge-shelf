@@ -17,18 +17,18 @@ const showSkeleton = ref(true)
 const { locale, t } = useI18n()
 
 const palette = [
-  '#1aa3ff',
-  '#4bc0c0',
-  '#36a2eb',
-  '#9966ff',
-  '#ff9f40',
-  '#ef4444',
-  '#22c55e',
-  '#f59e0b',
-  '#06b6d4',
-  '#a855f7',
-  '#ec4899',
-  '#94a3b8',
+  '#ce6464',
+  '#ce9964',
+  '#cece64',
+  '#99ce64',
+  '#64ce64',
+  '#64ce99',
+  '#64cece',
+  '#6499ce',
+  '#6464ce',
+  '#9964ce',
+  '#ce64ce',
+  '#ce6499',
 ]
 
 // API
@@ -72,7 +72,7 @@ onMounted(async () => {
       :key="'skeleton-' + n"
       type="image@1"
       width="'100%'"
-      :height="'425px'"
+      :height="'435px'"
       base-color="var(--skel-base)"
       highlight-color="var(--skel-highlight)"
     />
@@ -88,7 +88,7 @@ onMounted(async () => {
         :data="donutData"
         :arc-width="45"
         :labels="labels"
-        :height="305"
+        :height="270"
         :radius="0"
         :type="'full'"
         :crosshair="false"
@@ -127,6 +127,6 @@ onMounted(async () => {
 
 .chart__body {
   justify-self: center;
-  width: 240px;
+  width: 100%;
 }
 </style>

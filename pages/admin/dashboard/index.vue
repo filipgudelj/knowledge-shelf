@@ -44,6 +44,7 @@ useHead(() => ({
 
     > * {
       flex: 1;
+      min-width: 0;
     }
   }
 }

@@ -43,7 +43,7 @@ onMounted(async () => {
       :key="'skeleton-' + n"
       type="image@1"
       width="'100%'"
-      :height="'425px'"
+      :height="'435px'"
       base-color="var(--skel-base)"
       highlight-color="var(--skel-highlight)"
     />
