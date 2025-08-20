@@ -5,12 +5,14 @@ const { showToast } = useToast()
 const { t, locale } = useI18n()
 const router = useRouter()
 const localePath = useLocalePath()
+const authStore = useAuthStore()
 
 // WATCHERS
 watch(
   user,
   async () => {
     if (user.value) {
+      await authStore.migrateAnonymousFavourites(user.value.id)
       await nextTick()
       showToast('success', t('toast.emailConfirmed'))
       router.push(localePath('/'))

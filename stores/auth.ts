@@ -83,5 +83,12 @@ export const useAuthStore = defineStore('auth', () => {
     return response
   }
 
-  return { register, login, logout, sendPasswordResetLink, updateUserPassword }
+  return {
+    register,
+    login,
+    logout,
+    sendPasswordResetLink,
+    updateUserPassword,
+    migrateAnonymousFavourites,
+  }
 })
