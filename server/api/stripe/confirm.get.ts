@@ -171,7 +171,7 @@ export default defineEventHandler(async (event) => {
   if (toEmail) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
-      auth: { user: process.env.SMTP_USER!, pass: process.env.SMTP_PASS! },
+      auth: { user: config.smtpUser, pass: config.smtpPass },
     })
 
     const lang = String(md.locale || 'en').toLowerCase()
@@ -307,11 +307,11 @@ export default defineEventHandler(async (event) => {
 
     try {
       await transporter.sendMail({
-        from: process.env.SMTP_USER!,
+        from: config.smtpUser,
         to: toEmail,
         subject: `${t.order} #${order.id} ${lang === 'hr' ? 'potvrda' : 'confirmation'}`,
         html,
-        replyTo: process.env.SMTP_USER!,
+        replyTo: config.smtpUser,
       })
     } catch (err) {
       console.error('Order confirmation email failed', err)

@@ -59,6 +59,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     stripeSecretKey: process.env.STRIPE_SK_KEY,
+    smtpUser: process.env.SMTP_USER,
+    smtpPass: process.env.SMTP_PASS,
     public: {
       stripePublishableKey: process.env.STRIPE_PK_KEY,
     },
