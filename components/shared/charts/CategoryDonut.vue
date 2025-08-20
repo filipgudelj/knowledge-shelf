@@ -86,7 +86,7 @@ onMounted(async () => {
     <div class="chart__body">
       <DonutChart
         :data="donutData"
-        :arc-width="45"
+        :arc-width="75"
         :labels="labels"
         :height="270"
         :radius="0"
