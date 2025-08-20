@@ -16,7 +16,6 @@ useHead(() => ({
 
     <ClientOnly>
       <RevenueLine />
-
       <div class="dashboard__charts">
         <TopBooks />
         <CategoryDonut />
