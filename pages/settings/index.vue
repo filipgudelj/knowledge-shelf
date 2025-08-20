@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useForm, useField } from 'vee-validate'
 import * as yup from 'yup'
+import settingsSvgUrl from '@/public/svgs/settings.svg?url'
 
 // STATE
 const { t, locale } = useI18n()
@@ -11,6 +12,7 @@ const loading = ref(false)
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 const trim = (s?: string) => (s ?? '').trim()
 const emailDisplay = user.value?.email
+const imageLoaded = ref(false)
 
 const nameInput = ref<{ focus: () => void } | null>(null)
 const surnameInput = ref<{ focus: () => void } | null>(null)
@@ -20,6 +22,18 @@ const lastSaved = ref({
   name: trim(user.value?.user_metadata?.name ?? ''),
   surname: trim(user.value?.user_metadata?.surname ?? ''),
   phone: trim(user.value?.user_metadata?.phone ?? ''),
+})
+
+// LCH
+onMounted(() => {
+  const img = new Image()
+  img.src = settingsSvgUrl
+  if (img.complete && img.naturalWidth > 0) {
+    imageLoaded.value = true
+  } else {
+    img.onload = () => (imageLoaded.value = true)
+    img.onerror = () => (imageLoaded.value = true)
+  }
 })
 
 // COMPUTEDS
@@ -189,7 +203,11 @@ useHead(() => ({
       </div>
     </form>
 
-    <div class="settings__image" />
+    <div
+      class="settings__image"
+      :class="{ 'settings__image--loaded': imageLoaded }"
+      :style="{ backgroundImage: `url('${settingsSvgUrl}')` }"
+    ></div>
   </div>
 </template>
 
@@ -245,14 +263,20 @@ useHead(() => ({
 }
 
 .settings__image {
+  position: relative;
   display: none;
   width: 50%;
   height: 100%;
   border-radius: $radius-4;
-  background-image: url('/svgs/settings.svg');
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: contain;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+
+  &--loaded {
+    opacity: 1;
+  }
 
   @media (min-width: $screen-lg) {
     display: block;

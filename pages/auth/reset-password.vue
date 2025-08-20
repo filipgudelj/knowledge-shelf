@@ -2,6 +2,7 @@
 import { useForm, useField } from 'vee-validate'
 import * as yup from 'yup'
 import { useThrottleFn } from '@vueuse/core'
+import guyWithKeySvgUrl from '@/public/svgs/guy-with-key.svg?url'
 
 // STATE
 const authStore = useAuthStore()
@@ -14,8 +15,20 @@ const shouldRender = ref(false)
 const loading = ref(false)
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 const { error_description } = route.query as Record<string, string>
+const imageLoaded = ref(false)
 
 // LCH
+onMounted(() => {
+  const img = new Image()
+  img.src = guyWithKeySvgUrl
+  if (img.complete && img.naturalWidth > 0) {
+    imageLoaded.value = true
+  } else {
+    img.onload = () => (imageLoaded.value = true)
+    img.onerror = () => (imageLoaded.value = true)
+  }
+})
+
 onMounted(async () => {
   if (error_description === 'Email link is invalid or has expired') {
     await nextTick()
@@ -127,7 +140,11 @@ useHead(() => ({
       </FormButton>
     </form>
 
-    <div class="reset-password__image" />
+    <div
+      class="reset-password__image"
+      :class="{ 'reset-password__image--loaded': imageLoaded }"
+      :style="{ backgroundImage: `url('${guyWithKeySvgUrl}')` }"
+    ></div>
   </div>
 </template>
 
@@ -157,14 +174,20 @@ useHead(() => ({
 }
 
 .reset-password__image {
+  position: relative;
   display: none;
   width: 50%;
   height: 100%;
   border-radius: $radius-4;
-  background-image: url('/svgs/guy-with-key.svg');
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: contain;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+
+  &--loaded {
+    opacity: 1;
+  }
 
   @media (min-width: $screen-lg) {
     display: block;

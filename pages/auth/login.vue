@@ -2,6 +2,7 @@
 import { useForm, useField } from 'vee-validate'
 import * as yup from 'yup'
 import { useThrottleFn } from '@vueuse/core'
+import girlReadingSvgUrl from '@/public/svgs/girl-reading.svg?url'
 
 // STATE
 const authStore = useAuthStore()
@@ -12,6 +13,19 @@ const router = useRouter()
 const loading = ref(false)
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 const passwordInput = ref<{ focus: () => void } | null>(null)
+const imageLoaded = ref(false)
+
+// LCH
+onMounted(() => {
+  const img = new Image()
+  img.src = girlReadingSvgUrl
+  if (img.complete && img.naturalWidth > 0) {
+    imageLoaded.value = true
+  } else {
+    img.onload = () => (imageLoaded.value = true)
+    img.onerror = () => (imageLoaded.value = true)
+  }
+})
 
 // HANDLERS
 const focusPassword = () => {
@@ -147,7 +161,11 @@ useHead(() => ({
       </FormButton>
     </form>
 
-    <div class="login__image" />
+    <div
+      class="login__image"
+      :class="{ 'login__image--loaded': imageLoaded }"
+      :style="{ backgroundImage: `url('${girlReadingSvgUrl}')` }"
+    ></div>
   </div>
 </template>
 
@@ -190,14 +208,20 @@ useHead(() => ({
 }
 
 .login__image {
+  position: relative;
   display: none;
   width: 50%;
   height: 100%;
   border-radius: $radius-4;
-  background-image: url('/svgs/girl-reading.svg');
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: contain;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+
+  &--loaded {
+    opacity: 1;
+  }
 
   @media (min-width: $screen-lg) {
     display: block;
