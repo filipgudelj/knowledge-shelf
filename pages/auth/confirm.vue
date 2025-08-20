@@ -6,6 +6,7 @@ const { t, locale } = useI18n()
 const router = useRouter()
 const localePath = useLocalePath()
 const authStore = useAuthStore()
+const route = useRoute()
 
 // WATCHERS
 watch(
@@ -17,7 +18,13 @@ watch(
       showToast('success', t('toast.emailConfirmed'))
       router.push(localePath('/'))
     } else {
-      router.push(localePath('/'))
+      const { error, error_code, error_description } = route.query
+      router.push({
+        path: localePath('/'),
+        query: error_code
+          ? { error, error_code, error_description }
+          : undefined,
+      })
     }
   },
   { immediate: true },

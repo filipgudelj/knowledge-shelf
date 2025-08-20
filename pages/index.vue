@@ -10,6 +10,8 @@ const newestBooks = ref<Book[]>([])
 const staffPickedBooks = ref<Book[]>([])
 const cartStore = useCartStore()
 const favouritesStore = useFavouritesStore()
+const route = useRoute()
+const router = useRouter()
 
 // API
 await (async () => {
@@ -29,21 +31,19 @@ onMounted(async () => {
   await favouritesStore.loadFavourites()
   await cartStore.loadCart()
 
-  if (!window.location.hash) return
+  const fromQuery = route.query.error_code as string | undefined
+  const fromHash = route.hash
+    ? (new URLSearchParams(route.hash.slice(1)).get('error_code') ?? undefined)
+    : undefined
 
-  const params = new URLSearchParams(window.location.hash.slice(1))
-  const code = params.get('error_code')
+  if (!fromQuery && !fromHash) return
 
-  if (code) {
-    await nextTick()
+  setTimeout(() => {
     showToast('error', t('toast.linkExpired'))
-  }
+  }, 0)
 
-  history.replaceState(
-    history.state,
-    '',
-    window.location.pathname + window.location.search,
-  )
+  const { error, error_code, error_description, ...rest } = route.query
+  router.replace({ path: route.path, query: rest, hash: '' })
 })
 
 // HEAD
