@@ -1,75 +1,77 @@
-# Nuxt Minimal Starter
+# 📚 Knowledge Shelf – Book Webshop
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A **book webshop** built with **Nuxt** and **Supabase**, designed to be clean, fast, and user-friendly.
 
-## Setup
+<img width="1903" height="948" alt="Home" src="https://github.com/user-attachments/assets/d462e307-f73f-49af-94ba-575618b745aa" />
 
-Make sure to install dependencies:
 
+---
+
+## ✨ Features
+
+- 🌓 **Light/Dark mode**
+- 🌐 **Multilingual support (i18n)** with language switcher
+- 🛒 **Webshop flow:** cart → checkout → Stripe payment → confirmation email
+- ⭐ **Favourites** management
+- 🔐 **User authentication** (login, register, role-based access)
+
+---
+
+## 🛠 Tech Stack
+
+- **Framework:** Nuxt 3
+- **Backend & DB:** Supabase
+- **State:** Pinia
+- **Payments:** Stripe
+- **Internationalization:** i18n
+- **Styling:** SCSS (BEM)
+- **Auth:** Supabase Auth
+- **Deploy:** Netlify
+
+---
+
+## 🚀 Project Setup
 ```bash
-# npm
+# 1. Clone the repository
+git clone [repo]
+
+# 2. Enter the project folder
+cd knowledge-shelf
+
+# 3. Install dependencies
 npm install
 
-# pnpm
-pnpm install
+# 4. Create a .env file and fill it with the correct data
 
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
+# 5. Build the project
 npm run build
 
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+# 6. Start the development server
+npm run dev
 ```
 
-Locally preview production build:
+---
 
+## 📂 Folder Structure
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+├── assets/                # SCSS styles (colors, spacings, typography, etc.)
+├── components/
+│   ├── layout/            # Layout components
+│   │   ├── sidebar/
+│   │   └── topbar/
+│   └── shared/            # Reusable UI parts
+│       ├── books/
+│       ├── charts/
+│       ├── core/
+│       └── form/
+├── composables/           # useFavouriteCookie, useToast
+├── helpers/               # formatters
+├── i18n/                  # translations
+├── layouts/               # default, explore
+├── middleware/            # user role redirection, color theme refresh control
+├── pages/                 # app pages
+├── public/                # images, SVGs
+├── server/api/stripe      # Stripe logic
+├── stores/                # auth, books, cart, favourites, orders
+└── types/                 # TypeScript types
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
