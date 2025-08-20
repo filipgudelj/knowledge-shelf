@@ -27,7 +27,7 @@
   },
 
   "forgotPassword": {
-    "title": "Resetiraj lozinku",
+    "title": "Zaboravljena lozinka",
     "emailLabel": "E-pošta",
     "emailPlaceholder": "Unesi svoju e-poštu",
     "sendResetLink": "Pošalji link za resetiranje",
@@ -35,7 +35,7 @@
   },
 
   "resetPassword": {
-    "title": "Nova lozinka",
+    "title": "Resetiraj lozinku",
     "newPasswordLabel": "Nova lozinka",
     "newPasswordPlaceholder": "Unesi novu lozinku",
     "setNewPassword": "Postavi novu lozinku",
@@ -186,7 +186,7 @@
         "address": "Unesi adresu",
         "city": "Unesi grad",
         "zip": "Unesi poštanski broj",
-        "notes": "Unesi napomene (ako ih imaš)"
+        "notes": "Unesi napomene"
       },
       "methods": {
         "standard": "Standardna dostava",

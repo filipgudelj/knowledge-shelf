@@ -69,14 +69,12 @@ useHead(() => ({
   @include flex(column, flex-start, flex-start);
   width: 100%;
   gap: $spacing-5;
-  margin-top: $spacing-6;
 }
 
 .success__header {
   @include flex(row, flex-start, center);
   width: 100%;
   gap: $spacing-4;
-  margin-top: $spacing-6;
 }
 
 .success__icon {

@@ -150,7 +150,7 @@ onClickOutside(searchResultsDropdownRef, () => {
 }
 
 .search__input {
-  width: 185px;
+  width: 130px;
   height: 40px;
   padding-inline: $spacing-10;
   border: 1px solid $color-gray-200;
@@ -190,6 +190,10 @@ onClickOutside(searchResultsDropdownRef, () => {
     html.dark & {
       color: $color-gray-500;
     }
+  }
+
+  @media (min-width: 430px) {
+    width: 185px;
   }
 
   @media (min-width: $screen-xs) {
@@ -263,7 +267,11 @@ onClickOutside(searchResultsDropdownRef, () => {
   }
 
   &::-webkit-scrollbar {
-    width: 12px;
+    width: 8px;
+
+    @media (min-width: 430px) {
+      width: 12px;
+    }
   }
 
   &::-webkit-scrollbar-track {

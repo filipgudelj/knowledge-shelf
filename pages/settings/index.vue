@@ -199,7 +199,6 @@ useHead(() => ({
   gap: $spacing-5;
   width: 100%;
   height: 494px;
-  margin-top: $spacing-6;
 }
 
 .settings__form {

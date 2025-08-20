@@ -127,7 +127,6 @@ useHead(() => ({
 <style scoped lang="scss">
 .orders {
   width: 100%;
-  margin-top: $spacing-6;
   overflow-x: auto;
 
   &::-webkit-scrollbar {

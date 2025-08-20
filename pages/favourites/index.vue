@@ -52,6 +52,6 @@ useHead(() => ({
 }
 
 .favourites__title {
-  margin: $spacing-6 0;
+  margin-bottom: $spacing-6;
 }
 </style>

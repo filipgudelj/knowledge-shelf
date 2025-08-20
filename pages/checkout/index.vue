@@ -504,10 +504,6 @@ useHead(() => ({
   width: 100%;
 }
 
-.checkout__title {
-  margin-top: $spacing-6;
-}
-
 .checkout__grid {
   display: grid;
   grid-template-columns: 1fr;

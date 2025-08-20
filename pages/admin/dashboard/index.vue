@@ -30,7 +30,6 @@ useHead(() => ({
   width: 100%;
   @include flex(column, flex-start, flex-start);
   gap: $spacing-5;
-  margin-top: $spacing-6;
 }
 
 .dashboard__charts {

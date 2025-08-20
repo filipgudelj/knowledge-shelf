@@ -113,8 +113,6 @@ useHead(() => ({
   @include flex(row);
   gap: $spacing-5;
   width: 100%;
-  height: 216px;
-  margin-top: $spacing-6;
 }
 
 .forgot-password__form {

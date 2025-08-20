@@ -82,7 +82,7 @@ const localizedName = (category: Category) => category.name[locale.value]
 
 .scrollmenu__item {
   display: inline-block;
-  margin: $spacing-6 $spacing-6 $spacing-2 0;
+  margin: 0 $spacing-6 $spacing-2 0;
   padding-block: $spacing-2;
   font-weight: 700;
   transition: all 0.3s ease;

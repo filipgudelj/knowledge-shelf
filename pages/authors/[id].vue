@@ -192,7 +192,6 @@ useHead(() => ({
   grid-template-columns: 1fr;
   grid-template-rows: auto auto auto;
   column-gap: $spacing-16;
-  margin-top: $spacing-6;
 
   .author__name {
     grid-column: 1;
@@ -290,7 +289,6 @@ useHead(() => ({
   grid-template-rows: auto auto auto;
   width: 100%;
   column-gap: $spacing-12;
-  margin-top: $spacing-6;
 
   .author__skeleton-name {
     grid-column: 1;

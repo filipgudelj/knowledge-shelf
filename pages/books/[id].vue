@@ -254,7 +254,6 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
   display: grid;
   grid-template-columns: 1fr;
   width: 100%;
-  margin-top: $spacing-6;
 
   @media (min-width: 900px) {
     grid-template-columns: 1fr 1.5fr;
@@ -389,7 +388,6 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
   display: grid;
   grid-template-columns: 1fr;
   width: 100%;
-  margin-top: $spacing-6;
 
   @media (min-width: 900px) {
     grid-template-columns: 1fr 1.5fr;

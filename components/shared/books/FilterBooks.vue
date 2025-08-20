@@ -24,7 +24,8 @@ const buttonsSize = computed(() => {
 })
 
 const actionsWidth = computed(() => {
-  if (width.value < 610) return '240px'
+  if (width.value < 430) return '100%'
+  else if (width.value < 610) return '240px'
   return '350px'
 })
 
@@ -108,21 +109,21 @@ const resetFilters = () => {
       <ClientOnly>
         <div class="filters__actions" :style="{ width: `${actionsWidth}` }">
           <FormButton
-            type="submit"
-            variant="primary"
-            :size="buttonsSize"
-            @click="applyFilters"
-          >
-            {{ t('filter.apply') }}
-          </FormButton>
-
-          <FormButton
             type="reset"
             variant="secondary"
             :size="buttonsSize"
             @click="resetFilters"
           >
             {{ t('filter.reset') }}
+          </FormButton>
+
+          <FormButton
+            type="submit"
+            variant="primary"
+            :size="buttonsSize"
+            @click="applyFilters"
+          >
+            {{ t('filter.apply') }}
           </FormButton>
         </div>
       </ClientOnly>
@@ -147,6 +148,11 @@ const resetFilters = () => {
 
 .filters__select {
   @include flex(column, flex-start, stretch);
+  font-size: $font-size-sm !important;
+
+  @media (min-width: $screen-sm) {
+    font-size: $font-size-md !important;
+  }
 
   @media (min-width: $screen-lg) {
     @include flex(row, flex-start, stretch);
@@ -174,9 +180,13 @@ const resetFilters = () => {
 }
 
 .filters__actions {
-  @include flex(row, flex-end, flex-start);
+  @include flex(column, center, center);
   gap: $spacing-3;
   margin-left: auto;
   white-space: nowrap;
+
+  @media (min-width: 430px) {
+    @include flex(row, flex-end, flex-start);
+  }
 }
 </style>

@@ -27,7 +27,7 @@
   },
 
   "forgotPassword": {
-    "title": "Reset password",
+    "title": "Forgot password",
     "emailLabel": "Email",
     "emailPlaceholder": "Enter your email",
     "sendResetLink": "Send reset link",
@@ -35,7 +35,7 @@
   },
 
   "resetPassword": {
-    "title": "New password",
+    "title": "Reset password",
     "newPasswordLabel": "New password",
     "newPasswordPlaceholder": "Enter your new password",
     "setNewPassword": "Set new password",
@@ -186,7 +186,7 @@
         "address": "Enter your address",
         "city": "Enter your city",
         "zip": "Enter your postal code",
-        "notes": "Enter order notes (if any)"
+        "notes": "Enter order notes"
       },
       "methods": {
         "standard": "Standard Shipping",

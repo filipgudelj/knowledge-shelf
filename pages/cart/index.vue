@@ -129,12 +129,8 @@ useHead(() => ({
           {{ t('cart.clearCart') }}
         </FormButton>
 
-        <NuxtLinkLocale to="/checkout">
-          <FormButton
-            type="button"
-            variant="primary"
-            class="cart__actions-button"
-          >
+        <NuxtLinkLocale to="/checkout" class="cart__actions-button">
+          <FormButton type="button" variant="primary">
             {{ t('cart.checkout') }}
           </FormButton>
         </NuxtLinkLocale>
@@ -177,10 +173,6 @@ useHead(() => ({
 <style lang="scss" scoped>
 .cart {
   width: 100%;
-}
-
-.cart__title {
-  margin-top: $spacing-6;
 }
 
 .cart__table-wrapper {
@@ -230,7 +222,7 @@ useHead(() => ({
 }
 
 .cart__header {
-  margin-top: $spacing-6;
+  margin-top: $spacing-3;
   padding: $spacing-6 0;
   border-bottom: 1px solid $color-gray-300;
   font-weight: 700;
@@ -335,22 +327,26 @@ useHead(() => ({
 }
 
 .cart__actions {
+  @include flex(column, flex-start, flex-start);
+  gap: $spacing-3;
   margin-top: $spacing-6;
-  display: flex;
-  justify-content: space-between;
+
+  @media (min-width: 430px) {
+    @include flex(row, space-between, flex-start);
+  }
 }
 
 .cart__actions-button {
-  width: 150px;
+  width: 100%;
+
+  @media (min-width: 430px) {
+    width: 150px;
+  }
 }
 
 .cart__no-results {
   margin-top: $spacing-6;
   font-size: $font-size-lg;
-}
-
-.cart__skeleton {
-  margin-top: $spacing-6;
 }
 
 .cart__skeleton-header {
