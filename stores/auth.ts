@@ -6,13 +6,15 @@ export const useAuthStore = defineStore('auth', () => {
   const router = useRouter()
   const { getAllFavouritesFromCookie, clearAllFavouritesFromCookie } =
     useFavouritesCookie()
+  const config = useRuntimeConfig()
+  const siteUrl = config.public.siteUrl
 
   const register = async (email: string, password: string) => {
     const response = await supabase.auth.signUp({
       email: email,
       password: password,
       options: {
-        emailRedirectTo: `http://localhost:3000${localePath('/auth/confirm')}`,
+        emailRedirectTo: `${siteUrl}${localePath('/auth/confirm')}`,
       },
     })
 
@@ -71,7 +73,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const sendPasswordResetLink = async (email: string) => {
     const response = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `http://localhost:3000${localePath('/auth/reset-password')}`,
+      redirectTo: `${siteUrl}${localePath('/auth/reset-password')}`,
     })
 
     return response

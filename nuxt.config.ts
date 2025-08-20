@@ -62,6 +62,7 @@ export default defineNuxtConfig({
     smtpUser: process.env.SMTP_USER,
     smtpPass: process.env.SMTP_PASS,
     public: {
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL,
       stripePublishableKey: process.env.NUXT_PUBLIC_STRIPE_PK_KEY,
     },
   },

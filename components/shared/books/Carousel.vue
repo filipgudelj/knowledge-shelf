@@ -142,6 +142,7 @@ onBeforeUnmount(() => {
             width: `calc(100% * (${totalSlides} / ${visibleSlides}))`,
           }"
           class="carousel__track"
+          :class="{ 'carousel__track--center': visibleSlides === 1 }"
         >
           <VueSkeletonLoader
             v-if="props.isLoading || showSkeleton"
@@ -298,6 +299,11 @@ onBeforeUnmount(() => {
   @include flex(row, flex-start, flex-start);
   gap: $spacing-5;
   transition: transform 0.3s ease-in-out;
+
+  &--center {
+    justify-content: center;
+    gap: $spacing-2;
+  }
 }
 
 .slide {

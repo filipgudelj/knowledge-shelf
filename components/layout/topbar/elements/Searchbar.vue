@@ -150,7 +150,7 @@ onClickOutside(searchResultsDropdownRef, () => {
 }
 
 .search__input {
-  width: 130px;
+  width: 128px;
   height: 40px;
   padding-inline: $spacing-10;
   border: 1px solid $color-gray-200;
@@ -255,6 +255,7 @@ onClickOutside(searchResultsDropdownRef, () => {
   left: 0;
   right: 0;
   z-index: 100;
+  min-width: 185px;
   max-height: 300px;
   margin-top: $spacing-2;
   border-radius: $radius-5;
