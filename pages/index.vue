@@ -28,9 +28,7 @@ await (async () => {
 onMounted(async () => {
   await favouritesStore.loadFavourites()
   await cartStore.loadCart()
-})
 
-onMounted(async () => {
   if (!window.location.hash) return
 
   const params = new URLSearchParams(window.location.hash.slice(1))

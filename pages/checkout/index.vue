@@ -94,10 +94,7 @@ const schema = yup.object({
   email: yup
     .string()
     .required(t('validation.email.required'))
-    .matches(
-      /^[^@]+?\.[^@]+?@[\w.-]+\.[a-zA-Z]{2,}$/,
-      t('validation.email.invalid'),
-    ),
+    .email(t('validation.email.invalid')),
   name: yup.string().required(t('validation.name.required')),
   surname: yup.string().required(t('validation.surname.required')),
   phone: yup.string().optional(),

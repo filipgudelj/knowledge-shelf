@@ -29,10 +29,7 @@ const schema = yup.object({
   email: yup
     .string()
     .required(t('validation.email.required'))
-    .matches(
-      /^[^@]+?\.[^@]+?@[\w.-]+\.[a-zA-Z]{2,}$/,
-      t('validation.email.invalid'),
-    ),
+    .email(t('validation.email.invalid')),
 })
 
 const submitted = ref(false)
