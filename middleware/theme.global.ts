@@ -1,18 +1,9 @@
-import { useDark } from '@vueuse/core'
-
-export default defineNuxtRouteMiddleware((to, from) => {
-  const themeCookie = useCookie('theme-cookie')
-  const isDark = useDark()
-
-  watch(isDark, (newIsDarkValue) => {
-    themeCookie.value = newIsDarkValue ? 'dark' : 'light'
-  })
-
+export default defineNuxtRouteMiddleware(() => {
   if (import.meta.client) return
 
+  const themeCookie = useCookie<'light' | 'dark'>('theme-cookie')
+
   useHead({
-    htmlAttrs: {
-      class: themeCookie.value === 'dark' ? 'dark' : '',
-    },
+    htmlAttrs: { class: themeCookie.value === 'dark' ? 'dark' : '' },
   })
 })

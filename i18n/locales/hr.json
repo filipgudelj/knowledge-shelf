@@ -38,6 +38,8 @@
     "title": "Resetiraj lozinku",
     "newPasswordLabel": "Nova lozinka",
     "newPasswordPlaceholder": "Unesi novu lozinku",
+    "confirmPasswordLabel": "Potvrdi lozinku",
+    "confirmPasswordPlaceholder": "Ponovno unesi lozinku",
     "setNewPassword": "Postavi novu lozinku",
     "loading": "Postavljam lozinku..."
   },

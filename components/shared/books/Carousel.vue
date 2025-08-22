@@ -45,14 +45,24 @@ const visibleSlides = computed<number>(() => {
   if (width.value < 1902) return 6
   return 7
 })
+
 const isPreviousButtonDisabled = computed(() => currentSlideIndex.value === 0)
 const isNextButtonDisabled = computed(
   () => currentSlideIndex.value === maxSlideIndex.value,
 )
+
 const maxSlideIndex = computed(() => totalSlides.value - visibleSlides.value)
 const translateX = computed(() => {
   return `translateX(-${(100 / totalSlides.value) * currentSlideIndex.value}%)`
 })
+
+const isSkeletonActive = computed(() => props.isLoading || showSkeleton.value)
+const useCenter = computed(
+  () =>
+    !isSkeletonActive.value &&
+    visibleSlides.value === 1 &&
+    totalSlides.value > 0,
+)
 
 // WATCHERS
 watch(width, () => {
@@ -142,7 +152,7 @@ onBeforeUnmount(() => {
             width: `calc(100% * (${totalSlides} / ${visibleSlides}))`,
           }"
           class="carousel__track"
-          :class="{ 'carousel__track--center': visibleSlides === 1 }"
+          :class="{ 'carousel__track--center': useCenter }"
         >
           <VueSkeletonLoader
             v-if="props.isLoading || showSkeleton"
@@ -152,7 +162,12 @@ onBeforeUnmount(() => {
             :height="'460px'"
             base-color="var(--skel-base)"
             highlight-color="var(--skel-highlight)"
-            :style="{ width: `calc(100% / ${totalSlides} - 1rem)` }"
+            :style="{
+              width:
+                visibleSlides > 1
+                  ? `calc(100% / ${totalSlides} - 1rem)`
+                  : `calc(100% / ${totalSlides})`,
+            }"
           />
 
           <div

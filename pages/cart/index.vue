@@ -269,25 +269,30 @@ useHead(() => ({
 
 .cart__price {
   @include flex(row);
+  align-items: center;
   gap: $spacing-3;
+  height: 25px;
   font-weight: 700;
 
   &--old {
-    align-self: center;
+    height: 100%;
     color: $color-gray-700;
     text-decoration: line-through;
     font-size: $font-size-sm;
+    line-height: 1.5;
 
     html.dark & {
       color: $color-gray-400;
     }
   }
   &--current {
+    height: 100%;
     font-weight: 700;
   }
 }
 
 .cart__total {
+  height: 25px;
   font-weight: 700;
 }
 

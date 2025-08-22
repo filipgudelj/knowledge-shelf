@@ -16,6 +16,7 @@ const loading = ref(false)
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 const { error_description } = route.query as Record<string, string>
 const imageLoaded = ref(false)
+const confirmPasswordInput = ref<{ focus: () => void } | null>(null)
 
 // LCH
 onMounted(() => {
@@ -39,18 +40,29 @@ onMounted(async () => {
   }
 })
 
+// HANDLERS
+const focusConfirmPassword = () => {
+  confirmPasswordInput.value?.focus()
+}
+
 // VALIDATION
 const schema = yup.object({
   password: yup
     .string()
     .min(6, t('validation.password.min'))
     .required(t('validation.password.required')),
+  confirmPassword: yup
+    .string()
+    .required(t('validation.confirmPassword.required'))
+    .oneOf([yup.ref('password')], t('validation.confirmPassword.match')),
 })
 
 const submitted = ref(false)
 const { handleSubmit } = useForm({ validationSchema: schema })
 const { value: password, errorMessage: passwordError } =
   useField<string>('password')
+const { value: confirmPassword, errorMessage: confirmPasswordError } =
+  useField<string>('confirmPassword')
 
 // SUBMIT
 const onSubmit = handleSubmit(
@@ -114,6 +126,7 @@ useHead(() => ({
         id="new-password"
         type="password"
         :placeholder="$t('resetPassword.newPasswordPlaceholder')"
+        @keydown.enter.prevent="focusConfirmPassword"
       >
         <template #icon>
           <Icon name="mdi:password-outline" />
@@ -121,6 +134,25 @@ useHead(() => ({
 
         <template #error>
           <div v-if="submitted && passwordError">{{ passwordError }}</div>
+        </template>
+      </FormInput>
+
+      <FormInput
+        ref="confirmPasswordInput"
+        :label="$t('resetPassword.confirmPasswordLabel')"
+        v-model="confirmPassword"
+        id="confirmPassword"
+        type="password"
+        :placeholder="$t('resetPassword.confirmPasswordPlaceholder')"
+      >
+        <template #icon>
+          <Icon name="mdi:lock-check-outline" />
+        </template>
+
+        <template #error>
+          <div v-if="submitted && confirmPasswordError">
+            {{ confirmPasswordError }}
+          </div>
         </template>
       </FormInput>
 

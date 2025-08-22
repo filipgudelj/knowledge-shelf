@@ -262,6 +262,7 @@ onClickOutside(searchResultsDropdownRef, () => {
   box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.4);
   background-color: $color-gray-100;
   overflow-y: auto;
+  overscroll-behavior: contain;
 
   html.dark & {
     background-color: $color-gray-900;

@@ -321,9 +321,13 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
 .book__summary-actions {
   display: grid;
   grid-template-columns: minmax(0, 550px) 80px;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto auto auto;
   gap: $spacing-4;
   margin-top: $spacing-5;
+
+  @media (min-width: 430px) {
+    grid-template-rows: auto auto;
+  }
 }
 
 .book__summary-quantity {
@@ -333,15 +337,25 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
 }
 
 .book__summary-submit {
-  grid-column: 1;
-  grid-row: 2;
   width: 100%;
+  grid-column: 1 / span 2;
+  grid-row: 2;
+
+  @media (min-width: 430px) {
+    grid-column: 1;
+    grid-row: 2;
+  }
 }
 
 .book__summary-favourite {
-  grid-column: 2;
-  grid-row: 2;
   width: auto;
+  grid-column: 1 / span 2;
+  grid-row: 3;
+
+  @media (min-width: 430px) {
+    grid-column: 2;
+    grid-row: 2;
+  }
 }
 
 .book__media img {

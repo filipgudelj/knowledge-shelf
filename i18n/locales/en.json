@@ -38,6 +38,8 @@
     "title": "Reset password",
     "newPasswordLabel": "New password",
     "newPasswordPlaceholder": "Enter your new password",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Re-enter your password",
     "setNewPassword": "Set new password",
     "loading": "Setting password..."
   },
