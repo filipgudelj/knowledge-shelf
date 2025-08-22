@@ -187,6 +187,15 @@ const onSelect = (value: string) => {
   &::-webkit-scrollbar-button {
     display: none;
   }
+
+  @-moz-document url-prefix() {
+    scrollbar-width: thin;
+    scrollbar-color: $color-gray-300 transparent;
+
+    html.dark & {
+      scrollbar-color: $color-gray-700 transparent;
+    }
+  }
 }
 
 .select__option {
