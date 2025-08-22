@@ -23,7 +23,6 @@ onMounted(() => {
   setTimeout(() => {
     showSkeleton.value = false
   }, 500)
-  cartStore.loadCart()
 })
 
 // HEAD

@@ -204,7 +204,6 @@ const onSubmitThrottled = useThrottleFn((e: Event) => {
 
 // LCH
 onMounted(async () => {
-  await cartStore.loadCart()
   setTimeout(() => (showSkeleton.value = false), 500)
 })
 

@@ -8,7 +8,6 @@ const booksStore = useBooksStore()
 const mostSoldBooks = ref<Book[]>([])
 const newestBooks = ref<Book[]>([])
 const staffPickedBooks = ref<Book[]>([])
-const cartStore = useCartStore()
 const favouritesStore = useFavouritesStore()
 const route = useRoute()
 const router = useRouter()
@@ -29,7 +28,6 @@ await (async () => {
 // LCH
 onMounted(async () => {
   await favouritesStore.loadFavourites()
-  await cartStore.loadCart()
 
   const fromQuery = route.query.error_code as string | undefined
   const fromHash = route.hash

@@ -33,7 +33,6 @@ if (!isNaN(bookId)) {
 // LCH
 onMounted(async () => {
   await favouritesStore.loadFavourites()
-  await cartStore.loadCart()
 })
 
 onMounted(() => {

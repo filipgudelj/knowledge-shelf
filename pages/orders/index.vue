@@ -15,7 +15,13 @@ const skeletonRowHeight = computed(() => (width.value < 768 ? '140px' : '40px'))
 const rows = computed(() =>
   ordersStore.orders.map((order, index) => ({
     number: index + 1,
-    titles: (order.items ?? []).map((i) => i.title_snapshot).join(', '),
+    titles: (order.items ?? [])
+      .map((i) =>
+        i.quantity && i.quantity > 1
+          ? `${i.title_snapshot} (${t('orders.quantity', { count: i.quantity })})`
+          : i.title_snapshot,
+      )
+      .join(', '),
     shipping_method: order.shipping_method,
     total: order.total,
     createdAt: order.created_at,

@@ -244,7 +244,8 @@
     "shippingMethod": "Shipping method",
     "shipping": "shipping",
     "totalPrice": "Total price",
-    "createdAt": "Order time"
+    "createdAt": "Order time",
+    "quantity": "{count} pcs"
   },
 
   "admin": {

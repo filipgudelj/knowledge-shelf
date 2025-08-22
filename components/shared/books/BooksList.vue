@@ -14,7 +14,6 @@ const props = defineProps<{
 const { t } = useI18n()
 const showSkeleton = ref(true)
 let skeletonTimer: ReturnType<typeof setTimeout> | null = null
-const cartStore = useCartStore()
 const favouritesStore = useFavouritesStore()
 
 // COMPUTEDS
@@ -47,7 +46,6 @@ watch(
 // LCH
 onMounted(async () => {
   await favouritesStore.loadFavourites()
-  await cartStore.loadCart()
 })
 
 onMounted(() => {
