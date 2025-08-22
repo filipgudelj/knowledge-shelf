@@ -69,6 +69,7 @@ npm run dev
 ├── layouts/               # default, explore
 ├── middleware/            # user role redirection, color theme refresh control
 ├── pages/                 # app pages
+├── plugins/               # theme persistence
 ├── public/                # images, SVGs
 ├── server/api/stripe      # Stripe logic
 ├── stores/                # auth, books, cart, favourites, orders
