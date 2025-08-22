@@ -67,7 +67,7 @@ npm run dev
 ├── helpers/               # formatters
 ├── i18n/                  # translations
 ├── layouts/               # default, explore
-├── middleware/            # user role redirection, color theme refresh control
+├── middleware/            # user role redirection, color theme refresh control, cart state sync
 ├── pages/                 # app pages
 ├── plugins/               # theme persistence
 ├── public/                # images, SVGs
