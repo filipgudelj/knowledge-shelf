@@ -2,7 +2,7 @@
 
 A **book webshop** built with **Nuxt** and **Supabase**, designed to be clean, fast, and user-friendly.
 
-<img width="1902" height="948" alt="Home" src="https://github.com/user-attachments/assets/19c20983-5b08-4a98-9d0e-89c8854a3d19" />
+<img width="1905" height="950" alt="Home" src="https://github.com/user-attachments/assets/69a9231e-beaf-4834-9820-4d330e5e5d07" />
 
 ---
 
