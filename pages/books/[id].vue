@@ -96,9 +96,9 @@ const quantity = ref(book.value?.stock === 0 ? 0 : 1)
               !user
                 ? t('book.actions.loginToAdd')
                 : cartStore.isInCart(book.id)
-                  ? t('book.actions.addedToBasket')
+                  ? t('book.actions.addedToCart')
                   : book.stock > 0
-                    ? t('book.actions.addToBasket')
+                    ? t('book.actions.addToCart')
                     : t('book.actions.unavailable')
             }}
           </FormButton>

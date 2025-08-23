@@ -14,9 +14,11 @@
   @include flex(row, space-between, center);
   padding: $spacing-6;
   border-bottom: 1px solid $color-gray-300;
+  background-color: $color-gray-100;
 
   html.dark & {
     border-bottom: 1px solid $color-gray-700;
+    background-color: $color-gray-900;
   }
 }
 

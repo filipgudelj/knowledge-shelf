@@ -77,8 +77,8 @@ const inCart = computed(() => cartStore.isInCart(props.book.id))
         book.stock === 0
           ? t('book.actions.unavailable')
           : inCart
-            ? t('book.actions.addedToBasket')
-            : t('book.actions.addToBasket')
+            ? t('book.actions.addedToCart')
+            : t('book.actions.addToCart')
       }}
     </FormButton>
   </div>

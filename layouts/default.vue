@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
-    <Sidebar />
-    <Topbar />
+    <Sidebar class="sidebar" />
+    <Topbar class="topbar" />
     <main class="content">
       <slot />
     </main>
@@ -18,6 +18,20 @@
   @media (min-width: $screen-md) {
     grid-template-columns: 250px 1fr;
   }
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  z-index: 200;
+  height: 100vh;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
 }
 
 .content {

@@ -235,8 +235,8 @@ onBeforeUnmount(() => {
                 book.stock === 0
                   ? t('book.actions.unavailable')
                   : cartStore.isInCart(book.id)
-                    ? t('book.actions.addedToBasket')
-                    : t('book.actions.addToBasket')
+                    ? t('book.actions.addedToCart')
+                    : t('book.actions.addToCart')
               }}
             </FormButton>
           </div>

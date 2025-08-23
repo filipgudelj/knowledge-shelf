@@ -102,9 +102,11 @@ const cartStore = useCartStore()
   display: grid;
   grid-template-rows: 80px 1fr;
   border-right: 1px solid $color-gray-300;
+  background-color: $color-gray-100;
 
   html.dark & {
     border-right: 1px solid $color-gray-700;
+    background-color: $color-gray-900;
   }
 }
 

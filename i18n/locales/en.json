@@ -103,8 +103,8 @@
     "quantity": "Quantity",
     "actions": {
       "loginToAdd": "Login for cart",
-      "addToBasket": "Add to basket",
-      "addedToBasket": "Added to basket",
+      "addToCart": "Add to cart",
+      "addedToCart": "Added to cart",
       "unavailable": "Unavailable"
     },
     "meta": {

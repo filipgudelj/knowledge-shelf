@@ -108,8 +108,8 @@
     "quantity": "Količina",
     "actions": {
       "loginToAdd": "Prijavi se za košaricu",
-      "addToBasket": "Dodaj u košaricu",
-      "addedToBasket": "Dodano u košaricu",
+      "addToCart": "Dodaj u košaricu",
+      "addedToCart": "Dodano u košaricu",
       "unavailable": "Nedostupno"
     },
     "meta": {
