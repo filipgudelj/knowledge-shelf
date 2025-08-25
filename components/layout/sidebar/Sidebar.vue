@@ -155,6 +155,56 @@ const cartStore = useCartStore()
   @include flex(column, flex-start, center);
   gap: $spacing-2;
   padding-inline: $spacing-4;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+
+  html.dark & {
+    background-color: $color-gray-900;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+
+    @media (min-width: 430px) {
+      width: 12px;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: $radius-3;
+    background-color: $color-gray-300;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-gray-400;
+
+      html.dark & {
+        background-color: $color-gray-600;
+      }
+    }
+
+    html.dark & {
+      background-color: $color-gray-700;
+    }
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  @-moz-document url-prefix() {
+    scrollbar-width: thin;
+    scrollbar-color: $color-gray-300 transparent;
+
+    html.dark & {
+      scrollbar-color: $color-gray-700 transparent;
+    }
+  }
 }
 
 .sidebar__nav-item {
