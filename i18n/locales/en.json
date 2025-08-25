@@ -10,7 +10,8 @@
 
   "search": {
     "resultsFor": "Results for",
-    "placeholder": "Search books...",
+    "placeholderShort": "Search...",
+    "placeholderLong": "Search books...",
     "noResults": "No results found."
   },
 

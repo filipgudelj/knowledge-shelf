@@ -10,7 +10,8 @@
 
   "search": {
     "resultsFor": "Rezultati za",
-    "placeholder": "Pretraži knjige...",
+    "placeholderShort": "Pretraži...",
+    "placeholderLong": "Pretraži knjige...",
     "noResults": "Nema pronađenih rezultata."
   },
 

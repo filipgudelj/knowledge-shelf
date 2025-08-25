@@ -55,8 +55,12 @@ watch(selected, (newSelectedValue) => {
 
 <style lang="scss" scoped>
 .sort__select {
-  max-width: 230px;
+  max-width: 210px;
   font-size: $font-size-sm !important;
+
+  @media (min-width: 430px) {
+    max-width: 230px;
+  }
 
   @media (min-width: $screen-sm) {
     font-size: $font-size-md !important;

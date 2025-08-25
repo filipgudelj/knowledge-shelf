@@ -1,19 +1,25 @@
 <script lang="ts" setup>
 import type { Book } from '@/types'
 import { formatNumberToEuro } from '~/helpers/formatters'
-import { onClickOutside } from '@vueuse/core'
+import { onClickOutside, useMediaQuery } from '@vueuse/core'
 
 // STATE
 const localePath = useLocalePath()
 const router = useRouter()
 const route = useRoute()
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const booksStore = useBooksStore()
 const searchQuery = ref(String(route.params.searchQuery || ''))
 const searchResults = ref<Book[]>([])
 const searchResultsDropdownRef = ref(null)
 const isSearching = ref(false)
 let abortController: AbortController | null = null
+const isNarrow = useMediaQuery('(max-width: 429px)')
+
+// COMPUTEDS
+const searchPlaceholder = computed(() =>
+  t(isNarrow.value ? 'search.placeholderShort' : 'search.placeholderLong'),
+)
 
 // API
 const getSearchResults = async (query: string) => {
@@ -78,66 +84,68 @@ onClickOutside(searchResultsDropdownRef, () => {
 </script>
 
 <template>
-  <div class="search">
-    <input
-      type="text"
-      name="search"
-      v-model="searchQuery"
-      @keydown.enter="doSearch"
-      :placeholder="$t('search.placeholder')"
-      autocomplete="off"
-      class="search__input"
-    />
+  <ClientOnly>
+    <div class="search">
+      <input
+        type="text"
+        name="search"
+        v-model="searchQuery"
+        @keydown.enter="doSearch"
+        :placeholder="searchPlaceholder"
+        autocomplete="off"
+        class="search__input"
+      />
 
-    <button @click="doSearch" class="search__button" aria-label="Search">
-      <Icon name="mdi:search" size="24px" />
-    </button>
+      <button @click="doSearch" class="search__button" aria-label="Search">
+        <Icon name="mdi:search" size="24px" />
+      </button>
 
-    <button
-      v-if="searchQuery"
-      @click="clearSearch"
-      class="search__button--clear"
-      aria-label="Clear search"
-    >
-      <Icon name="mdi:remove" size="24px" />
-    </button>
-
-    <div
-      v-if="searchQuery.trim() && (searchResults.length || isSearching)"
-      ref="searchResultsDropdownRef"
-      class="search__results"
-    >
-      <div v-if="isSearching" class="search__loading">
-        <div class="search__loading-item" v-for="n in 3" :key="n" />
-      </div>
+      <button
+        v-if="searchQuery"
+        @click="clearSearch"
+        class="search__button--clear"
+        aria-label="Clear search"
+      >
+        <Icon name="mdi:remove" size="24px" />
+      </button>
 
       <div
-        v-else
-        v-for="book in searchResults"
-        :key="book.id"
-        @click="goToBook(book.id)"
-        class="search__result"
+        v-if="searchQuery.trim() && (searchResults.length || isSearching)"
+        ref="searchResultsDropdownRef"
+        class="search__results"
       >
-        <img
-          class="search__result-image"
-          :src="book.cover_url"
-          :alt="book.title"
-        />
-        <div class="search__result-details">
-          <p class="search__result-author">{{ book.author_name }}</p>
-          <p class="search__result-title">{{ book.title }}</p>
-          <p class="search__result-price">
-            <span v-if="book.sale_price" class="search__result-price--old">
-              {{ formatNumberToEuro(book.price, locale) }}
-            </span>
-            <span class="search__result-price--current">
-              {{ formatNumberToEuro(book.sale_price ?? book.price, locale) }}
-            </span>
-          </p>
+        <div v-if="isSearching" class="search__loading">
+          <div class="search__loading-item" v-for="n in 3" :key="n" />
+        </div>
+
+        <div
+          v-else
+          v-for="book in searchResults"
+          :key="book.id"
+          @click="goToBook(book.id)"
+          class="search__result"
+        >
+          <img
+            class="search__result-image"
+            :src="book.cover_url"
+            :alt="book.title"
+          />
+          <div class="search__result-details">
+            <p class="search__result-author">{{ book.author_name }}</p>
+            <p class="search__result-title">{{ book.title }}</p>
+            <p class="search__result-price">
+              <span v-if="book.sale_price" class="search__result-price--old">
+                {{ formatNumberToEuro(book.price, locale) }}
+              </span>
+              <span class="search__result-price--current">
+                {{ formatNumberToEuro(book.sale_price ?? book.price, locale) }}
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </ClientOnly>
 </template>
 
 <style lang="scss" scoped>
@@ -150,7 +158,7 @@ onClickOutside(searchResultsDropdownRef, () => {
 }
 
 .search__input {
-  width: 128px;
+  width: 140px;
   height: 40px;
   padding-inline: $spacing-10;
   border: 1px solid $color-gray-200;
