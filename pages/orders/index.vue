@@ -2,16 +2,17 @@
 import { formatNumberToEuro } from '~/helpers/formatters'
 import VueSkeletonLoader from 'vue3-skeleton-loader'
 import 'vue3-skeleton-loader/dist/style.css'
-import { useWindowSize } from '@vueuse/core'
+import { useMediaQuery } from '@vueuse/core'
 
 // STATE
 const { t, locale } = useI18n()
 const ordersStore = useOrdersStore()
 const showSkeleton = ref(true)
-const { width } = useWindowSize()
+const lt768 = useMediaQuery('(max-width: 767.98px)')
 
 // COMPUTEDS
-const skeletonRowHeight = computed(() => (width.value < 768 ? '140px' : '40px'))
+const skeletonRowHeight = computed(() => (lt768.value ? '140px' : '40px'))
+
 const rows = computed(() =>
   ordersStore.orders.map((order, index) => ({
     number: index + 1,

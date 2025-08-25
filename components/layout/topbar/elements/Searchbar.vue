@@ -14,11 +14,11 @@ const searchResults = ref<Book[]>([])
 const searchResultsDropdownRef = ref(null)
 const isSearching = ref(false)
 let abortController: AbortController | null = null
-const isNarrow = useMediaQuery('(max-width: 429px)')
+const lt430 = useMediaQuery('(max-width: 429.98px)')
 
 // COMPUTEDS
 const searchPlaceholder = computed(() =>
-  t(isNarrow.value ? 'search.placeholderShort' : 'search.placeholderLong'),
+  t(lt430.value ? 'search.placeholderShort' : 'search.placeholderLong'),
 )
 
 // API

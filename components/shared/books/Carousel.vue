@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useWindowSize } from '@vueuse/core'
+import { useMediaQuery } from '@vueuse/core'
 import type { Book } from '@/types'
 import { formatNumberToEuro } from '~/helpers/formatters'
 import VueSkeletonLoader from 'vue3-skeleton-loader'
@@ -21,7 +21,6 @@ const props = withDefaults(
 
 // STATE
 const { t, locale } = useI18n()
-const { width } = useWindowSize()
 const user = useSupabaseUser()
 const cartStore = useCartStore()
 const currentSlideIndex = ref(0)
@@ -31,18 +30,27 @@ const imageLoaded = ref<boolean[]>([])
 const onImageLoad = (index: number) => {
   imageLoaded.value[index] = true
 }
+const lt495 = useMediaQuery('(max-width: 494.98px)')
+const lt685 = useMediaQuery('(max-width: 684.98px)')
+const lt768 = useMediaQuery('(max-width: 767.98px)')
+const lt967 = useMediaQuery('(max-width: 966.98px)')
+const lt1200 = useMediaQuery('(max-width: 1199.98px)')
+const lt1433 = useMediaQuery('(max-width: 1432.98px)')
+const lt1665 = useMediaQuery('(max-width: 1664.98px)')
+const lt1902 = useMediaQuery('(max-width: 1901.98px)')
 
 // COMPUTEDS
 const totalSlides = computed<number>(() => props.books.length)
+
 const visibleSlides = computed<number>(() => {
-  if (width.value < 495) return 1
-  if (width.value < 685) return 2
-  if (width.value < 768) return 3
-  if (width.value < 967) return 2
-  if (width.value < 1200) return 3
-  if (width.value < 1433) return 4
-  if (width.value < 1665) return 5
-  if (width.value < 1902) return 6
+  if (lt495.value) return 1
+  if (lt685.value) return 2
+  if (lt768.value) return 3
+  if (lt967.value) return 2
+  if (lt1200.value) return 3
+  if (lt1433.value) return 4
+  if (lt1665.value) return 5
+  if (lt1902.value) return 6
   return 7
 })
 
@@ -65,9 +73,12 @@ const useCenter = computed(
 )
 
 // WATCHERS
-watch(width, () => {
-  currentSlideIndex.value = 0
-})
+watch(
+  () => visibleSlides.value,
+  () => {
+    currentSlideIndex.value = 0
+  },
+)
 
 watch(
   () => props.books,

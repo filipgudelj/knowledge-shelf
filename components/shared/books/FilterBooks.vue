@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useWindowSize } from '@vueuse/core'
+import { useMediaQuery } from '@vueuse/core'
 import type { BookFilters } from '@/types'
 
 // PROPS
@@ -15,17 +15,17 @@ const emits = defineEmits<{
 // STATE
 const localFilters = reactive<BookFilters>({ ...props.filters })
 const { t } = useI18n()
-const { width } = useWindowSize()
+const lt430 = useMediaQuery('(max-width: 429.98px)')
+const lt610 = useMediaQuery('(max-width: 609.98px)')
 
 // COMPUTEDS
 const buttonsSize = computed(() => {
-  if (width.value < 610) return 'sm'
-  return 'md'
+  return lt610.value ? 'sm' : 'md'
 })
 
 const actionsWidth = computed(() => {
-  if (width.value < 430) return '100%'
-  else if (width.value < 610) return '240px'
+  if (lt430.value) return '100%'
+  if (lt610.value) return '240px'
   return '350px'
 })
 
