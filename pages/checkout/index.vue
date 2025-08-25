@@ -69,10 +69,12 @@ const shippingMethods = [
 
 // COMPUTEDS
 const countries = computed(() =>
-  euCountryCodes.map((code) => ({
-    label: t(`countries.${code}`),
-    value: code,
-  })),
+  euCountryCodes
+    .map((code) => ({
+      label: t(`countries.${code}`),
+      value: code,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label)),
 )
 
 const subtotal = computed(() =>
