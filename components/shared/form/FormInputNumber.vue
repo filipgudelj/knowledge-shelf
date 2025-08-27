@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 // PROPS
 const props = defineProps<{
-  id?: string
-  modelValue?: number
+  id: string
+  modelValue: number
   label?: string
   min?: number
   max?: number

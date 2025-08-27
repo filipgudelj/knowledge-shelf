@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 // PROPS
 const props = defineProps<{
-  id?: string
+  id: string
   type?: string
   placeholder?: string
-  modelValue?: string
+  modelValue: string
   label?: string
 }>()
 
