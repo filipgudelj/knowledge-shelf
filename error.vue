@@ -8,6 +8,7 @@ const props = defineProps({
 
 // STATE
 const localePath = useLocalePath()
+const { t } = useI18n()
 
 // HANDLERS
 const handleError = () => clearError({ redirect: localePath('/') })
@@ -17,7 +18,9 @@ const handleError = () => clearError({ redirect: localePath('/') })
   <div class="error">
     <h1 class="error__code">{{ props.error?.statusCode }}</h1>
     <p class="error__message">{{ props.error?.message }}</p>
-    <button @click="handleError" class="error__button">Back to home</button>
+    <button @click="handleError" class="error__button">
+      {{ t('errorPage.backToHome') }}
+    </button>
     <div class="error__image" />
   </div>
 </template>

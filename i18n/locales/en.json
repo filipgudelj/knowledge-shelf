@@ -325,6 +325,10 @@
     "invalidBookId": "Book ID must be a number"
   },
 
+  "errorPage": {
+    "backToHome": "Back to home"
+  },
+
   "countries": {
     "AT": "Austria",
     "BE": "Belgium",

@@ -324,6 +324,10 @@
     "invalidBookId": "ID knjige mora biti broj"
   },
 
+  "errorPage": {
+    "backToHome": "Povratak na početnu"
+  },
+
   "countries": {
     "AT": "Austrija",
     "BE": "Belgija",
